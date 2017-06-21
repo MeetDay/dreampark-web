@@ -1,9 +1,9 @@
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 
 module.exports = {
-	debug: true,
-	// webpack_assets_file_path: 'webpack-assets.json',
-	// webpack_stats_file_path: 'webpack-stats.json',
+	// debug: true,
+	webpack_assets_file_path: 'webpack-assets.json',
+	webpack_stats_file_path: 'webpack-stats.json',
 	assets: {
 		images: {
 			extensions: ['png', 'jpg', 'gif', 'ico', 'svg']
@@ -27,11 +27,6 @@ module.exports = {
 		        	return WebpackIsomorphicToolsPlugin.css_modules_loader_parser(module, options, log);
 		        }
 		        return module.source
-		        // if (module.source) {
-		        //     const regex = options.development ? /exports\.locals = ((.|\n)+);/ : /module\.exports = ((.|\n)+);/;
-		        //     const match = module.source.match(regex);
-		        //     return match ? JSON.parse(match[1]) : {};
-		        // }
 			}
 		}
 	}

@@ -82,8 +82,8 @@ const config = {
 			// filename: '[name].[hash].min.js',
 			minChunks: Infinity
 		}),
-		new webpack.IgnorePlugin(/webpack-stats\.json$/),
 		webpackIsomorphicToolsPlugin,
+		new webpack.IgnorePlugin(/webpack-stats\.json$/),
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: JSON.stringify('development'),
