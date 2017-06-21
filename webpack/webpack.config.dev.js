@@ -1,5 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
+var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools-configuration')).development(process.env.NODE_ENV === 'development');
 
 const projectRootPath = path.resolve(__dirname, '..');
 const HOST = process.env.HOST || 'localhost';
@@ -11,7 +13,7 @@ const config = {
 	entry: {
 		main: [
 			'webpack-hot-middleware/client?reload=true',
-			'webpack/hot/only-dev-server',
+			'webpack/hot/dev-server',
 			'./src/client.js'
 		],
 		vendor: [
@@ -19,8 +21,10 @@ const config = {
 			'react-dom',
 			'redux',
 			'redux-thunk',
+			'redux-promise-middleware',
 			'react-redux',
-			'react-router-dom',
+			'react-router',
+			'react-router-scroll',
 			'react-router-redux',
 			'superagent'
 		]
@@ -59,9 +63,9 @@ const config = {
 				{ loader: 'less-loader' }
 			]
 		}, {
-			test: /\.(png|jpg|gif|svg)$/,
+			test: webpackIsomorphicToolsPlugin.regular_expression('images'),
 			exclude: /node_modules/,
-			use: [{ loader: 'url-loader', options: { limit: 8192 }}]
+			use: [{ loader: 'url-loader', options: { limit: 10240 }}]
 		}]
 	},
 	resolve: {
@@ -78,9 +82,12 @@ const config = {
 			// filename: '[name].[hash].min.js',
 			minChunks: Infinity
 		}),
+		new webpack.IgnorePlugin(/webpack-stats\.json$/),
+		webpackIsomorphicToolsPlugin,
 		new webpack.DefinePlugin({
 			'process.env': {
-				NODE_ENV: JSON.stringify('development')
+				NODE_ENV: JSON.stringify('development'),
+				BABEL_ENV: JSON.stringify('development/client')
 			},
 			__CLIENT__: true,
 			__SERVER__: false,

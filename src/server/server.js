@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === 'development' || __DEV__ ) {
 	}));
 	app.use(require('webpack-hot-middleware')(compiler, {
 		path: '/__webpack_hmr',
-		heartbeat: 10 * 1000
+		heartbeat: 3 * 1000
 	}));
 }
 
@@ -44,3 +44,4 @@ app.listen(PORT, function(error) {
  		console.info(`\n 🌛 Listening on port ${ PORT }. Open up http://localhost:${ PORT } in your browser. \n`);
  	}
 })
+

@@ -1,6 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools-configuration')).development(false);
 
 const projectRootPath = path.resolve(__dirname, '..');
 const config = {
@@ -10,22 +12,24 @@ const config = {
 		main: [
 			'./src/client.js'
 		],
-		reactLibrary: [
+		vendor: [
 			'react',
 			'react-dom',
 			'react-redux',
 			'redux',
 			'redux-thunk',
+			'redux-promise-middleware',
 			'react-router',
+			'react-router-scroll',
 			'react-router-redux',
 			'superagent'
 		]
 	},
 	output: {
-		path: path.resolve(projectRootPath, 'dist'),
+		path: path.resolve(projectRootPath, 'static/dist'),
 		filename: '[name].[hash].min.js',
 		chunkFilename: '[name].[hash].min.js',
-		publicPath: '/dist'
+		publicPath: '/dist/'
 	},
 	module: {
 		rules: [{
@@ -47,7 +51,7 @@ const config = {
 				]
 			})
 		}, {
-			test: /\.(png|jpg|gif)$/,
+			test: webpackIsomorphicToolsPlugin.regular_expression('images'),
 			exclude: /node_modules/,
 			use: [{ loader: 'url-loader', options: { limit: 8192 }}]
 		}]
@@ -70,6 +74,8 @@ const config = {
 			// filename: '[name].[hash].min.js',
 			minChunks: Infinity
 		}),
+		new webpack.IgnorePlugin(/webpack-stats\.json$/),
+		webpackIsomorphicToolsPlugin,
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: JSON.stringify('production')

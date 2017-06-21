@@ -1,4 +1,5 @@
 import { applyMiddleware, createStore as createReduxStore } from 'redux';
+import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise-middleware';
 import reduxPayloadMiddleware from './middleware/reduxPayloadMiddleware';
@@ -8,7 +9,7 @@ export default function createStore(history, client, preloadedState) {
 	const store = createReduxStore(
 		reducers,
 		preloadedState,
-		applyMiddleware(reduxPayloadMiddleware(client), thunk, promise())
+		applyMiddleware(reduxPayloadMiddleware(client), routerMiddleware(history), thunk, promise())
 	);
 	return store;
 }

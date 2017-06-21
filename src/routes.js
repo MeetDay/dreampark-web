@@ -4,7 +4,7 @@ import App from './containers/App';
 import Home from './containers/Home';
 import NotFound from './containers/NotFound';
 
-export default const routes = (store) => {
+const routes = (store) => {
 	return (
 		<Route path="/" component={App}>
 			<IndexRoute component={Home} />
@@ -12,3 +12,4 @@ export default const routes = (store) => {
 		</Route>
 	)
 }
+export default routes;

@@ -3,6 +3,30 @@
 	"plugins": [
 		"add-module-exports",
 		"transform-decorators-legacy",
-		['import', { libraryName: 'antd', style: 'css' }]
-	]
+		"transform-react-display-name",
+		["transform-runtime", {
+			"helpers": false,
+			"polyfill": false,
+			"regenerator": false,
+			"moduleName": "babel-runtime"
+		}],
+		["import", { "libraryName": "antd", "style": "css" }]
+	],
+	"env": {
+		"development/client": {
+			"plugins": [
+				"typecheck",
+				["react-transform", {
+					"transforms": [{
+						"transform": "react-transform-hmr",
+						"imports": ["react"],
+						"locals": ["module"]
+					}, {
+						"transform": "react-transform-catch-errors",
+			            "imports": ["react", "redbox-react"]
+					}]
+				}]
+			]
+		}
+	}
 }

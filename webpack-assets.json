@@ -1,0 +1,9 @@
+{
+  "javascript": {
+    "vendor": "http://localhost:3000/distvendor.min.js",
+    "main": "http://localhost:3000/distmain.min.js",
+    "manifest": "http://localhost:3000/distmanifest.min.js"
+  },
+  "styles": {},
+  "assets": {}
+}

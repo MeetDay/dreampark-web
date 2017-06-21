@@ -1,2 +1,2 @@
-export NotFound from './container/NotFound';
-export default NotFound from './container/NotFound';
+import NotFound from './container/NotFound';
+export default NotFound;

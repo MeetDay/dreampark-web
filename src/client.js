@@ -1,29 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { match, Router, browserHistory, applyRouterMiddleware } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import useScroll from 'scroll-behavior/lib/useStandardScroll';
+import { useScroll } from 'react-router-scroll';
 
 import APIClient from './helpers/APIClient';
 import createStore from './store';
 import routes from './routes';
 
 const client = new APIClient();
-const _browserHistory = useScroll(() => browserHistory)();
-const store = createStore(_browserHistory, client, window.__redux__data__);
-const history = syncHistoryWithStore(_browserHistory, store);
+const store = createStore(history, client, window.__redux_data__);
+const history = syncHistoryWithStore(browserHistory, store);
 
 const dest = document.getElementById("app");
 match({ history, routes: routes(store) }, (error, redirectLocation, renderProps) => {
 	const component = (
 		<Provider store={store} key="provider">
-			<Router {...renderProps} />
+			<Router {...renderProps} history={history} render={ applyRouterMiddleware(useScroll()) } />
 		</Provider>
 	);
  	ReactDOM.render(component, dest);
 })
-
-if (__DEV__ && module.hot) {
-	module.hot.accept()
-}
