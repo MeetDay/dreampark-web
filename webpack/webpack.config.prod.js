@@ -39,7 +39,11 @@ const config = {
 		}, {
 			test: /\.css$/,
 			exclude: /node_modules/,
-			use: [{ loader: 'style-loader'}, { loader: 'css-loader'}, { loader: 'postcss-loader' }]
+			use: [
+				{ loader: 'style-loader'}, 
+				{ loader: 'css-loader?modules&camelCase&importLoaders=1&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
+				{ loader: 'postcss-loader' }
+			]
 		}, {
 			test: /\.(css|scss)$/,
 			exclude: /node_modules/,
@@ -50,6 +54,13 @@ const config = {
 					{ loader: 'sass-loader', options: { sourceMap: true } }
 				]
 			})
+		}, {
+			test: /\.less$/,
+			use: [
+				{ loader: 'style-loader' }, 
+				{ loader: 'css-loader?modules&camelCase&importLoaders=2&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
+				{ loader: 'less-loader' }
+			]
 		}, {
 			test: webpackIsomorphicToolsPlugin.regular_expression('images'),
 			exclude: /node_modules/,

@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools-configuration')).development(process.env.NODE_ENV === 'development');
+var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools-configuration')).development();
 
 const projectRootPath = path.resolve(__dirname, '..');
 const HOST = process.env.HOST || 'localhost';
@@ -59,7 +59,7 @@ const config = {
 			test: /\.less$/,
 			use: [
 				{ loader: 'style-loader' }, 
-				{ loader: 'css-loader?modules&camelCase&importLoaders=2&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
+				{ loader: 'css-loader?modules&camelCase&importLoaders=1&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
 				{ loader: 'less-loader' }
 			]
 		}, {
@@ -72,7 +72,7 @@ const config = {
 		extensions: ['.js', '.jsx', 'json'],
 		alias: {
 			'react': path.resolve(__dirname, '../node_modules/react'),
-			'react-dom': path.resolve(__dirname, '../node_modules/react-dom')
+			'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
 		},
 	},
 	plugins: [
