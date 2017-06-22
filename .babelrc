@@ -1,16 +1,11 @@
 {
 	"presets": ["react", "es2015", "stage-0"],
 	"plugins": [
+		["import", { "libraryName": "antd", "style": "true" }],
+		"transform-runtime",
 		"add-module-exports",
 		"transform-decorators-legacy",
-		"transform-react-display-name",
-		["transform-runtime", {
-			"helpers": false,
-			"polyfill": false,
-			"regenerator": false,
-			"moduleName": "babel-runtime"
-		}],
-		["import", { "libraryName": "antd", "style": true }]
+		"transform-react-display-name"
 	],
 	"env": {
 		"development/client": {

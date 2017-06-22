@@ -39,12 +39,16 @@ const config = {
 		rules: [{
 			test: /\.(js|jsx)$/,
 			exclude: /node_modules/,
-			loader: 'babel-loader'
+			loader: 'babel-loader',
+			options: {
+				plugins: [['import', { libraryName: 'antd', style: 'css' }]],
+				cacheDirectory: true
+			}
 		},{
 			test: /\.css$/,
 			use: [
 					{ loader: 'style-loader' }, 
-					{ loader: 'css-loader?modules&camelCase&importLoaders=2&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
+					{ loader: 'css-loader?camelCase&importLoaders=2&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
 					{ loader: 'postcss-loader' }
 				]
 		}, {
@@ -52,14 +56,16 @@ const config = {
 			exclude: /node_modules/,
 			use: [
 					{ loader: 'style-loader' }, 
-					{ loader: 'css-loader?modules&camelCase&importLoaders=2&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' }, 
+					{ loader: 'css-loader?camelCase&importLoaders=2&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' }, 
 					{ loader: 'sass-loader', options: { sourceMap: true } },
 				]
-		},{
+		}, {
 			test: /\.less$/,
+			include: /node_modules/,
 			use: [
 				{ loader: 'style-loader' }, 
-				{ loader: 'css-loader?modules&camelCase&importLoaders=1&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
+				{ loader: 'css-loader' },
+				{ loader: 'postcss-loader' },
 				{ loader: 'less-loader' }
 			]
 		}, {

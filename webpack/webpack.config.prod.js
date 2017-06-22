@@ -58,7 +58,7 @@ const config = {
 			test: /\.less$/,
 			use: [
 				{ loader: 'style-loader' }, 
-				{ loader: 'css-loader?modules&camelCase&importLoaders=2&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
+				{ loader: 'css-loader' },
 				{ loader: 'less-loader' }
 			]
 		}, {
