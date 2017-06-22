@@ -8,8 +8,7 @@ export default class Login extends React.Component {
         const styles = require('./Login.scss');
         return (
             <div className={styles.loginBack} >
-                <div className={styles.container}>
-                </div>
+                
             </div>
         );
     }
