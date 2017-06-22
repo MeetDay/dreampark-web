@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Button } from 'antd';
-// import styles from './App.scss';
 
 export default class App extends React.Component {
 
