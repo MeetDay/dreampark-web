@@ -1,17 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import { Button } from 'antd';
-import { LoginButton } from '../../../components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux';
+import { Launching } from '../component';
+
+@connect(
+    state => ({
+
+    })
+)
 
 export default class Login extends React.Component {
+    constructor() {
+        super();
+        this.handleClick = (e) => this._handleClick(e);
+    }
+
+    _handleClick(e) {
+        e.preventDefault();
+        console.log(111);
+        this.props.dispatch(push('/register'));
+    }
+
     render() {
         const styles = require('./Login.scss');
+        console.log(this.props);
         return (
             <div className={styles.loginBack} >
-                <div>asdlfkjasdfklj;asdkfj</div>
-                <Button  loading />
-                <LoginButton title="微信登陆" bgColor="transparent" borderColor="black" onClick={(e) => {console.log('click')}} />
+                <div onClick={this.handleClick}>asdlfkjasdfklj;asdkfj</div>
+                <Launching />
             </div>
         );
     }

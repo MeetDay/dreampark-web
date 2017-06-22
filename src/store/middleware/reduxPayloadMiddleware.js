@@ -1,7 +1,8 @@
 export default function reduxPayloadMiddleware(client) {
 	return store => next => action => {
-		const { payload } = action.payload;
-		if (typeof payload === 'function') action.payload = payload(client);
+		console.log(action);
+		const { promise } = action;
+		if (typeof promise === 'function') action.payload = promise(client);
 		next(action);
 	}
 }

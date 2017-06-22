@@ -14,7 +14,7 @@ export default class LoginButton extends React.Component {
         bgColor: 'yellow',
         borderColor: 'yellow',
         imgSrc: '/assets/wechat.png',
-        imgShow: true
+        imgShow: false
     }
     render() {
         const styles = require('./LoginButton.scss');

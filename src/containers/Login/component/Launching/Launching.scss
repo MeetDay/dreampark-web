@@ -1,0 +1,10 @@
+
+
+.buttons {
+    width: 90%;
+    margin-left: 5%;
+
+    &>div:last-child {
+        margin-top: 20px;
+    }
+}
