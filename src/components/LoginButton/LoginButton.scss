@@ -1,3 +1,35 @@
 .bgColor {
-    
+    background-color: yellow;
+}
+
+$buttonHeight: 44px;
+.button {
+    position: relative;
+    width: 100%;
+    height: $buttonHeight;
+    border-radius: $buttonHeight/2;
+    border: 1px solid yellow;
+}
+
+$logoHeight: 36px;
+.logo {
+    width: $logoHeight;
+    height: $logoHeight;
+    margin: ($buttonHeight - $logoHeight)/2 0;
+    margin-left: $buttonHeight/2;
+}
+
+.buttonText {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 24px;
+    max-width: 200px;
+    font-size: 16px;
+    line-height: 24px;
+    color: black;
+    text-align: center;
 }
