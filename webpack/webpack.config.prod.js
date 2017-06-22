@@ -35,7 +35,11 @@ const config = {
 		rules: [{
 			test: /\.jsx?$/,
 			exclude: /node_modules/,
-			loader: 'babel-loader'
+			loader: 'babel-loader',
+			options: {
+				plugins: [['import', { libraryName: 'antd', style: 'css' }]],
+				cacheDirectory: true
+			}
 		}, {
 			test: /\.css$/,
 			exclude: /node_modules/,
