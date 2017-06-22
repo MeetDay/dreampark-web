@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-require('babel-polyfill');
 require('../server.babel');
 
 global.__CLIENT__ = false;

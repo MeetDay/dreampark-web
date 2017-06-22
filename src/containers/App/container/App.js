@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Button } from 'antd';
-// import Button from 'antd/lib/button';
-// import Avatar from 'antd/lib/avatar';
-
-import styles from './App.scss';
+// import styles from './App.scss';
 
 export default class App extends React.Component {
 
 	render() {
-		// const styles = require('./App.scss');
-		// require('antd/lib/button/style');
-		// require('antd/lib/avatar/style');
+		const styles = require('./App.scss');
 		return (
 			<div className={styles.app}>
 				<h1>Hello App 111</h1>

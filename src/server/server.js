@@ -14,7 +14,7 @@ const compiler = webpack(webpackConfig);
 var app = new Express();
 app.use(compression());
 app.use(favicon(path.resolve(__dirname, '../../static/favicon.ico')));
-app.use(Express.static(path.resolve(__dirname, '../static')));
+app.use(Express.static(path.resolve(__dirname, '../../static')));
 
 if (process.env.NODE_ENV === 'development' || __DEV__ ) {
 	app.use(require('morgan')('tiny'));
@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'development' || __DEV__ ) {
 	}));
 }
 
-app.use(serverRouterMiddleware());
+app.use('*', serverRouterMiddleware());
 
 app.listen(PORT, function(error) {
  	if (error) {

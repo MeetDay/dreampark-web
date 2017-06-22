@@ -23,6 +23,7 @@ export default class Html extends React.Component {
 		            <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
 		            <meta name="theme-color" content="#ffffff" />
 		            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		            <link rel="stylesheet" href="/dist/main.min.css" />
 		        </head>
 	            <body>
 	           		<div id="app" dangerouslySetInnerHTML={{ __html: content }} />

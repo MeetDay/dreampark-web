@@ -31,7 +31,7 @@ const serverRouterMiddleware = () => (req, res, next) => {
 	    			<RouterContext {...renderProps} />
 	    		</Provider>
 	    	);
-	    	console.log(renderToString(<Html component={component} store={store} />));
+	    	// console.log(renderToString(<Html component={component} store={store} />));
 	 		res.status(200).send('<!doctype html>\n' + renderToString(<Html component={component} store={store} />));
 	    } else {
      		res.status(404).send('Not found');
