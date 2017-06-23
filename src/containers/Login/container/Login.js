@@ -38,7 +38,8 @@ export default class Login extends React.Component {
             );
         }
         return (
-            <div className={styles.loginBack} >
+            <div>
+                <div className={styles.loginBack} />
                 { content }
             </div>
         );

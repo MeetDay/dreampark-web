@@ -1,0 +1,22 @@
+.loging {
+    position: relative;
+    padding: 0 5%;
+    font-size: 16px;
+}
+
+.forgotPassword {
+    overflow: hidden;
+    & > a {
+        float: right;
+        height: 44px;
+        line-height: 44px;
+        text-decoration: none;
+        color: white;
+    }
+}
+
+.loginDescription {
+    margin: 35px 0;
+    font-size: 28px;
+    color: white;
+}

@@ -12,6 +12,19 @@
       "buttonText": "LoginButton__buttonText__3JtkC",
       "_style": ".LoginButton__button__3qjBC {\n  position: relative;\n  width: 100%;\n  height: 44px;\n  border-radius: 22px;\n  border: 1px solid yellow; }\n\n.LoginButton__logo__2Xrwm {\n  width: 30px;\n  height: 30px;\n  margin: 7px 0;\n  margin-left: 22px; }\n\n.LoginButton__buttonText__3JtkC {\n  position: absolute;\n  margin: auto;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  height: 24px;\n  max-width: 200px;\n  font-size: 16px;\n  line-height: 24px;\n  color: black;\n  text-align: center; }\n"
     },
+    "./src/components/Navbar/Navbar.scss": {
+      "nav": "Navbar__nav__1jsbZ",
+      "_style": ".Navbar__nav__1jsbZ {\n  position: relative;\n  color: white;\n  z-index: 999; }\n"
+    },
+    "./src/components/Phone/Phone.scss": {
+      "phone": "Phone__phone__16VX8",
+      "title": "Phone__title__2C5fy",
+      "bottom": "Phone__bottom__9CTSs",
+      "zone": "Phone__zone__21GgL",
+      "inputphone": "Phone__inputphone__3esE9",
+      "checkd": "Phone__checkd__WXaHN",
+      "_style": ".Phone__phone__16VX8 {\n  position: relative;\n  width: 100%;\n  max-height: 80px;\n  border-bottom: solid 1px white;\n  color: white; }\n\n.Phone__title__2C5fy {\n  padding: 0;\n  font-size: 16px; }\n\n.Phone__bottom__9CTSs {\n  margin-top: 15px;\n  margin-bottom: 8px;\n  height: 35px;\n  line-height: 35px; }\n\n.Phone__zone__21GgL {\n  max-width: 50px;\n  border-radius: 2px;\n  padding: 4px 8px;\n  vertical-align: top;\n  font-size: 18px;\n  background-color: white;\n  color: black; }\n\n.Phone__inputphone__3esE9 {\n  max-width: 200px;\n  border: none;\n  padding: 0;\n  margin-left: 20px;\n  line-height: 35px;\n  font-size: 24px;\n  outline: none;\n  color: white;\n  background-color: transparent; }\n\n.Phone__checkd__WXaHN {\n  position: relative;\n  float: right;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 20px;\n  height: 20px; }\n"
+    },
     "./src/containers/App/container/App.scss": {
       "app": "App__app__2m6W4",
       "_style": ".App__app__2m6W4 {\n  background-color: white; }\n"
@@ -25,6 +38,12 @@
       "buttons": "Launching__buttons__34mEM",
       "declare": "Launching__declare__2d7xH",
       "_style": ".Launching__launching__1hhVV {\n  margin: 20px; }\n\n.Launching__launchingTop__1X5X0 {\n  width: 100%;\n  height: 44px;\n  line-height: 44px; }\n\n.Launching__loginButton__22bCc {\n  float: right;\n  min-width: 80px;\n  border: none;\n  padding: 0;\n  line-height: 44px;\n  outline: none;\n  font-size: 18px;\n  text-align: right;\n  color: white;\n  background-color: transparent; }\n\n.Launching__appLogo__1RAEH {\n  margin-top: 44px; }\n  .Launching__appLogo__1RAEH > img {\n    width: 70px;\n    height: 70px;\n    border-radius: 35px; }\n\n.Launching__description__ejw24 {\n  margin: 36px 0;\n  font-size: 28px;\n  color: white; }\n\n.Launching__buttons__34mEM {\n  width: 100%; }\n  .Launching__buttons__34mEM > div:last-child {\n    margin-top: 20px; }\n\n.Launching__declare__2d7xH {\n  margin-top: 44px;\n  font-size: 14px;\n  line-height: 24px;\n  letter-spacing: 1.5px;\n  color: white; }\n  .Launching__declare__2d7xH > span > a {\n    text-decoration: underline; }\n"
+    },
+    "./src/containers/Login/component/Loging/Loging.scss": {
+      "loging": "Loging__loging__Y9BRq",
+      "forgotPassword": "Loging__forgotPassword__149B9",
+      "loginDescription": "Loging__loginDescription__VI9xV",
+      "_style": ".Loging__loging__Y9BRq {\n  position: relative;\n  padding: 0 5%;\n  font-size: 16px; }\n\n.Loging__forgotPassword__149B9 {\n  overflow: hidden; }\n  .Loging__forgotPassword__149B9 > a {\n    float: right;\n    height: 44px;\n    line-height: 44px;\n    text-decoration: none;\n    color: white; }\n\n.Loging__loginDescription__VI9xV {\n  margin: 35px 0;\n  font-size: 28px;\n  color: white; }\n"
     },
     "./src/containers/Login/container/Login.scss": {
       "loginBack": "Login__loginBack__LQYMw",
