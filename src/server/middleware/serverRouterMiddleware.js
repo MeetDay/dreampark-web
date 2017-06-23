@@ -16,13 +16,12 @@ const serverRouterMiddleware = () => (req, res, next) => {
 	}
 
 	const client = new APIClient();
-	const memoryHistory = createHistory(req.url);
+	const memoryHistory = createHistory(req.originalUrl);
 	const store = createStore(memoryHistory, client);
 	const history = syncHistoryWithStore(memoryHistory, store);
-	match({ history, routes: routes(store), location: req.url }, (error, redirectLocation, renderProps) => {
+	match({ history, routes: routes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
     	if (error) {
-      		// res.status(500).send(error.message);
-      		next(error);
+      		res.status(500).send(error.message);
     	} else if (redirectLocation) {
       		res.redirect(302, redirectLocation.pathname + redirectLocation.search);
 	    } else if (renderProps) {
