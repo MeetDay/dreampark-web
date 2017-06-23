@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 export default class LoginButton extends React.Component {
     static propTypes = {
         bgColor: PropTypes.string,
+        borderColor: PropTypes.string,
+        textColor: PropTypes.string,
         title: PropTypes.string,
         imgSrc: PropTypes.string,
         imgShow: PropTypes.bool,
@@ -13,12 +15,13 @@ export default class LoginButton extends React.Component {
     static defaultProps = {
         bgColor: 'yellow',
         borderColor: 'yellow',
+        textColor: 'black',
         imgSrc: '/assets/wechat.png',
         imgShow: false
     }
     render() {
         const styles = require('./LoginButton.scss');
-        const { borderColor } = this.props;
+        const { borderColor, textColor } = this.props;
         const display = this.props.imgShow ? 'inline-block' : 'none';
         return (
             <div
@@ -27,7 +30,7 @@ export default class LoginButton extends React.Component {
                 onClick={this.props.onClick}
             >
                 <img style={{ display }} className={styles.logo} src={this.props.imgSrc} alt="wechat" />
-                <span className={styles.buttonText}>{this.props.title}</span>
+                <span style={{ color: textColor }} className={styles.buttonText}>{this.props.title}</span>
             </div>
         );
     }

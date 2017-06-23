@@ -6,23 +6,29 @@
   },
   "styles": {},
   "assets": {
-    "./src/containers/App/container/App.scss": {
-      "app": "App__app__2m6W4",
-      "_style": ".App__app__2m6W4 {\n  background-color: white; }\n"
-    },
-    "./src/containers/Login/container/Login.scss": {
-      "loginBack": "Login__loginBack__LQYMw",
-      "_style": ".Login__loginBack__LQYMw {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-image: url(\"/assets/bg.jpg\");\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat; }\n"
-    },
     "./src/components/LoginButton/LoginButton.scss": {
       "button": "LoginButton__button__3qjBC",
       "logo": "LoginButton__logo__2Xrwm",
       "buttonText": "LoginButton__buttonText__3JtkC",
-      "_style": ".LoginButton__button__3qjBC {\n  position: relative;\n  width: 100%;\n  height: 44px;\n  border-radius: 22px;\n  border: 1px solid yellow; }\n\n.LoginButton__logo__2Xrwm {\n  width: 36px;\n  height: 36px;\n  margin: 4px 0;\n  margin-left: 22px; }\n\n.LoginButton__buttonText__3JtkC {\n  position: absolute;\n  margin: auto;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  height: 24px;\n  max-width: 200px;\n  font-size: 16px;\n  line-height: 24px;\n  color: black;\n  text-align: center; }\n"
+      "_style": ".LoginButton__button__3qjBC {\n  position: relative;\n  width: 100%;\n  height: 44px;\n  border-radius: 22px;\n  border: 1px solid yellow; }\n\n.LoginButton__logo__2Xrwm {\n  width: 30px;\n  height: 30px;\n  margin: 7px 0;\n  margin-left: 22px; }\n\n.LoginButton__buttonText__3JtkC {\n  position: absolute;\n  margin: auto;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  height: 24px;\n  max-width: 200px;\n  font-size: 16px;\n  line-height: 24px;\n  color: black;\n  text-align: center; }\n"
+    },
+    "./src/containers/App/container/App.scss": {
+      "app": "App__app__2m6W4",
+      "_style": ".App__app__2m6W4 {\n  background-color: white; }\n"
     },
     "./src/containers/Login/component/Launching/Launching.scss": {
+      "launching": "Launching__launching__1hhVV",
+      "launchingTop": "Launching__launchingTop__1X5X0",
+      "loginButton": "Launching__loginButton__22bCc",
+      "appLogo": "Launching__appLogo__1RAEH",
+      "description": "Launching__description__ejw24",
       "buttons": "Launching__buttons__34mEM",
-      "_style": ".Launching__buttons__34mEM {\n  width: 90%;\n  margin-left: 5%; }\n  .Launching__buttons__34mEM > div:last-child {\n    margin-top: 20px; }\n"
+      "declare": "Launching__declare__2d7xH",
+      "_style": ".Launching__launching__1hhVV {\n  margin: 20px; }\n\n.Launching__launchingTop__1X5X0 {\n  width: 100%;\n  height: 44px;\n  line-height: 44px; }\n\n.Launching__loginButton__22bCc {\n  float: right;\n  min-width: 80px;\n  border: none;\n  padding: 0;\n  line-height: 44px;\n  outline: none;\n  font-size: 18px;\n  text-align: right;\n  color: white;\n  background-color: transparent; }\n\n.Launching__appLogo__1RAEH {\n  margin-top: 44px; }\n  .Launching__appLogo__1RAEH > img {\n    width: 70px;\n    height: 70px;\n    border-radius: 35px; }\n\n.Launching__description__ejw24 {\n  margin: 36px 0;\n  font-size: 28px;\n  color: white; }\n\n.Launching__buttons__34mEM {\n  width: 100%; }\n  .Launching__buttons__34mEM > div:last-child {\n    margin-top: 20px; }\n\n.Launching__declare__2d7xH {\n  margin-top: 44px;\n  font-size: 14px;\n  line-height: 24px;\n  letter-spacing: 1.5px;\n  color: white; }\n  .Launching__declare__2d7xH > span > a {\n    text-decoration: underline; }\n"
+    },
+    "./src/containers/Login/container/Login.scss": {
+      "loginBack": "Login__loginBack__LQYMw",
+      "_style": ".Login__loginBack__LQYMw {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-image: url(\"/assets/bg.jpg\");\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat; }\n"
     }
   }
 }

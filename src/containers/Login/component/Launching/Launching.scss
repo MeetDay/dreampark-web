@@ -1,10 +1,59 @@
+.launching {
+    margin: 20px;
+}
 
+$launchingTopHeight: 44px;
+.launchingTop {
+    width: 100%;
+    height: $launchingTopHeight;
+    line-height: $launchingTopHeight;
+}
+
+.loginButton {
+    float: right;
+    min-width: 80px;
+    border: none;
+    padding: 0;
+    // margin-right: 5%;
+    line-height: $launchingTopHeight;
+    outline: none;
+    font-size: 18px;
+    text-align: right;
+    color: white;
+    background-color: transparent;
+}
+
+$logoHeight: 70px;
+.appLogo {
+    margin-top: 44px;
+    &>img {
+        width: $logoHeight;
+        height: $logoHeight;
+        border-radius: $logoHeight/2;
+    }
+}
+
+.description {
+    margin: 36px 0;
+    font-size: 28px;
+    color: white;
+}
 
 .buttons {
-    width: 90%;
-    margin-left: 5%;
-
+    width: 100%;
     &>div:last-child {
         margin-top: 20px;
+    }
+}
+
+.declare {
+    margin-top: 44px;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 1.5px;
+    color: white;
+
+    &>span>a {
+        text-decoration: underline;
     }
 }

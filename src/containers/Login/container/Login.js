@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
-import { Launching } from '../component';
+import { Launching, Loging } from '../component';
 
 @connect(
     state => ({
@@ -25,11 +25,21 @@ export default class Login extends React.Component {
 
     render() {
         const styles = require('./Login.scss');
-        console.log(this.props);
+        const { location } = this.props;
+
+        let content = <Loging />;
+        if (this.props.location.hash === '#launching') {
+            content = (
+                <Launching />
+            );
+        } else if (this.props.location.hash === '#loging') {
+            content = (
+                <Loging  />
+            );
+        }
         return (
             <div className={styles.loginBack} >
-                <div onClick={this.handleClick}>asdlfkjasdfklj;asdkfj</div>
-                <Launching />
+                { content }
             </div>
         );
     }
