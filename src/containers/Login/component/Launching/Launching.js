@@ -14,7 +14,7 @@ export default class Launching extends React.Component {
 
     handleClickRegisterButton(e) {
         e.preventDefault();
-        console.log('register dream button');
+        location.href = '/register';
     }
 
     handleClickWeChatButton(e) {

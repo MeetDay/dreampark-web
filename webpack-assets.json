@@ -44,7 +44,7 @@
       "description": "Launching__description__ejw24",
       "buttons": "Launching__buttons__34mEM",
       "declare": "Launching__declare__2d7xH",
-      "_style": ".Launching__launching__1hhVV {\n  margin: 20px; }\n\n.Launching__launchingTop__1X5X0 {\n  width: 100%;\n  height: 44px;\n  line-height: 44px; }\n\n.Launching__loginButton__22bCc {\n  float: right;\n  min-width: 80px;\n  border: none;\n  padding: 0;\n  line-height: 44px;\n  outline: none;\n  font-size: 18px;\n  text-align: right;\n  color: white;\n  background-color: transparent; }\n\n.Launching__appLogo__1RAEH {\n  margin-top: 44px; }\n  .Launching__appLogo__1RAEH > img {\n    width: 70px;\n    height: 70px;\n    border-radius: 35px; }\n\n.Launching__description__ejw24 {\n  margin: 36px 0;\n  font-size: 28px;\n  color: white; }\n\n.Launching__buttons__34mEM {\n  width: 100%; }\n  .Launching__buttons__34mEM > div:last-child {\n    margin-top: 20px; }\n\n.Launching__declare__2d7xH {\n  margin-top: 44px;\n  font-size: 14px;\n  line-height: 24px;\n  letter-spacing: 1.5px;\n  color: white; }\n  .Launching__declare__2d7xH > span > a {\n    text-decoration: underline; }\n"
+      "_style": ".Launching__launching__1hhVV {\n  position: relative;\n  margin: 20px; }\n\n.Launching__launchingTop__1X5X0 {\n  width: 100%;\n  height: 44px;\n  line-height: 44px; }\n\n.Launching__loginButton__22bCc {\n  float: right;\n  min-width: 80px;\n  border: none;\n  padding: 0;\n  line-height: 44px;\n  outline: none;\n  font-size: 18px;\n  text-align: right;\n  color: white;\n  background-color: transparent; }\n\n.Launching__appLogo__1RAEH {\n  margin-top: 44px; }\n  .Launching__appLogo__1RAEH > img {\n    width: 70px;\n    height: 70px;\n    border-radius: 35px; }\n\n.Launching__description__ejw24 {\n  margin: 36px 0;\n  font-size: 28px;\n  color: white; }\n\n.Launching__buttons__34mEM {\n  width: 100%; }\n  .Launching__buttons__34mEM > div:last-child {\n    margin-top: 20px; }\n\n.Launching__declare__2d7xH {\n  margin-top: 44px;\n  font-size: 14px;\n  line-height: 24px;\n  letter-spacing: 1.5px;\n  color: white; }\n  .Launching__declare__2d7xH > span > a {\n    text-decoration: underline; }\n"
     },
     "./src/containers/Login/component/Loging/Loging.scss": {
       "loging": "Loging__loging__Y9BRq",
@@ -56,6 +56,13 @@
     "./src/containers/Login/container/Login.scss": {
       "loginBack": "Login__loginBack__LQYMw",
       "_style": ".Login__loginBack__LQYMw {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-image: url(\"/assets/bg.jpg\");\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat; }\n"
+    },
+    "./src/containers/Login/component/ForgotPassword/ForgotPassword.scss": {
+      "forgotpassword": "ForgotPassword__forgotpassword__26-1n",
+      "nav": "ForgotPassword__nav__2hHl4",
+      "description": "ForgotPassword__description__fakcx",
+      "bottom": "ForgotPassword__bottom__2UHcD",
+      "_style": ".ForgotPassword__forgotpassword__26-1n {\n  position: relative;\n  margin: 0 5%; }\n\n.ForgotPassword__nav__2hHl4 {\n  height: 44px; }\n\n.ForgotPassword__description__fakcx > span {\n  display: block;\n  margin: 24px 0;\n  color: white; }\n\n.ForgotPassword__description__fakcx > span:first-child {\n  font-size: 28px; }\n\n.ForgotPassword__description__fakcx > span:last-child {\n  font-size: 18px; }\n\n.ForgotPassword__bottom__2UHcD > div {\n  margin-bottom: 24px; }\n"
     }
   }
 }

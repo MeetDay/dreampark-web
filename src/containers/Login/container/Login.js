@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
-import { Launching, Loging } from '../component';
+import { Launching, Loging, ForgotPassword } from '../component';
 
 @connect(
     state => ({
@@ -14,13 +14,6 @@ import { Launching, Loging } from '../component';
 export default class Login extends React.Component {
     constructor() {
         super();
-        this.handleClick = (e) => this._handleClick(e);
-    }
-
-    _handleClick(e) {
-        e.preventDefault();
-        console.log(111);
-        this.props.dispatch(push('/register'));
     }
 
     render() {
@@ -35,6 +28,10 @@ export default class Login extends React.Component {
         } else if (this.props.location.hash === '#loging') {
             content = (
                 <Loging  />
+            );
+        } else if (this.props.location.hash === '#forgotpassword') {
+            content = (
+                <ForgotPassword />
             );
         }
         return (

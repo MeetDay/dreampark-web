@@ -34,7 +34,7 @@ export default class Password extends React.Component {
                     <input
                         className={styles.inputpassword}
                         type={inputType}
-                        onChange={this.props.onChange} 
+                        onChange={this.props.onChange}
                     />
                 </div>
             </div>

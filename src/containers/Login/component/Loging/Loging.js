@@ -13,7 +13,7 @@ export default class Loging extends React.Component {
         return (
             <div className={styles.loging}>
                 <div className={styles.forgotPassword}>
-                    <a href="">忘记密码</a>
+                    <a href="/login#forgotpassword">忘记密码</a>
                 </div>
                 <div className={styles.loginDescription}>
                     <span>登&nbsp;录</span>
