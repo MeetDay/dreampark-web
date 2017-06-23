@@ -20,3 +20,9 @@
     font-size: 28px;
     color: white;
 }
+
+.loginBottom {
+    & > div {
+        margin-bottom: 25px;
+    }
+}

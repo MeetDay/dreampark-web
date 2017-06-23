@@ -16,6 +16,13 @@
       "nav": "Navbar__nav__1jsbZ",
       "_style": ".Navbar__nav__1jsbZ {\n  position: relative;\n  color: white;\n  z-index: 999; }\n"
     },
+    "./src/components/Password/Password.scss": {
+      "password": "Password__password__3ixDx",
+      "top": "Password__top__3ZQiV",
+      "bottom": "Password__bottom__3G0Ls",
+      "inputpassword": "Password__inputpassword__2NRh3",
+      "_style": ".Password__password__3ixDx {\n  border: none;\n  border-bottom: 1px solid white; }\n\n.Password__top__3ZQiV {\n  overflow: hidden; }\n  .Password__top__3ZQiV > button {\n    min-width: 80px;\n    min-height: 36px;\n    padding: 0;\n    margin: 0;\n    border: none;\n    outline: none;\n    font-size: 14px;\n    color: white;\n    background-color: transparent; }\n  .Password__top__3ZQiV > button:first-child {\n    float: left;\n    text-align: left; }\n  .Password__top__3ZQiV > button:last-child {\n    float: right;\n    text-align: right; }\n\n.Password__bottom__3G0Ls {\n  margin-top: 5px; }\n\n.Password__inputpassword__2NRh3 {\n  width: 100%;\n  border: none;\n  padding: 0;\n  padding-left: 5px;\n  margin: 0;\n  line-height: 35px;\n  font-size: 24px;\n  outline: none;\n  color: white;\n  background-color: transparent; }\n"
+    },
     "./src/components/Phone/Phone.scss": {
       "phone": "Phone__phone__16VX8",
       "title": "Phone__title__2C5fy",
@@ -43,7 +50,8 @@
       "loging": "Loging__loging__Y9BRq",
       "forgotPassword": "Loging__forgotPassword__149B9",
       "loginDescription": "Loging__loginDescription__VI9xV",
-      "_style": ".Loging__loging__Y9BRq {\n  position: relative;\n  padding: 0 5%;\n  font-size: 16px; }\n\n.Loging__forgotPassword__149B9 {\n  overflow: hidden; }\n  .Loging__forgotPassword__149B9 > a {\n    float: right;\n    height: 44px;\n    line-height: 44px;\n    text-decoration: none;\n    color: white; }\n\n.Loging__loginDescription__VI9xV {\n  margin: 35px 0;\n  font-size: 28px;\n  color: white; }\n"
+      "loginBottom": "Loging__loginBottom__Cy-Rx",
+      "_style": ".Loging__loging__Y9BRq {\n  position: relative;\n  padding: 0 5%;\n  font-size: 16px; }\n\n.Loging__forgotPassword__149B9 {\n  overflow: hidden; }\n  .Loging__forgotPassword__149B9 > a {\n    float: right;\n    height: 44px;\n    line-height: 44px;\n    text-decoration: none;\n    color: white; }\n\n.Loging__loginDescription__VI9xV {\n  margin: 35px 0;\n  font-size: 28px;\n  color: white; }\n\n.Loging__loginBottom__Cy-Rx > div {\n  margin-bottom: 25px; }\n"
     },
     "./src/containers/Login/container/Login.scss": {
       "loginBack": "Login__loginBack__LQYMw",

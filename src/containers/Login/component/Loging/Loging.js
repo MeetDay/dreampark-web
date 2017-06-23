@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Phone } from '../../../../components';
+import { Phone, Password, LoginButton } from '../../../../components';
 
 export default class Loging extends React.Component {
     constructor() {
         super();
-        this.onChage
     }
 
     render() {
@@ -19,7 +18,11 @@ export default class Loging extends React.Component {
                 <div className={styles.loginDescription}>
                     <span>登&nbsp;录</span>
                 </div>
-                <Phone onChange={e => console.log(111)} />
+                <div className={styles.loginBottom}>
+                    <Phone onChange={e => console.log(111)} />
+                    <Password onChange={e => console.log(222) }/>
+                    <LoginButton title="登录" onClick={e => console.log(333)} />
+                </div>
             </div>
         );
     }
