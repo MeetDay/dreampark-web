@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, LoginButton } from '../../../../components';
+import { Phone, Password, LoginButton } from '../../../../components';
 
 export default class ForgotPassword extends React.Component {
     render() {

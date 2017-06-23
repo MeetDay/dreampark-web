@@ -25,10 +25,6 @@ export default class Login extends React.Component {
             content = (
                 <Launching />
             );
-        } else if (this.props.location.hash === '#loging') {
-            content = (
-                <Loging  />
-            );
         } else if (this.props.location.hash === '#forgotpassword') {
             content = (
                 <ForgotPassword />

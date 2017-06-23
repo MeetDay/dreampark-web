@@ -32,6 +32,7 @@ export default class Password extends React.Component {
                 </div>
                 <div className={styles.bottom}>
                     <input
+                        id="password"
                         className={styles.inputpassword}
                         type={inputType}
                         onChange={this.props.onChange}
