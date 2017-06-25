@@ -1,0 +1,73 @@
+.card {
+    border: 1px solid #eee;
+}
+
+$priceHeight: 35px;
+.totalPrice {
+    height: $priceHeight;
+    line-height: $priceHeight;
+    background-color: #E62A10;
+
+    & > span {
+        float: right;
+        margin-right: 15px;
+        font-size: 14px;
+        color: white;
+    }
+}
+
+$infoPadding: 15px;
+.info {
+    padding: $infoPadding 0;
+    margin: 0 $infoPadding;
+    border-bottom: 1px solid #DEDEDE;
+
+    & > div {
+        display: inline-block;
+    }
+}
+
+$coverHeight: 80px;
+.cover {
+    vertical-align: top;
+    & > img {
+        width: $coverHeight;
+        height: $coverHeight;
+        vertical-align: top;
+    }
+}
+
+.description {
+    margin-left: $infoPadding;
+    width: calc(100% - #{$infoPadding} - #{$coverHeight});
+    font-size: 14px;
+
+    & > div {
+        margin: 10px 0;
+        font-size: 14px;
+        color: #9B9B9B;
+    }
+    & > div:first-child {
+        margin-top: 0;
+        color: #4A4A4A;
+    }
+    & > div > span:nth-child(2n) {
+        float: right;
+    }
+}
+
+.tool {
+    height: 44px;
+    text-align: center;
+    font-size: 14px;
+    color: #9B9B9B;
+    & > div {
+        display: inline-block;
+        width: 50%;
+        height: 22px;
+        margin: 12px 0;
+    }
+    & > div:first-child {
+        border-right: 1px solid #DEDEDE;
+    }
+}

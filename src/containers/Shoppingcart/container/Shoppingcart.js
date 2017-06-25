@@ -1,0 +1,13 @@
+import React from 'react';
+import { Card } from '../component';
+
+export default class extends React.Component {
+    render() {
+        const styles = require('./Shoppingcart.scss');
+        return (
+            <div className={styles.shoppingcart}>
+                <Card />
+            </div>
+        );
+    }
+}
