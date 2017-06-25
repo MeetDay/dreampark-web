@@ -5,18 +5,41 @@ import { StepOne, StepTwo, StepThree, StepFour } from '../component';
 export default class Register extends React.Component {
     constructor() {
         super();
+        this.onPhonenNmberChange = (e) => this._onPhonenumberChange(e);
+        this.onPasswordChange = (e) => this._onPasswordChange(e);
         this.state = {
 
         };
+    }
+
+    _onPhonenumberChange(e) {
+        e.preventDefault();
+        this.setState({
+            phonenumber: e.target.value
+        });
+    }
+    _onPasswordChange(e) {
+        e.preventDefault();
+        console.log(e.target.value)
     }
 
     render() {
         const loginStyle = require('../../Login/container/Login.scss');
         const styles = require('./Register.scss');
 
-        let content = (<StepOne />);
+        let content = (
+            <StepOne
+                phonenumber={this.state.phonenumber}
+                onPhonenNmberChange={this.onPhonenNmberChange}
+                onPasswordChange={this.onPasswordChange}
+            />
+        );
         if (this.props.location.hash === '#steptwo') {
-            content = (<StepTwo />);
+            content = (
+                <StepTwo
+                    phonenumber={this.state.phonenumber}
+                />
+            );
         } else if (this.props.location.hash === '#stepthree') {
             content = (<StepThree />);
         } else if (this.props.location.hash === '#stepfour') {

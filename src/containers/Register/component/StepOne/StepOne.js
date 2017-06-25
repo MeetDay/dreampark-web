@@ -5,7 +5,9 @@ import { LoginButton, Phone, Password } from '../../../../components';
 
 export default class StepOne extends React.Component {
     static propTypes = {
-        onChange: PropTypes.func,
+        phonenumber: PropTypes.string,
+        onPhonenNmberChange: PropTypes.func,
+        onPasswordChange: PropTypes.func,
     };
 
     constructor() {
@@ -24,10 +26,10 @@ export default class StepOne extends React.Component {
 
     _handleClickNextStep(e) {
         e.preventDefault();
-        if (!/^1(3|4|5|7|8)\d{9}$/.test(this.state.phonenumber)) {
+        console.log(this.props.phonenumber);
+        if (!/^1(3|4|5|7|8)\d{9}$/.test(this.props.phonenumber)) {
             return message.error('请输入正确的手机号...');
         }
-        console.log(this.state.password);
         location.hash = '#steptwo';
     }
 
@@ -42,8 +44,8 @@ export default class StepOne extends React.Component {
                     <span>请输入您的电话号码及密码以注册成为梦想会员</span>
                 </div>
                 <div className={logingStyle.loginBottom}>
-                    <Phone onChange={ this.onChange } />
-                    <Password onChange={ this.onChange }/>
+                    <Phone onChange={ this.props.onPhonenNmberChange } imgShow />
+                    <Password onChange={ this.props.onPasswordChange }/>
                     <LoginButton title="下一步" onClick={this.handleClickNextStep} />
                 </div>
             </div>
