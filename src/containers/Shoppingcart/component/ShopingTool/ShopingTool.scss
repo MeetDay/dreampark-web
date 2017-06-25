@@ -1,0 +1,28 @@
+$toolHeight: 55px;
+$contentHeight: 24px;
+.tool {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    height: $toolHeight;
+    line-height: $toolHeight;
+    font-size: 16px;
+    text-align: center;
+    color: white;
+    background-color: #2D343B;
+
+    & > div {
+        display: inline-block;
+        height: $contentHeight;
+        line-height: $contentHeight;
+
+    }
+    & > div:first-child {
+        width: 70%;
+        border-right: 2px solid #DEDEDE;
+    }
+    & > div:last-child {
+        width: 30%;
+    }
+}

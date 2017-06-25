@@ -1,3 +1,2 @@
-import Card from './Card/Card';
 export Card from './Card/Card';
-export default Card;
+export ShopingTool from './ShopingTool/ShopingTool';

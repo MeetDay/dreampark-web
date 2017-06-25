@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from '../component';
+import { Card, ShopingTool } from '../component';
 
 export default class extends React.Component {
     render() {
@@ -7,6 +7,7 @@ export default class extends React.Component {
         return (
             <div className={styles.shoppingcart}>
                 <Card />
+                <ShopingTool price={232} />
             </div>
         );
     }
