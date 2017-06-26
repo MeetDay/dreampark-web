@@ -1,2 +1,2 @@
-import Tickets from './container/Tickets';
-export default Tickets;
+export Tickets from './container/Tickets';
+export BuyTicket from './container/BuyTicket';

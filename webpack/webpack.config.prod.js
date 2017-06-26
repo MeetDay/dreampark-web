@@ -43,7 +43,7 @@ const config = {
 				fallback: 'style-loader',
 				use: [
 					{ loader: 'css-loader?modules&camelCase&importLoaders=1&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
-					{ loader: 'postcss-loader' }					
+					{ loader: 'postcss-loader' }
 				]
 			})
 		}, {
@@ -52,7 +52,7 @@ const config = {
 			use: ExtractTextPlugin.extract({
 				fallback: 'style-loader',
 				use: [
-					{ loader: 'css-loader?modules&camelCase&importLoaders=1&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' }, 
+					{ loader: 'css-loader?modules&camelCase&importLoaders=1&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
 					{ loader: 'sass-loader', options: { sourceMap: true } }
 				]
 			})
@@ -63,7 +63,7 @@ const config = {
 				fallback: 'style-loader',
 				use: [
 					{ loader: 'css-loader' },
-					{ loader: 'less-loader' }					
+					{ loader: 'less-loader' }
 				]
 			})
 		}, {
@@ -77,8 +77,8 @@ const config = {
 		alias: {
 			'react': path.resolve(__dirname, '../node_modules/react/dist/react.min.js'),
 			'react-dom': path.resolve(__dirname, '../node_modules/react-dom/dist/react-dom.min.js'),
-			'redux': path.resolve(__dirname, '../node_modules/redux/dist/redux.js'),
-			'react-redux': path.resolve(__dirname, '../node_modules/react-redux/dist/react-redux.js'),
+			'redux': path.resolve(__dirname, '../node_modules/redux/dist/redux.min.js'),
+			'react-redux': path.resolve(__dirname, '../node_modules/react-redux/dist/react-redux.min.js'),
 			'react-router': path.resolve(__dirname, '../node_modules/react-router/umd/ReactRouter.min.js'),
 		}
 	},
@@ -97,7 +97,8 @@ const config = {
 		webpackIsomorphicToolsPlugin,
 		new webpack.DefinePlugin({
 			'process.env': {
-				NODE_ENV: JSON.stringify('production')
+				NODE_ENV: JSON.stringify('production'),
+				BABEL_ENV: JSON.stringify('production/client')
 			},
 			__CLIENT__: true,
 			__SERVER__: false,

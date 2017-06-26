@@ -39,7 +39,7 @@ export default class Tickets extends React.Component {
 
     _handleClickBuyTickets(e) {
         e.preventDefault();
-        console.log('购买门票');
+        location.href = '/tickets/buy';
     }
 
     render() {
