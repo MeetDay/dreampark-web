@@ -26,7 +26,7 @@ export default class Phone extends React.Component {
                 <div className={styles.bottom}>
                     {this.props.zone && <label className={styles.zone}>+86</label>}
                     <input id="phonenumber" style={{ marginLeft }} className={styles.inputphone} onChange={this.props.onChange} type={this.props.type} />
-                    <img style={{ display }} className={styles.checkd} src="/assets/logo.png" alt="checked"/>
+                    <img style={{ display }} className={styles.checkd} src="/assets/checked_cart.png" alt="checked"/>
                 </div>
             </div>
         )

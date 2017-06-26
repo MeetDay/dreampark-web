@@ -1,3 +1,27 @@
+$toolHeight: 55px;
+$toolPadding: 10px;
 .tool {
-    
+    position: fixed;
+    left: $toolPadding;
+    right: $toolPadding;
+    bottom: $toolPadding;
+    height: $toolHeight;
+    text-align: center;
+    background-color: #E62A10;
+}
+
+$imgHeight: 30px;
+.cartImg {
+    height: $imgHeight;
+    margin-top: ($toolHeight - $imgHeight) / 2;
+}
+
+.ticket {
+    display: inline-block;
+    margin-left: 4px;
+    height: $toolHeight;
+    line-height: $toolHeight;
+    vertical-align: top;
+    font-size: 18px;
+    color: white;
 }

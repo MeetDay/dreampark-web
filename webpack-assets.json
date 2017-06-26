@@ -39,7 +39,7 @@
       "zone": "Phone__zone__21GgL",
       "inputphone": "Phone__inputphone__3esE9",
       "checkd": "Phone__checkd__WXaHN",
-      "_style": ".Phone__phone__16VX8 {\n  position: relative;\n  width: 100%;\n  max-height: 80px;\n  border-bottom: solid 1px white;\n  color: white; }\n\n.Phone__title__2C5fy {\n  padding: 0;\n  font-size: 16px; }\n\n.Phone__bottom__9CTSs {\n  margin-top: 15px;\n  margin-bottom: 8px;\n  height: 35px;\n  line-height: 35px; }\n\n.Phone__zone__21GgL {\n  max-width: 50px;\n  border-radius: 2px;\n  padding: 4px 8px;\n  vertical-align: top;\n  font-size: 18px;\n  background-color: white;\n  color: black; }\n\n.Phone__inputphone__3esE9 {\n  max-width: 240px;\n  border: none;\n  padding: 0;\n  line-height: 35px;\n  font-size: 24px;\n  outline: none;\n  color: white;\n  background-color: transparent; }\n\n.Phone__checkd__WXaHN {\n  position: relative;\n  float: right;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 20px;\n  height: 20px; }\n"
+      "_style": ".Phone__phone__16VX8 {\n  position: relative;\n  width: 100%;\n  max-height: 80px;\n  border-bottom: solid 1px white;\n  color: white; }\n\n.Phone__title__2C5fy {\n  padding: 0;\n  font-size: 16px; }\n\n.Phone__bottom__9CTSs {\n  margin-top: 15px;\n  margin-bottom: 8px;\n  height: 35px;\n  line-height: 35px; }\n\n.Phone__zone__21GgL {\n  max-width: 50px;\n  border-radius: 2px;\n  padding: 4px 8px;\n  vertical-align: top;\n  font-size: 18px;\n  background-color: white;\n  color: black; }\n\n.Phone__inputphone__3esE9 {\n  max-width: 240px;\n  border: none;\n  padding: 0;\n  line-height: 35px;\n  font-size: 24px;\n  outline: none;\n  color: white;\n  background-color: transparent; }\n\n.Phone__checkd__WXaHN {\n  position: relative;\n  float: right;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 21px;\n  height: 15px; }\n"
     },
     "./src/containers/App/container/App.scss": {
       "app": "App__app__2m6W4",
@@ -71,7 +71,7 @@
     },
     "./src/containers/Login/container/Login.scss": {
       "loginBack": "Login__loginBack__LQYMw",
-      "_style": ".Login__loginBack__LQYMw {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-image: url(\"/assets/bg.jpg\");\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat; }\n"
+      "_style": ".Login__loginBack__LQYMw {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-image: url(\"/assets/login_background.png\");\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat; }\n"
     },
     "./src/containers/Register/component/StepFour/StepFour.scss": {
       "stepfour": "StepFour__stepfour__2tS3r",
@@ -114,8 +114,24 @@
       "shoppingcart": "Shoppingcart__shoppingcart__NudCF",
       "_style": ".Shoppingcart__shoppingcart__NudCF {\n  margin: 5% 5%; }\n"
     },
+    "./src/containers/Tickets/component/Header/Header.scss": {
+      "header": "Header__header__3AhMC",
+      "avatar": "Header__avatar__2vCWR",
+      "info": "Header__info__3WAxg",
+      "username": "Header__username__3lolH",
+      "vip": "Header__vip__23co9",
+      "tip": "Header__tip__3Bunf",
+      "qrcode": "Header__qrcode__tg8WT",
+      "bottom": "Header__bottom__2IU04",
+      "item": "Header__item__V4vqx",
+      "itemActive": "Header__itemActive__266ta",
+      "_style": ".Header__header__3AhMC {\n  height: 130px;\n  white-space: nowrap;\n  background-color: white; }\n\n.Header__avatar__2vCWR {\n  height: 60px;\n  margin: 35px 0;\n  margin-left: 50px; }\n  @media screen and (max-width: 370px) {\n    .Header__avatar__2vCWR {\n      margin-left: 20px; } }\n\n.Header__info__3WAxg {\n  display: inline-block;\n  height: 60px;\n  margin: 35px 0;\n  margin-left: 13px;\n  vertical-align: top; }\n  .Header__info__3WAxg > div {\n    display: block; }\n\n.Header__username__3lolH {\n  font-size: 20px;\n  color: #143B6E; }\n\n.Header__vip__23co9 {\n  width: 56px;\n  height: 22px;\n  margin-left: 13px;\n  vertical-align: text-bottom; }\n\n.Header__tip__3Bunf {\n  margin-top: 5px;\n  font-size: 14px;\n  color: #9B9B9B; }\n\n.Header__qrcode__tg8WT {\n  display: inline-block;\n  height: 60px;\n  width: 60px;\n  margin: 35px 0;\n  margin-left: 45px;\n  vertical-align: top;\n  background-color: gray; }\n  @media screen and (max-width: 370px) {\n    .Header__qrcode__tg8WT {\n      margin-left: 15px; } }\n\n.Header__bottom__2IU04 {\n  height: 40px;\n  background-color: #2D343B; }\n  .Header__bottom__2IU04 > div {\n    display: inline-block;\n    width: 50%;\n    line-height: 40px;\n    font-size: 16px;\n    color: white;\n    text-align: center; }\n\n.Header__item__V4vqx {\n  display: inline-block;\n  height: 40px;\n  line-height: 40px; }\n\n.Header__itemActive__266ta {\n  border-bottom: 3px solid #E62A10; }\n"
+    },
     "./src/containers/Tickets/component/TicketTool/TicketTool.scss": {
-      "_style": ""
+      "tool": "TicketTool__tool__3s1E2",
+      "cartImg": "TicketTool__cartImg__2b1zV",
+      "ticket": "TicketTool__ticket__1Dfly",
+      "_style": ".TicketTool__tool__3s1E2 {\n  position: fixed;\n  left: 10px;\n  right: 10px;\n  bottom: 10px;\n  height: 55px;\n  text-align: center;\n  background-color: #E62A10; }\n\n.TicketTool__cartImg__2b1zV {\n  height: 30px;\n  margin-top: 12.5px; }\n\n.TicketTool__ticket__1Dfly {\n  display: inline-block;\n  margin-left: 4px;\n  height: 55px;\n  line-height: 55px;\n  vertical-align: top;\n  font-size: 18px;\n  color: white; }\n"
     }
   }
 }

@@ -1,0 +1,84 @@
+$headerHeight: 130px;
+.header {
+    height: $headerHeight;
+    white-space: nowrap;
+    background-color: white;
+}
+
+$avatarHeight: 60px;
+.avatar {
+    height: $avatarHeight;
+    margin: ($headerHeight - $avatarHeight)/2 0;
+    margin-left: 50px;
+    @media screen and (max-width: 370px) {
+        margin-left: 20px;
+    }
+}
+
+.info {
+    display: inline-block;
+    height: $avatarHeight;
+    margin: ($headerHeight - $avatarHeight)/2 0;
+    margin-left: 13px;
+    vertical-align: top;
+
+    & > div {
+        display: block;
+    }
+}
+
+.username {
+    font-size: 20px;
+    color: #143B6E;
+}
+
+.vip {
+    width: 56px;
+    height: 22px;
+    margin-left: 13px;
+    vertical-align: text-bottom;
+}
+
+.tip {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #9B9B9B;
+}
+
+.qrcode {
+    display: inline-block;
+    height: $avatarHeight;
+    width: $avatarHeight;
+    margin: ($headerHeight - $avatarHeight)/2 0;
+    margin-left: 45px;
+    @media screen and (max-width: 370px) {
+        margin-left: 15px;
+    }
+    vertical-align: top;
+    background-color: gray;
+}
+
+$bottomHeight: 40px;
+.bottom {
+    height: $bottomHeight;
+    background-color: #2D343B;
+
+    & > div {
+        display: inline-block;
+        width: 50%;
+        line-height: $bottomHeight;
+        font-size: 16px;
+        color: white;
+        text-align: center;
+    }
+}
+
+.item {
+    display: inline-block;
+    height: $bottomHeight;
+    line-height: $bottomHeight;
+}
+
+.itemActive {
+    border-bottom: 3px solid #E62A10;
+}
