@@ -40,7 +40,7 @@ export default class TicketDetail extends React.Component {
                         </div>
                     </div>
                     <div className={styles.qrcode}>
-                        二维码
+                        <div />
                     </div>
                 </div>
             </Modal>

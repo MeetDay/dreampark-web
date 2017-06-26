@@ -2,7 +2,7 @@
 }
 
 .info {
-
+    border-bottom: 1px dashed;
 }
 
 .title {
@@ -43,9 +43,39 @@
 }
 
 .location {
+    height: 25px;
+    line-height: 25px;
+    margin-top: 14px;
+    margin-bottom: 25px;
+    font-family: PingFangSC-Regular;
+    & > span {
 
+    }
+    & > span:first-child {
+        font-size: 14px;
+        color: #1C2123;
+    }
+    & > span:last-child {
+        float: right;
+        font-size: 12px;
+        color: #E62A10;
+    }
 }
 
+$qrcodeHeight: 200px;
+$qrcodeWrapHeight: 160px;
 .qrcode {
-
+    position: relative;
+    height: $qrcodeHeight;
+    & > div {
+        position: absolute;
+        left: 50%;
+        right: 0;
+        top: 50%;
+        bottom: 0;
+        width: $qrcodeWrapHeight;
+        height: $qrcodeWrapHeight;
+        transform: translate(-50%, -50%);
+        background-color: gray;
+    }
 }
