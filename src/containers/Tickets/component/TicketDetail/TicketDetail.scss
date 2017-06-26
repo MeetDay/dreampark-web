@@ -1,0 +1,51 @@
+.ticketDetail {
+}
+
+.info {
+
+}
+
+.title {
+    font-family: PingFangSC-Semibold;
+    font-size: 20px;
+    color: black;
+}
+
+.date {
+    margin-top: 10px;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: black;
+}
+
+.time {
+    margin-top: 14px;
+
+    & > div {
+        display: inline-block;
+        width: 50%;
+    }
+}
+
+.item {
+    display: block;
+    font-family: PingFangSC-Regular;
+}
+
+.itemTitle {
+    font-size: 14px;
+    color: #9B9B9B;
+}
+
+.itemTime {
+    font-size: 28px;
+    color: #E62A10;
+}
+
+.location {
+
+}
+
+.qrcode {
+
+}

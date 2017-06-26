@@ -1,9 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Ticket extends React.Component {
+    static propTypes = {
+        viewTickets: PropTypes.func
+    }
     constructor() {
         super();
-
         this.handleRefundTicket = (e) => this._handleRefundTicket(e);
     }
 
@@ -16,7 +19,7 @@ export default class Ticket extends React.Component {
         const styles = require('./Ticket.scss');
         return (
             <div className={styles.ticket}>
-                <div className={styles.ticketWrap}>
+                <div className={styles.ticketWrap} onClick={this.props.viewTickets}>
                     <div className={styles.info}>
                         <span className={styles.title}>腾格里国际音乐节</span>
                         <span className={styles.date}>2017年10月2日 星期三</span>
