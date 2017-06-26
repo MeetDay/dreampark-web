@@ -11,7 +11,7 @@ export default class Tickets extends React.Component {
         this.handleClickBuyTickets = (e) => this._handleClickBuyTickets(e);
         this.state = {
             selectedTicket: { username: Math.random()},
-            showModal: true
+            showModal: false
         };
     }
 
