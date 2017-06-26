@@ -18,10 +18,18 @@ export default class Tickets extends React.Component {
     }
 
     render() {
+        const styles = require('./Tickets.scss');
         return (
             <div>
                 <Header onMenuItemChange={this.onMenuItemChange} />
-                <Ticket />
+                <div className={styles.ticketWrap}>
+                    <Ticket />
+                    <Ticket />
+                    <Ticket />
+                    <Ticket />
+                    <Ticket />
+                    <Ticket />
+                </div>
                 <TicketTool onClick={this.handleClickBuyTickets} />
             </div>
         );

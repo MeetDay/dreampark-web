@@ -1,0 +1,102 @@
+.ticket {
+    margin: 20px 0;
+    font-family: PingFangSC-Regular, sans-serif;
+}
+
+$ticketHeight: 130px;
+.ticketWrap {
+    box-shadow: 0 0 5px #ccc;
+    height: $ticketHeight;
+    // background-color: red;
+    & > div {
+        display: inline-block;
+        vertical-align: top;
+    }
+}
+
+.info {
+    position: relative;
+    width: 75%;
+    height: 100%;
+    padding: 12px;
+    color: black;
+    & > span {
+        display: block;
+    }
+}
+
+.title {
+    font-size: 20px;
+}
+.date {
+    font-size: 16px;
+}
+.time {
+    font-size: 16px;
+    color: #9B9B9B;
+}
+
+.rest {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 0;
+}
+
+.ticketCount {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+    color: #E62A10;
+}
+
+.refundTicket {
+    display: inline-block;
+    vertical-align: top;
+    float: right;
+    margin-right: 10px;
+    & > img {
+        width: 13px;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+
+    & > span {
+        font-size: 12px;
+        color: #9B9B9B;
+    }
+}
+
+.qrcode {
+    position: relative;
+    width: 25%;
+    height: 100%;
+    border-left: 2px dashed;
+}
+
+$qrcodeWrapWidth: 40px;
+$qrcodeWrapHeight: 45px;
+.qrcodeWrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-($qrcodeWrapWidth/2), -($qrcodeWrapHeight/2));
+    width: $qrcodeWrapWidth;
+    height: $qrcodeWrapHeight;
+
+    & > div {
+        background-color: gray;
+        width: 25px;
+        height: 25px;
+        margin-left: 7.5px;
+        overflow: hidden;
+    }
+    & > span {
+        display: inline-block;
+        width: $qrcodeWrapWidth;
+        margin-top: 3px;
+        font-size: 12px;
+        text-align: center;
+        color: #9B9B9B;
+    }
+}
