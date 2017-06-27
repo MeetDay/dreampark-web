@@ -4,6 +4,7 @@ import { Navbar as NavigationBar } from '../../../components';
 
 export default class App extends React.Component {
 	render() {
+		require('./Html.css');
 		const styles = require('./App.scss');
 		return (
 			<div className={styles.app}>

@@ -1,0 +1,41 @@
+$cardHeight: 130px;
+.card {
+    height: $cardHeight;
+    box-sizing: padding-box;
+    padding: 20px 0;
+    margin: 0 20px;
+    border: none;
+    border-bottom: 1px solid #DEDEDE;
+    white-space: nowrap;
+}
+
+$coverImageHeight: 90px;
+.cover {
+    width: $coverImageHeight;
+    height: $coverImageHeight;
+}
+
+.info {
+    display: inline-block;
+    margin-left: 15px;
+    vertical-align: top;
+
+    & > span {
+        display: block;
+        margin: 3px 0;
+        font-size: 14px;
+        color: #9B9B9B;
+    }
+    & > span:first-child {
+        margin-top: 0px;
+    }
+    & > span:last-child {
+        font-family: PingFangSC-Semibold;
+        color: #E62A10;
+    }
+}
+
+.title {
+    font-size: 16px !important;
+    color: black !important;
+}

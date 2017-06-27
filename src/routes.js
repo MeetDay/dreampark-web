@@ -14,7 +14,7 @@ const routes = (store) => {
 			<IndexRoute component={Home} />
 			<Route path="/home" component={Home} />
 			<Route path="/tickets" component={Tickets} />
-			<Route path="/tickets/buy" component={BuyTicket} />
+			<Route path="/buytickets" component={BuyTicket} />
 			<Shoppingcart path="/shoppingcart" component={Shoppingcart} />
 			<Route path="/login" component={Login} />
 			<Route path="/register" component={Register} />
