@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CoverImage } from '../../../components';
-import { ToolBar } from '../component';
+import { ToolBar, Recommend } from '../component';
 
 export default class HotDetail extends React.Component {
     render() {
@@ -29,6 +29,15 @@ export default class HotDetail extends React.Component {
                     </div>
                     <div className={styles.item}>
                         <div className={classNames(styles.tip)}>相关推荐</div>
+                        <div className={styles.recommend}>
+                            <div className={styles.recommendWarp}>
+                                <Recommend />
+                                <Recommend />
+                                <Recommend />
+                                <Recommend />
+                                <Recommend />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <ToolBar />

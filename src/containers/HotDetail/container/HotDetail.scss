@@ -38,3 +38,17 @@ $detailBottomMargin: 75px;
     font-size: 18px;
     color: #E62A10;
 }
+
+.recommend {
+    width: 100%;
+    overflow: hidden;
+}
+.recommendWarp {
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch !important;
+}
+.recommendWarp::-webkit-scrollbar {
+    display: none;
+}
