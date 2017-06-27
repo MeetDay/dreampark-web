@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { CoverImage } from '../../../components';
+import { CoverImage, TitleElement, TextElement, ImageElement } from '../../../components';
 import { Navbar, ToolBar, Recommend } from '../component';
 
 export default class HotDetail extends React.Component {
@@ -12,6 +12,11 @@ export default class HotDetail extends React.Component {
             <div className={styles.detail}>
                 <Navbar />
                 <CoverImage height={200} src={imageUrl} />
+                <div className={styles.content}>
+                    <TitleElement />
+                    <ImageElement />
+                    <TextElement />
+                </div>
                 <div className={styles.container}>
                     <div>
                         <div className={styles.title}>梦想车展</div>
