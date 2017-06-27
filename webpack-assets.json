@@ -57,6 +57,31 @@
       "app": "App__app__2m6W4",
       "_style": ".App__app__2m6W4 {\n  background-color: white; }\n"
     },
+    "./src/containers/HotDetail/component/Recommend/Recommend.scss": {
+      "cover": "Recommend__cover__gneRo",
+      "title": "Recommend__title__1btiO",
+      "_style": ".Recommend__cover__gneRo {\n  display: inline-block;\n  position: relative;\n  width: 180px;\n  height: 100px;\n  margin: 0 10px;\n  vertical-align: top;\n  background-position: center center;\n  background-size: cover; }\n\n.Recommend__title__1btiO {\n  position: absolute;\n  left: 5px;\n  bottom: 5px;\n  max-width: 160px;\n  height: 22px;\n  padding: 0 5px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  line-height: 22px;\n  font-size: 12px;\n  color: white;\n  background-color: #E62A10; }\n"
+    },
+    "./src/containers/HotDetail/component/ToolBar/ToolBar.scss": {
+      "toolBar": "ToolBar__toolBar__2wwWi",
+      "left": "ToolBar__left__oD-VO",
+      "price": "ToolBar__price__1KmNR",
+      "right": "ToolBar__right__5pnHj",
+      "_style": ".ToolBar__toolBar__2wwWi {\n  position: fixed;\n  left: 10px;\n  right: 10px;\n  bottom: 10px;\n  height: 55px;\n  padding: 12px 20px;\n  white-space: nowrap;\n  background-color: #2D343B; }\n  @media screen and (max-width: 370px) {\n    .ToolBar__toolBar__2wwWi {\n      padding: 12px 10px; } }\n\n.ToolBar__left__oD-VO {\n  display: inline-block;\n  width: 60%;\n  height: 31px;\n  line-height: 31px;\n  border-right: 1px solid white;\n  font-size: 16px;\n  color: white;\n  vertical-align: top; }\n\n.ToolBar__price__1KmNR {\n  margin: 0 5px;\n  font-family: PingFangSC-Semibold;\n  color: #E62A10; }\n  @media screen and (max-width: 370px) {\n    .ToolBar__price__1KmNR {\n      margin: 0; } }\n\n.ToolBar__right__5pnHj {\n  display: inline-block;\n  width: 40%;\n  height: 31px;\n  line-height: 31px;\n  font-size: 16px;\n  color: white;\n  vertical-align: top; }\n  .ToolBar__right__5pnHj > img {\n    width: 22px;\n    margin-left: 10px;\n    margin-right: 5px;\n    vertical-align: text-bottom; }\n"
+    },
+    "./src/containers/HotDetail/container/HotDetail.scss": {
+      "detail": "HotDetail__detail__2jnAS",
+      "container": "HotDetail__container__3xQwQ",
+      "title": "HotDetail__title__2ruQU",
+      "item": "HotDetail__item__1m8IM",
+      "activityTime": "HotDetail__activityTime__346EG",
+      "activityLocation": "HotDetail__activityLocation__3AVYt",
+      "attention": "HotDetail__attention__1EaZo",
+      "tip": "HotDetail__tip__1nKvn",
+      "recommend": "HotDetail__recommend__1saqs",
+      "recommendWarp": "HotDetail__recommendWarp__1wuia",
+      "_style": ".HotDetail__detail__2jnAS {\n  margin-bottom: 75px; }\n\n.HotDetail__container__3xQwQ {\n  margin: 0 20px; }\n\n.HotDetail__title__2ruQU {\n  margin: 20px 0;\n  font-size: 22px;\n  color: #D0011B; }\n\n.HotDetail__item__1m8IM {\n  padding-bottom: 10px;\n  border-bottom: 1px solid #ccc; }\n\n.HotDetail__activityTime__346EG {\n  font-size: 16px;\n  color: black; }\n\n.HotDetail__activityLocation__3AVYt {\n  font-size: 16px;\n  color: black; }\n\n.HotDetail__attention__1EaZo {\n  font-family: PingFangSC-Light;\n  font-size: 16px;\n  color: black; }\n\n.HotDetail__tip__1nKvn {\n  margin: 20px 0;\n  font-size: 18px;\n  color: #E62A10; }\n\n.HotDetail__recommend__1saqs {\n  width: 100%;\n  overflow: hidden; }\n\n.HotDetail__recommendWarp__1wuia {\n  white-space: nowrap;\n  overflow-y: hidden;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch !important; }\n\n.HotDetail__recommendWarp__1wuia::-webkit-scrollbar {\n  display: none; }\n"
+    },
     "./src/containers/Login/component/ForgotPassword/ForgotPassword.scss": {
       "forgotpassword": "ForgotPassword__forgotpassword__26-1n",
       "nav": "ForgotPassword__nav__2hHl4",
@@ -189,30 +214,13 @@
       "ticketWrap": "Tickets__ticketWrap__1-ptD",
       "_style": ".Tickets__ticketWrap__1-ptD {\n  padding: 0 20px; }\n"
     },
-    "./src/containers/HotDetail/container/HotDetail.scss": {
-      "detail": "HotDetail__detail__2jnAS",
-      "container": "HotDetail__container__3xQwQ",
-      "title": "HotDetail__title__2ruQU",
-      "item": "HotDetail__item__1m8IM",
-      "activityTime": "HotDetail__activityTime__346EG",
-      "activityLocation": "HotDetail__activityLocation__3AVYt",
-      "attention": "HotDetail__attention__1EaZo",
-      "tip": "HotDetail__tip__1nKvn",
-      "recommend": "HotDetail__recommend__1saqs",
-      "recommendWarp": "HotDetail__recommendWarp__1wuia",
-      "_style": ".HotDetail__detail__2jnAS {\n  margin-bottom: 75px; }\n\n.HotDetail__container__3xQwQ {\n  margin: 0 20px; }\n\n.HotDetail__title__2ruQU {\n  margin: 20px 0;\n  font-size: 22px;\n  color: #D0011B; }\n\n.HotDetail__item__1m8IM {\n  padding-bottom: 10px;\n  border-bottom: 1px solid #ccc; }\n\n.HotDetail__activityTime__346EG {\n  font-size: 16px;\n  color: black; }\n\n.HotDetail__activityLocation__3AVYt {\n  font-size: 16px;\n  color: black; }\n\n.HotDetail__attention__1EaZo {\n  font-family: PingFangSC-Light;\n  font-size: 16px;\n  color: black; }\n\n.HotDetail__tip__1nKvn {\n  margin: 20px 0;\n  font-size: 18px;\n  color: #E62A10; }\n\n.HotDetail__recommend__1saqs {\n  width: 100%;\n  overflow: hidden; }\n\n.HotDetail__recommendWarp__1wuia {\n  white-space: nowrap;\n  overflow-y: hidden;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch !important; }\n\n.HotDetail__recommendWarp__1wuia::-webkit-scrollbar {\n  display: none; }\n"
-    },
-    "./src/containers/HotDetail/component/ToolBar/ToolBar.scss": {
-      "toolBar": "ToolBar__toolBar__2wwWi",
-      "left": "ToolBar__left__oD-VO",
-      "price": "ToolBar__price__1KmNR",
-      "right": "ToolBar__right__5pnHj",
-      "_style": ".ToolBar__toolBar__2wwWi {\n  position: fixed;\n  left: 10px;\n  right: 10px;\n  bottom: 10px;\n  height: 55px;\n  padding: 12px 20px;\n  white-space: nowrap;\n  background-color: #2D343B; }\n  @media screen and (max-width: 370px) {\n    .ToolBar__toolBar__2wwWi {\n      padding: 12px 10px; } }\n\n.ToolBar__left__oD-VO {\n  display: inline-block;\n  width: 60%;\n  height: 31px;\n  line-height: 31px;\n  border-right: 1px solid white;\n  font-size: 16px;\n  color: white;\n  vertical-align: top; }\n\n.ToolBar__price__1KmNR {\n  margin: 0 5px;\n  font-family: PingFangSC-Semibold;\n  color: #E62A10; }\n  @media screen and (max-width: 370px) {\n    .ToolBar__price__1KmNR {\n      margin: 0; } }\n\n.ToolBar__right__5pnHj {\n  display: inline-block;\n  width: 40%;\n  height: 31px;\n  line-height: 31px;\n  font-size: 16px;\n  color: white;\n  vertical-align: top; }\n  .ToolBar__right__5pnHj > img {\n    width: 22px;\n    margin-left: 10px;\n    margin-right: 5px;\n    vertical-align: text-bottom; }\n"
-    },
-    "./src/containers/HotDetail/component/Recommend/Recommend.scss": {
-      "cover": "Recommend__cover__gneRo",
-      "title": "Recommend__title__1btiO",
-      "_style": ".Recommend__cover__gneRo {\n  display: inline-block;\n  position: relative;\n  width: 180px;\n  height: 100px;\n  margin: 0 10px;\n  vertical-align: top;\n  background-position: center center;\n  background-size: cover; }\n\n.Recommend__title__1btiO {\n  position: absolute;\n  left: 5px;\n  bottom: 5px;\n  max-width: 160px;\n  height: 22px;\n  padding: 0 5px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  line-height: 22px;\n  font-size: 12px;\n  color: white;\n  background-color: #E62A10; }\n"
+    "./src/containers/HotDetail/component/Navbar/Navbar.scss": {
+      "navbar": "Navbar__navbar__2BJ1q",
+      "back": "Navbar__back__kbdM0",
+      "title": "Navbar__title__22bCX",
+      "like": "Navbar__like__1TkdS",
+      "imgWrap": "Navbar__imgWrap__tCRTK",
+      "_style": ".Navbar__navbar__2BJ1q {\n  position: relative;\n  height: 44px;\n  width: 100%;\n  background-color: #1C2123; }\n  .Navbar__navbar__2BJ1q > div:last-child {\n    float: right; }\n\n.Navbar__back__kbdM0 {\n  height: 16px;\n  margin-left: 15px;\n  vertical-align: middle; }\n\n.Navbar__title__22bCX {\n  display: inline-block;\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  height: 24px;\n  max-width: 200px;\n  margin: auto;\n  font-size: 16px;\n  text-align: center;\n  color: white;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden; }\n\n.Navbar__like__1TkdS {\n  width: 23px;\n  margin-right: 15px;\n  vertical-align: middle; }\n\n.Navbar__imgWrap__tCRTK {\n  display: inline-block;\n  line-height: 44px;\n  vertical-align: middle; }\n"
     }
   }
 }

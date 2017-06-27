@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CoverImage } from '../../../components';
-import { ToolBar, Recommend } from '../component';
+import { Navbar, ToolBar, Recommend } from '../component';
 
 export default class HotDetail extends React.Component {
     render() {
@@ -10,6 +10,7 @@ export default class HotDetail extends React.Component {
         const imageUrl = "http://o9vi0jo2t.bkt.clouddn.com/client_uploads/images/26/DD76A2DF7CC999FBCDCC9FB28AA4F64E";
         return (
             <div className={styles.detail}>
+                <Navbar />
                 <CoverImage height={200} src={imageUrl} />
                 <div className={styles.container}>
                     <div>
