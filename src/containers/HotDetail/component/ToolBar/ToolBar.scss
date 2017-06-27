@@ -1,0 +1,56 @@
+$toolBarHeight: 55px;
+$toolBarMargin: 10px;
+$toolBarPadding: 12px;
+.toolBar {
+    position: fixed;
+    left: $toolBarMargin;
+    right: $toolBarMargin;
+    bottom: $toolBarMargin;
+    height: $toolBarHeight;
+    padding: $toolBarPadding 20px;
+    white-space: nowrap;
+    background-color: #2D343B;
+
+    @media screen and (max-width: 370px) {
+        padding: $toolBarPadding 10px;
+    }
+}
+
+$contentHeight: $toolBarHeight - $toolBarPadding*2;
+.left {
+    display: inline-block;
+    width: 60%;
+    height: $contentHeight;
+    line-height: $contentHeight;
+    border-right: 1px solid white;
+    font-size: 16px;
+    color: white;
+    vertical-align: top;
+}
+
+.price {
+    margin: 0 5px;
+    font-family: PingFangSC-Semibold;
+    color: #E62A10;
+
+    @media screen and (max-width: 370px) {
+        margin: 0;
+    }
+}
+
+.right {
+    display: inline-block;
+    width: 40%;
+    height: $contentHeight;
+    line-height: $contentHeight;
+    font-size: 16px;
+    color: white;
+    vertical-align: top;
+
+    & > img {
+        width: 22px;
+        margin-left: 10px;
+        margin-right: 5px;
+        vertical-align: text-bottom;
+    }
+}

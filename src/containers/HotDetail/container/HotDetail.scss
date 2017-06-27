@@ -1,0 +1,40 @@
+$detailBottomMargin: 75px;
+.detail {
+    margin-bottom: $detailBottomMargin;
+}
+.container {
+    margin: 0 20px;
+}
+
+.title {
+    margin: 20px 0;
+    font-size: 22px;
+    color: #D0011B;
+}
+
+.item {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.activityTime {
+    font-size: 16px;
+    color: black;
+}
+
+.activityLocation {
+    font-size: 16px;
+    color: black;
+}
+
+.attention {
+    font-family: PingFangSC-Light;
+    font-size: 16px;
+    color: black;
+}
+
+.tip {
+    margin: 20px 0;
+    font-size: 18px;
+    color: #E62A10;
+}
