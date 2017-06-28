@@ -42,18 +42,19 @@ const config = {
 			use: ExtractTextPlugin.extract({
 				fallback: 'style-loader',
 				use: [
-					{ loader: 'css-loader?modules&camelCase&importLoaders=1&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
+					{ loader: 'css-loader' },
 					{ loader: 'postcss-loader' }
 				]
 			})
 		}, {
-			test: /\.(css|scss)$/,
+			test: /\.scss$/,
 			exclude: /node_modules/,
 			use: ExtractTextPlugin.extract({
 				fallback: 'style-loader',
 				use: [
 					{ loader: 'css-loader?modules&camelCase&importLoaders=1&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
-					{ loader: 'sass-loader', options: { sourceMap: true } }
+					{ loader: 'sass-loader', options: { sourceMap: true } },
+					{ loader: 'postcss-loader' }
 				]
 			})
 		}, {

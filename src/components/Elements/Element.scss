@@ -1,20 +1,41 @@
+$elementVerMargin: 14px;
 .title {
-    padding: 14px 0;
+    padding: $elementVerMargin 0;
     border-bottom: 1px solid #DEDEDE;
     font-size: 20px;
     color: black;
 }
 
 .text {
-    margin: 14px 0;
-    font-size: 14px;
+    margin: $elementVerMargin 0;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
     color: black;
 }
 
 .image {
-    // width: 100%;
-
+    margin: $elementVerMargin 0;
     & > img {
         width: 100%;
+        vertical-align: top;
+    }
+}
+
+.bigImageElement {
+    margin: $elementVerMargin -20px;
+
+    & > img {
+        display: block;
+        width: 100%;
+        vertical-align: top;
+    }
+    & > div {
+        box-sizing: content-box;
+        max-height: 75px;
+        padding: 5px 20px;
+        font-size: 14px;
+        line-height: 25px;
+        color: white;
+        background-color: #2D343B;
     }
 }

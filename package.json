@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf static/dist && better-npm-run build",
-    "dev": "concurrently --kill-others \"npm run start-dev\"",
+    "dev": "rimraf static/dist && concurrently --kill-others \"npm run start-dev\"",
     "start-dev": "better-npm-run start-dev",
     "start": "npm run start-prod",
     "start-prod": "better-npm-run start-prod"

@@ -1,6 +1,7 @@
 $detailBottomMargin: 75px;
 .detail {
-    margin-bottom: $detailBottomMargin;
+    // margin-bottom: $detailBottomMargin;
+    border-bottom: $detailBottomMargin solid transparent;
 }
 
 .content {
@@ -15,6 +16,49 @@ $detailBottomMargin: 75px;
     margin: 20px 0;
     font-size: 22px;
     color: #D0011B;
+}
+
+.contentWrap {
+    overflow: hidden;
+}
+
+.viewMoreWrap {
+    position: relative;
+    width: 100%;
+}
+
+.viewMore {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    width: 190px;
+    height: 40px;
+    border-radius: 20px;
+
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    background-color: #E62A10;
+
+    & > span {
+        line-height: 40px;
+    }
+    & > img {
+        width: 16px;
+        margin-left: 12px;
+        vertical-align: middle;
+    }
+}
+
+.gradient {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -70px;
+    height: 70px;
+    background: linear-gradient(0deg, white, rgba(255, 255, 255, 0.1));
 }
 
 .item {
