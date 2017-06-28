@@ -14,7 +14,7 @@ export default class HotDetail extends React.Component {
             contentWrapMaxHeight: '175px',
             contentWrapOverflow: 'hidden',
             viewMoreWrapDisplay: 'block',
-            showBuyTicketNow: false,
+            showBuyTicketNow: true,
         };
     }
 
