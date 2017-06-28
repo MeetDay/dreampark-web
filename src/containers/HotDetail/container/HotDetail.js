@@ -10,11 +10,12 @@ export default class HotDetail extends React.Component {
         this.handleClickViewMore = (e) => this._handleClickViewMore(e);
         this.handleClickBuyTicketNow = (e) => this._handleClickBuyTicketNow(e);
         this.handleClickAddToCart = (e) => this._handleClickAddToCart(e);
+        this.handleClickCancel = (e) => this._handleClickCancel(e);
         this.state = {
             contentWrapMaxHeight: '175px',
             contentWrapOverflow: 'hidden',
             viewMoreWrapDisplay: 'block',
-            showBuyTicketNow: true,
+            showBuyTicketNow: false,
         };
     }
 
@@ -36,6 +37,10 @@ export default class HotDetail extends React.Component {
         e.preventDefault();
     }
 
+    _handleClickCancel(e) {
+        e.preventDefault();
+        this.setState({ showBuyTicketNow: false });
+    }
 
     render() {
         const styles = require('./HotDetail.scss');
@@ -95,7 +100,7 @@ export default class HotDetail extends React.Component {
                     </div>
                 </div>
                 {!this.state.showBuyTicketNow && <ToolBar onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} /> }
-                {this.state.showBuyTicketNow && <BuyTicketNow />}
+                {this.state.showBuyTicketNow && <BuyTicketNow onClickCancel={this.handleClickCancel} />}
             </div>
         );
     }

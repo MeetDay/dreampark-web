@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class BuyTicketNow extends React.Component {
+    static propTypes = {
+        onClickCancel: PropTypes.func.isRequired
+    };
+
     constructor() {
         super();
         this.handleClickTicketLess = (e) => this._handleClickTicketLess(e);
@@ -24,12 +28,12 @@ export default class BuyTicketNow extends React.Component {
         const toolBarStyles = require('../ToolBar/ToolBar.scss');
         const styles = require('./BuyTicketNow.scss');
         return (
-            <div className={styles.buyTicketNow}>
+            <div onTouchMove={e => e.preventDefault()} className={styles.buyTicketNow}>
 
                 <div className={styles.ticket}>
                     <div className={styles.header}>
                         <span>购买门票</span>
-                        <div onClick={e => console.log('取消')} className={styles.cancel}>
+                        <div onClick={this.props.onClickCancel} className={styles.cancel}>
                             <span>取消</span>
                             <img src="/assets/arrow_down_black.png" alt="arrow_down_black" />
                         </div>
@@ -48,7 +52,7 @@ export default class BuyTicketNow extends React.Component {
                     <div className={styles.footer}>
                         <div className={styles.tip}>选择时间：</div>
                         <div>
-
+                            缺少占位图，暂时无法再继续
                         </div>
                     </div>
                 </div>
