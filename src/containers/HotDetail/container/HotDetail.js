@@ -2,17 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CoverImage, TitleElement, TextElement, ImageElement, BigImageElement } from '../../../components';
-import { Navbar, ToolBar, Recommend } from '../component';
+import { Navbar, ToolBar, Recommend, BuyTicketNow } from '../component';
 
 export default class HotDetail extends React.Component {
     constructor() {
         super();
         this.handleClickViewMore = (e) => this._handleClickViewMore(e);
+        this.handleClickBuyTicketNow = (e) => this._handleClickBuyTicketNow(e);
+        this.handleClickAddToCart = (e) => this._handleClickAddToCart(e);
         this.state = {
             contentWrapMaxHeight: '175px',
             contentWrapOverflow: 'hidden',
             viewMoreWrapDisplay: 'block',
-
+            showBuyTicketNow: false,
         };
     }
 
@@ -24,6 +26,16 @@ export default class HotDetail extends React.Component {
             viewMoreWrapDisplay: 'none'
         });
     }
+
+    _handleClickBuyTicketNow(e) {
+        e.preventDefault();
+        this.setState({ showBuyTicketNow: true });
+    }
+
+    _handleClickAddToCart(e) {
+        e.preventDefault();
+    }
+
 
     render() {
         const styles = require('./HotDetail.scss');
@@ -82,7 +94,8 @@ export default class HotDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-                <ToolBar />
+                {!this.state.showBuyTicketNow && <ToolBar onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} /> }
+                {this.state.showBuyTicketNow && <BuyTicketNow />}
             </div>
         );
     }
