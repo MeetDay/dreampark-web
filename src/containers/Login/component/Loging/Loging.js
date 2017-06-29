@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Phone, Password, LoginButton } from '../../../../components';
+import Navbar from '../Navbar/Navbar';
 
 export default class Loging extends React.Component {
     constructor() {
@@ -12,9 +13,10 @@ export default class Loging extends React.Component {
         const styles = require('./Loging.scss');
         return (
             <div className={styles.loging}>
-                <div className={styles.forgotPassword}>
+                <Navbar showForgotPassword={true} />
+                {/* <div className={styles.forgotPassword}>
                     <a href="/login#forgotpassword">忘记密码</a>
-                </div>
+                </div> */}
                 <div className={styles.loginDescription}>
                     <span>登&nbsp;录</span>
                 </div>

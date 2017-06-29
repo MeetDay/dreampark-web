@@ -166,7 +166,7 @@
     "./src/containers/Register/container/Register.scss": {
       "container": "Register__container__3GCJW",
       "nav": "Register__nav__3PkKt",
-      "_style": ".Register__container__3GCJW {\n  position: relative; }\n\n.Register__nav__3PkKt {\n  height: 44px;\n  line-height: 44px;\n  font-size: 20px;\n  color: white; }\n"
+      "_style": ".Register__container__3GCJW {\n  position: relative; }\n\n.Register__nav__3PkKt {\n  margin: 0 20px; }\n"
     },
     "./src/containers/Shoppingcart/component/Card/Card.scss": {
       "card": "Card__card__2SRa_",
@@ -247,6 +247,12 @@
     "./src/containers/Tickets/container/Tickets.scss": {
       "ticketWrap": "Tickets__ticketWrap__1-ptD",
       "_style": ".Tickets__ticketWrap__1-ptD {\n  padding: 0 20px; }\n"
+    },
+    "./src/containers/Login/component/Navbar/Navbar.scss": {
+      "navbar": "Navbar__navbar__28qng",
+      "forgot": "Navbar__forgot__1qPzn",
+      "back": "Navbar__back__31ZZB",
+      "_style": ".Navbar__navbar__28qng {\n  position: relative;\n  height: 44px;\n  font-size: 16px;\n  background-color: transparent; }\n  .Navbar__navbar__28qng > div {\n    display: inline-block;\n    height: 44px;\n    line-height: 44px; }\n\n.Navbar__forgot__1qPzn {\n  float: right; }\n\n.Navbar__back__31ZZB > img {\n  height: 20px;\n  vertical-align: middle; }\n"
     }
   }
 }

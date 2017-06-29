@@ -28,7 +28,7 @@ export default class StepTwo extends React.Component {
                     <span>{`我们向 ${this.props.phonenumber} 发送了一个短信验证码。请输入...`}</span>
                 </div>
                 <div className={logingStyle.loginBottom}>
-                    <Phone zone={false} onChange={e => console.log(111)} />
+                    <Phone zone={false} title="短信验证码" onChange={e => console.log(111)} />
                     <div className={styles.nextstep}>
                         <LoginButton
                             title="没有收到？重新获取"

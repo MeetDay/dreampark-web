@@ -1,0 +1,24 @@
+$navbarHeight: 44px;
+.navbar {
+    position: relative;
+    height: $navbarHeight;
+    font-size: 16px;
+    background-color: transparent;
+
+    & > div {
+        display: inline-block;
+        height: $navbarHeight;
+        line-height: $navbarHeight;
+    }
+}
+
+.forgot {
+    float: right;
+}
+
+.back {
+    & > img {
+        height: 20px;
+        vertical-align: middle;
+    }
+}

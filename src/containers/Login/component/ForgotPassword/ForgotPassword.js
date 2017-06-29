@@ -1,12 +1,14 @@
 import React from 'react';
 import { Phone, Password, LoginButton } from '../../../../components';
+import Navbar from '../Navbar/Navbar';
 
 export default class ForgotPassword extends React.Component {
     render() {
         const styles = require('./ForgotPassword.scss')
         return (
             <div className={styles.forgotpassword}>
-                <div className={styles.nav} />
+                {/* <div className={styles.nav} /> */}
+                <Navbar />
                 <div className={styles.description}>
                     <span>忘记密码？</span>
                     <span>请输入您的电话号码以查找您的账号。</span>
