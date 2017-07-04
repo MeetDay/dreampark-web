@@ -1,16 +1,35 @@
 .ticket {
+    position: relative;
     margin: 20px 0;
     font-family: PingFangSC-Regular, sans-serif;
 }
 
+.ticketBorder {
+    & > img {
+        width: 100%;
+        vertical-align: top;
+    }
+}
+
 $ticketHeight: 130px;
 .ticketWrap {
-    box-shadow: 0 0 5px #ccc;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    // box-shadow: 0 0 5px #ccc;
     height: $ticketHeight;
     // background-color: red;
     & > div {
         display: inline-block;
         vertical-align: top;
+    }
+
+    @media screen and (max-width: 370px) {
+        height: 120px;
     }
 }
 
@@ -71,7 +90,7 @@ $ticketHeight: 130px;
     position: relative;
     width: 25%;
     height: 100%;
-    border-left: 2px dashed;
+    // border-left: 2px dashed;
 }
 
 $qrcodeWrapWidth: 40px;

@@ -11,7 +11,7 @@ export default class Ticket extends React.Component {
     }
 
     _handleRefundTicket(e) {
-        e.preventDefault();
+        e.stopPropagation();
         console.log('申请退票...');
     }
 
@@ -19,6 +19,9 @@ export default class Ticket extends React.Component {
         const styles = require('./Ticket.scss');
         return (
             <div className={styles.ticket}>
+                <div className={styles.ticketBorder}>
+                    <img src="/assets/ticket_border_big.png" alt="ticket_border_big" />
+                </div>
                 <div className={styles.ticketWrap} onClick={this.props.viewTickets}>
                     <div className={styles.info}>
                         <span className={styles.title}>腾格里国际音乐节</span>

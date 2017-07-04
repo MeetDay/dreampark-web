@@ -56,11 +56,6 @@ export default class Tickets extends React.Component {
                 <Header onMenuItemChange={this.onMenuItemChange} />
                 <div className={styles.ticketWrap}>
                     <Ticket viewTickets={this.viewTickets}/>
-                    <Ticket />
-                    <Ticket />
-                    <Ticket />
-                    <Ticket />
-                    <Ticket />
                 </div>
                 <TicketTool onClick={this.handleClickBuyTickets} />
             </div>
