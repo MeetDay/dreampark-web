@@ -117,6 +117,21 @@ $ticketCountPartHeight: 40px;
     padding: 20px 0;
 }
 
+.choiceTicket {
+    width: 100%;
+    overflow: hidden;
+}
+
+.choiceTicketWrap {
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch !important;
+}
+.choiceTicketWrap::-webkit-scrollbar {
+    display: none;
+}
+
 .toolBar {
     position: absolute;
     left: 0;
@@ -126,4 +141,69 @@ $ticketCountPartHeight: 40px;
     white-space: nowrap;
     padding: 12px 20px;
     background-color: #2D343B;
+}
+
+/**
+ *   ticket css
+ */
+
+.timeSlotTicket {
+    position: relative;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.ticketBorder {
+    width: 138px;
+    vertical-align: top;
+}
+
+.ticketTriangle {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+
+    & > img {
+        width: 19px;
+        vertical-align: top;
+    }
+}
+
+.separatorLine {
+    position: absolute;
+    right: 28px;
+    top: 15px;
+    bottom: 15px;
+    width: 0px;
+    border-left: 1px dashed;
+}
+
+.ticketContent {
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    top: 4px;
+    bottom: 4px;
+    margin: auto;
+}
+
+.ticketTop {
+    margin-left: 12px;
+    margin-top: 7px;
+
+    font-family: PingFangSC-Regular;
+    font-size: 20px;
+    color: black;
+
+    & > span {
+        color: #E62A10;
+    }
+}
+
+.ticketBottom {
+    margin-left: 12px;
+
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: black;
 }

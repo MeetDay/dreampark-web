@@ -10,8 +10,10 @@ export default class BuyTicketNow extends React.Component {
         super();
         this.handleClickTicketLess = (e) => this._handleClickTicketLess(e);
         this.handleClickTicketMore = (e) => this._handleClickTicketMore(e);
+        this.handleClickTicket = (e) => this._handleClickTicket(e);
         this.state = {
-            ticketCount: 1
+            ticketCount: 1,
+            selectedTickets: [],
         };
     }
 
@@ -24,6 +26,13 @@ export default class BuyTicketNow extends React.Component {
         e.preventDefault();
         this.setState((preState, props) => ({ ticketCount:  preState.ticketCount + 1 }))
     }
+
+    _handleClickTicket(e) {
+        e.preventDefault();
+        console.log(1111);
+
+    }
+
     render() {
         const toolBarStyles = require('../ToolBar/ToolBar.scss');
         const styles = require('./BuyTicketNow.scss');
@@ -51,8 +60,14 @@ export default class BuyTicketNow extends React.Component {
                     </div>
                     <div className={styles.footer}>
                         <div className={styles.tip}>选择时间：</div>
-                        <div>
-                            缺少占位图，暂时无法再继续
+                        <div className={styles.choiceTicket}>
+                            <div className={styles.choiceTicketWrap}>
+                                <TimeSlotTicket onTicketClick={this._handleClickTicket} />
+                                <TimeSlotTicket onTicketClick={this._handleClickTicket} />
+                                <TimeSlotTicket onTicketClick={this._handleClickTicket} />
+                                <TimeSlotTicket onTicketClick={this._handleClickTicket} />
+                                <TimeSlotTicket onTicketClick={this._handleClickTicket} />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -67,6 +82,34 @@ export default class BuyTicketNow extends React.Component {
                         <img src="/assets/cart_white_menu.png" alt="cart" />
                         <span>加入购物车</span>
                     </div>
+                </div>
+            </div>
+        );
+    }
+}
+
+class TimeSlotTicket extends React.Component {
+    static propTypes = {
+        onTicketClick: PropTypes.func.isRequired,
+        selected: PropTypes.bool
+    };
+    static defaultProps = {
+        selected: true
+    };
+
+    render() {
+        const styles = require('./BuyTicketNow.scss');
+        const triangleStyle = { display: this.props.selected ? 'block' : 'none' };
+        return (
+            <div className={styles.timeSlotTicket} onClick={this.props.onTicketClick}>
+                <img className={styles.ticketBorder} src="/assets/ticket_border.png" alt="ticket_border" />
+                <div  style={triangleStyle} className={styles.ticketTriangle}>
+                    <img src="/assets/triangle.png" alt="triangle" />
+                </div>
+                <div className={styles.separatorLine} />
+                <div className={styles.ticketContent}>
+                    <div className={styles.ticketTop}>10月 <span>4日</span></div>
+                    <div className={styles.ticketBottom}>8:00-9:00</div>
                 </div>
             </div>
         );
