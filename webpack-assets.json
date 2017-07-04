@@ -131,7 +131,7 @@
       "description": "Launching__description__ejw24",
       "buttons": "Launching__buttons__34mEM",
       "declare": "Launching__declare__2d7xH",
-      "_style": ".Launching__launching__1hhVV {\n  position: relative;\n  margin: 20px; }\n\n.Launching__launchingTop__1X5X0 {\n  width: 100%;\n  height: 44px;\n  line-height: 44px; }\n\n.Launching__loginButton__22bCc {\n  float: right;\n  min-width: 80px;\n  border: none;\n  padding: 0;\n  line-height: 44px;\n  outline: none;\n  font-size: 18px;\n  text-align: right;\n  color: white;\n  background-color: transparent; }\n\n.Launching__appLogo__1RAEH {\n  margin-top: 44px; }\n  .Launching__appLogo__1RAEH > img {\n    width: 70px;\n    height: 70px;\n    border-radius: 35px; }\n\n.Launching__description__ejw24 {\n  margin: 36px 0;\n  font-size: 28px;\n  color: white; }\n\n.Launching__buttons__34mEM {\n  width: 100%; }\n  .Launching__buttons__34mEM > div:last-child {\n    margin-top: 20px; }\n\n.Launching__declare__2d7xH {\n  margin-top: 44px;\n  font-size: 14px;\n  line-height: 24px;\n  letter-spacing: 1.5px;\n  color: white; }\n  .Launching__declare__2d7xH > span > a {\n    text-decoration: underline; }\n"
+      "_style": ".Launching__launching__1hhVV {\n  position: relative;\n  margin: 20px; }\n\n.Launching__launchingTop__1X5X0 {\n  width: 100%;\n  height: 44px;\n  line-height: 44px; }\n\n.Launching__loginButton__22bCc {\n  float: right;\n  min-width: 80px;\n  border: none;\n  padding: 0;\n  line-height: 44px;\n  outline: none;\n  font-size: 18px;\n  text-align: right;\n  color: white;\n  background-color: transparent; }\n\n.Launching__appLogo__1RAEH {\n  margin-top: 44px; }\n  .Launching__appLogo__1RAEH > img {\n    width: 70px;\n    height: 70px;\n    border-radius: 35px; }\n\n.Launching__description__ejw24 {\n  margin: 36px 0;\n  font-size: 28px;\n  color: white; }\n\n.Launching__buttons__34mEM {\n  width: 100%; }\n  .Launching__buttons__34mEM > div:last-child {\n    margin-top: 20px; }\n\n.Launching__declare__2d7xH {\n  margin-top: 44px;\n  font-size: 14px;\n  line-height: 24px;\n  letter-spacing: 1.5px;\n  color: white; }\n  .Launching__declare__2d7xH > span > a {\n    text-decoration: underline;\n    color: white; }\n"
     },
     "./src/containers/Login/component/Loging/Loging.scss": {
       "loging": "Loging__loging__Y9BRq",
@@ -139,6 +139,12 @@
       "loginDescription": "Loging__loginDescription__VI9xV",
       "loginBottom": "Loging__loginBottom__Cy-Rx",
       "_style": ".Loging__loging__Y9BRq {\n  position: relative;\n  padding: 0 5%;\n  font-size: 16px; }\n\n.Loging__forgotPassword__149B9 {\n  overflow: hidden; }\n  .Loging__forgotPassword__149B9 > a {\n    float: right;\n    height: 44px;\n    line-height: 44px;\n    text-decoration: none;\n    color: white; }\n\n.Loging__loginDescription__VI9xV {\n  margin: 35px 0;\n  font-size: 28px;\n  color: white; }\n\n.Loging__loginBottom__Cy-Rx > div {\n  margin-bottom: 25px; }\n"
+    },
+    "./src/containers/Login/component/Navbar/Navbar.scss": {
+      "navbar": "Navbar__navbar__28qng",
+      "forgot": "Navbar__forgot__1qPzn",
+      "back": "Navbar__back__31ZZB",
+      "_style": ".Navbar__navbar__28qng {\n  position: relative;\n  height: 44px;\n  font-size: 16px;\n  background-color: transparent; }\n  .Navbar__navbar__28qng > div {\n    display: inline-block;\n    height: 44px;\n    line-height: 44px; }\n\n.Navbar__forgot__1qPzn {\n  float: right; }\n\n.Navbar__back__31ZZB > img {\n  height: 20px;\n  vertical-align: middle; }\n"
     },
     "./src/containers/Login/container/Login.scss": {
       "loginBack": "Login__loginBack__LQYMw",
@@ -247,12 +253,6 @@
     "./src/containers/Tickets/container/Tickets.scss": {
       "ticketWrap": "Tickets__ticketWrap__1-ptD",
       "_style": ".Tickets__ticketWrap__1-ptD {\n  padding: 0 20px; }\n"
-    },
-    "./src/containers/Login/component/Navbar/Navbar.scss": {
-      "navbar": "Navbar__navbar__28qng",
-      "forgot": "Navbar__forgot__1qPzn",
-      "back": "Navbar__back__31ZZB",
-      "_style": ".Navbar__navbar__28qng {\n  position: relative;\n  height: 44px;\n  font-size: 16px;\n  background-color: transparent; }\n  .Navbar__navbar__28qng > div {\n    display: inline-block;\n    height: 44px;\n    line-height: 44px; }\n\n.Navbar__forgot__1qPzn {\n  float: right; }\n\n.Navbar__back__31ZZB > img {\n  height: 20px;\n  vertical-align: middle; }\n"
     }
   }
 }

@@ -54,7 +54,8 @@ $logoHeight: 70px;
     letter-spacing: 1.5px;
     color: white;
 
-    &>span>a {
+    & > span > a {
         text-decoration: underline;
+        color: white;
     }
 }
