@@ -27,8 +27,8 @@ const config = {
 	},
 	output: {
 		path: path.resolve(projectRootPath, 'static/dist'),
-		filename: '[name].min.js',
-		chunkFilename: '[name].min.js',
+		filename: '[name].[hash].min.js',
+		chunkFilename: '[name].[chunkhash].min.js',
 		publicPath: '/dist/'
 	},
 	module: {
@@ -84,7 +84,7 @@ const config = {
 		}
 	},
 	plugins: [
-		new ExtractTextPlugin('[name].min.css'),
+		new ExtractTextPlugin('[name].[hash].min.css'),
 		new webpack.optimize.UglifyJsPlugin({
 			compress: { warnings: false },
 			comments: false

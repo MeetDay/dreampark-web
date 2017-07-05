@@ -15,6 +15,7 @@ $carouselHeight: 200px;
 .carouselCard {
     height: $carouselHeight;
     & > img {
+        width: 100%;
         height: $carouselHeight;
         vertical-align: top;
     }

@@ -32,7 +32,7 @@ const serverRouterMiddleware = () => (req, res, next) => {
 		    			<ReduxAsyncConnect {...renderProps} />
 		    		</Provider>
 		    	);
-				res.status(200).send('<!doctype html>\n' + renderToString(<Html component={component} store={store} />));
+				res.status(200).send('<!doctype html>\n' + renderToString(<Html component={component} store={store} assets={webpackIsomorphicTools.assets()} />));
 			});
 	    } else {
      		res.status(404).send('Not found');

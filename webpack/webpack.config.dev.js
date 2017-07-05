@@ -31,9 +31,9 @@ const config = {
 	},
 	output: {
 		path: path.resolve(projectRootPath, 'dist'),
-		filename: '[name].min.js',
-		chunkFilename: '[name].min.js',
-		publicPath: `http://${HOST}:${PORT}/dist`
+		filename: '[name].[hash].min.js',
+		chunkFilename: '[name].[chunkhash].min.js',
+		publicPath: `http://${HOST}:${PORT}/dist/`
 	},
 	module: {
 		rules: [{
