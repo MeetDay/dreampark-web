@@ -7,6 +7,7 @@ import HotDetail from './containers/HotDetail';
 import Shoppingcart from './containers/Shoppingcart';
 import Login from './containers/Login';
 import Register from './containers/Register';
+import TermsOfService from './containers/TermsOfService';
 import NotFound from './containers/NotFound';
 
 const routes = (store) => {
@@ -20,6 +21,7 @@ const routes = (store) => {
 			<Shoppingcart path="/shoppingcart" component={Shoppingcart} />
 			<Route path="/login" component={Login} />
 			<Route path="/register" component={Register} />
+			<Route path="/terms/:serviceType" component={TermsOfService} />
 			<Route path="*" component={NotFound} status={404} />
 		</Route>
 	)
