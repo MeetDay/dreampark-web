@@ -2,6 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { match, RouterContext } from 'react-router';
+import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect'
 import { syncHistoryWithStore } from 'react-router-redux';
 import createHistory from 'react-router/lib/createMemoryHistory';
 
@@ -25,13 +26,14 @@ const serverRouterMiddleware = () => (req, res, next) => {
     	} else if (redirectLocation) {
       		res.redirect(302, redirectLocation.pathname + redirectLocation.search);
 	    } else if (renderProps) {
-	    	const component = (
-	    		<Provider store={store} key="provider">
-	    			<RouterContext {...renderProps} />
-	    		</Provider>
-	    	);
-	    	// console.log(renderToString(<Html component={component} store={store} />));
-	 		res.status(200).send('<!doctype html>\n' + renderToString(<Html component={component} store={store} />));
+			loadOnServer(renderProps, store).then(() => {
+				const component = (
+		    		<Provider store={store} key="provider">
+		    			<ReduxAsyncConnect {...renderProps} />
+		    		</Provider>
+		    	);
+				res.status(200).send('<!doctype html>\n' + renderToString(<Html component={component} store={store} />));
+			});
 	    } else {
      		res.status(404).send('Not found');
 	    }

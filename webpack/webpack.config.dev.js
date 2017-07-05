@@ -43,7 +43,7 @@ const config = {
 		}, {
 			test: /\.css$/,
 			use: [
-					{ loader: 'style-loader' }, 
+					{ loader: 'style-loader' },
 					{ loader: 'css-loader?modules&camelCase&importLoaders=2&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
 					{ loader: 'postcss-loader' }
 				]
@@ -51,15 +51,15 @@ const config = {
 			test: /\.scss$/,
 			exclude: /node_modules/,
 			use: [
-					{ loader: 'style-loader' }, 
-					{ loader: 'css-loader?modules&camelCase&importLoaders=2&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' }, 
+					{ loader: 'style-loader' },
+					{ loader: 'css-loader?modules&camelCase&importLoaders=2&sourceMap&localIdentName=[name]__[local]__[hash:base64:5]' },
 					{ loader: 'sass-loader', options: { sourceMap: true } },
 				]
 		}, {
 			test: /\.less$/,
 			include: /node_modules/,
 			use: [
-				{ loader: 'style-loader' }, 
+				{ loader: 'style-loader' },
 				{ loader: 'css-loader' },
 				{ loader: 'postcss-loader' },
 				{ loader: 'less-loader' }
@@ -77,7 +77,7 @@ const config = {
 			'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
 			'redux': path.resolve(__dirname, '../node_modules/redux'),
 			'react-redux': path.resolve(__dirname, '../node_modules/react-redux'),
-			'react-router': path.resolve(__dirname, '../node_modules/react-router/umd/ReactRouter.js'),
+			// 'react-router': path.resolve(__dirname, '../node_modules/react-router/umd/ReactRouter.js'),
 		},
 	},
 	plugins: [

@@ -80,7 +80,7 @@ const config = {
 			'react-dom': path.resolve(__dirname, '../node_modules/react-dom/dist/react-dom.min.js'),
 			'redux': path.resolve(__dirname, '../node_modules/redux/dist/redux.min.js'),
 			'react-redux': path.resolve(__dirname, '../node_modules/react-redux/dist/react-redux.min.js'),
-			'react-router': path.resolve(__dirname, '../node_modules/react-router/umd/ReactRouter.min.js'),
+			// 'react-router': path.resolve(__dirname, '../node_modules/react-router/umd/ReactRouter.min.js'),
 		}
 	},
 	plugins: [
