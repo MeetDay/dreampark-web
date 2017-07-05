@@ -1,35 +1,36 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { message } from 'antd';
-import { LoginButton, Phone, Password } from '../../../../components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { message } from 'antd'
+import { LoginButton, Phone, Password } from '../../../../components'
 
 export default class StepOne extends React.Component {
     static propTypes = {
         phonenumber: PropTypes.string,
+        password: PropTypes.string,
         onPhonenNmberChange: PropTypes.func,
         onPasswordChange: PropTypes.func,
     };
 
     constructor() {
-        super();
-        this.onChange = (e) => this._onChange(e);
-        this.handleClickNextStep = (e) => this._handleClickNextStep(e);
+        super()
+        this.onChange = (e) => this._onChange(e)
+        this.handleClickNextStep = (e) => this._handleClickNextStep(e)
+        this.state = { phonenumberIllegal: false }
     }
 
+    illegalPhonenumber = (phonenumber) => /^1(3|4|5|7|8)\d{9}$/.test(phonenumber)
+
     _onChange(e) {
-        e.preventDefault();
-        console.log(e.target.id);
+        this.props.onPhonenNmberChange(e)
         this.setState({
-            [e.target.id]: e.target.value
-        });
+            phonenumberIllegal: this.illegalPhonenumber(e.target.value)
+        })
     }
 
     _handleClickNextStep(e) {
         e.preventDefault();
-        console.log(this.props.phonenumber);
-        if (!/^1(3|4|5|7|8)\d{9}$/.test(this.props.phonenumber)) {
-            return message.error('请输入正确的手机号...');
-        }
+        if (!this.illegalPhonenumber(this.props.phonenumber))
+            return message.error('请输入正确的手机号...')
         location.hash = '#steptwo';
     }
 
@@ -44,8 +45,8 @@ export default class StepOne extends React.Component {
                     <span>请输入您的电话号码及密码以注册成为梦想会员</span>
                 </div>
                 <div className={logingStyle.loginBottom}>
-                    <Phone onChange={ this.props.onPhonenNmberChange } imgShow />
-                    <Password onChange={ this.props.onPasswordChange }/>
+                    <Phone onChange={ this.onChange } imgShow={this.state.phonenumberIllegal} defaultValue={this.props.phonenumber} />
+                    <Password onChange={ this.props.onPasswordChange } defaultValue={this.props.password} />
                     <LoginButton title="下一步" onClick={this.handleClickNextStep} />
                 </div>
             </div>

@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.4ec2f34ad471119d06d4.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.4ec2f34ad471119d06d4.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.4ec2f34ad471119d06d4.min.js"
+    "main": "http://localhost:3000/dist/main.876b7b6d9e68997bf6df.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.876b7b6d9e68997bf6df.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.876b7b6d9e68997bf6df.min.js"
   },
   "styles": {},
   "assets": {
@@ -61,7 +61,7 @@
       "zone": "Phone__zone__21GgL",
       "inputphone": "Phone__inputphone__3esE9",
       "checkd": "Phone__checkd__WXaHN",
-      "_style": ".Phone__phone__16VX8 {\n  position: relative;\n  width: 100%;\n  max-height: 80px;\n  border-bottom: solid 1px white;\n  color: white; }\n\n.Phone__title__2C5fy {\n  padding: 0;\n  font-size: 16px; }\n\n.Phone__bottom__9CTSs {\n  margin-top: 15px;\n  margin-bottom: 8px;\n  height: 35px;\n  line-height: 35px; }\n\n.Phone__zone__21GgL {\n  max-width: 50px;\n  border-radius: 2px;\n  padding: 4px 8px;\n  vertical-align: top;\n  font-size: 18px;\n  background-color: white;\n  color: black; }\n\n.Phone__inputphone__3esE9 {\n  max-width: 240px;\n  border: none;\n  padding: 0;\n  line-height: 35px;\n  font-size: 24px;\n  outline: none;\n  color: white;\n  background-color: transparent; }\n\n.Phone__checkd__WXaHN {\n  position: relative;\n  float: right;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 21px;\n  height: 15px; }\n"
+      "_style": ".Phone__phone__16VX8 {\n  position: relative;\n  width: 100%;\n  max-height: 80px;\n  border-bottom: solid 1px white;\n  color: white; }\n\n.Phone__title__2C5fy {\n  padding: 0;\n  font-size: 16px; }\n\n.Phone__bottom__9CTSs {\n  margin-top: 15px;\n  margin-bottom: 8px;\n  height: 35px;\n  line-height: 35px; }\n\n.Phone__zone__21GgL {\n  max-width: 50px;\n  border-radius: 2px;\n  padding: 4px 8px;\n  vertical-align: top;\n  font-size: 18px;\n  background-color: white;\n  color: black; }\n\n.Phone__inputphone__3esE9 {\n  max-width: 240px;\n  border: none;\n  padding: 0;\n  line-height: 35px;\n  font-size: 24px;\n  outline: none;\n  color: white;\n  background-color: transparent; }\n  @media (max-width: 370px) {\n    .Phone__inputphone__3esE9 {\n      max-width: 180px; } }\n\n.Phone__checkd__WXaHN {\n  position: relative;\n  float: right;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 21px;\n  height: 15px; }\n"
     },
     "./src/containers/App/container/App.scss": {
       "app": "App__app__2m6W4",

@@ -9,19 +9,24 @@ export default class Register extends React.Component {
         this.onPhonenNmberChange = (e) => this._onPhonenumberChange(e);
         this.onPasswordChange = (e) => this._onPasswordChange(e);
         this.state = {
-
+            phonenumber: '',
+            password: ''
         };
     }
 
+
+    /**
+     *  register step one
+     */
     _onPhonenumberChange(e) {
         e.preventDefault();
-        this.setState({
-            phonenumber: e.target.value
-        });
+        console.log('phonenumber:', e.target.value);
+        this.setState({ phonenumber: e.target.value });
     }
     _onPasswordChange(e) {
         e.preventDefault();
-        console.log(e.target.value)
+        console.log('password:', e.target.value);
+        this.setState({ password: e.target.value });
     }
 
     render() {
@@ -31,6 +36,7 @@ export default class Register extends React.Component {
         let content = (
             <StepOne
                 phonenumber={this.state.phonenumber}
+                password={this.state.password}
                 onPhonenNmberChange={this.onPhonenNmberChange}
                 onPasswordChange={this.onPasswordChange}
             />

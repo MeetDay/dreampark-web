@@ -6,6 +6,7 @@ export default class Phone extends React.Component {
         type: PropTypes.string,
         title: PropTypes.string,
         zone: PropTypes.bool,
+        defaultValue: PropTypes.string,
         imgShow: PropTypes.bool,
         onChange: PropTypes.func
     }
@@ -25,7 +26,7 @@ export default class Phone extends React.Component {
                 <span className={styles.title}>{this.props.title}</span>
                 <div className={styles.bottom}>
                     {this.props.zone && <label className={styles.zone}>+86</label>}
-                    <input id="phonenumber" style={{ marginLeft }} className={styles.inputphone} onChange={this.props.onChange} type={this.props.type} />
+                    <input id="phonenumber" style={{ marginLeft }} className={styles.inputphone} onChange={this.props.onChange} type={this.props.type} defaultValue={this.props.defaultValue} />
                     <img style={{ display }} className={styles.checkd} src="/assets/checked_cart.png" alt="checked"/>
                 </div>
             </div>
