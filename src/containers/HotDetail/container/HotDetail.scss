@@ -4,6 +4,23 @@ $detailBottomMargin: 75px;
     border-bottom: $detailBottomMargin solid transparent;
 }
 
+/**
+ *   轮播图的样式
+ */
+.carousel {
+    margin-top: 44px;
+    background-color: blue;
+}
+
+$carouselHeight: 200px;
+.carouselCard {
+    height: $carouselHeight;
+    & > img {
+        height: $carouselHeight;
+        vertical-align: top;
+    }
+}
+
 .content {
     margin: 0 20px;
 }

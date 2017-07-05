@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Carousel } from 'antd';
 import { CoverImage, TitleElement, TextElement, ImageElement, BigImageElement } from '../../../components';
 import { Navbar, ToolBar, Recommend, BuyTicketNow } from '../component';
 
@@ -49,12 +50,19 @@ export default class HotDetail extends React.Component {
             overflow: this.state.contentWrapOverflow
         };
         const viewMoreWrapStyle = { display: this.state.viewMoreWrapDisplay };
-
         const imageUrl = "http://o9vi0jo2t.bkt.clouddn.com/client_uploads/images/26/DD76A2DF7CC999FBCDCC9FB28AA4F64E";
         return (
             <div className={styles.detail}>
                 <Navbar />
-                <CoverImage height={200} src={imageUrl} />
+                <div className={styles.carousel}>
+                    <Carousel autoplay>
+                        <div><CarouselCard /></div>
+                        <div><CarouselCard /></div>
+                        <div><CarouselCard /></div>
+                        <div><CarouselCard /></div>
+                        <div><CarouselCard /></div>
+                    </Carousel>
+                </div>
                 <div className={styles.container}>
                     <div className={styles.item}>
                         <div className={styles.title}>梦想车展</div>
@@ -102,6 +110,21 @@ export default class HotDetail extends React.Component {
                 {!this.state.showBuyTicketNow && <ToolBar onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} /> }
                 {this.state.showBuyTicketNow && <BuyTicketNow onClickCancel={this.handleClickCancel} />}
             </div>
+        );
+    }
+}
+
+class CarouselCard extends React.Component {
+    static propTypes = {
+        carousel: PropTypes.object,
+    };
+    render() {
+        const styles = require('./HotDetail.scss');
+        const imageUrl = "http://o9vi0jo2t.bkt.clouddn.com/client_uploads/images/26/DD76A2DF7CC999FBCDCC9FB28AA4F64E";
+        return (
+            <a className={styles.carouselCard}>
+                <img src={imageUrl} alt="cover"/>
+            </a>
         );
     }
 }
