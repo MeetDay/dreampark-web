@@ -1,16 +1,25 @@
-import React from 'react';
-import { Icon } from 'antd';
-import { StepOne, StepTwo, StepThree, StepFour } from '../component';
-import { Navbar } from '../../Login/component';
+import React from 'react'
+import { Icon } from 'antd'
+import { StepOne, StepTwo, StepThree, StepFour } from '../component'
+import { Navbar } from '../../Login/component'
 
 export default class Register extends React.Component {
     constructor() {
         super();
-        this.onPhonenNmberChange = (e) => this._onPhonenumberChange(e);
-        this.onPasswordChange = (e) => this._onPasswordChange(e);
+        this.onPhonenNmberChange = (e) => this._onPhonenumberChange(e)
+        this.onPasswordChange = (e) => this._onPasswordChange(e)
+        this.onUsernameChange = (e) => this._onUsernameChange(e)
+        this.onCardNumberChange = (e) => this._onCardNumberChange(e)
+        this.onCarNumberChange = (e) => this._onCarNumberChange(e)
+        this.onProfessionChange = (e) => this._onProfessionChange(e)
+
         this.state = {
             phonenumber: '',
-            password: ''
+            password: '',
+            username: '',
+            cardno: '',
+            carno: '',
+            profession: ''
         };
     }
 
@@ -29,6 +38,35 @@ export default class Register extends React.Component {
         this.setState({ password: e.target.value });
     }
 
+    /**
+     *  register step three
+     */
+    _onUsernameChange(e) {
+        e.preventDefault()
+        console.log('username:', e.target.value)
+        this.setState({ username: e.target.value })
+
+    }
+    _onCardNumberChange(e) {
+        e.preventDefault()
+        console.log('cardno:', e.target.value)
+        this.setState({ cardno: e.target.value })
+    }
+
+    /*
+     *  register step three
+     */
+    _onCarNumberChange(e) {
+        e.preventDefault()
+        console.log('carnumber:', e.target.value)
+        this.setState({ carno: e.target.value })
+    }
+    _onProfessionChange(e) {
+        e.preventDefault()
+        console.log('profession:', e.target.value)
+        this.setState({ profession: e.target.value })
+    }
+
     render() {
         const loginStyle = require('../../Login/container/Login.scss');
         const styles = require('./Register.scss');
@@ -42,15 +80,25 @@ export default class Register extends React.Component {
             />
         );
         if (this.props.location.hash === '#steptwo') {
-            content = (
-                <StepTwo
-                    phonenumber={this.state.phonenumber}
-                />
-            );
+            content = (<StepTwo phonenumber={this.state.phonenumber} />)
         } else if (this.props.location.hash === '#stepthree') {
-            content = (<StepThree />);
+            content = (
+                <StepThree
+                    username={this.state.username}
+                    cardno={this.state.cardno}
+                    onUsernameChange={this.onUsernameChange}
+                    onCardNumberChange={this.onCardNumberChange}
+                />
+            )
         } else if (this.props.location.hash === '#stepfour') {
-            content = (<StepFour />);
+            content = (
+                <StepFour
+                    carno={this.state.carno}
+                    profession={this.state.profession}
+                    onCarNumberChange={this.onCarNumberChange}
+                    onProfessionChange={this.onProfessionChange}
+                />
+            )
         }
         return (
             <div className={styles.register}>

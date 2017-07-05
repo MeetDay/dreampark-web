@@ -20,13 +20,14 @@ export default class Phone extends React.Component {
     render() {
         const styles = require('./Phone.scss');
         const display = this.props.imgShow ? 'inline-block' : 'none';
-        const marginLeft = this.props.zone ? '20px' : '0';
+        const marginLeft = this.props.zone ? '20px' : '2px';
+        const maxWidth = this.props.zone ? '190px' : '240px';
         return (
             <div className={styles.phone}>
                 <span className={styles.title}>{this.props.title}</span>
                 <div className={styles.bottom}>
                     {this.props.zone && <label className={styles.zone}>+86</label>}
-                    <input id="phonenumber" style={{ marginLeft }} className={styles.inputphone} onChange={this.props.onChange} type={this.props.type} defaultValue={this.props.defaultValue} />
+                    <input id="phonenumber" style={{ marginLeft, maxWidth }} className={styles.inputphone} onChange={this.props.onChange} type={this.props.type} defaultValue={this.props.defaultValue} />
                     <img style={{ display }} className={styles.checkd} src="/assets/checked_cart.png" alt="checked"/>
                 </div>
             </div>
