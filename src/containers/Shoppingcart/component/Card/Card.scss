@@ -1,4 +1,5 @@
 .card {
+    margin: 20px 0;
     border: 1px solid #eee;
 }
 
@@ -32,7 +33,6 @@ $coverHeight: 80px;
     vertical-align: top;
     & > img {
         width: $coverHeight;
-        height: $coverHeight;
         vertical-align: top;
     }
 }
@@ -46,6 +46,10 @@ $coverHeight: 80px;
         margin: 10px 0;
         font-size: 14px;
         color: #9B9B9B;
+
+        @media (max-width: 320px) {
+            font-size: 12px;
+        }
     }
     & > div:first-child {
         margin-top: 0;

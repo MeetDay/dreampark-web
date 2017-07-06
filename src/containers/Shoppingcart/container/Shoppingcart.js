@@ -7,6 +7,10 @@ export default class extends React.Component {
         return (
             <div className={styles.shoppingcart}>
                 <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
                 <ShopingTool price={232} />
             </div>
         );
