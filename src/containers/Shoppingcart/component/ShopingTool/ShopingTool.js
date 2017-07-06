@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox } from 'antd';
+
+import { Checkbox } from '../../../../components';
 
 export default class ShopingTool extends React.Component {
     static propTypes = {
-        price: PropTypes.number
+        price: PropTypes.number,
+        onClickSettleAccount: PropTypes.func,
+        onClickAllChecked: PropTypes.func
     }
     static defaultProps = {
         price: 0
@@ -14,10 +17,8 @@ export default class ShopingTool extends React.Component {
         const styles = require('./ShopingTool.scss');
         return (
             <div className={styles.tool}>
-                <div>{`￥${this.props.price}`} 结算</div>
-                <div>
-                    <Checkbox style={{ fontSize: '16px' }}>全选</Checkbox>
-                </div>
+                <div onClick={this.props.onClickSettleAccount}>{`￥${this.props.price}`} 结算</div>
+                <div><Checkbox onChange={this.props.onClickAllChecked}>全选</Checkbox></div>
             </div>
         );
     }

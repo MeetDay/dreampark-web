@@ -1,11 +1,23 @@
 .checkboxWrapper {
-
+    // background-color: yellow;
 }
 
+$checkboxWidth: 16px;
 .checkbox {
-
+    display: inline-block;
+    width: $checkboxWidth;
+    height: $checkboxWidth;
+    border: 1px solid #ccc;
+    vertical-align: sub;
+    & > img {
+        position: relative;
+        padding-left: 1px;
+        padding-top: 3px;
+        width: 14px;
+        vertical-align: top;
+    }
 }
 
-.checkedImageurl {
-    
+.content {
+    margin-left: 8px;
 }

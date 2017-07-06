@@ -6,5 +6,5 @@ export ImageElement from './Elements/ImageElement/ImageElement';
 export BigImageElement from './Elements/BigImageElement/BigImageElement';
 export TextElement from './Elements/TextElement/TextElement';
 export TitleElement from './Elements/TitleElement/TitleElement';
-
+export Checkbox from './Checkbox/Checkbox';
 export Navbar from './Navbar/Navbar';

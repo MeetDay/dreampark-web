@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes form 'prop-types'
+import PropTypes from 'prop-types'
 
 export default class Checkbox extends React.Component {
     static propTypes = {
@@ -14,15 +14,40 @@ export default class Checkbox extends React.Component {
         checkdImageurl: '/assets/checked_cart.png'
     }
 
+    constructor(props) {
+        super(props)
+        this.handleClick = (e) => this._handleClick(e)
+        this.state = {
+            checked: props.checked || props.defaultChecked
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.checked !== this.props.checked) {
+            setTimeout(() => { this.setState({ checked: nextProps.checked }) }, 0)
+        }
+    }
+
+    _handleClick(e) {
+        e.preventDefault()
+        this.setState((preState, props) => {
+            if (typeof this.props.onChange === 'function') this.props.onChange({ checked: !preState.checked })
+            return { checked: !preState.checked }
+        })
+    }
+
     render() {
         const styles = require('./Checkbox.scss')
+        const style = {
+            backgroundColor: this.state.checked ? '#E62A10 ' : 'white',
+            border: this.state.checked ? 'none' : '1px solid #ccc'
+        }
         return (
             <span className={styles.checkboxWrapper}>
-                <span className={styles.checkbox}>
-                    <input type="checkbox" onChange={this.props.onChange} />
-                    <img className={styles.checkedImageurl} src={this.props.checkdImageurl} alt="checked" />
+                <span onClick={this.handleClick} style={style} className={styles.checkbox}>
+                    <img src={this.props.checkdImageurl} alt="checked" />
                 </span>
-                <span>{this.props.children}</span>
+                <span className={styles.content}>{this.props.children}</span>
             </span>
         );
     }
