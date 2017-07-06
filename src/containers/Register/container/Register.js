@@ -54,7 +54,7 @@ export default class Register extends React.Component {
     }
 
     /*
-     *  register step three
+     *  register step four
      */
     _onCarNumberChange(e) {
         e.preventDefault()
