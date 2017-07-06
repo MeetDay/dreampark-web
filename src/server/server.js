@@ -1,11 +1,14 @@
 var Express = require('express');
 var path = require('path');
 var fs = require('fs');
+var bodyParser = require('body-parser');
 var compression = require('compression');
 var favicon = require('serve-favicon');
 var webpack = require('webpack');
 var webpackConfig = require('../../webpack/webpack.config.dev.js');
 var serverRouterMiddleware = require('./middleware/serverRouterMiddleware');
+
+var smsCodeRouter = require('./serverRouters/smsCodeRouter');
 
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3000;
@@ -35,6 +38,9 @@ if (process.env.NODE_ENV === 'development' || __DEV__ ) {
 	}));
 }
 
+app.use(bodyParser.json());
+app.use('/api/sms/code', smsCodeRouter);
+
 app.use('*', serverRouterMiddleware());
 
 app.listen(PORT, function(error) {
@@ -44,4 +50,3 @@ app.listen(PORT, function(error) {
  		console.info(`\n 🌛 Listening on port ${ PORT }. Open up http://localhost:${ PORT } in your browser. \n`);
  	}
 })
-

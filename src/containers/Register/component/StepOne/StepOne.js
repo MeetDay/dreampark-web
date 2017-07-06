@@ -18,6 +18,12 @@ export default class StepOne extends React.Component {
         this.state = { phonenumberIllegal: false }
     }
 
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({ phonenumberIllegal: this.illegalPhonenumber(this.props.phonenumber) })
+        }, 0);
+    }
+
     illegalPhonenumber = (phonenumber) => /^1(3|4|5|7|8)\d{9}$/.test(phonenumber)
 
     _onChange(e) {
