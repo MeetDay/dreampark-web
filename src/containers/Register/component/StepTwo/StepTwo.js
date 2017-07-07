@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import superagent from 'superagent'
 import { message } from 'antd'
 import { LoginButton, Phone, Password } from '../../../../components'
+import countDown from '../../../../Utils/countDown'
 
 export default class StepTwo extends React.Component {
     static propTypes = {
@@ -18,36 +19,28 @@ export default class StepTwo extends React.Component {
         this.onChange = (e) => this._onChange(e)
         this.state = {
             SMSCode: '',
-            msg_id: '06890980-6789-4054-bba9-90fb66ab2fce'
+            counterDisabled: false,
+            counterMsg: '没有收到？重新获取'
         }
     }
 
+    illegalSMSCode = (code) => /^\d{4}$/.test(code)
+    
     _handleClickRegainCode(e) {
         e.preventDefault()
-        superagent
-            .post('https://api.sms.jpush.cn/v1/codes')
-            .send({ mobile: this.props.phonenumber, temp_id: 123 })
-            .set('Authorization', `Basic ${new Buffer('appKey:masterSecrect').toString('base64')}`)
-            .end((error, { body } = {}) => {
-                if (error || Object.prototype.hasOwnProperty.call(body, 'error'))
-                    return message.error('获取短信验证码失败')
-                this.setState({ msg_id: body[msg_id] })
+        if (this.state.counterDisabled) return
+
+        const updateCounter = (counter) => {
+            this.setState({
+                counterDisabled: counter === 0 ? false : true,
+                counterMsg: counter === 0 ? '没有收到？重新获取' : `${counter}秒后, 重新获取`
             })
+        }
+        countDown(60, updateCounter)
     }
 
     _handleClickNextStep(e) {
         e.preventDefault()
-        if (this.state.msg_id.length <= 0) return
-        superagent
-            .post(`https://api.sms.jpush.cn/v1/codes/${this.state.msg_id}/valid`)
-            .send({ code: this.state.SMSCode })
-            .set('Authorization', `Basic ${new Buffer('appKey:masterSecrect').toString('base64')}`)
-            .end((error, { body } = {}) => {
-                location.hash = '#stepthree';
-                if (error || Object.prototype.hasOwnProperty.call(body, 'error'))
-                    return message.error('短信验证码错误, 请重新输入')
-                location.hash = '#stepthree';
-            })
     }
 
     _onChange(e) {
@@ -60,6 +53,7 @@ export default class StepTwo extends React.Component {
         const logingStyle = require('../../../Login/component/Loging/Loging.scss');
         const forgotpasswordStyle = require('../../../Login/component/ForgotPassword/ForgotPassword.scss');
         const styles = require('./StepTwo.scss');
+
         return (
             <div className={styles.steptwo}>
                 <div className={forgotpasswordStyle.description}>
@@ -67,10 +61,10 @@ export default class StepTwo extends React.Component {
                     <span>{`我们向 ${this.props.phonenumber.replace(/(\d)(?=(\d{4})+(?!\d))/g, '$1' + ' ')} 发送了一个短信验证码。请输入...`}</span>
                 </div>
                 <div className={logingStyle.loginBottom}>
-                    <Phone zone={false} title="短信验证码" onChange={this.onChange} />
+                    <Phone zone={false} title="短信验证码" onChange={this.onChange} imgShow={this.illegalSMSCode(this.state.SMSCode)} />
                     <div className={styles.nextstep}>
                         <LoginButton
-                            title="没有收到？重新获取"
+                            title={this.state.counterMsg}
                             bgColor="tansparent"
                             borderColor="white"
                             textColor="white"
