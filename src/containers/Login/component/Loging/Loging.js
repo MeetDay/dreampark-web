@@ -13,7 +13,6 @@ export default class Loging extends React.Component {
         const styles = require('./Loging.scss');
         return (
             <div className={styles.loging}>
-                <Navbar showForgotPassword={true} />
                 {/* <div className={styles.forgotPassword}>
                     <a href="/login#forgotpassword">忘记密码</a>
                 </div> */}

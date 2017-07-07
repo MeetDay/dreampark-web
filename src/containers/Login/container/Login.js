@@ -29,8 +29,8 @@ export default class Login extends React.Component {
 
     render() {
         const styles = require('./Login.scss');
-        const { location } = this.props;
-
+        const { location } = this.props
+        const showForgotPassword = this.props.location.hash === ''
         let content = <Loging />;
         if (this.props.location.hash === '#launching') {
             content = (<Launching />);
@@ -42,7 +42,7 @@ export default class Login extends React.Component {
         return (
             <div>
                 <div className={styles.loginBack} />
-                <div className={styles.nav}><Navbar /></div>
+                <div className={styles.nav}><Navbar showForgotPassword={showForgotPassword} /></div>
                 { content }
             </div>
         );
