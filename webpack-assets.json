@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.0412961068345830493b.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.0412961068345830493b.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.0412961068345830493b.min.js"
+    "main": "http://localhost:3000/dist/main.0d1a3db75afd1cc6caa4.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.0d1a3db75afd1cc6caa4.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.0d1a3db75afd1cc6caa4.min.js"
   },
   "styles": {},
   "assets": {
@@ -167,7 +167,8 @@
     },
     "./src/containers/Login/container/Login.scss": {
       "loginBack": "Login__loginBack__LQYMw",
-      "_style": ".Login__loginBack__LQYMw {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-image: url(\"/assets/login_background.png\");\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat; }\n"
+      "nav": "Login__nav__R83rM",
+      "_style": ".Login__loginBack__LQYMw {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-image: url(\"/assets/login_background.png\");\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat; }\n\n.Login__nav__R83rM {\n  margin: 0 20px; }\n"
     },
     "./src/containers/Register/component/StepFour/StepFour.scss": {
       "stepfour": "StepFour__stepfour__2tS3r",
@@ -186,7 +187,7 @@
     "./src/containers/Register/component/StepTwo/StepTwo.scss": {
       "steptwo": "StepTwo__steptwo__eP1pe",
       "nextstep": "StepTwo__nextstep__2M_vS",
-      "_style": ".StepTwo__steptwo__eP1pe {\n  margin: 0 5%; }\n\n.StepTwo__nextstep__2M_vS > div:first-child {\n  display: inline-block;\n  width: 60%; }\n\n.StepTwo__nextstep__2M_vS > div:last-child {\n  display: inline-block;\n  width: 35%;\n  margin-left: 5%; }\n"
+      "_style": ".StepTwo__steptwo__eP1pe {\n  position: relative;\n  margin: 0 5%; }\n\n.StepTwo__nextstep__2M_vS > div:first-child {\n  display: inline-block;\n  width: 60%; }\n\n.StepTwo__nextstep__2M_vS > div:last-child {\n  display: inline-block;\n  width: 35%;\n  margin-left: 5%; }\n"
     },
     "./src/containers/Register/container/Register.scss": {
       "container": "Register__container__3GCJW",

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { message } from 'antd'
 import { LoginButton, Phone, Password } from '../../../../components'
+import { legalPhoneNumber } from '../../../../Utils/regex'
 
 export default class StepOne extends React.Component {
     static propTypes = {
@@ -20,22 +21,20 @@ export default class StepOne extends React.Component {
 
     componentDidMount() {
         setTimeout(() => {
-            this.setState({ phonenumberIllegal: this.illegalPhonenumber(this.props.phonenumber) })
+            this.setState({ phonenumberIllegal: legalPhoneNumber(this.props.phonenumber) })
         }, 0);
     }
-
-    illegalPhonenumber = (phonenumber) => /^1(3|4|5|7|8)\d{9}$/.test(phonenumber)
 
     _onChange(e) {
         this.props.onPhonenNmberChange(e)
         this.setState({
-            phonenumberIllegal: this.illegalPhonenumber(e.target.value)
+            phonenumberIllegal: legalPhoneNumber(e.target.value)
         })
     }
 
     _handleClickNextStep(e) {
         e.preventDefault();
-        if (!this.illegalPhonenumber(this.props.phonenumber))
+        if (!legalPhoneNumber(this.props.phonenumber))
             return message.error('请输入正确的手机号...')
         location.hash = '#steptwo';
     }

@@ -4,14 +4,13 @@ import superagent from 'superagent'
 import { message } from 'antd'
 import { LoginButton, Phone, Password } from '../../../../components'
 import countDown from '../../../../Utils/countDown'
+import { legalSMSCode, formatPhoneNumber } from '../../../../Utils/regex'
 
 export default class StepTwo extends React.Component {
     static propTypes = {
         phonenumber: PropTypes.string
     }
-    static defaultProps = {
-        phonenumber: ''
-    };
+    
     constructor() {
         super()
         this.handleClickNextStep = (e) => this._handleClickNextStep(e)
@@ -24,8 +23,6 @@ export default class StepTwo extends React.Component {
         }
     }
 
-    illegalSMSCode = (code) => /^\d{4}$/.test(code)
-    
     _handleClickRegainCode(e) {
         e.preventDefault()
         if (this.state.counterDisabled) return
@@ -58,10 +55,10 @@ export default class StepTwo extends React.Component {
             <div className={styles.steptwo}>
                 <div className={forgotpasswordStyle.description}>
                     <span>输入验证码</span>
-                    <span>{`我们向 ${this.props.phonenumber.replace(/(\d)(?=(\d{4})+(?!\d))/g, '$1' + ' ')} 发送了一个短信验证码。请输入...`}</span>
+                    <span>{`我们向 ${formatPhoneNumber(this.props.phonenumber)} 发送了一个短信验证码。请输入...`}</span>
                 </div>
                 <div className={logingStyle.loginBottom}>
-                    <Phone zone={false} title="短信验证码" onChange={this.onChange} imgShow={this.illegalSMSCode(this.state.SMSCode)} />
+                    <Phone zone={false} title="短信验证码" onChange={this.onChange} imgShow={legalSMSCode(this.state.SMSCode)} />
                     <div className={styles.nextstep}>
                         <LoginButton
                             title={this.state.counterMsg}
