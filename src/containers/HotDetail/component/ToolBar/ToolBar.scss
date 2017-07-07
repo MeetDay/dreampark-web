@@ -8,6 +8,7 @@ $toolBarPadding: 12px;
     bottom: $toolBarMargin;
     height: $toolBarHeight;
     padding: $toolBarPadding 20px;
+    text-align: center;
     white-space: nowrap;
     background-color: #2D343B;
 
@@ -17,6 +18,23 @@ $toolBarPadding: 12px;
 }
 
 $contentHeight: $toolBarHeight - $toolBarPadding*2;
+.content {
+    display: inline-block;
+    height: $contentHeight;
+    line-height: $contentHeight;
+    font-size: 16px;
+    color: white;
+
+    & > span {
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    @media (max-width: 370px) {
+        font-size: 14px;
+    }
+}
+
 .left {
     display: inline-block;
     width: 60%;
@@ -26,6 +44,10 @@ $contentHeight: $toolBarHeight - $toolBarPadding*2;
     font-size: 16px;
     color: white;
     vertical-align: top;
+
+    @media (max-width: 370px) {
+        font-size: 14px;
+    }
 }
 
 .price {
@@ -52,5 +74,9 @@ $contentHeight: $toolBarHeight - $toolBarPadding*2;
         margin-left: 10px;
         margin-right: 5px;
         vertical-align: text-bottom;
+    }
+
+    @media (max-width: 320px) {
+        font-size: 14px;
     }
 }

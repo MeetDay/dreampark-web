@@ -107,8 +107,8 @@ export default class HotDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-                {!this.state.showBuyTicketNow && <ToolBar onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} /> }
-                {this.state.showBuyTicketNow && <BuyTicketNow onClickCancel={this.handleClickCancel} />}
+                <ToolBar onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} />
+                <BuyTicketNow show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} />
             </div>
         );
     }

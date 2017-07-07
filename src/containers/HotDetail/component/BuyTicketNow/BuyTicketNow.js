@@ -1,20 +1,36 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 export default class BuyTicketNow extends React.Component {
     static propTypes = {
+        show: PropTypes.bool,
         onClickCancel: PropTypes.func.isRequired
-    };
+    }
+    static defaultProps = {
+        show: false
+    }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.handleClickTicketLess = (e) => this._handleClickTicketLess(e);
         this.handleClickTicketMore = (e) => this._handleClickTicketMore(e);
         this.handleClickTicket = (e) => this._handleClickTicket(e);
         this.state = {
+            visible: false,
+            showBackgroundColor: false,
             ticketCount: 1,
             selectedTickets: [],
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.show) {
+            setTimeout(() => { this.setState({ visible: nextProps.show, showBackgroundColor: nextProps.show }) }, 0)
+        } else {
+            setTimeout(() => { this.setState({ showBackgroundColor: nextProps.show }) }, 500)
+            setTimeout(() => { this.setState({ visible: nextProps.show }) }, 600)
+        }
     }
 
     _handleClickTicketLess(e) {
@@ -34,12 +50,17 @@ export default class BuyTicketNow extends React.Component {
     }
 
     render() {
-        const toolBarStyles = require('../ToolBar/ToolBar.scss');
-        const styles = require('./BuyTicketNow.scss');
+        const toolBarStyles = require('../ToolBar/ToolBar.scss')
+        const styles = require('./BuyTicketNow.scss')
+        const buyTicketNowStyle = {
+            backgroundColor: this.state.showBackgroundColor ? 'rgba(0, 0, 0, .4)' : 'rgba(0, 0, 0, 0)',
+            visibility: this.state.visible ? 'visible' : 'hidden'
+        }
+        const ticketStyle = { bottom: this.props.show ? '0' : '-410px' }
         return (
-            <div onTouchMove={e => e.preventDefault()} className={styles.buyTicketNow}>
+            <div onTouchMove={e => e.preventDefault()} style={buyTicketNowStyle} className={classNames(styles.backgroundTransition, styles.buyTicketNow)}>
 
-                <div className={styles.ticket}>
+                <div style={ticketStyle} className={classNames(styles.ticket, styles.ticketTransition)}>
                     <div className={styles.header}>
                         <span>购买门票</span>
                         <div onClick={this.props.onClickCancel} className={styles.cancel}>
@@ -70,18 +91,19 @@ export default class BuyTicketNow extends React.Component {
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div className={styles.toolBar}>
-                    <div className={toolBarStyles.left}>
-                        <span>价格</span>
-                        <span className={toolBarStyles.price}>450￥</span>
-                        <span>立刻购买</span>
+                    <div className={styles.toolBar}>
+                        <div className={toolBarStyles.left}>
+                            <span>价格</span>
+                            <span className={toolBarStyles.price}>450￥</span>
+                            <span>立刻购买</span>
+                        </div>
+                        <div className={toolBarStyles.right}>
+                            <img src="/assets/cart_white_menu.png" alt="cart" />
+                            <span>加入购物车</span>
+                        </div>
                     </div>
-                    <div className={toolBarStyles.right}>
-                        <img src="/assets/cart_white_menu.png" alt="cart" />
-                        <span>加入购物车</span>
-                    </div>
+
                 </div>
             </div>
         );
