@@ -1,11 +1,11 @@
 import superagent from 'superagent';
 import projectConfig from '../../project.config';
 
-function formatUrl(path) {
+function formatUrl(path, subpath) {
 	if (/^https?:\/\//.test(path)) return path;
 	const adjustedPath = path[0] !== '/' ? '/' + path : path;
-	 let baseUrl = projectConfig.baseUrl;
-	 if (process.env.NODE_ENV === 'development' || __DEV__) baseUrl = projectConfig.devBaseUrl;
+	let baseUrl = projectConfig.baseUrl + subpath;
+	if (process.env.NODE_ENV === 'development' || __DEV__) baseUrl = projectConfig.devBaseUrl + subpath;
 	return baseUrl + adjustedPath;
 }
 
@@ -13,8 +13,8 @@ const methods = ['get', 'post', 'put', 'del'];
 export default class APIClient {
 	constructor(req) {
 		methods.forEach(method => {
-			this[method] = (path, { params, data, headers } = {}) => new Promise((resolve, reject) => {
-				const request = superagent[method](formatUrl(path));
+			this[method] = (path, { params, data, headers, subpath='/fbpark/api/users' } = {}) => new Promise((resolve, reject) => {
+				const request = superagent[method](formatUrl(path, subpath));
 				request.set('Content-Type', 'application/json');
 				request.set('Accept', 'application/json');
 				if (params) request.query(params);

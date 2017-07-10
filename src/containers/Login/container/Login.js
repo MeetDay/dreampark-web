@@ -6,11 +6,14 @@ import { push } from 'react-router-redux'
 import { Launching, Loging, ForgotPassword } from '../component'
 import { StepTwo as SMSCode } from '../../Register/component'
 import Navbar from '../component/Navbar/Navbar'
+import { userLogin } from '../module/login'
+
 
 @connect(
     state => ({
-
-    })
+        
+    }),
+    dispatch => bindActionCreators({ userLogin }, dispatch)
 )
 
 export default class Login extends React.Component {
@@ -42,7 +45,7 @@ export default class Login extends React.Component {
         return (
             <div>
                 <div className={styles.loginBack} />
-                <div className={styles.nav}><Navbar showForgotPassword={showForgotPassword} /></div>
+                {this.props.location.hash !== '#launching' && <div className={styles.nav}><Navbar showForgotPassword={showForgotPassword} /></div>}
                 { content }
             </div>
         );

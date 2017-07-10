@@ -9,6 +9,7 @@ var webpackConfig = require('../../webpack/webpack.config.dev.js');
 var serverRouterMiddleware = require('./middleware/serverRouterMiddleware');
 
 var smsCodeRouter = require('./serverRouters/smsCodeRouter');
+var loginRouter = require('./serverRouters/loginRouter');
 
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3000;
@@ -39,7 +40,8 @@ if (process.env.NODE_ENV === 'development' || __DEV__ ) {
 }
 
 app.use(bodyParser.json());
-app.use('/api/sms/code', smsCodeRouter);
+app.use('/actions/user/sms', smsCodeRouter);
+app.use('/actions/user/login', loginRouter);
 
 app.use('*', serverRouterMiddleware());
 
