@@ -46,7 +46,7 @@ export function userLogin(username, password) {
     const data = { username, password, timestamp: new Date() }
     return {
         type: LOGIN,
-        payload: (client) => client.get('/login/wechat', { data, subpath: '/actions/user'})
+        payload: (client) => client.get('/signin', { data })
     }
 }
 
