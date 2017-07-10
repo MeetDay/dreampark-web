@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Phone, Password, LoginButton } from '../../../../components'
-import { legalPhoneNumber } from '../../../../Utils/regex'
+import { legalPhoneNumber } from '../../../../utils/regex'
 
 export default class Loging extends React.Component {
     static propTypes = {

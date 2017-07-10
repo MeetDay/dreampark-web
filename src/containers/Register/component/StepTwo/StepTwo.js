@@ -4,13 +4,13 @@ import superagent from 'superagent'
 import { message } from 'antd'
 import { LoginButton, Phone, Password } from '../../../../components'
 import countDown from '../../../../Utils/countDown'
-import { legalSMSCode, formatPhoneNumber } from '../../../../Utils/regex'
+import { legalSMSCode, formatPhoneNumber } from '../../../../utils/regex'
 
 export default class StepTwo extends React.Component {
     static propTypes = {
         phonenumber: PropTypes.string
     }
-    
+
     constructor() {
         super()
         this.handleClickNextStep = (e) => this._handleClickNextStep(e)
@@ -59,6 +59,7 @@ export default class StepTwo extends React.Component {
                 </div>
                 <div className={logingStyle.loginBottom}>
                     <Phone zone={false} title="短信验证码" onChange={this.onChange} imgShow={legalSMSCode(this.state.SMSCode)} />
+                    <Password title="重置密码" onChange={this.props.onPasswordChange} />
                     <div className={styles.nextstep}>
                         <LoginButton
                             title={this.state.counterMsg}

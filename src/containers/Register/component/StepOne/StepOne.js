@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { message } from 'antd'
 import { LoginButton, Phone, Password } from '../../../../components'
-import { legalPhoneNumber } from '../../../../Utils/regex'
+import { legalPhoneNumber } from '../../../../utils/regex'
 
 export default class StepOne extends React.Component {
     static propTypes = {

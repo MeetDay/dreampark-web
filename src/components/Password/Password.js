@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 
 export default class Password extends React.Component {
     static propTypes = {
+        title: PropTypes.string,
         defaultValue: PropTypes.string,
         onChange: PropTypes.func
     }
-
+    static defaultProps = {
+        title: '密码'
+    }
     constructor() {
         super();
         this.handleClick = (e) => this._handleClick(e);
@@ -28,7 +31,7 @@ export default class Password extends React.Component {
         return (
             <div className={styles.password}>
                 <div className={styles.top}>
-                    <button>密码</button>
+                    <button>{this.props.title}</button>
                     <button onClick={this.handleClick}>{showButtonMsg}</button>
                 </div>
                 <div className={styles.bottom}>

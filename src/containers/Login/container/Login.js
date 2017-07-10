@@ -60,13 +60,23 @@ export default class Login extends React.Component {
                 onPasswordChange={this.onPasswordChange}
                 userLogin={this.userLogin}
             />
-        );
+        )
         if (this.props.location.hash === '#launching') {
             content = (<Launching />);
         } else if (this.props.location.hash === '#forgotpassword') {
-            content = (<ForgotPassword phonenumber={this.state.phonenumber} onPhonenNmberChange={this.onPhonenNmberChange}/>);
+            content = (
+                <ForgotPassword
+                    phonenumber={this.state.phonenumber}
+                    onPhonenNmberChange={this.onPhonenNmberChange}
+                />
+            )
         } else if (this.props.location.hash === '#smscode') {
-            content = (<SMSCode phonenumber={this.state.phonenumber} />)
+            content = (
+                <SMSCode
+                    phonenumber={this.state.phonenumber}
+                    onPasswordChange={this.onPasswordChange}
+                />
+            )
         }
         return (
             <div>

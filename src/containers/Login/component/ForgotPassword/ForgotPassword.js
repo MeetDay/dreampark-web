@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Phone, Password, LoginButton } from '../../../../components'
-import { legalPhoneNumber } from '../../../../Utils/regex'
+import { legalPhoneNumber } from '../../../../utils/regex'
 import Navbar from '../Navbar/Navbar'
 
 export default class ForgotPassword extends React.Component {
