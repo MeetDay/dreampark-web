@@ -50,7 +50,8 @@ export default class StepTwo extends React.Component {
         const logingStyle = require('../../../Login/component/Loging/Loging.scss');
         const forgotpasswordStyle = require('../../../Login/component/ForgotPassword/ForgotPassword.scss');
         const styles = require('./StepTwo.scss');
-
+        console.log(this.props)
+        console.log(location.hash)
         return (
             <div className={styles.steptwo}>
                 <div className={forgotpasswordStyle.description}>
