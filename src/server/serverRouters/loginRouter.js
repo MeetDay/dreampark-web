@@ -9,12 +9,8 @@ loginRouter.get('/wechat', (req, res) => {
         console.log('wechat code', code)
         getWechatToken(code)
             .then((tokenInfo) => getWechatUserInfo(tokenInfo))
-            .then((userInfo) => {
-                res.json({ code: 10000, message: 'success', data: userInfo})
-            })
-            .catch((err) => {
-                res.json(Object.assign({ code: 10001 }, err))
-            })
+            .then((userInfo) => { res.json({ code: 10000, message: 'success', data: userInfo}) })
+            .catch((err) => { res.json(Object.assign({ code: 10001 }, err)) })
     }
 })
 

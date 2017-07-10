@@ -2,9 +2,9 @@ const SMSCODE = 'redux/register/SMSCODE';
 
 
 const actionHandlers = {
-    `${SMSCODE}_PENDING`: (state, action) => ({...state, }),
-    `${SMSCODE}_FULFILLED`: (state, action) => ({...state, }),
-    `${SMSCODE}_REJECTED`: (state, action) => ({...state, }),
+    [`${SMSCODE}_PENDING`]: (state, action) => ({...state, }),
+    [`${SMSCODE}_FULFILLED`]: (state, action) => ({...state, }),
+    [`${SMSCODE}_REJECTED`]: (state, action) => ({...state, }),
 }
 
 const initialState = {
