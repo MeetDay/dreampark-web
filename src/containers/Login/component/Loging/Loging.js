@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Phone, Password, LoginButton } from '../../../../components';
-import Navbar from '../Navbar/Navbar';
+import { Phone, Password, LoginButton } from '../../../../components'
+import { legalPhoneNumber } from '../../../../Utils/regex'
 
 export default class Loging extends React.Component {
-    constructor() {
-        super();
+    static propTypes = {
+        phonenumber: PropTypes.string,
+        userLogin: PropTypes.func,
+        onPhonenNmberChange: PropTypes.func,
+        onPasswordChange: PropTypes.func
     }
 
     render() {
@@ -20,9 +23,9 @@ export default class Loging extends React.Component {
                     <span>登&nbsp;录</span>
                 </div>
                 <div className={styles.loginBottom}>
-                    <Phone onChange={e => console.log(111)} />
-                    <Password onChange={e => console.log(222) }/>
-                    <LoginButton title="登录" onClick={e => console.log(333)} />
+                    <Phone onChange={this.props.onPhonenNmberChange} imgShow={legalPhoneNumber(this.props.phonenumber)} />
+                    <Password onChange={this.props.onPasswordChange} />
+                    <LoginButton title="登录" onClick={this.props.userLogin} />
                 </div>
             </div>
         );

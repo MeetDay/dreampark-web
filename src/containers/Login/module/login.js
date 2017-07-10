@@ -4,13 +4,31 @@ const SIGNUP = 'redux/login/SIGNUP'
 const WECHATLOGIN = 'redux/login/WECHATLOGIN'
 
 const actionhandlers = {
-    [`${LOGIN}_PENDING`]: (state, action) => ({...state, }),
-    [`${LOGIN}_FULFILLED`]: (state, action) => ({...state, }),
-    [`${LOGIN}_REJECTED`]: (state, action) => ({...state, }),
+    [`${LOGIN}_PENDING`]: (state, action) => ({
+        ...state,
+        loading: true,
+        loaded: false
+    }),
+
+    [`${LOGIN}_FULFILLED`]: (state, action) => {
+        console.log(action)
+        return {
+            ...state,
+            loading: false,
+            loaded: true
+        }
+    },
+
+    [`${LOGIN}_REJECTED`]: (state, action) => ({
+        ...state,
+        loading: false,
+        loaded: true
+    })
 };
 
 const initialState = {
-
+    loading: false,
+    loaded: false
 };
 
 /**
@@ -18,7 +36,7 @@ const initialState = {
  */
 export default function login(state=initialState, action) {
     const handler = actionhandlers[action.type];
-    return handler ? hander(state, action) : state;
+    return handler ? handler(state, action) : state;
 }
 
 /**
@@ -28,7 +46,7 @@ export function userLogin(username, password) {
     const data = { username, password, timestamp: new Date() }
     return {
         type: LOGIN,
-        payload: (client) => client.post('/signin', { data })
+        payload: (client) => client.get('/login/wechat', { data, subpath: '/actions/user'})
     }
 }
 

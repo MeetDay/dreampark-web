@@ -11,7 +11,7 @@ import { userLogin } from '../module/login'
 
 @connect(
     state => ({
-        
+
     }),
     dispatch => bindActionCreators({ userLogin }, dispatch)
 )
@@ -20,8 +20,11 @@ export default class Login extends React.Component {
     constructor(props) {
         super(props);
         this.onPhonenNmberChange = (e) => this._onPhonenNmberChange(e)
+        this.onPasswordChange = (e) => this._onPasswordChange(e)
+        this.userLogin = (e) => this._userLogin(e)
         this.state = {
-            phonenumber: ''
+            phonenumber: '',
+            password: ''
         }
     }
 
@@ -30,11 +33,29 @@ export default class Login extends React.Component {
         this.setState({ phonenumber: e.target.value })
     }
 
+    _onPasswordChange(e) {
+        e.preventDefault()
+        this.setState({ password: e.target.value })
+    }
+
+    _userLogin(e) {
+        e.preventDefault()
+        console.log('phone password', this.state.phonenumber, this.state.password)
+        this.props.userLogin(this.state.phonenumber, this.state.password)
+    }
+
     render() {
         const styles = require('./Login.scss');
         const { location } = this.props
         const showForgotPassword = this.props.location.hash === ''
-        let content = <Loging />;
+        let content = (
+            <Loging
+                phonenumber={this.state.phonenumber}
+                onPhonenNmberChange={this.onPhonenNmberChange}
+                onPasswordChange={this.onPasswordChange}
+                userLogin={this.userLogin}
+            />
+        );
         if (this.props.location.hash === '#launching') {
             content = (<Launching />);
         } else if (this.props.location.hash === '#forgotpassword') {
