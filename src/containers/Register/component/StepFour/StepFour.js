@@ -34,8 +34,8 @@ export default class StepFour extends React.Component {
                     <span>填写车牌号码享受停车优惠</span>
                 </div>
                 <div className={logingStyle.loginBottom}>
-                    <Phone type="text" title="车牌号码" zone={false} defaultValue={this.props.cardno} onChange={this.props.onCarNumberChange} />
-                    <Phone type="text" title="所属行业" zone={false} defaultValue={this.props.profession} onChange={this.props.onProfessionChange} />
+                    <Phone type="text" title="车牌号码" zone={false} value={this.props.cardno} onChange={this.props.onCarNumberChange} />
+                    <Phone type="text" title="所属行业" zone={false} value={this.props.profession} onChange={this.props.onProfessionChange} />
                     <div className={styles.nextstep}>
                         <LoginButton
                             title="跳过"

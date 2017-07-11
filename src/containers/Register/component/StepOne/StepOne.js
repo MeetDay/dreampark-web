@@ -14,7 +14,6 @@ export default class StepOne extends React.Component {
 
     constructor() {
         super()
-        this.onChange = (e) => this._onChange(e)
         this.handleClickNextStep = (e) => this._handleClickNextStep(e)
         this.state = { phonenumberIllegal: false }
     }
@@ -23,13 +22,6 @@ export default class StepOne extends React.Component {
         setTimeout(() => {
             this.setState({ phonenumberIllegal: legalPhoneNumber(this.props.phonenumber) })
         }, 0);
-    }
-
-    _onChange(e) {
-        this.props.onPhonenNmberChange(e)
-        this.setState({
-            phonenumberIllegal: legalPhoneNumber(e.target.value)
-        })
     }
 
     _handleClickNextStep(e) {
@@ -50,8 +42,8 @@ export default class StepOne extends React.Component {
                     <span>请输入您的电话号码及密码以注册成为梦想会员</span>
                 </div>
                 <div className={logingStyle.loginBottom}>
-                    <Phone onChange={ this.onChange } imgShow={this.state.phonenumberIllegal} defaultValue={this.props.phonenumber} />
-                    <Password onChange={ this.props.onPasswordChange } defaultValue={this.props.password} />
+                    <Phone onChange={ this.props.onPhonenNmberChange } imgShow={legalPhoneNumber(this.props.phonenumber)} value={this.props.phonenumber} />
+                    <Password onChange={ this.props.onPasswordChange } value={this.props.password} />
                     <LoginButton title="下一步" onClick={this.handleClickNextStep} />
                 </div>
             </div>

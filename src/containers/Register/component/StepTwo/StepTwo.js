@@ -8,6 +8,7 @@ import { legalSMSCode, formatPhoneNumber } from '../../../../utils/regex'
 
 export default class StepTwo extends React.Component {
     static propTypes = {
+        code: PropTypes.string,
         phonenumber: PropTypes.string,
         showNewPasswordComponent: PropTypes.bool,
         onSMSCodeChange: PropTypes.func,
@@ -21,7 +22,6 @@ export default class StepTwo extends React.Component {
         super()
         this.handleClickNextStep = (e) => this._handleClickNextStep(e)
         this.handleClickRegainCode = (e) => this._handleClickRegainCode(e)
-        this.onChange = (e) => this._onChange(e)
         this.state = {
             counterDisabled: false,
             counterMsg: '没有收到？重新获取'
@@ -46,12 +46,6 @@ export default class StepTwo extends React.Component {
         location.hash = '#stepthree'
     }
 
-    _onChange(e) {
-        e.preventDefault();
-        console.log('SMSCode:', e.target.value)
-        this.setState({ SMSCode: e.target.value })
-    }
-
     render() {
         const logingStyle = require('../../../Login/component/Loging/Loging.scss');
         const forgotpasswordStyle = require('../../../Login/component/ForgotPassword/ForgotPassword.scss');
@@ -63,7 +57,7 @@ export default class StepTwo extends React.Component {
                     <span>{`我们向 ${formatPhoneNumber(this.props.phonenumber)} 发送了一个短信验证码。请输入...`}</span>
                 </div>
                 <div className={logingStyle.loginBottom}>
-                    <Phone zone={false} title="短信验证码" onChange={this.props.onSMSCodeChange} imgShow={legalSMSCode(this.state.SMSCode)} />
+                    <Phone zone={false} title="短信验证码" onChange={this.props.onSMSCodeChange} imgShow={legalSMSCode(this.props.code)} />
                     {this.props.showNewPasswordComponent && <Password title="新的密码" onChange={this.props.onPasswordChange} />}
                     <div className={styles.nextstep}>
                         <LoginButton

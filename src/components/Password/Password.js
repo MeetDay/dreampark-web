@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class Password extends React.Component {
     static propTypes = {
         title: PropTypes.string,
-        defaultValue: PropTypes.string,
+        value: PropTypes.string,
         onChange: PropTypes.func
     }
     static defaultProps = {
@@ -40,7 +40,7 @@ export default class Password extends React.Component {
                         className={styles.inputpassword}
                         onChange={this.props.onChange}
                         type={inputType}
-                        defaultValue={this.props.defaultValue}
+                        value={this.props.value}
                     />
                 </div>
             </div>

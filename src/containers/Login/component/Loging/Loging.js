@@ -16,14 +16,11 @@ export default class Loging extends React.Component {
         const styles = require('./Loging.scss');
         return (
             <div className={styles.loging}>
-                {/* <div className={styles.forgotPassword}>
-                    <a href="/login#forgotpassword">忘记密码</a>
-                </div> */}
                 <div className={styles.loginDescription}>
                     <span>登&nbsp;录</span>
                 </div>
                 <div className={styles.loginBottom}>
-                    <Phone onChange={this.props.onPhonenNmberChange} defaultValue={this.props.phonenumber} imgShow={legalPhoneNumber(this.props.phonenumber)} />
+                    <Phone onChange={this.props.onPhonenNmberChange} value={this.props.phonenumber} imgShow={legalPhoneNumber(this.props.phonenumber)} />
                     <Password onChange={this.props.onPasswordChange} />
                     <LoginButton title="登录" onClick={this.props.userLogin} />
                 </div>

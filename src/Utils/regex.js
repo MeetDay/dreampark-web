@@ -11,3 +11,7 @@ export function formatPhoneNumber(phone) {
 export function legalSMSCode(code) {
     return /^\d{4}$/g.test(code)
 }
+
+export function illegalCardNunber(cardno) {
+    return /(^\d{15}$)|(^\d{17}([0-9]|X)$)/gi.test(cardno)
+}

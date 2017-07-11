@@ -89,8 +89,9 @@ export default class Register extends React.Component {
         if (this.props.location.hash === '#steptwo') {
             content = (
                 <StepTwo
+                    code={this.state.code}
                     phonenumber={this.state.phonenumber}
-                    onSMSCodeChange={this.props}
+                    onSMSCodeChange={this.onSMSCodeChange}
                 />
             )
         } else if (this.props.location.hash === '#stepthree') {
@@ -116,12 +117,7 @@ export default class Register extends React.Component {
             <div className={styles.register}>
                 <div className={loginStyle.loginBack} />
                 <div className={styles.container}>
-                    {/* <div className={styles.nav}>
-                        <Icon type="left" style={{ marginLeft: '15px' }} onClick={e => history.back()} />
-                    </div> */}
-                    <div className={styles.nav}>
-                        <Navbar />
-                    </div>
+                    <div className={styles.nav}><Navbar /></div>
                     { content }
                 </div>
             </div>
