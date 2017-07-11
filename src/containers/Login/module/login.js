@@ -9,7 +9,6 @@ const actionhandlers = {
         loading: true,
         loaded: false
     }),
-
     [`${LOGIN}_FULFILLED`]: (state, action) => {
         console.log(action)
         return {
@@ -18,7 +17,6 @@ const actionhandlers = {
             loaded: true
         }
     },
-
     [`${LOGIN}_REJECTED`]: (state, action) => ({
         ...state,
         loading: false,
@@ -43,7 +41,7 @@ export default function login(state=initialState, action) {
  *  user login
  */
 export function userLogin(username, password) {
-    const data = { username, password, timestamp: new Date() }
+    const data = { username, password, timestamp: Math.floor(Date.now() / 1000) }
     return {
         type: LOGIN,
         payload: (client) => client.get('/signin', { data })

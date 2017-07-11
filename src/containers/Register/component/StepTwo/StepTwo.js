@@ -8,7 +8,12 @@ import { legalSMSCode, formatPhoneNumber } from '../../../../utils/regex'
 
 export default class StepTwo extends React.Component {
     static propTypes = {
-        phonenumber: PropTypes.string
+        phonenumber: PropTypes.string,
+        showNewPasswordComponent: PropTypes.bool,
+        onPasswordChange: PropTypes.func
+    }
+    static defaultProps = {
+        showNewPasswordComponent: false
     }
 
     constructor() {
@@ -50,8 +55,6 @@ export default class StepTwo extends React.Component {
         const logingStyle = require('../../../Login/component/Loging/Loging.scss');
         const forgotpasswordStyle = require('../../../Login/component/ForgotPassword/ForgotPassword.scss');
         const styles = require('./StepTwo.scss');
-        console.log(this.props)
-        console.log(location.hash)
         return (
             <div className={styles.steptwo}>
                 <div className={forgotpasswordStyle.description}>
@@ -60,7 +63,7 @@ export default class StepTwo extends React.Component {
                 </div>
                 <div className={logingStyle.loginBottom}>
                     <Phone zone={false} title="短信验证码" onChange={this.onChange} imgShow={legalSMSCode(this.state.SMSCode)} />
-                    <Password title="重置密码" onChange={this.props.onPasswordChange} />
+                    {this.props.showNewPasswordComponent && <Password title="新的密码" onChange={this.props.onPasswordChange} />}
                     <div className={styles.nextstep}>
                         <LoginButton
                             title={this.state.counterMsg}

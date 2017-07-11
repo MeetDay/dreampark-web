@@ -9,7 +9,6 @@ import Navbar from '../component/Navbar/Navbar'
 import { userLogin } from '../module/login'
 import { legalPhoneNumber } from '../../../utils/regex'
 
-
 @connect(
     state => ({
 
@@ -52,7 +51,7 @@ export default class Login extends React.Component {
     render() {
         const styles = require('./Login.scss');
         const { location } = this.props
-        const showForgotPassword = this.props.location.hash === ''
+        const showForgotPassword = (location.hash === '#loging' || location.hash === '')
         let content = (
             <Loging
                 phonenumber={this.state.phonenumber}
@@ -73,6 +72,7 @@ export default class Login extends React.Component {
         } else if (this.props.location.hash === '#smscode') {
             content = (
                 <SMSCode
+                    showNewPasswordComponent
                     phonenumber={this.state.phonenumber}
                     onPasswordChange={this.onPasswordChange}
                 />
