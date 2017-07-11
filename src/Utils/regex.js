@@ -8,6 +8,12 @@ export function formatPhoneNumber(phone) {
     }
 }
 
+export function covertFormatPhoneToRealPhone(formatPhoneNumber) {
+    if (typeof formatPhoneNumber === 'string') {
+        return formatPhoneNumber.replace(/(\s)/gi, (match) => match.trim())
+    }
+}
+
 export function legalSMSCode(code) {
     return /^\d{4}$/g.test(code)
 }

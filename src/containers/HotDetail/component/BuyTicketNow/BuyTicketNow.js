@@ -44,9 +44,7 @@ export default class BuyTicketNow extends React.Component {
     }
 
     _handleClickTicket(e) {
-        e.preventDefault();
         console.log(1111);
-
     }
 
     render() {
@@ -58,7 +56,7 @@ export default class BuyTicketNow extends React.Component {
         }
         const ticketStyle = { bottom: this.props.show ? '0' : '-410px' }
         return (
-            <div onTouchMove={e => e.preventDefault()} style={buyTicketNowStyle} className={classNames(styles.backgroundTransition, styles.buyTicketNow)}>
+            <div style={buyTicketNowStyle} className={classNames(styles.backgroundTransition, styles.buyTicketNow)}>
 
                 <div style={ticketStyle} className={classNames(styles.ticket, styles.ticketTransition)}>
                     <div className={styles.header}>

@@ -21,10 +21,12 @@ export default class Login extends React.Component {
         super(props);
         this.onPhonenNmberChange = (e) => this._onPhonenNmberChange(e)
         this.onPasswordChange = (e) => this._onPasswordChange(e)
+        this.onSMSCodeChange = (e) => this._onSMSCodeChange(e)
         this.userLogin = (e) => this._userLogin(e)
         this.state = {
             phonenumber: '',
-            password: ''
+            password: '',
+            code: ''
         }
     }
 
@@ -36,6 +38,11 @@ export default class Login extends React.Component {
     _onPasswordChange(e) {
         e.preventDefault()
         this.setState({ password: e.target.value })
+    }
+
+    _onSMSCodeChange(e) {
+        e.preventDefault()
+        this.setState({ code: e.target.value })
     }
 
     _userLogin(e) {
@@ -73,7 +80,9 @@ export default class Login extends React.Component {
             content = (
                 <SMSCode
                     showNewPasswordComponent
+                    code={this.state.code}
                     phonenumber={this.state.phonenumber}
+                    onSMSCodeChange={this.onSMSCodeChange}
                     onPasswordChange={this.onPasswordChange}
                 />
             )

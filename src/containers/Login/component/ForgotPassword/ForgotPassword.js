@@ -16,7 +16,9 @@ export default class ForgotPassword extends React.Component {
 
     _handleClickGainCode(e) {
         e.preventDefault()
-        location.hash = '#smscode'
+        if (legalPhoneNumber(this.props.phonenumber)) {
+            location.hash = '#smscode'
+        }
     }
 
     render() {
@@ -30,7 +32,7 @@ export default class ForgotPassword extends React.Component {
                     <span>请输入您的电话号码以查找您的账号。</span>
                 </div>
                 <div className={styles.bottom}>
-                    <Phone defaultValue={this.props.phonenumber} imgShow={legalPhoneNumber(this.props.phonenumber)} onChange={this.props.onPhonenNmberChange} />
+                    <Phone value={this.props.phonenumber} imgShow={legalPhoneNumber(this.props.phonenumber)} onChange={this.props.onPhonenNmberChange} />
                     <LoginButton title="获取验证码" onClick={this.handleClickGainCode} />
                 </div>
             </div>
