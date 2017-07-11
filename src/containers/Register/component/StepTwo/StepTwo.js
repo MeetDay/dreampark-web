@@ -10,6 +10,7 @@ export default class StepTwo extends React.Component {
     static propTypes = {
         phonenumber: PropTypes.string,
         showNewPasswordComponent: PropTypes.bool,
+        onSMSCodeChange: PropTypes.func,
         onPasswordChange: PropTypes.func
     }
     static defaultProps = {
@@ -22,7 +23,6 @@ export default class StepTwo extends React.Component {
         this.handleClickRegainCode = (e) => this._handleClickRegainCode(e)
         this.onChange = (e) => this._onChange(e)
         this.state = {
-            SMSCode: '',
             counterDisabled: false,
             counterMsg: '没有收到？重新获取'
         }
@@ -43,6 +43,7 @@ export default class StepTwo extends React.Component {
 
     _handleClickNextStep(e) {
         e.preventDefault()
+        location.hash = '#stepthree'
     }
 
     _onChange(e) {
@@ -62,7 +63,7 @@ export default class StepTwo extends React.Component {
                     <span>{`我们向 ${formatPhoneNumber(this.props.phonenumber)} 发送了一个短信验证码。请输入...`}</span>
                 </div>
                 <div className={logingStyle.loginBottom}>
-                    <Phone zone={false} title="短信验证码" onChange={this.onChange} imgShow={legalSMSCode(this.state.SMSCode)} />
+                    <Phone zone={false} title="短信验证码" onChange={this.props.onSMSCodeChange} imgShow={legalSMSCode(this.state.SMSCode)} />
                     {this.props.showNewPasswordComponent && <Password title="新的密码" onChange={this.props.onPasswordChange} />}
                     <div className={styles.nextstep}>
                         <LoginButton

@@ -8,6 +8,7 @@ export default class Register extends React.Component {
         super();
         this.onPhonenNmberChange = (e) => this._onPhonenumberChange(e)
         this.onPasswordChange = (e) => this._onPasswordChange(e)
+        this.onSMSCodeChange = (e) => this._onSMSCodeChange(e)
         this.onUsernameChange = (e) => this._onUsernameChange(e)
         this.onCardNumberChange = (e) => this._onCardNumberChange(e)
         this.onCarNumberChange = (e) => this._onCarNumberChange(e)
@@ -16,6 +17,7 @@ export default class Register extends React.Component {
         this.state = {
             phonenumber: '',
             password: '',
+            code: '',
             username: '',
             cardno: '',
             carno: '',
@@ -23,19 +25,24 @@ export default class Register extends React.Component {
         };
     }
 
-
     /**
      *  register step one
      */
     _onPhonenumberChange(e) {
         e.preventDefault();
-        console.log('phonenumber:', e.target.value);
         this.setState({ phonenumber: e.target.value });
     }
     _onPasswordChange(e) {
         e.preventDefault();
-        console.log('password:', e.target.value);
         this.setState({ password: e.target.value });
+    }
+
+    /**
+     *  register step two
+     */
+    _onSMSCodeChange(e) {
+        e.preventDefault()
+        this.setState({ code: e.target.value })
     }
 
     /**
@@ -80,7 +87,12 @@ export default class Register extends React.Component {
             />
         );
         if (this.props.location.hash === '#steptwo') {
-            content = (<StepTwo phonenumber={this.state.phonenumber} />)
+            content = (
+                <StepTwo
+                    phonenumber={this.state.phonenumber}
+                    onSMSCodeChange={this.props}
+                />
+            )
         } else if (this.props.location.hash === '#stepthree') {
             content = (
                 <StepThree
