@@ -43,7 +43,11 @@ export default class StepTwo extends React.Component {
 
     _handleClickNextStep(e) {
         e.preventDefault()
-        location.hash = '#stepthree'
+        if (this.props.showNewPasswordComponent) {
+            console.log('i don\'t know what next step is ?')
+        } else {
+            location.hash = '#stepthree'
+        }
     }
 
     render() {
