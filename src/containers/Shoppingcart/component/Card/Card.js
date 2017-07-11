@@ -42,7 +42,7 @@ export default class Card extends React.Component {
                 </div>
                 <div className={styles.tool}>
                     <div onClick={this.handleClickDelete}>删除</div>
-                    <div><Checkbox checked={this.props.allChecked} onChange={this.onChange}>选中</Checkbox></div>
+                    <div><Checkbox checked={this.props.allChecked} value="选中" onChange={this.onChange} /></div>
                 </div>
             </div>
         );

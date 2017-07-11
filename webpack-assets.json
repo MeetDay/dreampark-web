@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.f1b0bea75f644ad85765.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.f1b0bea75f644ad85765.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.f1b0bea75f644ad85765.min.js"
+    "main": "http://localhost:3000/dist/main.2a6d310258738ea7bdd9.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.2a6d310258738ea7bdd9.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.2a6d310258738ea7bdd9.min.js"
   },
   "styles": {},
   "assets": {
@@ -68,6 +68,11 @@
     "./src/containers/App/container/App.scss": {
       "app": "App__app__2m6W4",
       "_style": ".App__app__2m6W4 {\n  background-color: white; }\n"
+    },
+    "./src/containers/Details/container/Details.scss": {
+      "cover": "Details__cover__3mi5A",
+      "elements": "Details__elements__jAJTx",
+      "_style": ".Details__cover__3mi5A {\n  width: 100%; }\n\n.Details__elements__jAJTx {\n  margin: 0 20px; }\n"
     },
     "./src/containers/HotDetail/component/BuyTicketNow/BuyTicketNow.scss": {
       "buyTicketNow": "BuyTicketNow__buyTicketNow__dD5Pe",
@@ -278,11 +283,6 @@
     "./src/containers/Tickets/container/Tickets.scss": {
       "ticketWrap": "Tickets__ticketWrap__1-ptD",
       "_style": ".Tickets__ticketWrap__1-ptD {\n  padding: 0 20px; }\n"
-    },
-    "./src/containers/Details/container/Details.scss": {
-      "cover": "Details__cover__3mi5A",
-      "elements": "Details__elements__jAJTx",
-      "_style": ".Details__cover__3mi5A {\n  width: 100%; }\n\n.Details__elements__jAJTx {\n  margin: 0 20px; }\n"
     }
   }
 }

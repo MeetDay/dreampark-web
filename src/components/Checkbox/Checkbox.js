@@ -5,6 +5,7 @@ export default class Checkbox extends React.Component {
     static propTypes = {
         checked: PropTypes.bool,
         defaultChecked: PropTypes.bool,
+        value: PropTypes.string,
         checkdImageurl: PropTypes.string,
         onChange: PropTypes.func
     }
@@ -18,7 +19,7 @@ export default class Checkbox extends React.Component {
         super(props)
         this.handleClick = (e) => this._handleClick(e)
         this.state = {
-            checked: props.checked || props.defaultChecked
+            checked: props.defaultChecked
         }
     }
 
@@ -47,7 +48,7 @@ export default class Checkbox extends React.Component {
                 <span onClick={this.handleClick} style={style} className={styles.checkbox}>
                     <img src={this.props.checkdImageurl} alt="checked" />
                 </span>
-                <span className={styles.content}>{this.props.children}</span>
+                <span className={styles.content}>{this.props.value}</span>
             </span>
         );
     }
