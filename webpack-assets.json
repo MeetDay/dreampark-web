@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.d6ff8b2e2b3afafd2c21.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.d6ff8b2e2b3afafd2c21.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.d6ff8b2e2b3afafd2c21.min.js"
+    "main": "http://localhost:3000/dist/main.f1b0bea75f644ad85765.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.f1b0bea75f644ad85765.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.f1b0bea75f644ad85765.min.js"
   },
   "styles": {},
   "assets": {
@@ -278,6 +278,11 @@
     "./src/containers/Tickets/container/Tickets.scss": {
       "ticketWrap": "Tickets__ticketWrap__1-ptD",
       "_style": ".Tickets__ticketWrap__1-ptD {\n  padding: 0 20px; }\n"
+    },
+    "./src/containers/Details/container/Details.scss": {
+      "cover": "Details__cover__3mi5A",
+      "elements": "Details__elements__jAJTx",
+      "_style": ".Details__cover__3mi5A {\n  width: 100%; }\n\n.Details__elements__jAJTx {\n  margin: 0 20px; }\n"
     }
   }
 }
