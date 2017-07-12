@@ -7,7 +7,8 @@ import { checkedItem, uncheckedItem, checkedAllItems, unCheckedAllItems, getShop
 @connect(
     state => ({
         shoppingcarts: state.shoppingcart.shoppingcarts,
-        checkedItems: state.shoppingcart.checkedItems
+        checkedItems: state.shoppingcart.checkedItems,
+        totalPrice: state.shoppingcart.totalPrice
     }),
     dispatch => bindActionCreators({
         checkedItem,
@@ -39,6 +40,8 @@ export default class extends React.Component {
         e.preventDefault()
         console.log('结算')
     }
+
+    // click all checked
     _handleClickAllChecked(option) {
         if (option.checked) {
             this.props.checkedAllItems()
@@ -47,8 +50,7 @@ export default class extends React.Component {
         }
     }
 
-
-    //
+    // mapped checked items
     _mapCheckedItems(checkedImtes) {
         return function(item) {
             if (checkedImtes.includes(item)) return Object.assign({ checked: true }, item)
@@ -68,7 +70,7 @@ export default class extends React.Component {
                         .map(this.mapCheckedItems(checkedItems))
                         .map((goods) => (<Card key={goods.id} goods={goods} checkedItem={this.props.checkedItem} uncheckedItem={this.props.uncheckedItem} deleteGoodsFromShoppingCart={this.props.deleteGoodsFromShoppingCart} />))
                 }
-                <ShopingTool price={232} allChecked={allChecked} onClickSettleAccount={this.handleClickSettleAccount} onClickAllChecked={this.handleClickAllChecked} />
+                <ShopingTool price={this.props.totalPrice} allChecked={allChecked} onClickSettleAccount={this.handleClickSettleAccount} onClickAllChecked={this.handleClickAllChecked} />
             </div>
         );
     }

@@ -36,7 +36,7 @@ export default class Card extends React.Component {
         const { checked } = this.props.goods;
         return (
             <div className={styles.card}>
-                <div className={styles.totalPrice}><span>232元</span></div>
+                <div className={styles.totalPrice}><span>{this.props.goods.total}</span></div>
                 <div className={styles.info}>
                     <div className={styles.cover}>
                         <img src="http://o9vi0jo2t.bkt.clouddn.com/client_uploads/images/178/D9A78555151B824B0E5374671B12D39E" alt="cover" />

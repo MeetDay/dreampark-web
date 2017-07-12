@@ -11,15 +11,15 @@ const actionHandlers = {
         const item = action.payload
         let checkedItems = state.checkedItems
         if (!state.checkedItems.includes(item)) checkedItems.push(item)
-        return { ...state, checkedItems: [...checkedItems] }
+        return { ...state, checkedItems: [...checkedItems], totalPrice: caclCheckedItemsPrice(checkedItems) }
     },
     [UNCHECKEDITEM]: (state, action) => {
         const item = action.payload
         const checkedItems = state.checkedItems.filter((element) => item.id !== element.id)
-        return { ...state, checkedItems: [...checkedItems] }
+        return { ...state, checkedItems: [...checkedItems], totalPrice: caclCheckedItemsPrice(checkedItems) }
     },
-    [CHECKEDALLITEMS]: (state, action) => ({ ...state, checkedItems:[...state.shoppingcarts] }),
-    [UNCHECKEDALLITEMS]: (state, action) => ({ ...state, checkedItems:[] }),
+    [CHECKEDALLITEMS]: (state, action) => ({ ...state, checkedItems:[...state.shoppingcarts], totalPrice: caclCheckedItemsPrice(state.shoppingcarts) }),
+    [UNCHECKEDALLITEMS]: (state, action) => ({ ...state, checkedItems:[], totalPrice: 0 }),
 
     [`${SHOPPINGCART}_PENDING`]: (state, action) => ({ ...state, shoppingcartLoading: true, shoppingcartLoaded: false }),
     [`${SHOPPINGCART}_FULFILLED`]: (state, action) => {
@@ -45,10 +45,11 @@ const initialState = {
     shoppingcartLoading: false,
     shoppingcartLoaded: false,
     shoppingcartError: null,
-    shoppingcarts: [{id:1}, {id:2}, {id:3}, {id:4}, {id:5}, {id:6}, {id:7}, {id:8}],
+    shoppingcarts: [{id:1, total: 423}, {id:2, total: 23}, {id:3, total: 234}, {id:4, total: 767}, {id:5, total: 345}, {id:6, total: 908}, {id:7, total: 438}, {id:8, total: 656}],
     checkedItems: [],
     hasMoreGoods: false,
-    maxGoodsID: 0
+    maxGoodsID: 0,
+    checkedItemsTotalPrice: 0
 }
 
 export default function shoppingcart(state=initialState, action) {
@@ -102,4 +103,11 @@ export function uncheckedItem(item) {
         type: UNCHECKEDITEM,
         payload: item
     }
+}
+
+/**
+ *  shopping utils
+ */
+function caclCheckedItemsPrice(checkedItems) {
+    return checkedItems.map((item) => item.total).reduce((sum, value) => (sum + value), 0)
 }
