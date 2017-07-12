@@ -57,7 +57,7 @@ export default function shoppingcart(state=initialState, action) {
 }
 
 export function getShoppingcart() {
-    return (getState, dispatch) => {
+    return (dispatch, getState) => {
         const { authHeaders } = getState().login
         const { maxGoodsID } = getState().shoppingcart
         dispatch({
@@ -71,7 +71,7 @@ export function getShoppingcart() {
 }
 
 export function deleteGoodsFromShoppingCart(goods) {
-    return (getState, dispatch) => {
+    return (dispatch, getState) => {
         const authHeaders = getState().login
         dispatch({
             type: DELETE_SHOPPINGCART_GOODS,

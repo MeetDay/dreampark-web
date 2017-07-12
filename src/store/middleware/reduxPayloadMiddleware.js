@@ -1,7 +1,7 @@
 export default function reduxPayloadMiddleware(client) {
 	return store => next => action => {
-		const { payload } = action;
-		if (typeof payload === 'function') action.payload = payload(client);
+		if (typeof action === 'function') return next(action)
+		if (typeof action.payload === 'function') action.payload = action.payload(client);
 		next(action);
 	}
 }
