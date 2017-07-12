@@ -10,10 +10,6 @@ export default class ShopingTool extends React.Component {
         onClickSettleAccount: PropTypes.func,
         onClickAllChecked: PropTypes.func
     }
-    static defaultProps = {
-        checked: false,
-        price: 0
-    }
 
     render () {
         const styles = require('./ShopingTool.scss');
