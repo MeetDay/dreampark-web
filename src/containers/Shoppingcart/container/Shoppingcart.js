@@ -59,7 +59,7 @@ export default class extends React.Component {
         const allChecked = this.props.shoppingcarts.length === this.props.checkedItems.length
         return (
             <div className={styles.shoppingcart}>
-                <div>{JSON.stringify(this.props.checkedItems)}</div>
+                {/* <div>{JSON.stringify(this.props.checkedItems)}</div> */}
                 {
                     shoppingcarts
                         .map(this.mapCheckedItems(checkedItems))
