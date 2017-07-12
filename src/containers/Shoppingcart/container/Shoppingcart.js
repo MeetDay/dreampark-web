@@ -29,11 +29,6 @@ export default class extends React.Component {
     }
 
     /**
-     *  card click event
-     */
-
-
-    /**
      *  shopping tool click event
      */
     _handleClickSettleAccount(e) {
