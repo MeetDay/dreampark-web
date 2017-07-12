@@ -4,28 +4,36 @@ import { Checkbox } from '../../../../components'
 
 export default class Card extends React.Component {
     static propTypes = {
-        allChecked: PropTypes.bool
-    }
-    constructor(props) {
-        super(props)
-        this.onChange = (option) => this._onChange(option)
-        this.handleClickDelete = (e) => this._handleClickDelete(e)
-        this.state = {
-            checked: false
-        }
+        goods: PropTypes.object.isRequired,
+        checkedItem: PropTypes.func,
+        uncheckedItem: PropTypes.func,
+        deleteGoodsFromShoppingCart: PropTypes.func
     }
 
-    _onChange(option) {
-        console.log(option.checked)
+    constructor(props) {
+        super(props)
+        this.onChange = (checkedItem) => this._onChange(checkedItem)
+        this.handleClickDelete = (e) => this._handleClickDelete(e)
+    }
+
+    // click checkbox event callback
+    _onChange(checkedItem) {
+        const { goods } = this.props
+        if (checkedItem.checked) {
+            this.props.checkedItem(goods)
+        } else {
+            this.props.uncheckedItem(goods)
+        }
     }
 
     _handleClickDelete(e) {
         e.preventDefault()
-        console.log('删除')
+        this.props.deleteGoodsFromShoppingCart(this.props.goods)
     }
 
     render() {
         const styles = require('./Card.scss');
+        const { checked } = this.props.goods;
         return (
             <div className={styles.card}>
                 <div className={styles.totalPrice}><span>232元</span></div>
@@ -42,7 +50,7 @@ export default class Card extends React.Component {
                 </div>
                 <div className={styles.tool}>
                     <div onClick={this.handleClickDelete}>删除</div>
-                    <div><Checkbox checked={this.props.allChecked} value="选中" onChange={this.onChange} /></div>
+                    <div><Checkbox checked={checked} value="选中" onChange={this.onChange} /></div>
                 </div>
             </div>
         );

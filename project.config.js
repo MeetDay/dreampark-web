@@ -6,5 +6,7 @@ module.exports = {
 
 	wechatAppID: '',
 	wechatAppSecret: '',
-	weChatAuthorizationUrl: ''
+	weChatAuthorizationUrl: '',
+
+	appCode: '2434391486e746138d67d704f1942a12'
 }

@@ -3,6 +3,19 @@ import Express from 'express'
 var loginRouter = Express.Router()
 import projectConfig from '../../../project.config'
 
+loginRouter.get('/idcard', (req, res) => {
+    superagent.get('http://idcard.market.alicloudapi.com/lianzhuo/idcard')
+        .set('Authorization', `APPCODE ${projectConfig.appCode}`)
+        .query(req.query)
+        .end((err, { body } = {}) => {
+            if (err) {
+                res.status(400).send(body || err)
+            } else {
+                res.status(200).send(body)
+            }
+        })
+})
+
 loginRouter.get('/wechat', (req, res) => {
     const { code } = req.query;
     if (code) {

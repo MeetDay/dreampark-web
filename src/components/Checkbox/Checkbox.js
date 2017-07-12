@@ -31,8 +31,10 @@ export default class Checkbox extends React.Component {
 
     _handleClick(e) {
         e.preventDefault()
+        const { onChange, value } = this.props;
         this.setState((preState, props) => {
-            if (typeof this.props.onChange === 'function') this.props.onChange({ checked: !preState.checked })
+            if (typeof this.props.onChange === 'function')
+                onChange({ checked: !preState.checked, value  })
             return { checked: !preState.checked }
         })
     }

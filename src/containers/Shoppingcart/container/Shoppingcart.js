@@ -1,22 +1,36 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { Card, ShopingTool } from '../component'
+import { checkedItem, uncheckedItem, checkedAllItems, unCheckedAllItems, getShoppingcart, deleteGoodsFromShoppingCart } from '../module/shoppingcart'
 
-import { Card, ShopingTool } from '../component';
+@connect(
+    state => ({
+        shoppingcarts: state.shoppingcart.shoppingcarts,
+        checkedItems: state.shoppingcart.checkedItems
+    }),
+    dispatch => bindActionCreators({
+        checkedItem,
+        uncheckedItem,
+        checkedAllItems,
+        unCheckedAllItems,
+        getShoppingcart,
+        deleteGoodsFromShoppingCart
+    }, dispatch)
+)
 
 export default class extends React.Component {
-
     constructor(props) {
         super(props)
         this.handleClickSettleAccount = (e) => this._handleClickSettleAccount(e)
         this.handleClickAllChecked = (option) => this._handleClickAllChecked(option)
-        this.state = {
-            allChecked: false
-        }
+        this.mapCheckedItems = (shoppingcarts) => this._mapCheckedItems(shoppingcarts)
     }
 
     /**
      *  card click event
      */
-     
+
 
     /**
      *  shopping tool click event
@@ -26,20 +40,35 @@ export default class extends React.Component {
         console.log('结算')
     }
     _handleClickAllChecked(option) {
-        console.log('全选', option.checked)
-        this.setState((preState, props) => ({ allChecked: !preState.allChecked }))
+        if (option.checked) {
+            this.props.checkedAllItems()
+        } else {
+            this.props.unCheckedAllItems()
+        }
+    }
+
+
+    //
+    _mapCheckedItems(checkedImtes) {
+        return function(item) {
+            if (checkedImtes.includes(item)) return Object.assign({ checked: true }, item)
+            return item
+        }
     }
 
     render() {
-        const styles = require('./Shoppingcart.scss');
+        const styles = require('./Shoppingcart.scss')
+        const { shoppingcarts, checkedItems } = this.props
+        const allChecked = this.props.shoppingcarts.length === this.props.checkedItems.length
         return (
             <div className={styles.shoppingcart}>
-                <Card allChecked={this.state.allChecked} />
-                <Card allChecked={this.state.allChecked} />
-                <Card allChecked={this.state.allChecked} />
-                <Card allChecked={this.state.allChecked} />
-                <Card allChecked={this.state.allChecked} />
-                <ShopingTool price={232} onClickSettleAccount={this.handleClickSettleAccount} onClickAllChecked={this.handleClickAllChecked} />
+                <div>{JSON.stringify(this.props.checkedItems)}</div>
+                {
+                    shoppingcarts
+                        .map(this.mapCheckedItems(checkedItems))
+                        .map((goods) => (<Card key={goods.id} goods={goods} checkedItem={this.props.checkedItem} uncheckedItem={this.props.uncheckedItem} deleteGoodsFromShoppingCart={this.props.deleteGoodsFromShoppingCart} />))
+                }
+                <ShopingTool price={232} allChecked={allChecked} onClickSettleAccount={this.handleClickSettleAccount} onClickAllChecked={this.handleClickAllChecked} />
             </div>
         );
     }
