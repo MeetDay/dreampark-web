@@ -18,6 +18,7 @@ const actionHandlers = {
         const checkedItems = state.checkedItems.filter((element) => item.id !== element.id)
         return { ...state, checkedItems: [...checkedItems], totalPrice: caclCheckedItemsPrice(checkedItems) }
     },
+    
     [CHECKEDALLITEMS]: (state, action) => ({ ...state, checkedItems:[...state.shoppingcarts], totalPrice: caclCheckedItemsPrice(state.shoppingcarts) }),
     [UNCHECKEDALLITEMS]: (state, action) => ({ ...state, checkedItems:[], totalPrice: 0 }),
 
