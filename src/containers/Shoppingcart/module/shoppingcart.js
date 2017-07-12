@@ -11,16 +11,16 @@ const actionHandlers = {
         const item = action.payload
         let checkedItems = state.checkedItems
         if (!state.checkedItems.includes(item)) checkedItems.push(item)
-        return { ...state, checkedItems: [...checkedItems], totalPrice: caclCheckedItemsPrice(checkedItems) }
+        return { ...state, checkedItems: [...checkedItems], checkedItemsTotalPrice: caclCheckedItemsPrice(checkedItems) }
     },
     [UNCHECKEDITEM]: (state, action) => {
         const item = action.payload
         const checkedItems = state.checkedItems.filter((element) => item.id !== element.id)
-        return { ...state, checkedItems: [...checkedItems], totalPrice: caclCheckedItemsPrice(checkedItems) }
+        return { ...state, checkedItems: [...checkedItems], checkedItemsTotalPrice: caclCheckedItemsPrice(checkedItems) }
     },
-    
-    [CHECKEDALLITEMS]: (state, action) => ({ ...state, checkedItems:[...state.shoppingcarts], totalPrice: caclCheckedItemsPrice(state.shoppingcarts) }),
-    [UNCHECKEDALLITEMS]: (state, action) => ({ ...state, checkedItems:[], totalPrice: 0 }),
+
+    [CHECKEDALLITEMS]: (state, action) => ({ ...state, checkedItems:[...state.shoppingcarts], checkedItemsTotalPrice: caclCheckedItemsPrice(state.shoppingcarts) }),
+    [UNCHECKEDALLITEMS]: (state, action) => ({ ...state, checkedItems:[], checkedItemsTotalPrice: 0 }),
 
     [`${SHOPPINGCART}_PENDING`]: (state, action) => ({ ...state, shoppingcartLoading: true, shoppingcartLoaded: false }),
     [`${SHOPPINGCART}_FULFILLED`]: (state, action) => {

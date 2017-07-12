@@ -8,7 +8,7 @@ import { checkedItem, uncheckedItem, checkedAllItems, unCheckedAllItems, getShop
     state => ({
         shoppingcarts: state.shoppingcart.shoppingcarts,
         checkedItems: state.shoppingcart.checkedItems,
-        totalPrice: state.shoppingcart.totalPrice
+        checkedItemsTotalPrice: state.shoppingcart.checkedItemsTotalPrice
     }),
     dispatch => bindActionCreators({
         checkedItem,
@@ -65,7 +65,7 @@ export default class extends React.Component {
                         .map(this.mapCheckedItems(checkedItems))
                         .map((goods) => (<Card key={goods.id} goods={goods} checkedItem={this.props.checkedItem} uncheckedItem={this.props.uncheckedItem} deleteGoodsFromShoppingCart={this.props.deleteGoodsFromShoppingCart} />))
                 }
-                <ShopingTool price={this.props.totalPrice} allChecked={allChecked} onClickSettleAccount={this.handleClickSettleAccount} onClickAllChecked={this.handleClickAllChecked} />
+                <ShopingTool price={this.props.checkedItemsTotalPrice} allChecked={allChecked} onClickSettleAccount={this.handleClickSettleAccount} onClickAllChecked={this.handleClickAllChecked} />
             </div>
         );
     }
