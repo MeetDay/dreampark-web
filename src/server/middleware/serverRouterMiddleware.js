@@ -26,7 +26,7 @@ const serverRouterMiddleware = () => (req, res, next) => {
     	} else if (redirectLocation) {
       		res.redirect(302, redirectLocation.pathname + redirectLocation.search);
 	    } else if (renderProps) {
-			loadOnServer(renderProps, store).then(() => {
+			loadOnServer({ ...renderProps, store, helpers: {client} }).then(() => {
 				const component = (
 		    		<Provider store={store} key="provider">
 		    			<ReduxAsyncConnect {...renderProps} />

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { formatPhoneNumber, covertFormatPhoneToRealPhone } from '../../utils/regex'
+import { formatPhoneNumber, clearWhiteSpaceOf } from '../../utils/regex'
 
 export default class Phone extends React.Component {
     static propTypes = {
@@ -25,7 +25,7 @@ export default class Phone extends React.Component {
         const display = imgShow ? 'inline-block' : 'none';
         const marginLeft = this.props.zone ? '20px' : '2px';
         const maxWidth = this.props.zone ? '190px' : '240px';
-        const formatValue = imgShow ? formatPhoneNumber(value) : covertFormatPhoneToRealPhone(value);
+        const formatValue = imgShow ? formatPhoneNumber(value) : clearWhiteSpaceOf(value);
         return (
             <div className={styles.phone}>
                 <span className={styles.title}>{this.props.title}</span>

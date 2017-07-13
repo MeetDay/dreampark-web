@@ -6,12 +6,12 @@ import { TitleElement, TextElement } from '../../../components'
 import { getUserAgreement, getPrivicyPolicy, getAdmissionNotice } from '../module/terms'
 
 @asyncConnect([{
-    promise: ({ params, store: { dispatch } }) => {
+    deferred: true,
+    promise: ({ params, store:{ dispatch } }) => {
         const { serviceType } = params;
         if (serviceType === 'agreement') return dispatch(getUserAgreement())
         if (serviceType === 'privacy') return dispatch(getPrivicyPolicy())
         if (serviceType === 'notice') return dispatch(getAdmissionNotice())
-        return undefined
     }
 }])
 

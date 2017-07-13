@@ -8,7 +8,9 @@ export function formatPhoneNumber(phone) {
     }
 }
 
-export function covertFormatPhoneToRealPhone(formatPhoneNumber) {
+// export function 
+
+export function clearWhiteSpaceOf(formatPhoneNumber) {
     if (typeof formatPhoneNumber === 'string') {
         return formatPhoneNumber.replace(/(\s)/gi, (match) => match.trim())
     }

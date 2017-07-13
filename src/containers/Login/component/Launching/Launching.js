@@ -50,7 +50,7 @@ export default class Launching extends React.Component {
                     />
                 </div>
                 <div className={styles.declare}>
-                    <span>“注册账号”或“登录”表示即代表我同意接受梦想盛会的<a>用户协议</a>及<a>隐私声明</a></span>
+                    <span>“注册账号”或“登录”表示即代表我同意接受梦想盛会的<a href="/terms/agreement">用户协议</a>及<a href="/terms/privacy">隐私声明</a></span>
                 </div>
             </div>
         );
