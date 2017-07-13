@@ -6,7 +6,7 @@ export default class BuyTicket extends React.Component {
     render() {
         const styles = require('./BuyTicket.scss');
         return (
-            <div>
+            <div className={styles.buyTicket}>
                 <TicketSearchBar />
                 <TicketCard />
                 <TicketCard />

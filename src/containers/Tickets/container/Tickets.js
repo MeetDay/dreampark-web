@@ -15,9 +15,6 @@ import { Header, Ticket, TicketDetail, TicketTool } from '../component'
 )
 
 export default class Tickets extends React.Component {
-    static defaultProps = {
-        ticket: { id: 1 }
-    }
     constructor() {
         super();
         this.onMenuItemChange = (value) => this._onMenuItemChange(value);
@@ -44,8 +41,7 @@ export default class Tickets extends React.Component {
     }
 
     render() {
-        const styles = require('./Tickets.scss');
-        console.log(this.props.usedTickts)
+        const styles = require('./Tickets.scss')
         const tickets = this.state.used ? this.props.usedTickts : this.props.unusedTikects
         return (
             <div>
