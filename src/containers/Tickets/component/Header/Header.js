@@ -4,29 +4,24 @@ import classNames from 'classnames';
 
 export default class Header extends React.Component {
     static propTypes = {
+        user: PropTypes.object,
         onMenuItemChange: PropTypes.func
     }
-    constructor() {
-        super();
-        this.handleClick = (e) => this._handleClick(e);
-        this.state = {
-            used: true
-        };
+    constructor(props) {
+        super(props)
+        this.handleClick = (e) => this._handleClick(e)
+        this.state = { used: true }
     }
 
     _handleClick(e) {
         e.preventDefault();
-        if (e.currentTarget.id === 'used' && !this.state.used) {
-            this.setState({ used: true });
-        } else {
-            this.setState({ used: false })
-        }
-        this.props.onMenuItemChange(e.currentTarget.id);
+        const used = e.currentTarget.id === 'used'
+        this.setState({ used: used })
+        this.props.onMenuItemChange(used)
     }
 
     render() {
         const styles = require('./Header.scss');
-        const itemStyle = classNames({ [styles.item]: true, [styles.itemActive]: this.state.used });
         return (
             <div>
                 <div className={styles.header}>

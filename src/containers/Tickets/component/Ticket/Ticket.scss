@@ -39,7 +39,12 @@ $ticketHeight: 130px;
     height: 100%;
     padding: 12px;
     color: black;
-    & > span {
+
+    & > a {
+        display: inline-block;
+        color: black;
+    }
+    & > a > span {
         display: block;
     }
 }
@@ -58,7 +63,7 @@ $ticketHeight: 130px;
 .rest {
     position: absolute;
     bottom: 12px;
-    left: 12px;
+    left: 14px;
     right: 0;
 }
 

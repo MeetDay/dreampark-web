@@ -1,63 +1,60 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Header, Ticket, TicketDetail, TicketTool } from '../component';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getUsedTickts, getUnusedTikects } from '../module/tickets'
+import { Header, Ticket, TicketDetail, TicketTool } from '../component'
+
+@connect(
+    state => ({
+        user: state.tickets.user,
+        unusedTikects: state.tickets.unusedTikects,
+        usedTickts: state.tickets.usedTickts
+    }),
+    dispatch => bindActionCreators({getUnusedTikects, getUsedTickts}, dispatch)
+)
 
 export default class Tickets extends React.Component {
+    static defaultProps = {
+        ticket: { id: 1 }
+    }
     constructor() {
         super();
         this.onMenuItemChange = (value) => this._onMenuItemChange(value);
-        this.viewTickets = (e) => this._viewTickets(e);
+        this.viewTicket = (e) => this._viewTicket(e);
         this.closeViewTickets = (e) => this._closeViewTickets(e);
-        this.handleClickBuyTickets = (e) => this._handleClickBuyTickets(e);
         this.state = {
-            selectedTicket: { username: Math.random()},
-            showModal: false
+            used: true,
+            selectedTicket: null,
+            showSelectedTicket: false
         };
     }
 
-    _onMenuItemChange(value) {
-        console.log(value);
+    _onMenuItemChange(used) {
+        this.setState({ used })
     }
 
-    _viewTickets(e) {
-        e.preventDefault();
-        console.log('查看门票');
-        this.setState({
-            showModal: true,
-            selectedTicket: { username: Math.random()}
-        });
+    _viewTicket(ticket) {
+        this.setState({ showSelectedTicket: true, selectedTicket: ticket });
     }
 
     _closeViewTickets(e) {
         e.preventDefault();
-        console.log('关闭查看门票页');
-        this.setState({
-            showModal: false,
-            selectedTicket: null
-        });
-    }
-
-    _handleClickBuyTickets(e) {
-        e.preventDefault();
-        location.href = '/buytickets';
+        this.setState({ showSelectedTicket: false, selectedTicket: null });
     }
 
     render() {
         const styles = require('./Tickets.scss');
+        console.log(this.props.usedTickts)
+        const tickets = this.state.used ? this.props.usedTickts : this.props.unusedTikects
         return (
             <div>
-                {this.state.selectedTicket &&
-                    <TicketDetail
-                        visible={this.state.showModal}
-                        onCancel={this.closeViewTickets}
-                        ticket={this.state.selectedTicket}
-                    />
-                }
-                <Header onMenuItemChange={this.onMenuItemChange} />
+                {this.state.selectedTicket && <TicketDetail visible={this.state.showSelectedTicket} onCancel={this.closeViewTickets} ticket={this.state.selectedTicket} />}
+                <Header user={this.props.user} onMenuItemChange={this.onMenuItemChange} />
                 <div className={styles.ticketWrap}>
-                    <Ticket viewTickets={this.viewTickets}/>
+                    { tickets.map((ticket) =>(<Ticket key={ticket.id} viewTicket={this.viewTicket} ticket={ticket} />)) }
                 </div>
-                <TicketTool onClick={this.handleClickBuyTickets} />
+                <TicketTool />
             </div>
         );
     }
