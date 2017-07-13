@@ -5,15 +5,15 @@ import { connect } from 'react-redux'
 import { TitleElement, TextElement } from '../../../components'
 import { getUserAgreement, getPrivicyPolicy, getAdmissionNotice } from '../module/terms'
 
-@asyncConnect([{
-    deferred: true,
-    promise: ({ params, store:{ dispatch } }) => {
-        const { serviceType } = params;
-        if (serviceType === 'agreement') return dispatch(getUserAgreement())
-        if (serviceType === 'privacy') return dispatch(getPrivicyPolicy())
-        if (serviceType === 'notice') return dispatch(getAdmissionNotice())
-    }
-}])
+// @asyncConnect([{
+//     deferred: true,
+//     promise: ({ params, store:{ dispatch } }) => {
+//         const { serviceType } = params;
+//         if (serviceType === 'agreement') return dispatch(getUserAgreement())
+//         if (serviceType === 'privacy') return dispatch(getPrivicyPolicy())
+//         if (serviceType === 'notice') return dispatch(getAdmissionNotice())
+//     }
+// }])
 
 @connect(
     state => ({ term: state.terms.term })

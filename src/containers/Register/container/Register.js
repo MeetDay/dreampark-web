@@ -2,6 +2,7 @@ import React from 'react'
 import { Icon } from 'antd'
 import { StepOne, StepTwo, StepThree, StepFour } from '../component'
 import { Navbar } from '../../Login/component'
+import { clearWhiteSpaceOf } from '../../../utils/regex'
 
 export default class Register extends React.Component {
     constructor() {
@@ -11,7 +12,7 @@ export default class Register extends React.Component {
         this.onSMSCodeChange = (e) => this._onSMSCodeChange(e)
         this.onUsernameChange = (e) => this._onUsernameChange(e)
         this.onCardNumberChange = (e) => this._onCardNumberChange(e)
-        this.onCarNumberChange = (e) => this._onCarNumberChange(e)
+        this.onClubChange = (e) => this._onClubChange(e)
         this.onProfessionChange = (e) => this._onProfessionChange(e)
 
         this.state = {
@@ -20,7 +21,7 @@ export default class Register extends React.Component {
             code: '',
             username: '',
             cardno: '',
-            carno: '',
+            club: '',
             profession: ''
         };
     }
@@ -30,6 +31,7 @@ export default class Register extends React.Component {
      */
     _onPhonenumberChange(e) {
         e.preventDefault();
+        if (clearWhiteSpaceOf(e.target.value).length > 11) return
         this.setState({ phonenumber: e.target.value });
     }
     _onPasswordChange(e) {
@@ -42,6 +44,7 @@ export default class Register extends React.Component {
      */
     _onSMSCodeChange(e) {
         e.preventDefault()
+        if (clearWhiteSpaceOf(e.target.value).length > 4) return
         this.setState({ code: e.target.value })
     }
 
@@ -50,23 +53,20 @@ export default class Register extends React.Component {
      */
     _onUsernameChange(e) {
         e.preventDefault()
-        console.log('username:', e.target.value)
         this.setState({ username: e.target.value })
 
     }
     _onCardNumberChange(e) {
         e.preventDefault()
-        console.log('cardno:', e.target.value)
         this.setState({ cardno: e.target.value })
     }
 
     /*
      *  register step four
      */
-    _onCarNumberChange(e) {
+    _onClubChange(e) {
         e.preventDefault()
-        console.log('carnumber:', e.target.value)
-        this.setState({ carno: e.target.value })
+        this.setState({ club: e.target.value })
     }
     _onProfessionChange(e) {
         e.preventDefault()
@@ -106,9 +106,9 @@ export default class Register extends React.Component {
         } else if (this.props.location.hash === '#stepfour') {
             content = (
                 <StepFour
-                    carno={this.state.carno}
+                    club={this.state.club}
                     profession={this.state.profession}
-                    onCarNumberChange={this.onCarNumberChange}
+                    onClubChange={this.onClubChange}
                     onProfessionChange={this.onProfessionChange}
                 />
             )

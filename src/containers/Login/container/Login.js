@@ -7,7 +7,7 @@ import { Launching, Loging, ForgotPassword } from '../component'
 import { StepTwo as SMSCode } from '../../Register/component'
 import Navbar from '../component/Navbar/Navbar'
 import { userLogin } from '../module/login'
-import { legalPhoneNumber } from '../../../utils/regex'
+import { legalPhoneNumber, clearWhiteSpaceOf } from '../../../utils/regex'
 
 @connect(
     state => ({
@@ -32,6 +32,7 @@ export default class Login extends React.Component {
 
     _onPhonenNmberChange(e) {
         e.preventDefault()
+        if (clearWhiteSpaceOf(e.target.value).length > 11) return
         this.setState({ phonenumber: e.target.value })
     }
 
@@ -42,6 +43,7 @@ export default class Login extends React.Component {
 
     _onSMSCodeChange(e) {
         e.preventDefault()
+        if (clearWhiteSpaceOf(e.target.value).length > 4) return
         this.setState({ code: e.target.value })
     }
 

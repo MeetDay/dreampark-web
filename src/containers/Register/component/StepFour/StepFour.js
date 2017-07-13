@@ -4,9 +4,9 @@ import { LoginButton, Phone } from '../../../../components'
 
 export default class StepFour extends React.Component {
     static propTypes = {
-        carno: PropTypes.string,
+        club: PropTypes.string,
         profession: PropTypes.string,
-        onCarNumberChange: PropTypes.func.isRequired,
+        onClubChange: PropTypes.func.isRequired,
         onProfessionChange: PropTypes.func.isRequired
     }
     constructor() {
@@ -34,8 +34,8 @@ export default class StepFour extends React.Component {
                     <span>填写车牌号码享受停车优惠</span>
                 </div>
                 <div className={logingStyle.loginBottom}>
-                    <Phone type="text" title="车牌号码" zone={false} value={this.props.cardno} onChange={this.props.onCarNumberChange} />
-                    <Phone type="text" title="所属行业" zone={false} value={this.props.profession} onChange={this.props.onProfessionChange} />
+                    <Phone type="text" usedFor="other" title="俱乐部" zone={false} value={this.props.club} onChange={this.props.onClubChange} />
+                    <Phone type="text" usedFor="other" title="所属行业" zone={false} value={this.props.profession} onChange={this.props.onProfessionChange} />
                     <div className={styles.nextstep}>
                         <LoginButton
                             title="跳过"
