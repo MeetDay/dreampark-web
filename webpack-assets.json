@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.933d399b49b80ce4b49b.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.933d399b49b80ce4b49b.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.933d399b49b80ce4b49b.min.js"
+    "main": "http://localhost:3000/dist/main.d3ddfbc1efb54c3705bc.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.d3ddfbc1efb54c3705bc.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.d3ddfbc1efb54c3705bc.min.js"
   },
   "styles": {},
   "assets": {
@@ -178,7 +178,7 @@
     "./src/containers/Register/component/StepFour/StepFour.scss": {
       "stepfour": "StepFour__stepfour__2tS3r",
       "nextstep": "StepFour__nextstep__1IiBH",
-      "_style": ".StepFour__stepfour__2tS3r {\n  margin: 0 5%; }\n\n.StepFour__nextstep__1IiBH > div:first-child {\n  display: inline-block;\n  width: 60%; }\n\n.StepFour__nextstep__1IiBH > div:last-child {\n  display: inline-block;\n  width: 35%;\n  margin-left: 5%; }\n"
+      "_style": ".StepFour__stepfour__2tS3r {\n  margin: 0 5%; }\n\n.StepFour__nextstep__1IiBH > div {\n  display: inline-block;\n  width: 100%; }\n"
     },
     "./src/containers/Register/component/StepOne/StepOne.scss": {
       "stepone": "StepOne__stepone__2LgEs",

@@ -1,4 +1,4 @@
-
+import sha256 from 'js-sha256'
 const LOGIN = 'redux/login/LOGIN'
 const SIGNUP = 'redux/login/SIGNUP'
 const WECHATLOGIN = 'redux/login/WECHATLOGIN'
@@ -41,7 +41,11 @@ export default function login(state=initialState, action) {
  *  user login
  */
 export function userLogin(username, password) {
-    const data = { username, password, timestamp: Math.floor(Date.now() / 1000) }
+    const data = {
+        username,
+        password: sha256(password).toUpperCase(),
+        timestamp: Math.floor(Date.now() / 1000)
+    }
     return {
         type: LOGIN,
         payload: (client) => client.get('/signin', { data })

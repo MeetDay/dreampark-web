@@ -1,8 +1,19 @@
 import React from 'react'
-import { Icon } from 'antd'
+import sha256 from 'js-sha256'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { StepOne, StepTwo, StepThree, StepFour } from '../component'
 import { Navbar } from '../../Login/component'
+import { userSignup } from '../../Login/module/login'
+import { comfirmUserInfo } from '../module/register'
 import { clearWhiteSpaceOf } from '../../../utils/regex'
+
+@connect(
+    state => ({
+        idcardInfo: state.register.idcardInfo
+    }),
+    dispatch => bindActionCreators({ userSignup, comfirmUserInfo }, dispatch)
+)
 
 export default class Register extends React.Component {
     constructor() {
@@ -14,6 +25,7 @@ export default class Register extends React.Component {
         this.onCardNumberChange = (e) => this._onCardNumberChange(e)
         this.onClubChange = (e) => this._onClubChange(e)
         this.onProfessionChange = (e) => this._onProfessionChange(e)
+        this.userSignup = (e) => this._userSignup(e)
 
         this.state = {
             phonenumber: '',
@@ -24,6 +36,20 @@ export default class Register extends React.Component {
             club: '',
             profession: ''
         };
+    }
+
+    // 注册
+    _userSignup(e) {
+        e.preventDefault()
+        this.props.userSignup({
+            username: this.state.username,
+            password: sha256(this.state.password).toUpperCase(),
+            mobile: clearWhiteSpaceOf(this.state.phonenumber),
+            identity_card: clearWhiteSpaceOf(this.state.cardno),
+            club: this.state.club,
+            birthday: this.props.idcardInfo.data.birthday,
+            trade: this.state.profession
+        })
     }
 
     /**
@@ -70,7 +96,6 @@ export default class Register extends React.Component {
     }
     _onProfessionChange(e) {
         e.preventDefault()
-        console.log('profession:', e.target.value)
         this.setState({ profession: e.target.value })
     }
 
@@ -97,10 +122,12 @@ export default class Register extends React.Component {
         } else if (this.props.location.hash === '#stepthree') {
             content = (
                 <StepThree
+                    idcardInfo={this.props.idcardInfo}
                     username={this.state.username}
                     cardno={this.state.cardno}
                     onUsernameChange={this.onUsernameChange}
                     onCardNumberChange={this.onCardNumberChange}
+                    comfirmUserInfo={this.props.comfirmUserInfo}
                 />
             )
         } else if (this.props.location.hash === '#stepfour') {
@@ -110,6 +137,7 @@ export default class Register extends React.Component {
                     profession={this.state.profession}
                     onClubChange={this.onClubChange}
                     onProfessionChange={this.onProfessionChange}
+                    userSignup={this.userSignup}
                 />
             )
         }

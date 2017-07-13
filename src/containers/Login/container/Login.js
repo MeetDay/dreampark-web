@@ -49,9 +49,8 @@ export default class Login extends React.Component {
 
     _userLogin(e) {
         e.preventDefault()
-        console.log('phone password', this.state.phonenumber, this.state.password)
         if (legalPhoneNumber(this.state.phonenumber) && this.state.password.length >= 8) {
-            this.props.userLogin(this.state.phonenumber, this.state.password)
+            this.props.userLogin(clearWhiteSpaceOf(this.state.phonenumber), this.state.password)
         } else {
             window.alert('用户名或密码错误...')
         }

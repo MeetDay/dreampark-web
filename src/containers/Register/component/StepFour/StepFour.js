@@ -7,7 +7,8 @@ export default class StepFour extends React.Component {
         club: PropTypes.string,
         profession: PropTypes.string,
         onClubChange: PropTypes.func.isRequired,
-        onProfessionChange: PropTypes.func.isRequired
+        onProfessionChange: PropTypes.func.isRequired,
+        userSignup: PropTypes.func
     }
     constructor() {
         super();
@@ -30,21 +31,21 @@ export default class StepFour extends React.Component {
         return (
             <div className={styles.stepfour}>
                 <div className={forgotpasswordStyle.description}>
-                    <span>完善个人信息（2/2）</span>
+                    <span>完善个人信息</span>
                     <span>填写车牌号码享受停车优惠</span>
                 </div>
                 <div className={logingStyle.loginBottom}>
                     <Phone type="text" usedFor="other" title="俱乐部" zone={false} value={this.props.club} onChange={this.props.onClubChange} />
                     <Phone type="text" usedFor="other" title="所属行业" zone={false} value={this.props.profession} onChange={this.props.onProfessionChange} />
                     <div className={styles.nextstep}>
-                        <LoginButton
+                        {/* <LoginButton
                             title="跳过"
                             bgColor="tansparent"
                             borderColor="white"
                             textColor="white"
-                            onClick={this.handleClickNextStep}
-                        />
-                        <LoginButton title="下一步" onClick={this.handleClickNextStep} />
+                            onClick={this.props.userSignup}
+                        /> */}
+                    <LoginButton title="下一步" onClick={this.props.userSignup} />
                     </div>
                 </div>
             </div>

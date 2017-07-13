@@ -2,14 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { message } from 'antd'
 import { LoginButton, Phone } from '../../../../components'
-import { illegalCardNunber } from '../../../../utils/regex'
+import { illegalCardNunber, clearWhiteSpaceOf } from '../../../../utils/regex'
 
 export default class StepThree extends React.Component {
     static propTypes = {
+        idcardInfo: PropTypes.object,
         username: PropTypes.string,
         cardno: PropTypes.string,
         onUsernameChange: PropTypes.func,
-        onCardNumberChange: PropTypes.func
+        onCardNumberChange: PropTypes.func,
+        comfirmUserInfo: PropTypes.func
     }
     constructor() {
         super();
@@ -20,7 +22,14 @@ export default class StepThree extends React.Component {
         e.preventDefault();
         if (!illegalCardNunber(this.props.cardno))
             return message.error('请输入正确的身份证号码...')
-        location.hash = '#stepfour';
+        this.props.comfirmUserInfo(this.props.username, clearWhiteSpaceOf(this.props.cardno))
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.idcardInfo !== this.props.idcardInfo) {
+            if (nextProps.idcardInfo && nextProps.idcardInfo.resp.code === 0)
+                location.hash = '#stepfour'
+        }
     }
 
     render() {
@@ -30,7 +39,7 @@ export default class StepThree extends React.Component {
         return (
             <div className={styles.stepthree}>
                 <div className={forgotpasswordStyle.description}>
-                    <span>完善个人信息（1/2)</span>
+                    <span>实名认证</span>
                     <span>根据政策法规必须完成实名认证，成功后获得免费门票</span>
                 </div>
                 <div className={logingStyle.loginBottom}>

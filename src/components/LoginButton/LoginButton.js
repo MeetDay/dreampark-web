@@ -13,8 +13,8 @@ export default class LoginButton extends React.Component {
     }
 
     static defaultProps = {
-        bgColor: 'yellow',
-        borderColor: 'yellow',
+        bgColor: '#FFF200',
+        borderColor: '#FFF200',
         textColor: 'black',
         imgSrc: '/assets/wechat.png',
         imgShow: false
