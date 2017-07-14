@@ -2,7 +2,7 @@ module.exports = {
 	// baseUrl: 'http://beegree.cc',
 	// devBaseUrl: 'http://dev.beegree.cc',
 	baseUrl: 'http://beegree.cc',
-	devBaseUrl: 'http://192.168.13.85:8080',
+	devBaseUrl: 'http://192.168.12.127:8080',
 
 	wechatAppID: '',
 	wechatAppSecret: '',

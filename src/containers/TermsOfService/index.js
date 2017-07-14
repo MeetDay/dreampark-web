@@ -1,4 +1,4 @@
 import TermsOfService from './container/TermsOfService'
 export default TermsOfService
 
-export terms from './module/terms'
+export dreamparkTerms from './module/dreamparkTerms'

@@ -2,34 +2,52 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { asyncConnect } from 'redux-async-connect'
 import { connect } from 'react-redux'
-import { TitleElement, TextElement } from '../../../components'
-import { getUserAgreement, getPrivicyPolicy, getAdmissionNotice } from '../module/terms'
+import { CoverImage, TitleElement, TextElement, ImageElement, BigImageElement } from '../../../components'
+import { isTermLoaded, getUserTermsBy } from '../module/dreamparkTerms'
+import { convertElementToComponet } from '../../../helpers/ElementHelper'
 
-// @asyncConnect([{
-//     deferred: true,
-//     promise: ({ params, store:{ dispatch } }) => {
-//         const { serviceType } = params;
-//         if (serviceType === 'agreement') return dispatch(getUserAgreement())
-//         if (serviceType === 'privacy') return dispatch(getPrivicyPolicy())
-//         if (serviceType === 'notice') return dispatch(getAdmissionNotice())
-//     }
-// }])
+@asyncConnect([{
+    deferred: false,
+    promise: ({ params, store:{ dispatch, getState } }) => {
+        const { serviceType } = params;
+        if (!isTermLoaded(getState())) {
+            return dispatch(getUserTermsBy(serviceType))
+        }
+    }
+}])
 
 @connect(
-    state => ({ term: state.terms.term })
+    state => ({
+        title: state.dreamparkTerms.title,
+        coverImage: state.dreamparkTerms.coverImage,
+        elements: state.dreamparkTerms.elements
+    })
 )
 
 export default class TermsOfService extends React.Component {
+
+    convertElementToComponet() {
+        return (element) => {
+            const { id, content } = element
+            let mappedElement = null
+            if (content.type === 'text') {
+                mappedElement = <TextElement key={id} text={content.media.plain_text} />
+            } else if (content.type === 'image' && content.media.caption.length > 0) {
+                mappedElement = <BigImageElement key={id} src={content.media.name} captionText={content.media.caption} />
+            } else if (content.type === 'image') {
+                mappedElement = <ImageElement key={id} src={content.media.name} />
+            }
+            return mappedElement
+        }
+    }
+
     render() {
         const styles = require('./TermsOfService.scss')
         return (
             <div className={styles.container}>
-                <TitleElement />
-                <TextElement />
-                <TextElement />
-                <TextElement />
-                <TextElement />
-                <TextElement />
+                { this.props.coverImage && <CoverImage src={this.props.coverImage.name} /> }
+                { this.props.title && <TitleElement title={this.props.title} /> }
+                { this.props.elements.map(this.convertElementToComponet())}
             </div>
         );
     }
