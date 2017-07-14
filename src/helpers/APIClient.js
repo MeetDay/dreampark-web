@@ -24,8 +24,8 @@ export default class APIClient {
 						request.set(key, headers[key]);
 					});
 				}
-				request.end((err, { body } = {}) => err ? reject(body || err) : resolve(body));
-			})
+				request.end((err, { body } = {}) => err ? reject(body || err) : resolve(body))
+			}).catch((e) => Promise.reject(e))
 		});
 	}
 }
