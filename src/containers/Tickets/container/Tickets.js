@@ -1,9 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { asyncConnect } from 'redux-async-connect'
 import { bindActionCreators } from 'redux'
-import { getUsedTickts, getUnusedTikects } from '../module/tickets'
+import { isUsedTicketsLoaded, getUsedTickts,isUnusedTicketsLoaded, getUnusedTikects } from '../module/tickets'
 import { Header, Ticket, TicketDetail, TicketTool } from '../component'
+
+@asyncConnect([{
+    deferred: true,
+    promise: ({ params, store: { dispatch, getState }, helpers }) => {
+        const { ticketType } = params
+        if (!isUnusedTicketsLoaded(getState()) && ticketType === 'unused') {
+            return dispatch(getUnusedTikects())
+        } else if(!isUsedTicketsLoaded(getState())) {
+            return dispatch(getUsedTickts())
+        }
+    }
+}])
 
 @connect(
     state => ({
@@ -11,7 +24,7 @@ import { Header, Ticket, TicketDetail, TicketTool } from '../component'
         unusedTikects: state.tickets.unusedTikects,
         usedTickts: state.tickets.usedTickts
     }),
-    dispatch => bindActionCreators({getUnusedTikects, getUsedTickts}, dispatch)
+    dispatch => bindActionCreators({ getUnusedTikects, getUsedTickts }, dispatch)
 )
 
 export default class Tickets extends React.Component {
@@ -29,6 +42,12 @@ export default class Tickets extends React.Component {
 
     _onMenuItemChange(used) {
         this.setState({ used })
+        if (used && this.props.usedTickts.length === 0) {
+            this.props.getUsedTickts()
+        }
+        if (!used && this.props.unusedTikects.length === 0) {
+            this.props.getUnusedTikects()
+        }
     }
 
     _viewTicket(ticket) {

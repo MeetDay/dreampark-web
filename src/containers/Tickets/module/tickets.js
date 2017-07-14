@@ -29,11 +29,19 @@ export default function tickets(state=initialState, action) {
     return handler ? handler(state, action) : state
 }
 
+export function isUnusedTicketsLoaded(globalState) {
+    return globalState.tickets && globalState.tickets.unusedTikectsLoaded
+}
+
+export function isUsedTicketsLoaded(globalState) {
+    return globalState.tickets && globalState.tickets.usedTicktsLoaded
+}
+
 export function getUnusedTikects() {
     return (dispatch, getState) => {
         const authHeaders = getState().login
         dispatch({
-            action: UNUSED_TICKETS,
+            type: UNUSED_TICKETS,
             payload: (client) => client.get('/unuse_ticket', {
                 headers: authHeaders
             })
@@ -45,7 +53,7 @@ export function getUsedTickts() {
     return (dispatch, getState) => {
         const authHeaders = getState().login
         dispatch({
-            action: UNUSED_TICKETS,
+            type: UNUSED_TICKETS,
             payload: (client) => client.get('/used_ticket', {
                 headers: authHeaders
             })

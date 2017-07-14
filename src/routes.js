@@ -16,11 +16,13 @@ const routes = (store) => {
 		<Route path="/" component={App}>
 			<IndexRoute component={Home} />
 			<Route path="/home" component={Home} />
-			<Route path="/tickets" component={Tickets} />
+			<Route path="/tickets" component={Tickets}>
+				<Route path="/:ticketType" component={Tickets} />
+			</Route>
 			<Route path="/buytickets" component={BuyTicket} />
 			<Route path="/details/:id" component={Details} />
 			<Route path="/hotdetail/:id" component={HotDetail} />
-			<Shoppingcart path="/shoppingcart" component={Shoppingcart} />
+			<Route path="/shoppingcart" component={Shoppingcart} />
 			<Route path="/login" component={Login} />
 			<Route path="/register" component={Register} />
 			<Route path="/terms/:serviceType" component={TermsOfService} />
