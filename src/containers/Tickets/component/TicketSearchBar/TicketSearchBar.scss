@@ -26,4 +26,13 @@ $searchBarHeight: 44px;
     display: inline-block;
     width: 92%;
     height: 100%;
+    vertical-align: top;
+
+    & > span > input {
+        border-radius: 14px;
+        padding-left: 12px;
+    }
+    & > span > span {
+        right: 12px !important;
+    }
 }
