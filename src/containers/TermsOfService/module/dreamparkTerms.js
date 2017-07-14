@@ -3,7 +3,7 @@ const TERM = 'redux/terms/term'
 const actionHandlers = {
     [`${TERM}_PENDING`]: (state, action) => ({...state, termLoading: true, termLoaded: false}),
     [`${TERM}_FULFILLED`]: (state, action) => ({ ...state, termLoading: false, termLoaded: true, title: action.payload.title, coverImage: action.payload.cover_image, elements: action.payload.elements }),
-    [`${TERM}_REJECTED`]: (state, action) => ({...state, termLoading: false, termLoaded: false })
+    [`${TERM}_REJECTED`]: (state, action) => ({...state, termLoading: false, termLoaded: false, termError: action.payload })
 }
 
 const initialState = {
