@@ -1,0 +1,54 @@
+.buyParkingCoupon {
+
+}
+
+.description {
+    margin: 24px 20px;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    line-height: 22px;
+    color: #71767A;
+}
+
+.carnumber {
+    margin: 24px 20px;
+    font-size: 0;
+}
+
+.carnumberDescription {
+    margin: 0px;
+    padding: 0px;
+    font-family: PingFangSC-Regular;
+    font-size: 20px;
+    line-height: 28px;
+    color: #71767A;
+}
+
+.carnumberInput {
+    padding-top: 30px;
+    margin-bottom: 50px;
+    border-bottom: 1px solid #E62A10;
+
+    & > input {
+        width: 100%;
+        height: 40px;
+        outline-style: none;
+        font-family: PingFangSC-Semibold;
+        line-height: 40px;
+        font-size: 28px;
+        color: #E62A10;
+    }
+}
+
+.priceInfoContent {
+    text-align: center;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #FFFFFF;
+
+    & > span:nth-child(2) {
+        margin: 0 10px;
+        font-family: PingFangSC-Semibold;
+        color: #EC0539;
+    }
+}

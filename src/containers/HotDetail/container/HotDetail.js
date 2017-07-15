@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Carousel } from 'antd';
 import { CoverImage, TitleElement, TextElement, ImageElement, BigImageElement } from '../../../components';
-import { Navbar, ToolBar, Recommend, BuyTicketNow } from '../component';
+import { Navbar, ToolBar, Recommend, BuyTicketNow, BuyParkingCoupon } from '../component';
 
 export default class HotDetail extends React.Component {
     constructor() {
@@ -108,7 +108,8 @@ export default class HotDetail extends React.Component {
                     </div>
                 </div>
                 <ToolBar onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} />
-                <BuyTicketNow show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} />
+                {/* <BuyTicketNow show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} /> */}
+                <BuyParkingCoupon show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} />
             </div>
         );
     }
