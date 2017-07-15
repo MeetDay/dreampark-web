@@ -7,4 +7,6 @@ export BigImageElement from './Elements/BigImageElement/BigImageElement';
 export TextElement from './Elements/TextElement/TextElement';
 export TitleElement from './Elements/TitleElement/TitleElement';
 export Checkbox from './Checkbox/Checkbox';
+export SearchBar from './SearchBar/SearchBar';
+export LoadMoreButton from './LoadMoreButton/LoadMoreButton';
 export Navbar from './Navbar/Navbar';

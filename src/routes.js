@@ -2,7 +2,7 @@ import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
-import { Tickets, BuyTicket } from './containers/Tickets';
+import { Tickets, BuyTicket, SearchTicket } from './containers/Tickets';
 import Details from './containers/Details';
 import HotDetail from './containers/HotDetail';
 import Shoppingcart from './containers/Shoppingcart';
@@ -18,6 +18,7 @@ const routes = (store) => {
 			<Route path="home" component={Home} />
 			<Route path="tickets" component={Tickets} />
 			<Route path="buytickets" component={BuyTicket} />
+			<Route path="buytickets/search" component={SearchTicket} />
 			<Route path="details/:id" component={Details} />
 			<Route path="hotdetail/:id" component={HotDetail} />
 			<Route path="shoppingcart" component={Shoppingcart} />

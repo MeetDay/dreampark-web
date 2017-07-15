@@ -1,0 +1,44 @@
+.item {
+    height: 95px;
+    width: 100%;
+    padding: 0 20px;
+    background-color: #FFFFFF;
+}
+
+.contentWrap {
+    position: relative;
+    padding: 12.5px 0;
+    border-bottom: 1px solid #DEDEDE;
+
+    & > span {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+.cover {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    background-color: #EEEFF2;
+    overflow: hidden;
+}
+
+.title {
+    margin-left: 15px;
+    font-family: PingFangSC-Regular;
+    font-size: 18px;
+    color: #1C2123;
+}
+
+.arrow {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    & > img {
+        width: 24px;
+        vertical-align: top;
+    }
+}
