@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.f3b1856aa7238fc7bfe6.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.f3b1856aa7238fc7bfe6.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.f3b1856aa7238fc7bfe6.min.js"
+    "main": "http://localhost:3000/dist/main.03e151978993a3fdc775.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.03e151978993a3fdc775.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.03e151978993a3fdc775.min.js"
   },
   "styles": {},
   "assets": {
@@ -305,7 +305,7 @@
       "cover": "SearchItem__cover__23EqI",
       "title": "SearchItem__title__18UUz",
       "arrow": "SearchItem__arrow__12scF",
-      "_style": ".SearchItem__item__1WEVn {\n  height: 95px;\n  width: 100%;\n  padding: 0 20px;\n  background-color: #FFFFFF; }\n\n.SearchItem__contentWrap__3Xjxf {\n  position: relative;\n  padding: 12.5px 0;\n  border-bottom: 1px solid #DEDEDE; }\n  .SearchItem__contentWrap__3Xjxf > span {\n    display: inline-block;\n    vertical-align: middle; }\n\n.SearchItem__cover__23EqI {\n  width: 70px;\n  height: 70px;\n  border-radius: 10px;\n  background-color: #EEEFF2;\n  overflow: hidden; }\n\n.SearchItem__title__18UUz {\n  margin-left: 15px;\n  font-family: PingFangSC-Regular;\n  font-size: 18px;\n  color: #1C2123; }\n\n.SearchItem__arrow__12scF {\n  position: absolute;\n  right: 15px;\n  top: 50%;\n  transform: translateY(-50%); }\n  .SearchItem__arrow__12scF > img {\n    width: 24px;\n    vertical-align: top; }\n"
+      "_style": ".SearchItem__item__1WEVn {\n  height: 95px;\n  width: 100%;\n  padding: 0 20px;\n  background-color: #FFFFFF; }\n\n.SearchItem__contentWrap__3Xjxf {\n  position: relative;\n  padding: 12.5px 0;\n  border-bottom: 1px solid #DEDEDE; }\n  .SearchItem__contentWrap__3Xjxf > span {\n    display: inline-block;\n    vertical-align: middle; }\n\n.SearchItem__cover__23EqI {\n  width: 70px;\n  height: 70px;\n  border-radius: 10px;\n  background-color: #EEEFF2;\n  overflow: hidden; }\n\n.SearchItem__title__18UUz {\n  margin-left: 15px;\n  font-family: PingFangSC-Regular;\n  font-size: 18px;\n  color: #1C2123; }\n\n.SearchItem__arrow__12scF {\n  position: absolute;\n  right: 15px;\n  top: 50%;\n  transform: translateY(-50%); }\n  .SearchItem__arrow__12scF > img {\n    width: 20px;\n    vertical-align: top; }\n"
     }
   }
 }
