@@ -126,7 +126,7 @@ class TimeSlotTicket extends React.Component {
                 <div  style={triangleStyle} className={styles.ticketTriangle}>
                     <img src="/assets/triangle.png" alt="triangle" />
                 </div>
-                <div className={styles.separatorLine} />
+                {/* <div className={styles.separatorLine} /> */}
                 <div className={styles.ticketContent}>
                     <div className={styles.ticketTop}>10月 <span>4日</span></div>
                     <div className={styles.ticketBottom}>8:00-9:00</div>
