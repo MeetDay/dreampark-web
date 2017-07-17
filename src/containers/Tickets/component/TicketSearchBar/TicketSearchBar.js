@@ -4,13 +4,28 @@ import { Input } from 'antd';
 const Search = Input.Search;
 
 export default class TicketSearchBar extends React.Component {
+    static propTypes = {
+        disabled: PropTypes.bool,
+        placeholder: PropTypes.string,
+        onFocus: PropTypes.func,
+        onSearch: PropTypes.func
+    }
+    static defaultProps = {
+        disabled: false,
+        placeholder: '搜索门票'
+    }
+
     constructor(props) {
         super(props)
         this.handleSearch = (value) => this._handleSearch(value)
+        this.handleFocus = (e) => this._handleFocues(e)
     }
 
     _handleSearch(value) {
         console.log(value)
+    }
+    _handleFocues(e) {
+        console.log('fffffff')
     }
 
     render() {
@@ -18,7 +33,9 @@ export default class TicketSearchBar extends React.Component {
         return (
             <div className={styles.searchBar}>
                 <div className={styles.back} onClick={() => history.back()}><img src="/assets/back.png" alt="back"/></div>
-                <div className={styles.search}><Search style={{ overflow: 'hidden', borderRadius: '14px', border: 'none' }} placeholder="搜索门票" onSearch={this.handleSearch} /></div>
+                <div className={styles.search}>
+                    <Search style={{ overflow: 'hidden', borderRadius: '14px', border: 'none' }} disabled={this.props.disabled} placeholder={this.props.placeholder} onFocus={this.handleFocus} onSearch={this.handleSearch} />
+                </div>
             </div>
         );
     }

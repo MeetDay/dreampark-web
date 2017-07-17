@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.03e151978993a3fdc775.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.03e151978993a3fdc775.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.03e151978993a3fdc775.min.js"
+    "main": "http://localhost:3000/dist/main.52c0eec65aae4e9f2848.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.52c0eec65aae4e9f2848.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.52c0eec65aae4e9f2848.min.js"
   },
   "styles": {},
   "assets": {
@@ -241,6 +241,14 @@
       "itemActive": "Header__itemActive__266ta",
       "_style": ".Header__header__3AhMC {\n  height: 130px;\n  white-space: nowrap;\n  background-color: white; }\n\n.Header__avatar__2vCWR {\n  height: 60px;\n  margin: 35px 0;\n  margin-left: 50px; }\n  @media screen and (max-width: 370px) {\n    .Header__avatar__2vCWR {\n      margin-left: 20px; } }\n\n.Header__info__3WAxg {\n  display: inline-block;\n  height: 60px;\n  margin: 35px 0;\n  margin-left: 13px;\n  vertical-align: top; }\n  .Header__info__3WAxg > div {\n    display: block; }\n\n.Header__username__3lolH {\n  font-size: 20px;\n  color: #143B6E; }\n\n.Header__vip__23co9 {\n  width: 56px;\n  height: 22px;\n  margin-left: 13px;\n  vertical-align: text-bottom; }\n\n.Header__tip__3Bunf {\n  margin-top: 5px;\n  font-size: 14px;\n  color: #9B9B9B; }\n\n.Header__qrcode__tg8WT {\n  display: inline-block;\n  height: 60px;\n  width: 60px;\n  margin: 35px 0;\n  margin-left: 45px;\n  vertical-align: top;\n  background-color: gray; }\n  @media screen and (max-width: 370px) {\n    .Header__qrcode__tg8WT {\n      margin-left: 15px; } }\n\n.Header__bottom__2IU04 {\n  height: 40px;\n  background-color: #2D343B; }\n  .Header__bottom__2IU04 > div {\n    display: inline-block;\n    width: 50%;\n    line-height: 40px;\n    font-size: 16px;\n    color: white;\n    text-align: center; }\n\n.Header__item__V4vqx {\n  display: inline-block;\n  height: 40px;\n  line-height: 40px; }\n\n.Header__itemActive__266ta {\n  border-bottom: 3px solid #E62A10; }\n"
     },
+    "./src/containers/Tickets/component/SearchItem/SearchItem.scss": {
+      "item": "SearchItem__item__1WEVn",
+      "contentWrap": "SearchItem__contentWrap__3Xjxf",
+      "cover": "SearchItem__cover__23EqI",
+      "title": "SearchItem__title__18UUz",
+      "arrow": "SearchItem__arrow__12scF",
+      "_style": ".SearchItem__item__1WEVn {\n  height: 95px;\n  width: 100%;\n  padding: 0 20px;\n  background-color: #FFFFFF; }\n\n.SearchItem__contentWrap__3Xjxf {\n  position: relative;\n  padding: 12.5px 0;\n  border-bottom: 1px solid #DEDEDE; }\n  .SearchItem__contentWrap__3Xjxf > span {\n    display: inline-block;\n    vertical-align: middle; }\n\n.SearchItem__cover__23EqI {\n  width: 70px;\n  height: 70px;\n  border-radius: 10px;\n  background-color: #EEEFF2;\n  overflow: hidden; }\n\n.SearchItem__title__18UUz {\n  margin-left: 15px;\n  font-family: PingFangSC-Regular;\n  font-size: 18px;\n  color: #1C2123; }\n\n.SearchItem__arrow__12scF {\n  position: absolute;\n  right: 15px;\n  top: 50%;\n  transform: translateY(-50%); }\n  .SearchItem__arrow__12scF > img {\n    width: 20px;\n    vertical-align: top; }\n"
+    },
     "./src/containers/Tickets/component/Ticket/Ticket.scss": {
       "ticket": "Ticket__ticket__3ibdj",
       "ticketBorder": "Ticket__ticketBorder__23Kv0",
@@ -279,7 +287,7 @@
       "searchBar": "TicketSearchBar__searchBar__2aqCL",
       "back": "TicketSearchBar__back__oUCiS",
       "search": "TicketSearchBar__search__3zM5w",
-      "_style": ".TicketSearchBar__searchBar__2aqCL {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 44px;\n  padding: 8px 20px;\n  box-sizing: padding-box;\n  background-color: #1C2123; }\n\n.TicketSearchBar__back__oUCiS {\n  display: inline-block;\n  width: 8%;\n  height: 100%;\n  padding: 6px 0; }\n  .TicketSearchBar__back__oUCiS > img {\n    display: block;\n    height: 16px;\n    vertical-align: top; }\n\n.TicketSearchBar__search__3zM5w {\n  display: inline-block;\n  width: 92%;\n  height: 100%;\n  vertical-align: top; }\n  .TicketSearchBar__search__3zM5w > span > input {\n    border-radius: 14px;\n    padding-left: 12px; }\n  .TicketSearchBar__search__3zM5w > span > span {\n    right: 12px !important; }\n"
+      "_style": ".TicketSearchBar__searchBar__2aqCL {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 44px;\n  padding: 8px 20px;\n  box-sizing: padding-box;\n  background-color: #1C2123;\n  z-index: 999; }\n\n.TicketSearchBar__back__oUCiS {\n  display: inline-block;\n  width: 8%;\n  height: 100%;\n  padding: 6px 0; }\n  .TicketSearchBar__back__oUCiS > img {\n    display: block;\n    height: 16px;\n    vertical-align: top; }\n\n.TicketSearchBar__search__3zM5w {\n  display: inline-block;\n  width: 92%;\n  height: 100%;\n  vertical-align: top; }\n  .TicketSearchBar__search__3zM5w > span > input {\n    border-radius: 14px;\n    padding-left: 12px; }\n  .TicketSearchBar__search__3zM5w > span > span {\n    right: 12px !important; }\n"
     },
     "./src/containers/Tickets/component/TicketTool/TicketTool.scss": {
       "tool": "TicketTool__tool__3s1E2",
@@ -293,19 +301,15 @@
     },
     "./src/containers/Tickets/container/SearchTicket.scss": {
       "searchTicket": "SearchTicket__searchTicket__2OKE1",
-      "_style": ".SearchTicket__searchTicket__2OKE1 {\n  background-color: #FFFFFF; }\n"
+      "contentWrap": "SearchTicket__contentWrap__GHM6C",
+      "noSearchResult": "SearchTicket__noSearchResult__3Q_8d",
+      "searchImg": "SearchTicket__searchImg__3FyFs",
+      "noSearchDescription": "SearchTicket__noSearchDescription__35rxw",
+      "_style": ".SearchTicket__searchTicket__2OKE1 {\n  background-color: #FFFFFF; }\n\n.SearchTicket__contentWrap__GHM6C {\n  margin-top: 44px; }\n\n.SearchTicket__noSearchResult__3Q_8d {\n  margin-top: 144px; }\n\n.SearchTicket__searchImg__3FyFs {\n  width: 100%;\n  height: 93px;\n  text-align: center; }\n  .SearchTicket__searchImg__3FyFs > img {\n    height: 100%;\n    vertical-align: top; }\n\n.SearchTicket__noSearchDescription__35rxw {\n  margin-top: 35px;\n  text-align: center; }\n  .SearchTicket__noSearchDescription__35rxw > span:first-child {\n    display: inline-block;\n    width: 100%;\n    font-family: PingFangSC-Semibold;\n    font-size: 16px;\n    color: #393939; }\n  .SearchTicket__noSearchDescription__35rxw > span:last-child {\n    display: inline-block;\n    margin-top: 20px;\n    font-family: PingFangSC-Regular;\n    font-size: 14px;\n    color: #D6D6D6; }\n"
     },
     "./src/containers/Tickets/container/Tickets.scss": {
       "ticketWrap": "Tickets__ticketWrap__1-ptD",
       "_style": ".Tickets__ticketWrap__1-ptD {\n  padding: 0 20px;\n  border-bottom: 75px solid transparent; }\n"
-    },
-    "./src/containers/Tickets/component/SearchItem/SearchItem.scss": {
-      "item": "SearchItem__item__1WEVn",
-      "contentWrap": "SearchItem__contentWrap__3Xjxf",
-      "cover": "SearchItem__cover__23EqI",
-      "title": "SearchItem__title__18UUz",
-      "arrow": "SearchItem__arrow__12scF",
-      "_style": ".SearchItem__item__1WEVn {\n  height: 95px;\n  width: 100%;\n  padding: 0 20px;\n  background-color: #FFFFFF; }\n\n.SearchItem__contentWrap__3Xjxf {\n  position: relative;\n  padding: 12.5px 0;\n  border-bottom: 1px solid #DEDEDE; }\n  .SearchItem__contentWrap__3Xjxf > span {\n    display: inline-block;\n    vertical-align: middle; }\n\n.SearchItem__cover__23EqI {\n  width: 70px;\n  height: 70px;\n  border-radius: 10px;\n  background-color: #EEEFF2;\n  overflow: hidden; }\n\n.SearchItem__title__18UUz {\n  margin-left: 15px;\n  font-family: PingFangSC-Regular;\n  font-size: 18px;\n  color: #1C2123; }\n\n.SearchItem__arrow__12scF {\n  position: absolute;\n  right: 15px;\n  top: 50%;\n  transform: translateY(-50%); }\n  .SearchItem__arrow__12scF > img {\n    width: 20px;\n    vertical-align: top; }\n"
     }
   }
 }
