@@ -9,7 +9,16 @@ smsCodeRouter.post('/code', (req, res) => {
         .type('form')
         .accept('application/json')
         .send(Object.assign({ appkey: projectConfig.smsAPPKey }, req.body))
-        .end((err, { text } = {}) => err ? res.send(JSON.parse(text) || err) : res.send(JSON.parse(text)))
+        .end((err, { body, text } = {}) => {
+            // if (err) return res.status(400).send(err)
+            const result = isEmptyObject(body) ? JSON.parse(text) : body
+            res.status(result.status).send(result)
+        })
 })
+
+function isEmptyObject(object) {
+    if (Object.keys(object).length > 0) return false
+    return true
+}
 
 export default smsCodeRouter;

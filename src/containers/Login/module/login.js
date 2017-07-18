@@ -1,6 +1,7 @@
 import sha256 from 'js-sha256'
 const LOGIN = 'redux/login/LOGIN'
 const SIGNUP = 'redux/login/SIGNUP'
+const UPDATE_USER = 'redux/login/UPDATE_USER'
 const WECHATLOGIN = 'redux/login/WECHATLOGIN'
 
 export function generatorAuthHeadersForUser(user) {
@@ -20,8 +21,12 @@ const actionhandlers = {
     [`${LOGIN}_REJECTED`]: (state, action) => ({ ...state, userLoading: false, userLoaded: true, userLoginError: action.payload }),
 
     [`${SIGNUP}_PENDING`]: (state, action) => ({...state, signupLoading: true, signupLoaded: false }),
-    [`${SIGNUP}_FULFILLED`]: (state, action) => ({ ...state, signupLoading: false, signupLoaded: true, signUser: action.payload }),
+    [`${SIGNUP}_FULFILLED`]: (state, action) => ({ ...state, signupLoading: false, signupLoaded: true, signUser: action.payload, authHeaders: generatorAuthHeadersForUser(action.payload) }),
     [`${SIGNUP}_REJECTED`]: (state, action) => ({ ...state, signupLoading: false, signupLoaded: false, userSignupError: action.payload }),
+
+    [`${UPDATE_USER}_PENDING`]: (state, action) => ({ ...state, updateUserLoading: true, updateUserLoaded: false }),
+    [`${UPDATE_USER}_FULFILLED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: true }),
+    [`${UPDATE_USER}_REJECTED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: false })
 };
 
 const initialState = {
@@ -33,6 +38,12 @@ const initialState = {
     signupLoaded: false,
     userSignupError: null,
     signUser: null,
+
+    updateUserLoading: false,
+    updateUserLoaded: false,
+    updateUser: null,
+    updateUserError: null,
+
     user: null,
     authHeaders: null
 };
@@ -64,6 +75,16 @@ export function userSignup(data) {
     return {
         type: SIGNUP,
         payload: (client) => client.post('/signup', { data })
+    }
+}
+
+export function updateUserInfo(data) {
+    return (dispatch, getState) => {
+        const { user, authHeaders } = getState().login
+        dispatch({
+            type: UPDATE_USER,
+            payload: (client) => client.post(`/${user.id}`, { data, headers: authHeaders })
+        })
     }
 }
 

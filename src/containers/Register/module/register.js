@@ -19,7 +19,7 @@ const initialState = {
     idcardError: null,
 
     smsCodeSuccess: false,
-    smsCodeError: null
+    smsCodeError: null,
 }
 
 export default function register(state=initialState, action) {

@@ -16,7 +16,7 @@ export default class StepTwo extends React.Component {
         getSMSCode: PropTypes.func,
         userSignup: PropTypes.func,
 
-        smsCodeError:PropTypes.func,
+        smsCodeError:PropTypes.object,
         signUser: PropTypes.object,
         userSignupError: PropTypes.object
     }
@@ -42,9 +42,7 @@ export default class StepTwo extends React.Component {
     componentWillReceiveProps(nextProps) {
         const { smsCodeError, signUser, userSignupError } = nextProps
         if (smsCodeError && smsCodeError !== this.props.smsCodeError) {
-            setTimeout(() => {
-                message.error(smsCodeError.error)
-            }, 2000)
+            setTimeout(_ => message.error(smsCodeError.error), 1000)
         }
 
         if (userSignupError && userSignupError !== this.props.userSignupError) {
@@ -59,7 +57,7 @@ export default class StepTwo extends React.Component {
     _handleClickRegainCode(e) {
         e.preventDefault()
         if (this.state.counterDisabled) return
-        this.props.getSMSCode()
+        this.props.getSMSCode(this.props.phonenumber)
 
         const updateCounter = (counter) => {
             this.setState({
@@ -75,7 +73,6 @@ export default class StepTwo extends React.Component {
         if (this.props.showNewPasswordComponent) {
             console.log('i don\'t know what next step is ?')
         } else {
-            // location.hash = '#stepthree'
             this.props.userSignup()
         }
     }
