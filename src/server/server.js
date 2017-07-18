@@ -39,6 +39,7 @@ if (process.env.NODE_ENV === 'development' || __DEV__ ) {
 	}));
 }
 
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 app.use('/actions/user/sms', smsCodeRouter);
 app.use('/actions/user/login', loginRouter);

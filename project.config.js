@@ -2,11 +2,14 @@ module.exports = {
 	// baseUrl: 'http://beegree.cc',
 	// devBaseUrl: 'http://dev.beegree.cc',
 	baseUrl: 'http://beegree.cc',
-	devBaseUrl: 'http://192.168.12.127:8080',
+	devBaseUrl: 'http://60.205.216.164',
 
 	wechatAppID: '',
 	wechatAppSecret: '',
 	weChatAuthorizationUrl: '',
 
-	appCode: '2434391486e746138d67d704f1942a12'
+	// 阿里云市场  -- 身份认证
+	appCode: '2434391486e746138d67d704f1942a12',
+	//smsSDK
+	smsAPPKey: '1f3ae60888200'
 }

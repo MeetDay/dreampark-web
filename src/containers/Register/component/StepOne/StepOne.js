@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { message } from 'antd'
+import { getSMSCodeAccordingTo } from '../../module/register'
 import { LoginButton, Phone, Password } from '../../../../components'
-import { legalPhoneNumber } from '../../../../utils/regex'
+import { legalPhoneNumber, clearWhiteSpaceOf } from '../../../../utils/regex'
 
 export default class StepOne extends React.Component {
     static propTypes = {
@@ -10,6 +11,7 @@ export default class StepOne extends React.Component {
         password: PropTypes.string,
         onPhonenNmberChange: PropTypes.func,
         onPasswordChange: PropTypes.func,
+        getSMSCode: PropTypes.func
     };
 
     constructor() {
@@ -27,7 +29,8 @@ export default class StepOne extends React.Component {
     _handleClickNextStep(e) {
         e.preventDefault();
         if (!legalPhoneNumber(this.props.phonenumber))
-            return message.error('请输入正确的手机号...')
+            return message.warn('请输入正确的手机号...')
+        this.props.getSMSCode(clearWhiteSpaceOf(this.props.phonenumber))
         location.hash = '#steptwo';
     }
 

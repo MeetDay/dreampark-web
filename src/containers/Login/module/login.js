@@ -19,16 +19,20 @@ const actionhandlers = {
     [`${LOGIN}_FULFILLED`]: (state, action) => ({ ...state, userLoading: false, userLoaded: true, user: action.payload, authHeaders: generatorAuthHeadersForUser(action.payload) }),
     [`${LOGIN}_REJECTED`]: (state, action) => ({ ...state, userLoading: false, userLoaded: true, userLoginError: action.payload }),
 
-    [`${SIGNUP}_PENDING`]: (state, action) => ({...state, userLoading: true, userLoaded: false }),
-    [`${SIGNUP}_FULFILLED`]: (state, action) => ({ ...state, userLoading: false, userLoaded: true, user: action.payload, authHeaders: generatorAuthHeadersForUser(action.payload) }),
-    [`${SIGNUP}_REJECTED`]: (state, action) => ({ ...state, userLoading: false, userLoaded: true, userRegisterError: action.payload }),
+    [`${SIGNUP}_PENDING`]: (state, action) => ({...state, signupLoading: true, signupLoaded: false }),
+    [`${SIGNUP}_FULFILLED`]: (state, action) => ({ ...state, signupLoading: false, signupLoaded: true, signUser: action.payload }),
+    [`${SIGNUP}_REJECTED`]: (state, action) => ({ ...state, signupLoading: false, signupLoaded: false, userSignupError: action.payload }),
 };
 
 const initialState = {
     userLoading: false,
     userLoaded: false,
     userLoginError: null,
-    userRegisterError: null,
+
+    signupLoading: false,
+    signupLoaded: false,
+    userSignupError: null,
+    signUser: null,
     user: null,
     authHeaders: null
 };
@@ -47,7 +51,7 @@ export default function login(state=initialState, action) {
 export function userLogin(username, password) {
     const data = {
         username,
-        password: sha256(password).toUpperCase(),
+        password: sha256(password),
         timestamp: Math.floor(Date.now() / 1000)
     }
     return {

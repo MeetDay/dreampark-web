@@ -2,17 +2,22 @@ import React from 'react'
 import sha256 from 'js-sha256'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { message } from 'antd'
 import { StepOne, StepTwo, StepThree, StepFour } from '../component'
 import { Navbar } from '../../Login/component'
 import { userSignup } from '../../Login/module/login'
-import { comfirmUserInfo } from '../module/register'
+import { comfirmUserInfo, getSMSCodeAccordingTo } from '../module/register'
 import { clearWhiteSpaceOf } from '../../../utils/regex'
 
 @connect(
     state => ({
+        signUser: state.login.signUser,
+        userSignupError: state.login.userSignupError,
+
+        smsCodeError: state.register.smsCodeError,
         idcardInfo: state.register.idcardInfo
     }),
-    dispatch => bindActionCreators({ userSignup, comfirmUserInfo }, dispatch)
+    dispatch => bindActionCreators({ userSignup, getSMSCodeAccordingTo, comfirmUserInfo }, dispatch)
 )
 
 export default class Register extends React.Component {
@@ -25,7 +30,7 @@ export default class Register extends React.Component {
         this.onCardNumberChange = (e) => this._onCardNumberChange(e)
         this.onClubChange = (e) => this._onClubChange(e)
         this.onProfessionChange = (e) => this._onProfessionChange(e)
-        this.userSignup = (e) => this._userSignup(e)
+        this.userSignup = () => this._userSignup()
 
         this.state = {
             phonenumber: '',
@@ -39,16 +44,12 @@ export default class Register extends React.Component {
     }
 
     // 注册
-    _userSignup(e) {
-        e.preventDefault()
+    _userSignup() {
         this.props.userSignup({
-            username: this.state.username,
-            password: sha256(this.state.password).toUpperCase(),
-            mobile: clearWhiteSpaceOf(this.state.phonenumber),
-            identity_card: clearWhiteSpaceOf(this.state.cardno),
-            club: this.state.club,
-            birthday: this.props.idcardInfo.data.birthday,
-            trade: this.state.profession
+            phone: clearWhiteSpaceOf(this.state.phonenumber),
+            password: sha256(this.state.password),
+            zone: 86,
+            code: clearWhiteSpaceOf(this.state.code)
         })
     }
 
@@ -62,7 +63,8 @@ export default class Register extends React.Component {
     }
     _onPasswordChange(e) {
         e.preventDefault();
-        this.setState({ password: e.target.value });
+        const password = e.target.value
+        this.setState({ password: password })
     }
 
     /**
@@ -109,6 +111,7 @@ export default class Register extends React.Component {
                 password={this.state.password}
                 onPhonenNmberChange={this.onPhonenNmberChange}
                 onPasswordChange={this.onPasswordChange}
+                getSMSCode={this.props.getSMSCodeAccordingTo}
             />
         );
         if (this.props.location.hash === '#steptwo') {
@@ -117,6 +120,12 @@ export default class Register extends React.Component {
                     code={this.state.code}
                     phonenumber={this.state.phonenumber}
                     onSMSCodeChange={this.onSMSCodeChange}
+                    getSMSCode={this.props.getSMSCodeAccordingTo}
+                    userSignup={this.userSignup}
+
+                    smsCodeError={this.props.smsCodeError}
+                    signUser={this.props.signUser}
+                    userSignupError={this.props.userSignupError}
                 />
             )
         } else if (this.props.location.hash === '#stepthree') {

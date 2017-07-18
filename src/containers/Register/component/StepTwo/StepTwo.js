@@ -12,7 +12,13 @@ export default class StepTwo extends React.Component {
         phonenumber: PropTypes.string,
         showNewPasswordComponent: PropTypes.bool,
         onSMSCodeChange: PropTypes.func,
-        onPasswordChange: PropTypes.func
+        onPasswordChange: PropTypes.func,
+        getSMSCode: PropTypes.func,
+        userSignup: PropTypes.func,
+
+        smsCodeError:PropTypes.func,
+        signUser: PropTypes.object,
+        userSignupError: PropTypes.object
     }
     static defaultProps = {
         showNewPasswordComponent: false
@@ -28,9 +34,32 @@ export default class StepTwo extends React.Component {
         }
     }
 
+    componentDidMount() {
+        if (!this.props.phonenumber || this.props.phonenumber.length <= 0)
+            location.hash = ''
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { smsCodeError, signUser, userSignupError } = nextProps
+        if (smsCodeError && smsCodeError !== this.props.smsCodeError) {
+            setTimeout(() => {
+                message.error(smsCodeError.error)
+            }, 2000)
+        }
+
+        if (userSignupError && userSignupError !== this.props.userSignupError) {
+            console.log(userSignupError)
+        }
+
+        if (signUser && signUser !== this.props.signUser) {
+            location.hash = '#stepthree'
+        }
+    }
+
     _handleClickRegainCode(e) {
         e.preventDefault()
         if (this.state.counterDisabled) return
+        this.props.getSMSCode()
 
         const updateCounter = (counter) => {
             this.setState({
@@ -46,7 +75,8 @@ export default class StepTwo extends React.Component {
         if (this.props.showNewPasswordComponent) {
             console.log('i don\'t know what next step is ?')
         } else {
-            location.hash = '#stepthree'
+            // location.hash = '#stepthree'
+            this.props.userSignup()
         }
     }
 

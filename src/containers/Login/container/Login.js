@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { push } from 'react-router-redux'
+import { message } from 'antd'
 import { Launching, Loging, ForgotPassword } from '../component'
 import { StepTwo as SMSCode } from '../../Register/component'
 import Navbar from '../component/Navbar/Navbar'
@@ -38,7 +39,8 @@ export default class Login extends React.Component {
 
     _onPasswordChange(e) {
         e.preventDefault()
-        this.setState({ password: e.target.value })
+        const password = e.target.value
+        this.setState({ password: password })
     }
 
     _onSMSCodeChange(e) {
@@ -52,7 +54,7 @@ export default class Login extends React.Component {
         if (legalPhoneNumber(this.state.phonenumber) && this.state.password.length >= 8) {
             this.props.userLogin(clearWhiteSpaceOf(this.state.phonenumber), this.state.password)
         } else {
-            window.alert('用户名或密码错误...')
+            message.error('用户名或密码错误...')
         }
     }
 
