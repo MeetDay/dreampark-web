@@ -2,18 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { asyncConnect } from 'redux-async-connect'
+import Cookies from 'universal-cookie'
 import { Navbar as NavigationBar } from '../../../components'
+import { loadCookie, isCookieLoaded } from '../../Login/module/login'
 
 @asyncConnect([{
 	deferred: true,
-	promise: (params, store, helpers) => {
-
+	promise: ({ params, store:{ dispatch, getState }, helpers }) => {
+		if (!helpers.serverSide && !isCookieLoaded(getState())) {
+			return dispatch(loadCookie())
+		}
 	}
 }])
 
 @connect(
 	state => ({
-
+		user: state.login.user
 	})
 )
 
@@ -28,6 +32,9 @@ export default class App extends React.Component {
 
 	componentDidMount() {
 		console.log(sessionStorage.getItem('urlWhenUserLeave'))
+		// this.props.dispatch(loadCookie())
+		// const cookies = new Cookies()
+		// cookies.set('dreampark_user_cookie', { userid: 123, timestamp: 12312312, access_token: 123123123 })
 	}
 
 	componentWillReceiveProps() {

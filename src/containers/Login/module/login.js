@@ -1,11 +1,20 @@
 import sha256 from 'js-sha256'
+import Cookies from 'universal-cookie'
+import * as Constant from '../../../utils/constant'
 
 const LOGIN = 'redux/login/LOGIN'
 const SIGNUP = 'redux/login/SIGNUP'
 const UPDATE_USER = 'redux/login/UPDATE_USER'
 const WECHATLOGIN = 'redux/login/WECHATLOGIN'
+const LOADCOOKIESYNC = 'redux/login/LOADCOOKIESYNC'
+const LOADCOOKIE = 'redux/login/LOADCOOKIE'
+
+export function isEmptyObject(obj) {
+    return obj === undefined || Object.keys(obj).length === 0
+}
 
 export function generatorAuthHeadersForUser(user) {
+    if (isEmptyObject(user)) return
     return {
         'X-Tella-Request-AppVersion': '1.0.0',
         'X-Tella-Request-Provider': 'web',
@@ -27,7 +36,9 @@ const actionhandlers = {
 
     [`${UPDATE_USER}_PENDING`]: (state, action) => ({ ...state, updateUserLoading: true, updateUserLoaded: false }),
     [`${UPDATE_USER}_FULFILLED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: true, user: action.payload }),
-    [`${UPDATE_USER}_REJECTED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: false, updateUserError: action.payload })
+    [`${UPDATE_USER}_REJECTED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: false, updateUserError: action.payload }),
+
+    [`${LOADCOOKIESYNC}`]: (state, action) => ({ ...state, user: action.cookie, authHeaders: generatorAuthHeadersForUser(action.cookie) })
 };
 
 const initialState = {
@@ -100,14 +111,18 @@ export function wechatLogin(code) {
 /**
  *  cookie
  */
-export function loadCookieSync() {
-
+export function loadCookieSync(cookie) {
+    return {
+        type: LOADCOOKIESYNC,
+        cookie
+    }
 }
 
 export function loadCookie() {
-
+    const cookies = new Cookies()
+    return loadCookieSync(cookies.get(Constant.USER_COOKIE))    
 }
 
 export function isCookieLoaded(globalState) {
-    return globalState.login && globalState.cookieLoaded
+    return globalState.login && globalState.login.user
 }

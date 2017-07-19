@@ -4,6 +4,8 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 var compression = require('compression');
 var favicon = require('serve-favicon');
+var cookiesMiddleware = require('universal-cookie-express');
+
 var webpack = require('webpack');
 var webpackConfig = require('../../webpack/webpack.config.dev.js');
 var serverRouterMiddleware = require('./middleware/serverRouterMiddleware');
@@ -39,7 +41,8 @@ if (process.env.NODE_ENV === 'development' || __DEV__ ) {
 	}));
 }
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookiesMiddleware());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/actions/user/sms', smsCodeRouter);
 app.use('/actions/user/login', loginRouter);
