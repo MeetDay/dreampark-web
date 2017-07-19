@@ -24,17 +24,11 @@ import { loadCookie, isCookieLoaded } from '../../Login/module/login'
 export default class App extends React.Component {
 
 	componentWillMount() {
-		if (typeof window !== undefined) {
-			console.log(this.props)
-			sessionStorage.setItem('urlWhenUserLeave', location.pathname)
-		}
+		
 	}
 
 	componentDidMount() {
-		console.log(sessionStorage.getItem('urlWhenUserLeave'))
-		// this.props.dispatch(loadCookie())
-		// const cookies = new Cookies()
-		// cookies.set('dreampark_user_cookie', { userid: 123, timestamp: 12312312, access_token: 123123123 })
+
 	}
 
 	componentWillReceiveProps() {
