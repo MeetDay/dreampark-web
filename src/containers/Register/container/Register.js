@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { message } from 'antd'
 import { StepOne, StepTwo, StepThree, StepFour } from '../component'
 import { Navbar } from '../../Login/component'
-import { userSignup } from '../../Login/module/login'
+import { userSignup, updateUserInfo } from '../../Login/module/login'
 import { comfirmUserInfo, getSMSCodeAccordingTo } from '../module/register'
 import { clearWhiteSpaceOf } from '../../../utils/regex'
 
@@ -17,7 +17,7 @@ import { clearWhiteSpaceOf } from '../../../utils/regex'
         smsCodeError: state.register.smsCodeError,
         idcardInfo: state.register.idcardInfo
     }),
-    dispatch => bindActionCreators({ userSignup, getSMSCodeAccordingTo, comfirmUserInfo }, dispatch)
+    dispatch => bindActionCreators({ userSignup, updateUserInfo, getSMSCodeAccordingTo, comfirmUserInfo }, dispatch)
 )
 
 export default class Register extends React.Component {
@@ -31,6 +31,7 @@ export default class Register extends React.Component {
         this.onClubChange = (e) => this._onClubChange(e)
         this.onProfessionChange = (e) => this._onProfessionChange(e)
         this.userSignup = () => this._userSignup()
+        this.updateUserInfo = () => this._updateUserInfo()
 
         this.state = {
             phonenumber: '',
@@ -50,6 +51,17 @@ export default class Register extends React.Component {
             password: sha256(this.state.password),
             zone: 86,
             code: clearWhiteSpaceOf(this.state.code)
+        })
+    }
+
+    // 更新用户信息
+    _updateUserInfo() {
+        this.props.updateUserInfo({
+            username: this.state.username,
+            identity_card: this.state.cardno,
+            birthday: this.props.idcardInfo.data.birthday,
+            club_name: this.state.club,
+            trade: this.state.profession
         })
     }
 
@@ -146,7 +158,7 @@ export default class Register extends React.Component {
                     profession={this.state.profession}
                     onClubChange={this.onClubChange}
                     onProfessionChange={this.onProfessionChange}
-                    userSignup={this.userSignup}
+                    updateUserInfo={this.updateUserInfo}
                 />
             )
         }

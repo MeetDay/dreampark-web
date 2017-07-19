@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { message } from 'antd'
 import { LoginButton, Phone } from '../../../../components'
-import { illegalCardNunber, clearWhiteSpaceOf } from '../../../../utils/regex'
+import { illegalCardNumber, clearWhiteSpaceOf } from '../../../../utils/regex'
+
+const IDCARD_WARNING_MESSAGE = '请输入正确的姓名和密码!'
 
 export default class StepThree extends React.Component {
     static propTypes = {
@@ -19,15 +21,18 @@ export default class StepThree extends React.Component {
     }
 
     _handleClickNextStep(e) {
-        e.preventDefault();
-        if (!illegalCardNunber(this.props.cardno))
-            return message.error('请输入正确的身份证号码...')
-        this.props.comfirmUserInfo(this.props.username, clearWhiteSpaceOf(this.props.cardno))
+        e.preventDefault()
+        if (this.props.username.length > 0 && illegalCardNumber(this.props.cardno)) {
+            this.props.comfirmUserInfo(this.props.username, clearWhiteSpaceOf(this.props.cardno))
+        } else {
+            message.warning(IDCARD_WARNING_MESSAGE)
+        }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.idcardInfo !== this.props.idcardInfo) {
-            if (nextProps.idcardInfo && nextProps.idcardInfo.resp.code === 0)
+        const { idcardInfo } = nextProps
+        if (idcardInfo !== this.props.idcardInfo) {
+            if (idcardInfo && idcardInfo.resp.code === 0)
                 location.hash = '#stepfour'
         }
     }

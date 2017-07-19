@@ -1,4 +1,5 @@
 import sha256 from 'js-sha256'
+
 const LOGIN = 'redux/login/LOGIN'
 const SIGNUP = 'redux/login/SIGNUP'
 const UPDATE_USER = 'redux/login/UPDATE_USER'
@@ -21,12 +22,12 @@ const actionhandlers = {
     [`${LOGIN}_REJECTED`]: (state, action) => ({ ...state, userLoading: false, userLoaded: true, userLoginError: action.payload }),
 
     [`${SIGNUP}_PENDING`]: (state, action) => ({...state, signupLoading: true, signupLoaded: false }),
-    [`${SIGNUP}_FULFILLED`]: (state, action) => ({ ...state, signupLoading: false, signupLoaded: true, signUser: action.payload, authHeaders: generatorAuthHeadersForUser(action.payload) }),
+    [`${SIGNUP}_FULFILLED`]: (state, action) => ({ ...state, signupLoading: false, signupLoaded: true, user: action.payload, authHeaders: generatorAuthHeadersForUser(action.payload) }),
     [`${SIGNUP}_REJECTED`]: (state, action) => ({ ...state, signupLoading: false, signupLoaded: false, userSignupError: action.payload }),
 
     [`${UPDATE_USER}_PENDING`]: (state, action) => ({ ...state, updateUserLoading: true, updateUserLoaded: false }),
-    [`${UPDATE_USER}_FULFILLED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: true }),
-    [`${UPDATE_USER}_REJECTED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: false })
+    [`${UPDATE_USER}_FULFILLED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: true, user: action.payload }),
+    [`${UPDATE_USER}_REJECTED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: false, updateUserError: action.payload })
 };
 
 const initialState = {
@@ -37,11 +38,9 @@ const initialState = {
     signupLoading: false,
     signupLoaded: false,
     userSignupError: null,
-    signUser: null,
 
     updateUserLoading: false,
     updateUserLoaded: false,
-    updateUser: null,
     updateUserError: null,
 
     user: null,
@@ -56,9 +55,7 @@ export default function login(state=initialState, action) {
     return handler ? handler(state, action) : state;
 }
 
-/**
- *  user login
- */
+// user login
 export function userLogin(username, password) {
     const data = {
         username,
@@ -71,6 +68,7 @@ export function userLogin(username, password) {
     }
 }
 
+// user signup
 export function userSignup(data) {
     return {
         type: SIGNUP,
@@ -78,6 +76,7 @@ export function userSignup(data) {
     }
 }
 
+// user update
 export function updateUserInfo(data) {
     return (dispatch, getState) => {
         const { user, authHeaders } = getState().login
@@ -96,4 +95,19 @@ export function wechatLogin(code) {
         type: WECHATLOGIN,
         payload: (client) => client.get('/login/wechat', { params: { code }, subpath: '/actions/user' })
     }
+}
+
+/**
+ *  cookie
+ */
+export function loadCookieSync() {
+
+}
+
+export function loadCookie() {
+
+}
+
+export function isCookieLoaded(globalState) {
+    return globalState.login && globalState.cookieLoaded
 }

@@ -37,6 +37,6 @@ export function legalSMSCode(code) {
     return /^\d{4}$/g.test(code)
 }
 
-export function illegalCardNunber(cardno) {
+export function illegalCardNumber(cardno) {
     return /(^\d{15}$)|(^\d{17}([0-9]|X)$)/gi.test(clearWhiteSpaceOf(cardno))
 }

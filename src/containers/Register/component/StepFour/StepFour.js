@@ -6,22 +6,18 @@ export default class StepFour extends React.Component {
     static propTypes = {
         club: PropTypes.string,
         profession: PropTypes.string,
-        onClubChange: PropTypes.func.isRequired,
-        onProfessionChange: PropTypes.func.isRequired,
-        userSignup: PropTypes.func
+        onClubChange: PropTypes.func,
+        onProfessionChange: PropTypes.func,
+        updateUserInfo: PropTypes.func
     }
-    constructor() {
-        super();
-        this.skip = (e) => this._skip(e)
+    constructor(props) {
+        super(props)
         this.handleClickNextStep = (e) => this._handleClickNextStep(e)
-    }
-
-    _skip(e) {
-        e.preventDefault()
     }
 
     _handleClickNextStep(e) {
         e.preventDefault()
+        this.props.updateUserInfo()
     }
 
     render() {
@@ -45,7 +41,7 @@ export default class StepFour extends React.Component {
                             textColor="white"
                             onClick={this.props.userSignup}
                         /> */}
-                    <LoginButton title="下一步" onClick={this.props.userSignup} />
+                        <LoginButton title="下一步" onClick={this.handleClickNextStep} />
                     </div>
                 </div>
             </div>
