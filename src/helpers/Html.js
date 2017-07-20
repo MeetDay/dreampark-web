@@ -17,23 +17,14 @@ export default class Html extends React.Component {
 		return (
 			<html lang="en-US">
 				<head>
-					<title>React</title>
+					<title>梦想公园</title>
 		            <meta name="msapplication-TileColor" content="#ffffff" />
 		            <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
 		            <meta name="theme-color" content="#ffffff" />
 		            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 					{
 						Object.keys(assets.styles)
-							.map((style) => (
-								<link
-									key={style}
-									type="text/css"
-									rel="stylesheet"
-									media="screen, projection"
-									href={assets.styles[style]}
-									charSet="utf-8"
-								/>
-							))
+							.map((style) => (<link key={style} type="text/css" rel="stylesheet" media="screen, projection" href={assets.styles[style]} charSet="utf-8" />))
 					}
 		        </head>
 	            <body>
@@ -42,14 +33,7 @@ export default class Html extends React.Component {
 					{
 						Object.keys(assets.javascript)
 							.reverse()
-							.map((js) => (
-								<script
-									type="text/javascript"
-									key={js}
-									src={assets.javascript[js]}
-									charSet="utf-8"
-								/>
-							))
+							.map((js) => (<script type="text/javascript" key={js} src={assets.javascript[js]} charSet="utf-8" />))
 					}
 	            </body>
 			</html>
