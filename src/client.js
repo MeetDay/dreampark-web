@@ -13,11 +13,10 @@ import routes from './routes';
 const client = new APIClient();
 const store = createStore(history, client, window.__redux_data__);
 const history = syncHistoryWithStore(browserHistory, store);
-const helpers = { client, serverSide: false }
 
 const userReduxConnect = () => ({
 	renderRouterContext: (child, props) => (
-		<ReduxAsyncConnect {...props} helpers={ helpers }>
+		<ReduxAsyncConnect {...props} helpers={{ client, serverSide: false }}>
 			{ child }
 		</ReduxAsyncConnect>
 	)
