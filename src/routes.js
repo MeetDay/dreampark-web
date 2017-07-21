@@ -10,13 +10,26 @@ import Login, { WeChatLoginTransition } from './containers/Login';
 import Register from './containers/Register';
 import TermsOfService from './containers/TermsOfService';
 import NotFound from './containers/NotFound';
+import projectConfig from '../project.config';
+
+function isEmptyObject(obj) {
+	return obj === undefined || obj === null || Object.keys(obj).length === 0
+}
 
 const routes = (store) => {
+	const requireLogin = (nextState, replaceState, callback) => {
+		const { user } = store.getState().login
+		if (isEmptyObject(user)) {
+			replaceState(projectConfig.weChatAuthorizationUrl)
+		}
+		callback()
+	}
+
 	return (
 		<Route path="/" component={App}>
 			<IndexRoute component={Home} />
 			<Route path="home" component={Home} />
-			<Route path="tickets" component={Tickets} />
+			<Route path="tickets" component={Tickets} onEnter={requireLogin} />
 			<Route path="buytickets" component={BuyTicket} />
 			<Route path="buytickets/search" component={SearchTicket} />
 			<Route path="details/:id" component={Details} />

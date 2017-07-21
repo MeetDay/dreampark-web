@@ -1,6 +1,7 @@
 import superagent from 'superagent'
 import Express from 'express'
 var loginRouter = Express.Router()
+import APIClient from '../../helpers/APIClient'
 import projectConfig from '../../../project.config'
 
 loginRouter.get('/idcard', (req, res) => {
@@ -23,7 +24,7 @@ loginRouter.get('/wechat', (req, res) => {
         getWechatToken(code)
             .then((tokenInfo) => getWechatUserInfo(tokenInfo))
             .then((userInfo) => { res.json({ code: 10000, message: 'success', data: userInfo}) })
-            .catch((err) => { res.json(Object.assign({ code: 10001 }, err)) })
+            .catch((err) => { res.status(400).json(Object.assign({ code: 10001 }, err)) })
     } else {
         res.status(400).json({ code: 10001, message: '缺少参数'})
     }
@@ -57,6 +58,26 @@ function getWechatUserInfo(tokenInfo) {
                 } else {
                     resolve(body)
                 }
+            })
+    })
+}
+
+function getUserInfo(weChatUserInfo) {
+    const data = {
+        nickname: weChatUserInfo.nickname,
+        service: 'wechat',
+        union_id: weChatUserInfo.unionid,
+        avatar_url: weChatUserInfo.headimgurl
+    }
+    return new Promise((resolve, reject) => {
+        let baseUrl = __DEV__ ? projectConfig.devBaseUrl : projectConfig.baseUrl
+        const linkAccountUrl = baseUrl + '/api/v1/users/link_account'
+        superagent.post(linkAccountUrl)
+            .send(data)
+            .end((err, res) => {
+                const body = JSON.parse(res.text)
+                if (err || Object.prototype.hasOwnProperty.call(body, 'code')) resolve({ weChatUserInfo, userError: body })
+                resolve({ weChatUserInfo, userInfo: body })
             })
     })
 }

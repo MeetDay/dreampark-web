@@ -39,7 +39,7 @@ export function isUsedTicketsLoaded(globalState) {
 
 export function getUnusedTikects() {
     return (dispatch, getState) => {
-        const authHeaders = getState().login
+        const { authHeaders } = getState().login
         dispatch({
             type: UNUSED_TICKETS,
             payload: (client) => client.get('/unuse_ticket', {
@@ -51,7 +51,7 @@ export function getUnusedTikects() {
 
 export function getUsedTickts() {
     return (dispatch, getState) => {
-        const authHeaders = getState().login
+        const { authHeaders } = getState().login
         dispatch({
             type: UNUSED_TICKETS,
             payload: (client) => client.get('/used_ticket', {
