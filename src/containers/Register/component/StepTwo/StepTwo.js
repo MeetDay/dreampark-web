@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import superagent from 'superagent'
 import { message } from 'antd'
 import { LoginButton, Phone, Password } from '../../../../components'
-import countDown from '../../../../Utils/countDown'
+import countDown from '../../../../utils/countDown'
 import { legalSMSCode, formatPhoneNumber } from '../../../../utils/regex'
 
 export default class StepTwo extends React.Component {
