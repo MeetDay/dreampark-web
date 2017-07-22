@@ -1,5 +1,6 @@
 import React from 'react'
 import { asyncConnect } from 'redux-async-connect'
+import { connect } from 'react-redux'
 import { isWechatInfoLoaded, wechatLogin } from '../../Login/module/login'
 
 @asyncConnect([{
@@ -11,7 +12,19 @@ import { isWechatInfoLoaded, wechatLogin } from '../../Login/module/login'
     }
 }])
 
+@connect(
+    state => ({
+        user: state.login.user,
+        weChatInfo: state.login.weChatInfo
+    })
+)
+
 export default class WeChatLoginTransition extends React.Component {
+
+    componentWillReceiveProps(nextProps) {
+        const { user, weChatInfo } = nextProps
+        
+    }
 
     render() {
         return (

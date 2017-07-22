@@ -4,10 +4,10 @@ var loginRouter = Express.Router()
 import APIClient from '../../helpers/APIClient'
 import projectConfig from '../../../project.config'
 
-loginRouter.post('/idcard', (req, res) => {
+loginRouter.get('/idcard', (req, res) => {
     superagent.get('http://idcard.market.alicloudapi.com/lianzhuo/idcard')
         .set('Authorization', `APPCODE ${projectConfig.appCode}`)
-        .query(req.body)
+        .query(req.query)
         .end((err, { body } = {}) => {
             if (err) {
                 res.status(400).send(body || err)
