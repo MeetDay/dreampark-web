@@ -16,12 +16,12 @@ export function isEmptyObject(obj) {
 export function generatorAuthHeadersForUser(user) {
     if (isEmptyObject(user)) return
     return {
-        'X-Tella-Request-AppVersion': '1.0.0',
-        'X-Tella-Request-Provider': 'web',
-        'X-Tella-Request-Timestamp': user.token_timestamp,
-        'X-Tella-Request-Token': user.access_token,
-        'X-Tella-Request-Userid': user.userid,
-        'X-Tella-Request-Device': 10
+        ['X-Tella-Request-AppVersion']: '1.0.0',
+        ['X-Tella-Request-Provider']: 'web',
+        ['X-Tella-Request-Timestamp']: user.token_timestamp,
+        ['X-Tella-Request-Token']: user.access_token,
+        ['X-Tella-Request-Userid']: user.userid,
+        ['X-Tella-Request-Device']: 10
     }
 }
 

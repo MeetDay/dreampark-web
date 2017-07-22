@@ -2,8 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Carousel } from 'antd';
+import { asyncConnect } from 'redux-async-connect';
+import { connect } from 'react-redux';
 import { CoverImage, TitleElement, TextElement, ImageElement, BigImageElement } from '../../../components';
 import { Navbar, ToolBar, Recommend, BuyTicketNow, BuyParkingCoupon } from '../component';
+import { isHotDetailLoaded, getHotDetailBy } from '../module/hotdetail';
+import { convertElementsToComponet } from '../../../utils/elements';
+
+@asyncConnect([{
+    deferred: false,
+    promise: ({ params, store: { dispatch, getState }, helpers }) => {
+        if (!isHotDetailLoaded(getState())) {
+            return dispatch(getHotDetailBy(params.id))
+        }
+    }
+}])
+
+@connect(
+    state => ({ hotDetail: state.hotdetail.hotDetail })
+)
 
 export default class HotDetail extends React.Component {
     constructor() {
@@ -50,7 +67,12 @@ export default class HotDetail extends React.Component {
             overflow: this.state.contentWrapOverflow
         };
         const viewMoreWrapStyle = { display: this.state.viewMoreWrapDisplay };
-        const imageUrl = "http://o9vi0jo2t.bkt.clouddn.com/client_uploads/images/26/DD76A2DF7CC999FBCDCC9FB28AA4F64E";
+
+        if (!this.props.hotDetail) return null;
+
+        // 转换数据
+        const { title, content, attention, place, location, time_info } = this.props.hotDetail;
+
         return (
             <div className={styles.detail}>
                 <Navbar />
@@ -65,14 +87,9 @@ export default class HotDetail extends React.Component {
                 </div>
                 <div className={styles.container}>
                     <div className={styles.item}>
-                        <div className={styles.title}>梦想车展</div>
+                        <div className={styles.title}>{ title }</div>
                         <div style={contentWrapStyle} className={styles.contentWrap} >
-                            <TextElement />
-                            <TextElement />
-                            <ImageElement />
-                            <TextElement />
-                            <BigImageElement />
-                            <TextElement />
+                            { convertElementsToComponet(content.elements) }
                         </div>
                         <div style={viewMoreWrapStyle} className={styles.viewMoreWrap} onClick={this.handleClickViewMore}>
                             <div className={styles.gradient}/>
@@ -84,15 +101,15 @@ export default class HotDetail extends React.Component {
                     </div>
                     <div className={styles.item}>
                         <div className={classNames(styles.tip)}>活动时间</div>
-                        <div className={styles.activityTime}>10月1日下午3:30 - 10月1日下午4:30</div>
+                        <div className={styles.activityTime}>{time_info}</div>
                     </div>
                     <div className={styles.item}>
                         <div className={classNames(styles.tip)}>场馆</div>
-                        <div className={styles.activityLocation}>梦想车展中央广场</div>
+                        <div className={styles.activityLocation}>{location}</div>
                     </div>
                     <div className={styles.item}>
                         <div className={classNames(styles.tip)}>注意事项</div>
-                        <div className={styles.attention}>请勿翻越护栏，文明牌照。未满18岁的儿童需成人陪同参观。</div>
+                        <div className={styles.attention}>{attention}</div>
                     </div>
                     <div className={styles.item}>
                         <div className={classNames(styles.tip)}>相关推荐</div>
