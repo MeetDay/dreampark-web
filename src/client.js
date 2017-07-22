@@ -16,7 +16,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 const userReduxConnect = () => ({
 	renderRouterContext: (child, props) => (
-		<ReduxAsyncConnect {...props} helpers={{ client, serverSide: false }}>
+		<ReduxAsyncConnect {...props} helpers={{ client, serverSide: false }}  filter={(item) => item.deferred}>
 			{ child }
 		</ReduxAsyncConnect>
 	)

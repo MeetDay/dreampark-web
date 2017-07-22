@@ -21,7 +21,7 @@ export default function hotdetail(state=initialState, action) {
 export function getHotDetailBy(id) {
     return (dispatch, getState) => {
         const { authHeaders } = getState().login
-        dispatch({
+        return dispatch({
             type: HOTDETAIL,
             payload: (client) => client.get(`/pois/${id}`, { headers: authHeaders, subpath: '/fbpark/v1' })
         })
@@ -29,6 +29,5 @@ export function getHotDetailBy(id) {
 }
 
 export function isHotDetailLoaded(globalState) {
-    console.log(globalState.hotdetail)
     return globalState.hotdetail && globalState.hotdetail.hotDetail
 }

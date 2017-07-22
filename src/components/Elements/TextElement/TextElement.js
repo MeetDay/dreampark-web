@@ -10,7 +10,7 @@ export default class TextElement extends React.Component {
         const styles = require('../Element.scss');
         return (
             <div className={classNames(styles.text)}>
-                <pre>{this.props.text}</pre>
+                {this.props.text}
             </div>
         );
     }

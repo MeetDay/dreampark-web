@@ -10,7 +10,7 @@ import { isHotDetailLoaded, getHotDetailBy } from '../module/hotdetail';
 import { convertElementsToComponet } from '../../../utils/elements';
 
 @asyncConnect([{
-    deferred: false,
+    deferred: true,
     promise: ({ params, store: { dispatch, getState }, helpers }) => {
         if (!isHotDetailLoaded(getState())) {
             return dispatch(getHotDetailBy(params.id))
@@ -61,28 +61,22 @@ export default class HotDetail extends React.Component {
     }
 
     render() {
+        if (!this.props.hotDetail) return null;
         const styles = require('./HotDetail.scss');
         const contentWrapStyle = {
             maxHeight: this.state.contentWrapMaxHeight,
             overflow: this.state.contentWrapOverflow
         };
         const viewMoreWrapStyle = { display: this.state.viewMoreWrapDisplay };
-
-        if (!this.props.hotDetail) return null;
-
         // 转换数据
-        const { title, content, attention, place, location, time_info } = this.props.hotDetail;
+        const { title, elements, content, attention, place, location, time_info } = this.props.hotDetail;
 
         return (
             <div className={styles.detail}>
                 <Navbar />
                 <div className={styles.carousel}>
                     <Carousel autoplay>
-                        <div><CarouselCard /></div>
-                        <div><CarouselCard /></div>
-                        <div><CarouselCard /></div>
-                        <div><CarouselCard /></div>
-                        <div><CarouselCard /></div>
+                        { elements && elements.map(element => (<div key={element.id}><CarouselCard carousel={element} /></div>)) }
                     </Carousel>
                 </div>
                 <div className={styles.container}>
@@ -101,15 +95,15 @@ export default class HotDetail extends React.Component {
                     </div>
                     <div className={styles.item}>
                         <div className={classNames(styles.tip)}>活动时间</div>
-                        <div className={styles.activityTime}>{time_info}</div>
+                        <div className={classNames(styles.textOfWhiteSpaceDeal, styles.activityTime)}>{time_info}</div>
                     </div>
                     <div className={styles.item}>
                         <div className={classNames(styles.tip)}>场馆</div>
-                        <div className={styles.activityLocation}>{location}</div>
+                        <div className={styles.activityLocation}>{place}</div>
                     </div>
                     <div className={styles.item}>
                         <div className={classNames(styles.tip)}>注意事项</div>
-                        <div className={styles.attention}>{attention}</div>
+                        <div className={classNames(styles.textOfWhiteSpaceDeal, styles.attention)}>{attention}</div>
                     </div>
                     <div className={styles.item}>
                         <div className={classNames(styles.tip)}>相关推荐</div>
@@ -138,7 +132,7 @@ class CarouselCard extends React.Component {
     };
     render() {
         const styles = require('./HotDetail.scss');
-        const imageUrl = "http://o9vi0jo2t.bkt.clouddn.com/client_uploads/images/26/DD76A2DF7CC999FBCDCC9FB28AA4F64E";
+        const { content: { name: imageUrl } } = this.props.carousel;
         return (
             <a className={styles.carouselCard}>
                 <img src={imageUrl} alt="cover"/>

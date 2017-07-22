@@ -7,7 +7,7 @@ import { isTermLoaded, getUserTermsBy } from '../module/dreamparkTerms'
 import { convertElementToComponet } from '../../../helpers/ElementHelper'
 
 @asyncConnect([{
-    deferred: false,
+    deferred: true,
     promise: ({ params, store:{ dispatch, getState } }) => {
         const { serviceType } = params;
         if (!isTermLoaded(getState())) {
