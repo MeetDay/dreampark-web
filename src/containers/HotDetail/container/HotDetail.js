@@ -83,7 +83,7 @@ export default class HotDetail extends React.Component {
                     <div className={styles.item}>
                         <div className={styles.title}>{ title }</div>
                         <div style={contentWrapStyle} className={styles.contentWrap} >
-                            { convertElementsToComponet(content.elements) }
+                            { content && convertElementsToComponet(content.elements) }
                         </div>
                         <div style={viewMoreWrapStyle} className={styles.viewMoreWrap} onClick={this.handleClickViewMore}>
                             <div className={styles.gradient}/>
