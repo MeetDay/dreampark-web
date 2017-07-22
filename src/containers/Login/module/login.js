@@ -39,7 +39,7 @@ const actionhandlers = {
     [`${UPDATE_USER}_REJECTED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: false, updateUserError: action.payload }),
 
     [`${WECHATLOGIN}_PENDING`]: (state, action) => ({ ...state, weChatInfoLoading: true, weChatInfoLoaded: false }),
-    [`${WECHATLOGIN}_FULFILLED`]: (state, action) => ({ ...state, weChatInfoLoading: false, weChatInfoLoaded: true, weChatInfo: action.payload }),
+    [`${WECHATLOGIN}_FULFILLED`]: (state, action) => ({ ...state, weChatInfoLoading: false, weChatInfoLoaded: true, weChatInfo: action.payload.weChatUserInfo, weChatInfoError: action.payload.userError, user: action.payload.userInfo }),
     [`${WECHATLOGIN}_REJECTED`]: (state, action) => ({...state, weChatInfoLoading: false, weChatInfoLoaded: false, weChatInfoError: action.payload }),
 
     [`${LOADCOOKIESYNC}`]: (state, action) => ({ ...state, user: action.cookie, authHeaders: generatorAuthHeadersForUser(action.cookie) })

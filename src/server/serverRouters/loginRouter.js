@@ -4,10 +4,10 @@ var loginRouter = Express.Router()
 import APIClient from '../../helpers/APIClient'
 import projectConfig from '../../../project.config'
 
-loginRouter.get('/idcard', (req, res) => {
+loginRouter.post('/idcard', (req, res) => {
     superagent.get('http://idcard.market.alicloudapi.com/lianzhuo/idcard')
         .set('Authorization', `APPCODE ${projectConfig.appCode}`)
-        .query(req.query)
+        .query(req.body)
         .end((err, { body } = {}) => {
             if (err) {
                 res.status(400).send(body || err)
@@ -23,6 +23,7 @@ loginRouter.get('/wechat', (req, res) => {
         console.log('wechat code', code)
         getWechatToken(code)
             .then((tokenInfo) => getWechatUserInfo(tokenInfo))
+            .then((weChatUserInfo) => getUserInfo(weChatUserInfo))
             .then((userInfo) => { res.json({ code: 10000, message: 'success', data: userInfo}) })
             .catch((err) => { res.status(400).json(Object.assign({ code: 10001 }, err)) })
     } else {
@@ -64,10 +65,7 @@ function getWechatUserInfo(tokenInfo) {
 
 function getUserInfo(weChatUserInfo) {
     const data = {
-        nickname: weChatUserInfo.nickname,
-        service: 'wechat',
-        union_id: weChatUserInfo.unionid,
-        avatar_url: weChatUserInfo.headimgurl
+        union_id: weChatUserInfo.unionid
     }
     return new Promise((resolve, reject) => {
         let baseUrl = __DEV__ ? projectConfig.devBaseUrl : projectConfig.baseUrl
