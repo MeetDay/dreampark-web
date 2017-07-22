@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Carousel } from 'antd';
 import { asyncConnect } from 'redux-async-connect';
 import { connect } from 'react-redux';
-import { CoverImage, TitleElement, TextElement, ImageElement, BigImageElement } from '../../../components';
+import { TitleElement } from '../../../components';
 import { Navbar, ToolBar, Recommend, BuyTicketNow, BuyParkingCoupon } from '../component';
 import { isHotDetailLoaded, getHotDetailBy } from '../module/hotdetail';
 import { convertElementsToComponet } from '../../../utils/elements';
@@ -70,7 +70,6 @@ export default class HotDetail extends React.Component {
         const viewMoreWrapStyle = { display: this.state.viewMoreWrapDisplay };
         // 转换数据
         const { title, elements, content, attention, place, location, time_info } = this.props.hotDetail;
-
         return (
             <div className={styles.detail}>
                 <Navbar />

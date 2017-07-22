@@ -37,9 +37,18 @@ const actionHandlers = {
     },
     [`${SHOPPINGCART}_REJECTED`]: (state, action) => ({ ...state, shoppingcartLoading: false, shoppingcartLoaded: true, shoppingcartError: action.payload }),
 
-    [`${DELETE_SHOPPINGCART_GOODS}_PENDING`]: (state, action) => ({ ...state }),
-    [`${DELETE_SHOPPINGCART_GOODS}_FULFILLED`]: (state, action) => ({ ...state }),
-    [`${DELETE_SHOPPINGCART_GOODS}_REJECTED`]: (state, action) => ({ ...state })
+    [`${DELETE_SHOPPINGCART_GOODS}_PENDING`]: (state, action) => ({ ...state, deleteGoodsLoading: true, deleteGoodsLoaded:false }),
+    [`${DELETE_SHOPPINGCART_GOODS}_FULFILLED`]: (state, action) => {
+        const { id: goodsID } = action.payload
+        const newShoppingcarts = state.shoppingcarts.filter((goods) => goods.id !== goodsID)
+        return {
+            ...state,
+            shoppingcarts: [...newShoppingcarts],
+            deleteGoodsLoading: false,
+            deleteGoodsLoaded: true
+        }
+    },
+    [`${DELETE_SHOPPINGCART_GOODS}_REJECTED`]: (state, action) => ({ ...state, deleteGoodsLoading: false, deleteGoodsLoaded:false })
 }
 
 const initialState = {
@@ -50,7 +59,10 @@ const initialState = {
     checkedItems: [],
     hasMoreGoods: false,
     maxGoodsID: 0,
-    checkedItemsTotalPrice: 0
+    checkedItemsTotalPrice: 0,
+
+    deleteGoodsLoading: false,
+    deleteGoodsLoaded: false
 }
 
 export default function shoppingcart(state=initialState, action) {
@@ -64,7 +76,7 @@ export function getShoppingcart() {
         const { maxGoodsID } = getState().shoppingcart
         dispatch({
             type: SHOPPINGCART,
-            payload: (client) => client.get('/users/cart', {
+            payload: (client) => client.get('/cart', {
                 params: { max_id: maxGoodsID },
                 headers: authHeaders
             })
@@ -74,11 +86,11 @@ export function getShoppingcart() {
 
 export function deleteGoodsFromShoppingCart(goods) {
     return (dispatch, getState) => {
-        const authHeaders = getState().login
+        const { authHeaders } = getState().login
         dispatch({
             type: DELETE_SHOPPINGCART_GOODS,
-            payload: (client) => client.del(`/users/cart/${goods.id}`, {
-                header: authHeaders
+            payload: (client) => client.del(`/cart/${goods.id}`, {
+                headers: authHeaders
             })
         })
     }
