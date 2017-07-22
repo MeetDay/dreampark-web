@@ -34,7 +34,6 @@ const serverRouterMiddleware = () => (req, res, next) => {
 	    } else if (renderProps) {
 			global.navigator = {userAgent: req.headers['user-agent']};
 			loadOnServer({ ...renderProps, store, helpers: { client, serverSide: true }, filter: (item) => item.deferred }).then(() => {
-				console.log(store.getState().hotdetail)
 				const component = (
 		    		<Provider store={store} key="provider">
 		    			<ReduxAsyncConnect {...renderProps} />
