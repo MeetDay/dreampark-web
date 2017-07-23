@@ -13,7 +13,7 @@ const methods = ['get', 'post', 'put', 'del'];
 export default class APIClient {
 	constructor(req) {
 		methods.forEach(method => {
-			this[method] = (path, { params, data, headers, subpath='/api/v1/users' } = {}) => new Promise((resolve, reject) => {
+			this[method] = (path, { params, data, headers, subpath='/fbpark/v1/users' } = {}) => new Promise((resolve, reject) => {
 				const request = superagent[method](formatUrl(path, subpath));
 				request.set('Content-Type', 'application/json');
 				request.set('Accept', 'application/json');

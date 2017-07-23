@@ -116,7 +116,6 @@ export default class Register extends React.Component {
     render() {
         const loginStyle = require('../../Login/container/Login.scss');
         const styles = require('./Register.scss');
-
         let content = (
             <StepOne
                 phonenumber={this.state.phonenumber}

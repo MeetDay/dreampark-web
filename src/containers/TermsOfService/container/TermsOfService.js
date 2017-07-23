@@ -4,7 +4,6 @@ import { asyncConnect } from 'redux-async-connect'
 import { connect } from 'react-redux'
 import { CoverImage, TitleElement, TextElement, ImageElement, BigImageElement } from '../../../components'
 import { isTermLoaded, getUserTermsBy } from '../module/dreamparkTerms'
-import { convertElementToComponet } from '../../../helpers/ElementHelper'
 
 @asyncConnect([{
     deferred: true,
