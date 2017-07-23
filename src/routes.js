@@ -34,7 +34,7 @@ const routes = (store) => {
 			<Route path="tickets" component={Tickets} onEnter={requireLogin} />
 			<Route path="buytickets" component={BuyTicket} />
 			<Route path="buytickets/search" component={SearchTicket} />
-			<Route path="details/:id" component={Details} />
+			<Route path="detail/:id" component={Details} />
 			<Route path="hotdetail/:id" component={HotDetail} />
 			<Route path="shoppingcart" component={Shoppingcart} onEnter={requireLogin} />
 			<Route path="login" component={Login} />
