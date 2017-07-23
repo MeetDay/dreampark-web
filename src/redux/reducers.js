@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux'
 import { reducer as reduxAsyncConnect } from 'redux-async-connect'
 
 import { home } from '../containers/Home'
+import { details } from '../containers/Details'
 import { hotdetail } from '../containers/HotDetail'
 import { shoppingcart } from '../containers/Shoppingcart'
 import { tickets } from '../containers/Tickets'
@@ -14,6 +15,7 @@ export default combineReducers({
 	routing: routerReducer,
 	reduxAsyncConnect,
 	home,
+	details,
 	hotdetail,
 	shoppingcart,
 	tickets,

@@ -16,6 +16,8 @@ $elementVerMargin: 14px;
 .image {
     margin: $elementVerMargin 0;
     & > img {
+        display: block;
+        margin: auto;
         width: 100%;
         vertical-align: top;
     }
@@ -30,11 +32,17 @@ $elementVerMargin: 14px;
         vertical-align: top;
     }
     & > div {
+        display: -webkit-box;
         box-sizing: content-box;
         max-height: 75px;
         padding: 5px 20px;
+
         font-size: 14px;
         line-height: 25px;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+
         color: white;
         background-color: #2D343B;
     }
