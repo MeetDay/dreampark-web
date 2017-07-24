@@ -153,6 +153,18 @@ $ticketCountPartHeight: 40px;
     background-color: #2D343B;
 }
 
+.toolBarSupplement {
+    text-align: center;
+
+    & > span:first-child {
+        float: left;
+    }
+    & > span:last-child {
+        float: right;
+        margin-right: 20px;
+    }
+}
+
 /**
  *   ticket css
  */

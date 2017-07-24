@@ -73,7 +73,7 @@ export default class HotDetail extends React.Component {
         const { title, elements, content, attention, place, location, time_info } = this.props.hotDetail;
         return (
             <div className={styles.detail}>
-                <Navbar />
+                <Navbar title={title} />
                 <div className={styles.carousel}>
                     <Carousel autoplay>
                         { elements && elements.map(element => (<div key={element.id}><CarouselCard carousel={element} /></div>)) }
@@ -118,9 +118,9 @@ export default class HotDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-                <ToolBar onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} />
-                {/* <BuyTicketNow show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} /> */}
-                <BuyParkingCoupon show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} />
+                <ToolBar price={123} onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} />
+                <BuyTicketNow show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} />
+                {/* <BuyParkingCoupon show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} /> */}
             </div>
         );
     }
