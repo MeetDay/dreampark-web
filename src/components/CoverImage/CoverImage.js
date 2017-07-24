@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { appendQiNiuQueryParamsForImageUrl } from '../../helpers/QiNiuHelpers';
 
 export default class CoverImage extends React.Component {
     static propTypes = {
@@ -15,7 +16,7 @@ export default class CoverImage extends React.Component {
         const style = {
             width: '100%',
             height: this.props.height,
-            backgroundImage: 'url(' + this.props.src + ')',
+            backgroundImage: 'url(' + appendQiNiuQueryParamsForImageUrl(this.props.src) + ')',
             backgroundPosition: 'center center',
             backgroundSize: 'cover'
         };

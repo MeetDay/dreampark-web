@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { appendQiNiuQueryParamsForImageUrl } from '../../../helpers/QiNiuHelpers'
 
 export default class BigImageElement extends React.Component {
     static propTypes = {
@@ -11,7 +12,7 @@ export default class BigImageElement extends React.Component {
         // const imageUrl = "http://o9vi0jo2t.bkt.clouddn.com/client_uploads/images/194/C2F1F0169AEF2A0B768C4274831E78DD";
         return (
             <div className={styles.bigImageElement}>
-                <img src={this.props.src} alt="image" />
+                <img src={appendQiNiuQueryParamsForImageUrl(this.props.src)} alt="image" />
                 <div>{this.props.captionText}</div>
             </div>
         );

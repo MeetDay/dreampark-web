@@ -17,14 +17,11 @@ import { convertElementsToComponet } from '../../../utils/elements'
 }])
 
 @connect(
-    state => ({
-        detail: state.details.detail
-    })
+    state => ({ detail: state.details.detail })
 )
 
 export default class Details extends React.Component {
     render() {
-        if (!this.props.detail) return null
         const styles = require('./Details.scss')
         const { title, cover_image: coverImage, elements } = this.props.detail
         return (
