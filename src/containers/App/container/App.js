@@ -23,18 +23,6 @@ import { loadCookie, isCookieLoaded } from '../../Login/module/login'
 
 export default class App extends React.Component {
 
-	componentWillMount() {
-		
-	}
-
-	componentDidMount() {
-
-	}
-
-	componentWillReceiveProps() {
-
-	}
-
 	render() {
 		require('./Html.css');
 		const styles = require('./App.scss');
