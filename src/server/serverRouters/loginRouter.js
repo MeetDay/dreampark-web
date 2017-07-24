@@ -25,9 +25,9 @@ loginRouter.get('/wechat', (req, res) => {
             .then((tokenInfo) => getWechatUserInfo(tokenInfo))
             .then((weChatUserInfo) => getUserInfo(weChatUserInfo))
             .then((userInfo) => { res.json({ code: 10000, message: 'success', data: userInfo}) })
-            .catch((err) => { res.status(400).json(Object.assign({ code: 10001 }, err)) })
+            .catch((err) => { res.json(Object.assign({ code: 10001 }, err)) })
     } else {
-        res.status(400).json({ code: 10001, message: '缺少参数'})
+        res.json({ code: 10001, message: '缺少参数'})
     }
 })
 
@@ -49,9 +49,9 @@ function getWechatToken(code) {
 }
 
 function getWechatUserInfo(tokenInfo) {
-    const userinfoUrl = `https://api.weixin.qq.com/sns/userinfo?access_token=${tokenInfo.access_token}&openid=${tokenInfo.openid}&lang=zh_CN`;
+    const userInfoUrl = `https://api.weixin.qq.com/sns/userinfo?access_token=${tokenInfo.access_token}&openid=${tokenInfo.openid}&lang=zh_CN`;
     return new Promise((resolve, reject) => {
-        superagent.get(userinfoUrl)
+        superagent.get(userInfoUrl)
             .end((err, res) => {
                 const body = JSON.parse(res.text)
                 if (err || Object.prototype.hasOwnProperty.call(body, 'errcode')) {
