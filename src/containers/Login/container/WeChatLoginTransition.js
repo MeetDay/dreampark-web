@@ -27,7 +27,7 @@ export default class WeChatLoginTransition extends React.Component {
 
     componentDidMount() {
         if (!Object.hasOwnProperty.call(this.props.location, 'code'))
-            jumpToWeChatAuthorizationUrl(location.href)
+            jumpToWeChatAuthorizationUrl()
     }
 
     componentWillReceiveProps(nextProps) {

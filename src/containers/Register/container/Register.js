@@ -11,11 +11,13 @@ import { clearWhiteSpaceOf } from '../../../utils/regex'
 
 @connect(
     state => ({
-        signUser: state.login.signUser,
+        user: state.login.user,
         userSignupError: state.login.userSignupError,
 
         smsCodeError: state.register.smsCodeError,
-        idcardInfo: state.register.idcardInfo
+        idcardInfo: state.register.idcardInfo,
+
+        weChatInfo: state.register.weChatInfo
     }),
     dispatch => bindActionCreators({ userSignup, updateUserInfo, getSMSCodeAccordingTo, comfirmUserInfo }, dispatch)
 )
@@ -46,11 +48,13 @@ export default class Register extends React.Component {
 
     // 注册
     _userSignup() {
+        const { weChatInfo } = this.props
         this.props.userSignup({
             phone: clearWhiteSpaceOf(this.state.phonenumber),
             password: sha256(this.state.password),
             zone: 86,
-            code: clearWhiteSpaceOf(this.state.code)
+            code: clearWhiteSpaceOf(this.state.code),
+            link_account: weChatInfo ? { union_id: weChatInfo.unionid } : undefined
         })
     }
 
@@ -135,7 +139,7 @@ export default class Register extends React.Component {
                     userSignup={this.userSignup}
 
                     smsCodeError={this.props.smsCodeError}
-                    signUser={this.props.signUser}
+                    signUser={this.props.user}
                     userSignupError={this.props.userSignupError}
                 />
             )

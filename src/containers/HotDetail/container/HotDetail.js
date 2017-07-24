@@ -8,6 +8,7 @@ import { TitleElement } from '../../../components';
 import { Navbar, ToolBar, Recommend, BuyTicketNow, BuyParkingCoupon } from '../component';
 import { isHotDetailLoaded, getHotDetailBy } from '../module/hotdetail';
 import { convertElementsToComponet } from '../../../utils/elements';
+import { appendQiNiuQueryParamsForImageUrl } from '../../../helpers/QiNiuHelpers';
 
 @asyncConnect([{
     deferred: true,
@@ -134,7 +135,7 @@ class CarouselCard extends React.Component {
         const { content: { name: imageUrl } } = this.props.carousel;
         return (
             <a className={styles.carouselCard}>
-                <img src={imageUrl} alt="cover"/>
+                <img src={appendQiNiuQueryParamsForImageUrl(imageUrl)} alt="cover"/>
             </a>
         );
     }
