@@ -3,6 +3,7 @@ import { asyncConnect } from 'redux-async-connect'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import * as Constant from '../../../utils/constant'
+import { jumpToWeChatAuthorizationUrl } from '../../../utils/wechat'
 import { isWechatInfoLoaded, wechatLogin } from '../../Login/module/login'
 
 @asyncConnect([{
@@ -23,6 +24,11 @@ import { isWechatInfoLoaded, wechatLogin } from '../../Login/module/login'
 )
 
 export default class WeChatLoginTransition extends React.Component {
+
+    componentDidMount() {
+        if (!Object.hasOwnProperty.call(this.props.location, 'code'))
+            jumpToWeChatAuthorizationUrl(location.href)
+    }
 
     componentWillReceiveProps(nextProps) {
         const { user, weChatInfo, weChatInfoError } = nextProps

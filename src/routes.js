@@ -11,7 +11,6 @@ import Register from './containers/Register';
 import TermsOfService from './containers/TermsOfService';
 import NotFound from './containers/NotFound';
 import projectConfig from '../project.config';
-import { getWeChatAuthorizationUrl } from './utils/wechat';
 
 function isEmptyObject(obj) {
 	return obj === undefined || obj === null || Object.keys(obj).length === 0
@@ -19,11 +18,8 @@ function isEmptyObject(obj) {
 
 const routes = (store) => {
 	const requireLogin = (nextState, replaceState, callback) => {
-		console.log(nextState)
 		const { user } = store.getState().login
-		if (isEmptyObject(user)) {
-			replaceState(getWeChatAuthorizationUrl())
-		}
+		if (isEmptyObject(user)) replaceState('/wechat')
 		callback()
 	}
 
