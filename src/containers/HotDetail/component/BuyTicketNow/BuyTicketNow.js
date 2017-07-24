@@ -22,7 +22,7 @@ export default class BuyTicketNow extends React.Component {
         this.state = {
             visible: false,
             showBackgroundColor: false,
-            ticketCount: 1,
+            ticketCount: 0,
             totalPrice: 0,
             selectedTickets: []
         };
@@ -39,12 +39,21 @@ export default class BuyTicketNow extends React.Component {
 
     _handleClickTicketLess(e) {
         e.preventDefault();
-        this.setState((preState, props) => ({ ticketCount:  preState.ticketCount > 1 ? preState.ticketCount -1 : preState.ticketCount }))
+        const selectedTicket = this.state.selectedTickets.length > 0 ? this.state.selectedTickets[0] : undefined;
+        const isOperable = (selectedTicket && this.state.ticketCount > 1);
+        this.setState((preState) => ({
+            ticketCount: isOperable ? preState.ticketCount - 1 : preState.ticketCount,
+            totalPrice: isOperable ? selectedTicket.price * (preState.ticketCount - 1) : selectedTicket.price
+        }))
     }
 
     _handleClickTicketMore(e) {
         e.preventDefault();
-        this.setState((preState, props) => ({ ticketCount:  preState.ticketCount + 1 }))
+        const selectedTicket = this.state.selectedTickets.length > 0 ? this.state.selectedTickets[0] : undefined
+        this.setState((preState, props) => ({
+            ticketCount: selectedTicket ? preState.ticketCount + 1 : 0,
+            totalPrice: selectedTicket ? selectedTicket.price * (preState.ticketCount + 1) : 0
+        }))
     }
 
     _handleClickTicket(ticket) {
@@ -52,12 +61,14 @@ export default class BuyTicketNow extends React.Component {
             const selectedTickets = this.state.selectedTickets.filter((item) => item.id !== ticket.id)
             this.setState((preState) => ({
                 selectedTickets: [...selectedTickets],
-                totalPrice: preState.totalPrice - ticket.price
+                ticketCount: 0,
+                totalPrice: 0
             }))
         } else {
             this.setState((preState) => ({
-                selectedTickets: [...this.state.selectedTickets, ticket],
-                totalPrice: preState.totalPrice + ticket.price
+                selectedTickets: [ticket],
+                ticketCount: 1,
+                totalPrice: ticket.price
             }))
         }
     }
