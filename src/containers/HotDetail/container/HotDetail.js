@@ -70,13 +70,13 @@ export default class HotDetail extends React.Component {
         };
         const viewMoreWrapStyle = { display: this.state.viewMoreWrapDisplay };
         // 转换数据
-        const { title, elements, content, attention, place, location, time_info } = this.props.hotDetail;
+        const { title, slides, content, attention, place, location, time_info } = this.props.hotDetail;
         return (
             <div className={styles.detail}>
                 <Navbar title={title} />
                 <div className={styles.carousel}>
                     <Carousel autoplay>
-                        { elements && elements.map(element => (<div key={element.id}><CarouselCard carousel={element} /></div>)) }
+                        { slides && slides.map(element => (<div key={element.id}><CarouselCard carousel={element} /></div>)) }
                     </Carousel>
                 </div>
                 <div className={styles.container}>

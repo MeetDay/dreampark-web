@@ -41,10 +41,12 @@ export default class BuyTicketNow extends React.Component {
         e.preventDefault();
         const selectedTicket = this.state.selectedTickets.length > 0 ? this.state.selectedTickets[0] : undefined;
         const isOperable = (selectedTicket && this.state.ticketCount > 1);
-        this.setState((preState) => ({
-            ticketCount: isOperable ? preState.ticketCount - 1 : preState.ticketCount,
-            totalPrice: isOperable ? selectedTicket.price * (preState.ticketCount - 1) : selectedTicket.price
-        }))
+        if (selectedTicket) {
+            this.setState((preState) => ({
+                ticketCount: isOperable ? preState.ticketCount - 1 : preState.ticketCount,
+                totalPrice: isOperable ? selectedTicket.price * (preState.ticketCount - 1) : selectedTicket.price
+            }))
+        }
     }
 
     _handleClickTicketMore(e) {
