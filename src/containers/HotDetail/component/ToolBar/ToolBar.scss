@@ -51,7 +51,10 @@ $contentHeight: $toolBarHeight - $toolBarPadding*2;
 }
 
 .price {
-    margin: 0 5px;
+    display: inline-block;
+    max-width: 60px;
+    // margin: 0 5px;
+    margin: 0;
     font-family: PingFangSC-Semibold;
     color: #E62A10;
 

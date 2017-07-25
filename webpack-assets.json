@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.abc22ec9e4200508ced9.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.abc22ec9e4200508ced9.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.abc22ec9e4200508ced9.min.js"
+    "main": "http://localhost:3000/dist/main.754a0508c09aadd795f2.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.754a0508c09aadd795f2.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.754a0508c09aadd795f2.min.js"
   },
   "styles": {},
   "assets": {
@@ -127,7 +127,7 @@
       "left": "ToolBar__left__oD-VO",
       "price": "ToolBar__price__1KmNR",
       "right": "ToolBar__right__5pnHj",
-      "_style": ".ToolBar__toolBar__2wwWi {\n  position: fixed;\n  left: 10px;\n  right: 10px;\n  bottom: 10px;\n  height: 55px;\n  padding: 12px 20px;\n  text-align: center;\n  white-space: nowrap;\n  background-color: #2D343B; }\n  @media screen and (max-width: 370px) {\n    .ToolBar__toolBar__2wwWi {\n      padding: 12px 10px; } }\n\n.ToolBar__content__1FAgT {\n  display: inline-block;\n  height: 31px;\n  line-height: 31px;\n  font-size: 16px;\n  color: white; }\n  .ToolBar__content__1FAgT > span {\n    display: inline-block;\n    margin: 0 10px; }\n  @media (max-width: 370px) {\n    .ToolBar__content__1FAgT {\n      font-size: 14px; } }\n\n.ToolBar__left__oD-VO {\n  display: inline-block;\n  width: 60%;\n  height: 31px;\n  line-height: 31px;\n  border-right: 1px solid white;\n  font-size: 16px;\n  color: white;\n  vertical-align: top; }\n  @media (max-width: 370px) {\n    .ToolBar__left__oD-VO {\n      font-size: 14px; } }\n\n.ToolBar__price__1KmNR {\n  margin: 0 5px;\n  font-family: PingFangSC-Semibold;\n  color: #E62A10; }\n  @media screen and (max-width: 370px) {\n    .ToolBar__price__1KmNR {\n      margin: 0; } }\n\n.ToolBar__right__5pnHj {\n  display: inline-block;\n  width: 40%;\n  height: 31px;\n  line-height: 31px;\n  font-size: 16px;\n  color: white;\n  vertical-align: top; }\n  .ToolBar__right__5pnHj > img {\n    width: 22px;\n    margin-left: 10px;\n    margin-right: 5px;\n    vertical-align: text-bottom; }\n  @media (max-width: 320px) {\n    .ToolBar__right__5pnHj {\n      font-size: 14px; } }\n"
+      "_style": ".ToolBar__toolBar__2wwWi {\n  position: fixed;\n  left: 10px;\n  right: 10px;\n  bottom: 10px;\n  height: 55px;\n  padding: 12px 20px;\n  text-align: center;\n  white-space: nowrap;\n  background-color: #2D343B; }\n  @media screen and (max-width: 370px) {\n    .ToolBar__toolBar__2wwWi {\n      padding: 12px 10px; } }\n\n.ToolBar__content__1FAgT {\n  display: inline-block;\n  height: 31px;\n  line-height: 31px;\n  font-size: 16px;\n  color: white; }\n  .ToolBar__content__1FAgT > span {\n    display: inline-block;\n    margin: 0 10px; }\n  @media (max-width: 370px) {\n    .ToolBar__content__1FAgT {\n      font-size: 14px; } }\n\n.ToolBar__left__oD-VO {\n  display: inline-block;\n  width: 60%;\n  height: 31px;\n  line-height: 31px;\n  border-right: 1px solid white;\n  font-size: 16px;\n  color: white;\n  vertical-align: top; }\n  @media (max-width: 370px) {\n    .ToolBar__left__oD-VO {\n      font-size: 14px; } }\n\n.ToolBar__price__1KmNR {\n  display: inline-block;\n  max-width: 60px;\n  margin: 0;\n  font-family: PingFangSC-Semibold;\n  color: #E62A10; }\n  @media screen and (max-width: 370px) {\n    .ToolBar__price__1KmNR {\n      margin: 0; } }\n\n.ToolBar__right__5pnHj {\n  display: inline-block;\n  width: 40%;\n  height: 31px;\n  line-height: 31px;\n  font-size: 16px;\n  color: white;\n  vertical-align: top; }\n  .ToolBar__right__5pnHj > img {\n    width: 22px;\n    margin-left: 10px;\n    margin-right: 5px;\n    vertical-align: text-bottom; }\n  @media (max-width: 320px) {\n    .ToolBar__right__5pnHj {\n      font-size: 14px; } }\n"
     },
     "./src/containers/HotDetail/container/HotDetail.scss": {
       "detail": "HotDetail__detail__2jnAS",
