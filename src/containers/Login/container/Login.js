@@ -90,7 +90,6 @@ export default class Login extends React.Component {
                 />
             )
         }
-        console.log(this.props)
         return (
             <div>
                 <div className={styles.loginBack} />
