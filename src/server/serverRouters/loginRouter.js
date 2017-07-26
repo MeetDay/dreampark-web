@@ -69,7 +69,7 @@ function getUserInfo(weChatUserInfo) {
     }
     return new Promise((resolve, reject) => {
         let baseUrl = __DEV__ ? projectConfig.devBaseUrl : projectConfig.baseUrl
-        const linkAccountUrl = baseUrl + '/api/v1/users/link_account'
+        const linkAccountUrl = baseUrl + '/api/v1/users/linked_account'
         superagent.post(linkAccountUrl)
             .send(data)
             .end((err, res) => {
