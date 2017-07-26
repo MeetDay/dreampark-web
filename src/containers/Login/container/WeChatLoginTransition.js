@@ -40,6 +40,7 @@ export default class WeChatLoginTransition extends React.Component {
         console.log(nextProps)
         const { user, weChatInfo, weChatInfoError } = nextProps
         if (weChatInfo && weChatInfoError && weChatInfoError.code === 10080) {
+            console.log(123)
             nextProps.dispatch(push('/register#stepone'))
         } else if (weChatInfo && user && !Object.hasOwnProperty.call(user, 'username')) {
             nextProps.dispatch(push('register#stepthree'))
