@@ -26,6 +26,7 @@ import { isWechatInfoLoaded, wechatLogin } from '../../Login/module/login'
 export default class WeChatLoginTransition extends React.Component {
 
     componentDidMount() {
+        console.log(this.props.location)
         if (!Object.hasOwnProperty.call(this.props.location, 'code'))
             jumpToWeChatAuthorizationUrl()
     }
