@@ -1,8 +1,8 @@
 module.exports = {
-	baseUrl: 'http://192.168.12.127:8080',
-	devBaseUrl: 'http://192.168.12.127:8080',
-	// baseUrl: 'http://60.205.216.164',
-	// devBaseUrl: 'http://60.205.216.164',
+	// baseUrl: 'http://192.168.12.127:8080',
+	// devBaseUrl: 'http://192.168.12.127:8080',
+	baseUrl: 'http://60.205.216.164',
+	devBaseUrl: 'http://60.205.216.164',
 
 	wechatAppID: 'wxacb87d3fa8d3ab52',
 	wechatAppSecret: 'b61e6bac5715ca1cc986c602f1f864ed',
