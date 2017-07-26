@@ -37,8 +37,9 @@ export default class WeChatLoginTransition extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
         const { user, weChatInfo, weChatInfoError } = nextProps
+        console.log(weChatInfo)
+        console.log(weChatInfoError)
         if (weChatInfo && weChatInfoError && weChatInfoError.code === 10080) {
             console.log(123)
             nextProps.dispatch(push('/register#stepone'))
