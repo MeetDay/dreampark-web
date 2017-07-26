@@ -1,6 +1,7 @@
 import superagent from 'superagent'
 import Express from 'express'
 var loginRouter = Express.Router()
+import { isEmptyObject } from '../../containers/Login/module/login'
 import APIClient from '../../helpers/APIClient'
 import projectConfig from '../../../project.config'
 
@@ -73,12 +74,11 @@ function getUserInfo({ weChatUserInfo, accessToken } = {}) {
         const linkAccountUrl = baseUrl + '/api/v1/users/linked_account'
         superagent.post(linkAccountUrl)
             .send(data)
-            .end((err, res) => {
-                const body = res.body
-                console.log(res.body)
-                console.log(res.text)
-                if (err || Object.prototype.hasOwnProperty.call(body, 'code')) resolve({ weChatUserInfo, userError: body })
-                resolve({ weChatUserInfo, userInfo: body })
+            .end((err, { body, text } = {}) => {
+                const resBody = isEmptyObject(body) ? JSON.parse(text) : body
+                console.log(resBody)
+                if (err || Object.prototype.hasOwnProperty.call(resBody, 'code')) resolve({ weChatUserInfo, userError: resBody })
+                resolve({ weChatUserInfo, userInfo: resBody })
             })
     })
 }
