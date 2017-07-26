@@ -57,14 +57,15 @@ function getWechatUserInfo(tokenInfo) {
                 if (err || Object.prototype.hasOwnProperty.call(body, 'errcode')) {
                     reject({ message: '根据token获取微信信息失败', data: body})
                 } else {
-                    resolve(body)
+                    resolve({ weChatUserInfo: body, accessToken: tokenInfo.access_token })
                 }
             })
     })
 }
 
-function getUserInfo(weChatUserInfo) {
+function getUserInfo({ weChatUserInfo, accessToken } = {}) {
     const data = {
+        auth_token: accessToken,
         union_id: weChatUserInfo.unionid
     }
     return new Promise((resolve, reject) => {
