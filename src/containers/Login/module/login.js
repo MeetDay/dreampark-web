@@ -45,10 +45,10 @@ const actionhandlers = {
             ...state,
             weChatInfoLoading: false,
             weChatInfoLoaded: true,
-            weChatInfo: action.payload.data.weChatUserInfo,
-            weChatInfoError: action.payload.data.userError,
-            user: action.payload.data.userInfo,
-            authHeaders: generatorAuthHeadersForUser(action.payload.data.userInfo)
+            weChatInfo: data.weChatUserInfo,
+            weChatInfoError: data.userError,
+            user: data.userInfo,
+            authHeaders: generatorAuthHeadersForUser(data.userInfo)
         }
     },
     [`${WECHATLOGIN}_REJECTED`]: (state, action) => ({...state, weChatInfoLoading: false, weChatInfoLoaded: false, weChatInfoError: action.payload.data }),
