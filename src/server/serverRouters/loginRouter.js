@@ -26,7 +26,7 @@ loginRouter.get('/wechat', (req, res) => {
             .then((tokenInfo) => getWechatUserInfo(tokenInfo))
             .then((weChatUserInfo) => getUserInfo(weChatUserInfo))
             .then((userInfo) => { res.json({ code: 10000, message: 'success', data: userInfo}) })
-            .catch((err) => { res.json(Object.assign({ code: 10001 }, data: err)) })
+            .catch((err) => { res.json(Object.assign({ code: 10002 }, data: err)) })
     } else {
         res.json({ code: 10001, message: '缺少参数'})
     }
@@ -41,7 +41,7 @@ function getWechatToken(code) {
             .end((err, res) => {
                 const body = JSON.parse(res.text)
                 if (err || Object.prototype.hasOwnProperty.call(body, 'errcode')) {
-                    reject({ message: '根据code获取微信token失败', data: body})
+                    reject({ message: '根据code获取微信token失败', data: body })
                 } else {
                     resolve(body)
                 }
@@ -58,7 +58,7 @@ function getWechatUserInfo(tokenInfo) {
                 if (err || Object.prototype.hasOwnProperty.call(body, 'errcode')) {
                     reject({ message: '根据token获取微信信息失败', data: body})
                 } else {
-                    resolve({ weChatUserInfo: body, accessToken: tokenInfo.access_token })
+                    resolve({  weChatUserInfo: body, accessToken: tokenInfo.access_token })
                 }
             })
     })
