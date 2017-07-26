@@ -1,7 +1,7 @@
 import * as Constant from './constant'
 import projectConfig from '../../project.config'
 
-export function jumpToWeChatAuthorizationUrl() {
+export function jumpToWeChatAuthorizationUrl(location) {
     const weChatAuthorizationUrl = getWeChatAuthorizationUrl(location.href)
     location.href = weChatAuthorizationUrl
 }

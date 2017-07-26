@@ -22,11 +22,12 @@ import { convertElementsToComponet } from '../../../utils/elements'
 
 export default class Details extends React.Component {
     render() {
+        if (!this.props.detail) retrun null
         const styles = require('./Details.scss')
         const { title, cover_image: coverImage, elements } = this.props.detail
         return (
             <div className={styles.details}>
-                <div className={styles.asd}>
+                <div>
                     { coverImage && <CoverImage src={coverImage.name} /> }
                 </div>
                 <div className={styles.elements}>

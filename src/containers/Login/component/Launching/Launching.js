@@ -1,6 +1,5 @@
 import React from 'react';
 import { LoginButton } from '../../../../components';
-import { jumpToWeChatAuthorizationUrl } from '../../../../utils/wechat';
 
 export default class Launching extends React.Component {
     constructor() {
@@ -20,7 +19,7 @@ export default class Launching extends React.Component {
 
     handleClickWeChatButton(e) {
         e.preventDefault();
-        jumpToWeChatAuthorizationUrl()
+        location.href = '/wechat'
     }
 
     render() {

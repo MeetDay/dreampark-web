@@ -8,9 +8,12 @@ import { isWechatInfoLoaded, wechatLogin } from '../../Login/module/login'
 
 @asyncConnect([{
     deferred: true,
-    promise: ({ params, store:{ dispatch, getState }, helpers }) => {
+    promise: ({ params, store:{ dispatch, getState }, location, helpers }) => {
+        const getQueryValueOf = key => decodeURIComponent(location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
         if (!helpers.serverSide && !isWechatInfoLoaded(getState())) {
-            return dispatch(wechatLogin(params.code))
+            const wechatCode = getQueryValueOf('code')
+            if (wechatCode)
+                return dispatch(wechatLogin(params.code))
         }
     }
 }])
@@ -26,9 +29,10 @@ import { isWechatInfoLoaded, wechatLogin } from '../../Login/module/login'
 export default class WeChatLoginTransition extends React.Component {
 
     componentDidMount() {
-        console.log(this.props.location)
-        if (!Object.hasOwnProperty.call(this.props.location, 'code'))
-            jumpToWeChatAuthorizationUrl()
+        const getQueryValueOf = key => decodeURIComponent(this.props.location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
+        const wechatCode = getQueryValueOf('code')
+        if (!wechatCode)
+            jumpToWeChatAuthorizationUrl(location)
     }
 
     componentWillReceiveProps(nextProps) {
