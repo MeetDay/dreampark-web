@@ -7,7 +7,7 @@ import { jumpToWeChatAuthorizationUrl } from '../../../utils/wechat'
 import { isWechatInfoLoaded, wechatLogin } from '../../Login/module/login'
 
 @asyncConnect([{
-    deferred: true,
+    deferred: false,
     promise: ({ params, store:{ dispatch, getState }, location, helpers }) => {
         const getQueryValueOf = key => decodeURIComponent(location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
         if (!helpers.serverSide && !isWechatInfoLoaded(getState())) {
