@@ -12,9 +12,8 @@ import { isWechatInfoLoaded, wechatLogin } from '../../Login/module/login'
         const getQueryValueOf = key => decodeURIComponent(location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
         if (!helpers.serverSide && !isWechatInfoLoaded(getState())) {
             const wechatCode = getQueryValueOf('code')
-            console.log(wechatCode)
             if (wechatCode) {
-                return dispatch(wechatLogin(params.code))
+                return dispatch(wechatLogin(wechatCode))
             }
         }
     }
