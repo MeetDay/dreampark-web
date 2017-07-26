@@ -39,8 +39,19 @@ const actionhandlers = {
     [`${UPDATE_USER}_REJECTED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: false, updateUserError: action.payload }),
 
     [`${WECHATLOGIN}_PENDING`]: (state, action) => ({ ...state, weChatInfoLoading: true, weChatInfoLoaded: false }),
-    [`${WECHATLOGIN}_FULFILLED`]: (state, action) => ({ ...state, weChatInfoLoading: false, weChatInfoLoaded: true, weChatInfo: action.payload.weChatUserInfo, weChatInfoError: action.payload.userError, user: action.payload.userInfo, authHeaders: generatorAuthHeadersForUser(action.payload.userInfo) }),
-    [`${WECHATLOGIN}_REJECTED`]: (state, action) => ({...state, weChatInfoLoading: false, weChatInfoLoaded: false, weChatInfoError: action.payload }),
+    [`${WECHATLOGIN}_FULFILLED`]: (state, action) => {
+        const { data } = action.payload
+        return {
+            ...state,
+            weChatInfoLoading: false,
+            weChatInfoLoaded: true,
+            weChatInfo: action.payload.data.weChatUserInfo,
+            weChatInfoError: action.payload.data.userError,
+            user: action.payload.data.userInfo,
+            authHeaders: generatorAuthHeadersForUser(action.payload.data.userInfo)
+        }
+    },
+    [`${WECHATLOGIN}_REJECTED`]: (state, action) => ({...state, weChatInfoLoading: false, weChatInfoLoaded: false, weChatInfoError: action.payload.data }),
 
     [`${LOADCOOKIESYNC}`]: (state, action) => ({ ...state, user: action.cookie, authHeaders: generatorAuthHeadersForUser(action.cookie) })
 };
