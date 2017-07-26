@@ -64,7 +64,8 @@ function getWechatUserInfo(tokenInfo) {
     })
 }
 
-function getUserInfo({ weChatUserInfo, accessToken } = {}) {
+function getUserInfo(weChatInfo) {
+    const { weChatUserInfo, accessToken } = weChatInfo
     const data = {
         auth_token: accessToken,
         union_id: weChatUserInfo.unionid
@@ -77,8 +78,8 @@ function getUserInfo({ weChatUserInfo, accessToken } = {}) {
             .end((err, { body, text } = {}) => {
                 const resBody = isEmptyObject(body) ? JSON.parse(text) : body
                 console.log(resBody)
-                if (err || Object.prototype.hasOwnProperty.call(resBody, 'code')) resolve({ weChatUserInfo, userError: resBody })
-                resolve({ weChatUserInfo, userInfo: resBody })
+                if (err || Object.prototype.hasOwnProperty.call(resBody, 'code')) resolve({ weChatUserInfo: weChatUserInfo, userError: resBody })
+                resolve({ weChatUserInfo: weChatUserInfo, userInfo: resBody })
             })
     })
 }
