@@ -30,8 +30,9 @@ export default function register(state=initialState, action) {
 export function getSMSCodeAccordingTo(phonenumber) {
     return {
         type: SMSCODE,
-        payload: (client) => client.post('http://localhost:3000/actions/user/sms/code', {
-            data: { zone: 86, phone: phonenumber }
+        payload: (client) => client.post('/sms/code', {
+            data: { zone: 86, phone: phonenumber },
+            subpath: '/actions/user'
         })
     }
 }
@@ -39,8 +40,9 @@ export function getSMSCodeAccordingTo(phonenumber) {
 export function comfirmUserInfo(name, cardno) {
     return {
         type: IDCARD,
-        payload: (client) => client.get('http://localhost:3000/actions/user/login/idcard', {
-            params: { name, cardno }
+        payload: (client) => client.get('/login/idcard', {
+            params: { name, cardno },
+            subpath: '/actions/user'
         })
     }
 }
