@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.09553f43cb87bbe11ab9.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.09553f43cb87bbe11ab9.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.09553f43cb87bbe11ab9.min.js"
+    "main": "http://localhost:3000/dist/main.dcf8673bfd3b1d98e73b.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.dcf8673bfd3b1d98e73b.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.dcf8673bfd3b1d98e73b.min.js"
   },
   "styles": {},
   "assets": {
@@ -165,7 +165,7 @@
       "description": "Launching__description__ejw24",
       "buttons": "Launching__buttons__34mEM",
       "declare": "Launching__declare__2d7xH",
-      "_style": ".Launching__launching__1hhVV {\n  position: relative;\n  margin: 20px; }\n\n.Launching__launchingTop__1X5X0 {\n  width: 100%;\n  height: 44px;\n  line-height: 44px; }\n\n.Launching__loginButton__22bCc {\n  float: right;\n  min-width: 80px;\n  border: none;\n  padding: 0;\n  line-height: 44px;\n  outline: none;\n  font-size: 18px;\n  text-align: right;\n  color: white;\n  background-color: transparent; }\n\n.Launching__appLogo__1RAEH {\n  margin-top: 44px; }\n  .Launching__appLogo__1RAEH > img {\n    width: 70px;\n    height: 70px;\n    border-radius: 35px; }\n\n.Launching__description__ejw24 {\n  margin: 36px 0;\n  font-size: 28px;\n  color: white; }\n\n.Launching__buttons__34mEM {\n  width: 100%; }\n  .Launching__buttons__34mEM > div:last-child {\n    margin-top: 20px; }\n\n.Launching__declare__2d7xH {\n  margin-top: 44px;\n  font-size: 14px;\n  line-height: 24px;\n  letter-spacing: 1.5px;\n  color: white; }\n  .Launching__declare__2d7xH > span > a {\n    text-decoration: underline;\n    color: white; }\n"
+      "_style": ".Launching__launching__1hhVV {\n  position: relative;\n  padding: 20px; }\n\n.Launching__launchingTop__1X5X0 {\n  width: 100%;\n  height: 44px;\n  line-height: 44px; }\n\n.Launching__loginButton__22bCc {\n  float: right;\n  min-width: 80px;\n  border: none;\n  padding: 0;\n  line-height: 44px;\n  outline: none;\n  font-size: 18px;\n  text-align: right;\n  color: white;\n  background-color: transparent; }\n\n.Launching__appLogo__1RAEH {\n  margin-top: 44px; }\n  .Launching__appLogo__1RAEH > img {\n    width: 70px;\n    height: 70px;\n    border-radius: 35px; }\n\n.Launching__description__ejw24 {\n  margin: 36px 0;\n  font-size: 28px;\n  color: white; }\n\n.Launching__buttons__34mEM {\n  width: 100%; }\n  .Launching__buttons__34mEM > div:last-child {\n    margin-top: 20px; }\n\n.Launching__declare__2d7xH {\n  margin-top: 44px;\n  font-size: 14px;\n  line-height: 24px;\n  letter-spacing: 1.5px;\n  color: white; }\n  .Launching__declare__2d7xH > span > a {\n    text-decoration: underline;\n    color: white; }\n"
     },
     "./src/containers/Login/component/Loging/Loging.scss": {
       "loging": "Loging__loging__Y9BRq",
