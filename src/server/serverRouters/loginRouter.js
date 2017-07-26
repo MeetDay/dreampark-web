@@ -74,6 +74,7 @@ function getUserInfo({ weChatUserInfo, accessToken } = {}) {
         superagent.post(linkAccountUrl)
             .send(data)
             .end((err, res) => {
+                const body = res.body
                 console.log(res.body)
                 console.log(res.text)
                 if (err || Object.prototype.hasOwnProperty.call(body, 'code')) resolve({ weChatUserInfo, userError: body })
