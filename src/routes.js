@@ -27,7 +27,7 @@ const routes = (store) => {
 		<Route path="/" component={App}>
 			<IndexRoute component={Home} />
 			<Route path="home" component={Home} />
-			<Route path="tickets/:ticketType" component={Tickets} onEnter={requireLogin} />
+			<Route path="tickets" component={Tickets} onEnter={requireLogin} />
 			<Route path="buytickets" component={BuyTicket} />
 			<Route path="buytickets/search" component={SearchTicket} />
 			<Route path="detail/:id" component={Details} />

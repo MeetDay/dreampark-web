@@ -9,8 +9,9 @@ import { Header, Ticket, TicketDetail, TicketTool } from '../component'
 
 @asyncConnect([{
     deferred: true,
-    promise: ({ params, store: { dispatch, getState }, helpers }) => {
-        const { ticketType } = params
+    promise: ({ params, store: { dispatch, getState }, location, helpers }) => {
+        const getQueryValueOf = key => decodeURIComponent(this.props.location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
+        const ticketType = getQueryValueOf('type')
         if (!isUnusedTicketsLoaded(getState()) && ticketType === 'used') {
             return dispatch(getUsedTickts())
         } else if(!isUsedTicketsLoaded(getState())) {
