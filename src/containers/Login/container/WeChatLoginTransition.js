@@ -1,6 +1,7 @@
 import React from 'react'
 import { asyncConnect } from 'redux-async-connect'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { push } from 'react-router-redux'
 import * as Constant from '../../../utils/constant'
 import { jumpToWeChatAuthorizationUrl } from '../../../utils/wechat'
@@ -24,7 +25,8 @@ import { isWechatInfoLoaded, wechatLogin } from '../../Login/module/login'
         user: state.login.user,
         weChatInfo: state.login.weChatInfo,
         weChatInfoError: state.login.weChatInfoError
-    })
+    }),
+    dispatch => bindActionCreators({ push: pushState }, dispatch)
 )
 
 export default class WeChatLoginTransition extends React.Component {
@@ -39,7 +41,7 @@ export default class WeChatLoginTransition extends React.Component {
     componentWillReceiveProps(nextProps) {
         const { user, weChatInfo, weChatInfoError } = nextProps
         if (weChatInfo && weChatInfoError && weChatInfoError.code === 10080) {
-            setTimeout(_ => { location.href = '/register#stepone' }, 100)
+            setTimeout(_ => { this.props.pushState('/register#stepone') }, 100)
         } else if (weChatInfo && user && !Object.hasOwnProperty.call(user, 'username')) {
             setTimeout(_ => { location.href = '/register#stepthree' }, 100)
         } else if (weChatInfo && !weChatInfoError && user) {
