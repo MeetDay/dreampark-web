@@ -17,11 +17,12 @@ export default class TicketSearchBar extends React.Component {
 
     render() {
         const styles = require('./TicketSearchBar.scss');
+        const searchStyle = { overflow: 'hidden', borderRadius: '14px', border: 'none' };
         return (
             <div className={styles.searchBar}>
                 <div className={styles.back} onClick={() => history.back()}><img src="/assets/back.png" alt="back"/></div>
                 <div className={styles.search}>
-                    <Search style={{ overflow: 'hidden', borderRadius: '14px', border: 'none' }} disabled={this.props.disabled} placeholder={this.props.placeholder} onFocus={this.props.onFocus} onSearch={this.props.onSearch} />
+                    <Search id="ticketsearch" style={searchStyle} disabled={this.props.disabled} placeholder={this.props.placeholder} onFocus={this.props.onFocus} onSearch={this.props.onSearch} />
                 </div>
             </div>
         );

@@ -9,6 +9,11 @@ export default class SearchTicket extends React.Component {
         this.handleSearch = (value) => this._handleSearch(value)
     }
 
+    componentDidMount() {
+        const searchComponent = document.getElementById('ticketsearch')
+        searchComponent.focus()
+    }
+
     _handleSearch(value) {
         console.log(value)
     }
