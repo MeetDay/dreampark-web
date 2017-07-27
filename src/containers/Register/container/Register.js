@@ -48,7 +48,7 @@ export default class Register extends React.Component {
     }
 
     componentDidMount() {
-        console.log(ths.props.weChatInfo)
+        console.log(this.props.weChatInfo)
     }
 
     // 注册
