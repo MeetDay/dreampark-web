@@ -12,9 +12,9 @@ import { Header, Ticket, TicketDetail, TicketTool } from '../component'
     promise: ({ params, store: { dispatch, getState }, location, helpers }) => {
         const getQueryValueOf = key => decodeURIComponent(location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
         const ticketType = getQueryValueOf('type')
-        if (!isUnusedTicketsLoaded(getState()) && ticketType === 'used') {
+        if (!isUsedTicketsLoaded(getState()) && ticketType === 'used') {
             return dispatch(getUsedTickts())
-        } else if(!isUsedTicketsLoaded(getState())) {
+        } else if(!isUnusedTicketsLoaded(getState())) {
             return dispatch(getUnusedTikects())
         }
     }
@@ -37,10 +37,18 @@ export default class Tickets extends React.Component {
         this.closeViewTickets = (e) => this._closeViewTickets(e);
         this.handleClickTicketToolBar = (e) => this._handleClickTicketToolBar(e);
         this.state = {
-            used: true,
+            used: false,
             selectedTicket: null,
             showSelectedTicket: false
         };
+    }
+
+    componentDidMount() {
+        const getQueryValueOf = key => decodeURIComponent(location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
+        const ticketType = getQueryValueOf('type')
+        if (ticketType === 'used') {
+            setTimeout(_ => { this.setState({ used: true }) }, 0)
+        }
     }
 
     _onMenuItemChange(used) {
@@ -77,7 +85,7 @@ export default class Tickets extends React.Component {
         return (
             <div>
                 {this.state.selectedTicket && <TicketDetail visible={this.state.showSelectedTicket} onCancel={this.closeViewTickets} ticket={this.state.selectedTicket} />}
-                <Header user={this.props.user} onMenuItemChange={this.onMenuItemChange} />
+                <Header key={this.props.user.id} user={this.props.user} onMenuItemChange={this.onMenuItemChange} />
                 <div className={styles.ticketWrap}>
                     { tickets && tickets.map((ticket) =>(<Ticket key={ticket.id} viewTicket={this.viewTicket} ticket={ticket} />)) }
                 </div>

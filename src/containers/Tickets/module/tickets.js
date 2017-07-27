@@ -4,14 +4,12 @@ const USED_TICKETS = 'redux/tickets/used'
 const actionHandlers = {
     [`${UNUSED_TICKETS}_PENDING`]: (state, action) => ({ ...state, unusedTikectsLoading: true, unusedTikectsLoaded: false }),
     [`${UNUSED_TICKETS}_FULFILLED`]: (state, action) => {
-        console.log(action.payload)
         return { ...state, unusedTikectsLoading: false, unusedTikectsLoaded: true, unusedTikects: action.payload.order_tickets, user: action.payload.user }
     },
     [`${UNUSED_TICKETS}_REJECTED`]: (state, action) => ({ ...state, unusedTikectsLoading: false, unusedTikectsLoaded: false, unusedTikectsError: action.payload }),
 
     [`${USED_TICKETS}_PENDING`]: (state, action) => ({ ...state, usedTicktsLoading: true, usedTicktsLoaded: false }),
     [`${USED_TICKETS}_FULFILLED`]: (state, action) => {
-        console.log(action.payload)
         return { ...state, usedTicktsLoading: false, usedTicktsLoaded: true, usedTickts: action.payload }
     },
     [`${USED_TICKETS}_REJECTED`]: (state, action) => ({ ...state, usedTicktsLoading: false, usedTicktsLoaded: false, usedTicktsError: action.payload })
@@ -59,7 +57,7 @@ export function getUsedTickts() {
     return (dispatch, getState) => {
         const { authHeaders } = getState().login
         dispatch({
-            type: UNUSED_TICKETS,
+            type: USED_TICKETS,
             payload: (client) => client.get('/used_ticket', {
                 headers: authHeaders
             })
