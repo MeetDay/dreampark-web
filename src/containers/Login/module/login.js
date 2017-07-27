@@ -116,7 +116,7 @@ export function updateUserInfo(data) {
         const { user, authHeaders } = getState().login
         dispatch({
             type: UPDATE_USER,
-            payload: (client) => client.post(`/${user.userid}`, { data, headers: authHeaders })
+            payload: (client) => client.put(`/${user.userid}`, { data, headers: authHeaders })
         })
     }
 }
