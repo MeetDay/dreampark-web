@@ -10,7 +10,7 @@ export default class Header extends React.Component {
     constructor(props) {
         super(props)
         this.handleClick = (e) => this._handleClick(e)
-        this.state = { used: true }
+        this.state = { used: false }
     }
 
     _handleClick(e) {
