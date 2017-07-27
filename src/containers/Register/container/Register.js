@@ -68,10 +68,10 @@ export default class Register extends React.Component {
         if (this.props.idcardInfo) {
             this.props.updateUserInfo({
                 username: this.state.username,
-                identity_card: this.state.cardno,
+                identity_card: clearWhiteSpaceOf(this.state.cardno),
                 birthday: this.props.idcardInfo.data.birthday,
-                gender: this.props.idcardInfo.sex,
-                address: this.props.idcardInfo.address,
+                gender: this.props.idcardInfo.data.sex,
+                address: this.props.idcardInfo.data.address,
                 club_name: this.state.club,
                 trade: this.state.profession
             })
