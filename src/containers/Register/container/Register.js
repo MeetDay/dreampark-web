@@ -47,6 +47,10 @@ export default class Register extends React.Component {
         };
     }
 
+    componentDidMount() {
+        console.log(ths.props.weChatInfo)
+    }
+
     // 注册
     _userSignup() {
         const { weChatInfo, accessToken } = this.props
