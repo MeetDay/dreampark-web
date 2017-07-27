@@ -11,7 +11,7 @@ import createStore from './store';
 import routes from './routes';
 
 const client = new APIClient();
-const store = createStore(history, client, window.__redux_data__);
+const store = createStore(browserHistory, client, window.__redux_data__);
 const history = syncHistoryWithStore(browserHistory, store);
 
 const userReduxConnect = () => ({
