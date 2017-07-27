@@ -50,6 +50,7 @@ export default class WeChatLoginTransition extends React.Component {
             this.props.push(forwardUrl || '/tickets')
         } else {
             console.log(weChatInfoError)
+            this.props.push('/login#launching')
         }
     }
 
