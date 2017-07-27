@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.c3dea42d13059f0c5549.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.c3dea42d13059f0c5549.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.c3dea42d13059f0c5549.min.js"
+    "main": "http://localhost:3000/dist/main.058ced26b44c701aa38f.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.058ced26b44c701aa38f.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.058ced26b44c701aa38f.min.js"
   },
   "styles": {},
   "assets": {
@@ -312,6 +312,10 @@
     "./src/containers/Tickets/container/Tickets.scss": {
       "ticketWrap": "Tickets__ticketWrap__1-ptD",
       "_style": ".Tickets__ticketWrap__1-ptD {\n  padding: 0 20px;\n  border-bottom: 75px solid transparent; }\n"
+    },
+    "./src/containers/Login/container/WeChatLoginTransition.scss": {
+      "description": "WeChatLoginTransition__description__32_nB",
+      "_style": ".WeChatLoginTransition__description__32_nB {\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  margin: auto;\n  width: 100%;\n  height: 44px;\n  line-height: 44px;\n  font-size: 14px;\n  text-align: center; }\n"
     }
   },
   "webpack": {
