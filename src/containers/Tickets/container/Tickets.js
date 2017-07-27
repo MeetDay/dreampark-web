@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { asyncConnect } from 'redux-async-connect'
 import { bindActionCreators } from 'redux'
@@ -24,7 +25,7 @@ import { Header, Ticket, TicketDetail, TicketTool } from '../component'
         unusedTikects: state.tickets.unusedTikects,
         usedTickts: state.tickets.usedTickts
     }),
-    dispatch => bindActionCreators({ getUnusedTikects, getUsedTickts }, dispatch)
+    dispatch => bindActionCreators({ push, getUnusedTikects, getUsedTickts }, dispatch)
 )
 
 export default class Tickets extends React.Component {
@@ -33,6 +34,7 @@ export default class Tickets extends React.Component {
         this.onMenuItemChange = (value) => this._onMenuItemChange(value);
         this.viewTicket = (e) => this._viewTicket(e);
         this.closeViewTickets = (e) => this._closeViewTickets(e);
+        this.handleClickTicketToolBar = (e) => this._handleClickTicketToolBar(e);
         this.state = {
             used: true,
             selectedTicket: null,
@@ -59,6 +61,11 @@ export default class Tickets extends React.Component {
         this.setState({ showSelectedTicket: false, selectedTicket: null });
     }
 
+    _handleClickTicketToolBar(e) {
+        e.preventDefault();
+        this.props.push('/buytickets')
+    }
+
     render() {
         const styles = require('./Tickets.scss')
         const tickets = this.state.used ? this.props.usedTickts : this.props.unusedTikects
@@ -69,7 +76,7 @@ export default class Tickets extends React.Component {
                 <div className={styles.ticketWrap}>
                     { tickets.map((ticket) =>(<Ticket key={ticket.id} viewTicket={this.viewTicket} ticket={ticket} />)) }
                 </div>
-                <TicketTool />
+                <TicketTool onTicketToolBarClick={this.handleClickTicketToolBar} />
             </div>
         );
     }

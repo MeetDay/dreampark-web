@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { push } from 'react-router-redux';
+import { connect } from 'react-redux';
 import { TicketCard, TicketSearchBar } from '../component';
+
+@connect(
+    state => ()
+)
 
 export default class BuyTicket extends React.Component {
     constructor(props) {
@@ -9,7 +15,7 @@ export default class BuyTicket extends React.Component {
     }
 
     _handleSearchFocus(e) {
-        location.href = '/buytickets/search'
+        this.props.dispatch(push('/buytickets/search'))
     }
 
     render() {
