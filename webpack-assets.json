@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.1ce203db4085f3e1f704.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.1ce203db4085f3e1f704.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.1ce203db4085f3e1f704.min.js"
+    "main": "http://localhost:3000/dist/main.63b5e6e7e95d846b2d69.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.63b5e6e7e95d846b2d69.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.63b5e6e7e95d846b2d69.min.js"
   },
   "styles": {},
   "assets": {
@@ -296,6 +296,10 @@
       "cartImg": "TicketTool__cartImg__2b1zV",
       "ticket": "TicketTool__ticket__1Dfly",
       "_style": ".TicketTool__tool__3s1E2 {\n  position: fixed;\n  left: 10px;\n  right: 10px;\n  bottom: 10px;\n  height: 55px;\n  text-align: center;\n  background-color: #E62A10; }\n\n.TicketTool__cartImg__2b1zV {\n  height: 30px;\n  margin-top: 12.5px; }\n\n.TicketTool__ticket__1Dfly {\n  display: inline-block;\n  margin-left: 4px;\n  height: 55px;\n  line-height: 55px;\n  vertical-align: top;\n  font-size: 18px;\n  font-family: PingFangSC-Regular;\n  color: white; }\n"
+    },
+    "./src/containers/Tickets/container/BuyTicket.scss": {
+      "buyTicket": "BuyTicket__buyTicket__2gXOK",
+      "_style": ".BuyTicket__buyTicket__2gXOK {\n  margin-top: 44px; }\n"
     },
     "./src/containers/Tickets/container/SearchTicket.scss": {
       "searchTicket": "SearchTicket__searchTicket__2OKE1",
