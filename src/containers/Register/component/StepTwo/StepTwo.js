@@ -4,7 +4,7 @@ import superagent from 'superagent'
 import { message } from 'antd'
 import { LoginButton, Phone, Password } from '../../../../components'
 import countDown from '../../../../utils/countDown'
-import { legalSMSCode, formatPhoneNumber } from '../../../../utils/regex'
+import { legalSMSCode, formatPhoneNumber, clearWhiteSpaceOf } from '../../../../utils/regex'
 
 export default class StepTwo extends React.Component {
     static propTypes = {
@@ -57,7 +57,7 @@ export default class StepTwo extends React.Component {
     _handleClickRegainCode(e) {
         e.preventDefault()
         if (this.state.counterDisabled) return
-        this.props.getSMSCode(this.props.phonenumber)
+        this.props.getSMSCode(clearWhiteSpaceOf(this.props.phonenumber))
 
         const updateCounter = (counter) => {
             this.setState({
