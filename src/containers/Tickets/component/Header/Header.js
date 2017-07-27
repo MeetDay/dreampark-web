@@ -28,7 +28,7 @@ export default class Header extends React.Component {
                     <img className={styles.avatar} src="/assets/avatar_profile_big.png" alt="avatar" />
                     <div className={styles.info}>
                         <div>
-                            <span className={styles.username}>崔小川</span>
+                            <span className={styles.username}>{this.props.user.username}</span>
                             <img className={styles.vip} src="/assets/vip_big.png" alt="vip" />
                         </div>
                         <div className={styles.tip}>点击显示我的二维码</div>

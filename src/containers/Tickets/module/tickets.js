@@ -22,12 +22,12 @@ const initialState = {
     unusedTikectsLoading: false,
     unusedTikectsLoaded: false,
     unusedTikectsError: null,
-    unusedTikects: [{id:1},{id:2}],
+    unusedTikects: [],
 
     usedTicktsLoading: false,
     usedTicktsLoaded: false,
     usedTicktsError: null,
-    usedTickts: [{id:4},{id:5},{id:6},{id:7},{id:8},{id:9}]
+    usedTickts: []
 }
 
 export default function tickets(state=initialState, action) {
