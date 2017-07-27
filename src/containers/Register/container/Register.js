@@ -55,7 +55,7 @@ export default class Register extends React.Component {
             password: sha256(this.state.password),
             zone: 86,
             code: clearWhiteSpaceOf(this.state.code),
-            link_account: weChatInfo ? { union_id: weChatInfo.unionid, accessToken } : undefined
+            link_account: weChatInfo ? { union_id: weChatInfo.unionid, auth_token: accessToken } : undefined
         })
     }
 
