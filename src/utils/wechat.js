@@ -7,7 +7,9 @@ export function jumpToWeChatAuthorizationUrl(location) {
 }
 
 export function getWeChatAuthorizationUrl(urlBeforeLeave) {
-    sessionStorage.setItem(Constant.URL_BEFORE_LEAVE, urlBeforeLeave);
+    if (typeof urlBeforeLeave === 'string' && !(urlBeforeLeave.includes('register') || urlBeforeLeave.includes('login'))) {
+        sessionStorage.setItem(Constant.URL_BEFORE_LEAVE, urlBeforeLeave);
+    }
     const redirectUri = 'http%3A%2F%2Fwww.fbpageant.com%2Fwechat';
     const url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${projectConfig.wechatAppID}`
         + `&redirect_uri=${redirectUri}&response_type=code&scope=snsapi_userinfo&state=fbpark#wechat_redirect`;
