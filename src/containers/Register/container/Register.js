@@ -17,7 +17,8 @@ import { clearWhiteSpaceOf } from '../../../utils/regex'
         smsCodeError: state.register.smsCodeError,
         idcardInfo: state.register.idcardInfo,
 
-        weChatInfo: state.register.weChatInfo
+        weChatInfo: state.login.weChatInfo,
+        accessToken: state.login.accessToken
     }),
     dispatch => bindActionCreators({ userSignup, updateUserInfo, getSMSCodeAccordingTo, comfirmUserInfo }, dispatch)
 )
@@ -48,13 +49,13 @@ export default class Register extends React.Component {
 
     // 注册
     _userSignup() {
-        const { weChatInfo } = this.props
+        const { weChatInfo, accessToken } = this.props
         this.props.userSignup({
             phone: clearWhiteSpaceOf(this.state.phonenumber),
             password: sha256(this.state.password),
             zone: 86,
             code: clearWhiteSpaceOf(this.state.code),
-            link_account: weChatInfo ? { union_id: weChatInfo.unionid } : undefined
+            link_account: weChatInfo ? { union_id: weChatInfo.unionid, accessToken } : undefined
         })
     }
 

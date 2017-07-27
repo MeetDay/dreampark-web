@@ -78,8 +78,8 @@ function getUserInfo(weChatInfo) {
             .end((err, { body, text } = {}) => {
                 const resBody = isEmptyObject(body) ? JSON.parse(text) : body
                 console.log(resBody)
-                if (err || Object.prototype.hasOwnProperty.call(resBody, 'code')) resolve({ weChatUserInfo: weChatUserInfo, userError: resBody })
-                resolve({ weChatUserInfo: weChatUserInfo, userInfo: resBody })
+                if (err || Object.prototype.hasOwnProperty.call(resBody, 'code')) resolve({ weChatUserInfo: weChatUserInfo, accessToken, userError: resBody })
+                resolve({ weChatUserInfo: weChatUserInfo, accessToken, userInfo: resBody })
             })
     })
 }

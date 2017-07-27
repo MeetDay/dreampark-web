@@ -46,7 +46,7 @@ export default class StepTwo extends React.Component {
         }
 
         if (userSignupError && userSignupError !== this.props.userSignupError) {
-            console.log(userSignupError)
+            setTimeout(_ => message.error(userSignupError.error_message), 1000)
         }
 
         if (signUser && signUser !== this.props.signUser) {

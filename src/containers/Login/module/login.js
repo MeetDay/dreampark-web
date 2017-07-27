@@ -41,13 +41,13 @@ const actionhandlers = {
     [`${WECHATLOGIN}_PENDING`]: (state, action) => ({ ...state, weChatInfoLoading: true, weChatInfoLoaded: false }),
     [`${WECHATLOGIN}_FULFILLED`]: (state, action) => {
         const { data } = action.payload
-        console.log(data)
         return {
             ...state,
             weChatInfoLoading: false,
             weChatInfoLoaded: true,
             weChatInfo: data.weChatUserInfo,
             weChatInfoError: data.userError,
+            accessToken: data.accessToken,
             user: data.userInfo,
             authHeaders: generatorAuthHeadersForUser(data.userInfo)
         }
@@ -73,6 +73,7 @@ const initialState = {
     user: null,
     authHeaders: null,
 
+    accessToken: undefined,
     weChatInfo: null,
     weChatInfoLoading: false,
     weChatInfoLoaded: false,
