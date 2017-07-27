@@ -26,7 +26,7 @@ import { isWechatInfoLoaded, wechatLogin } from '../../Login/module/login'
         weChatInfo: state.login.weChatInfo,
         weChatInfoError: state.login.weChatInfoError
     }),
-    dispatch => bindActionCreators({ push: pushState }, dispatch)
+    dispatch => bindActionCreators({ push }, dispatch)
 )
 
 export default class WeChatLoginTransition extends React.Component {
@@ -34,14 +34,15 @@ export default class WeChatLoginTransition extends React.Component {
     componentDidMount() {
         const getQueryValueOf = key => decodeURIComponent(this.props.location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
         const wechatCode = getQueryValueOf('code')
-        if (!wechatCode)
-            jumpToWeChatAuthorizationUrl(location)
+        console.log(this.props.push('/login'))
+        // if (!wechatCode)
+        //     jumpToWeChatAuthorizationUrl(location)
     }
 
     componentWillReceiveProps(nextProps) {
         const { user, weChatInfo, weChatInfoError } = nextProps
         if (weChatInfo && weChatInfoError && weChatInfoError.code === 10080) {
-            setTimeout(_ => { this.props.pushState('/register#stepone') }, 100)
+            setTimeout(_ => { location.href = '/register#stepone' }, 100)
         } else if (weChatInfo && user && !Object.hasOwnProperty.call(user, 'username')) {
             setTimeout(_ => { location.href = '/register#stepthree' }, 100)
         } else if (weChatInfo && !weChatInfoError && user) {
