@@ -21,7 +21,7 @@ export function generatorAuthHeadersForUser(user) {
         ['X-Tella-Request-Timestamp']: user.token_timestamp,
         ['X-Tella-Request-Token']: user.access_token,
         ['X-Tella-Request-Userid']: user.userid,
-        ['X-Tella-Request-Device']: 10
+        ['X-Tella-Request-Device']: 20
     }
 }
 
