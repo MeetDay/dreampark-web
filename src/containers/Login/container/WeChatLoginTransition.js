@@ -39,13 +39,14 @@ export default class WeChatLoginTransition extends React.Component {
     componentWillReceiveProps(nextProps) {
         const { user, weChatInfo, weChatInfoError } = nextProps
         if (weChatInfo && weChatInfoError && weChatInfoError.code === 10080) {
-            location.href = '/register#stepone'
-            // setTimeout(_ => { nextProps.dispatch(push('/register#stepone')) }, 1000)
+            setTimeout(_ => { location.href = '/register#stepone' }, 100)
         } else if (weChatInfo && user && !Object.hasOwnProperty.call(user, 'username')) {
-            nextProps.dispatch(push('register#stepthree'))
+            setTimeout(_ => { location.href = '/register#stepthree' }, 100)
         } else if (weChatInfo && !weChatInfoError && user) {
-            const forwardUrl = sessionStorage.getItem(Constant.URL_BEFORE_LEAVE)
-            nextProps.dispatch(push(forwardUrl || '/tickets'))
+            setTimeout(_ => {
+                const forwardUrl = sessionStorage.getItem(Constant.URL_BEFORE_LEAVE)
+                nextProps.dispatch(push(forwardUrl || '/tickets'))
+            }, 100)
         }
     }
 
