@@ -27,7 +27,7 @@ export default class App extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.user && nextProps.user !== this.props.user) {
 			const cookies = new Cookies()
-			cookies.setItem(Constant.USER_COOKIE, nextProps.user)
+			cookies.set(Constant.USER_COOKIE, nextProps.user, { path: '/' })
 		}
 	}
 
