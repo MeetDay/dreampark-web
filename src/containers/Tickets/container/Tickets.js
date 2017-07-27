@@ -11,10 +11,10 @@ import { Header, Ticket, TicketDetail, TicketTool } from '../component'
     deferred: true,
     promise: ({ params, store: { dispatch, getState }, helpers }) => {
         const { ticketType } = params
-        if (!isUnusedTicketsLoaded(getState()) && ticketType === 'unused') {
-            return dispatch(getUnusedTikects())
-        } else if(!isUsedTicketsLoaded(getState())) {
+        if (!isUnusedTicketsLoaded(getState()) && ticketType === 'used') {
             return dispatch(getUsedTickts())
+        } else if(!isUsedTicketsLoaded(getState())) {
+            return dispatch(getUnusedTikects())
         }
     }
 }])

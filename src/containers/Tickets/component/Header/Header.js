@@ -38,8 +38,8 @@ export default class Header extends React.Component {
                     </div>
                 </div>
                 <div className={styles.bottom}>
-                    <div id="used" onClick={this.handleClick}><span className={classNames({ [styles.item]: true, [styles.itemActive]: this.state.used })}>已使用</span></div>
                     <div id="unused" onClick={this.handleClick}><span className={classNames({ [styles.item]: true, [styles.itemActive]: !this.state.used })}>未使用</span></div>
+                    <div id="used" onClick={this.handleClick}><span className={classNames({ [styles.item]: true, [styles.itemActive]: this.state.used })}>已使用</span></div>
                 </div>
             </div>
         );
