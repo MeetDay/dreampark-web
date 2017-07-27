@@ -45,13 +45,16 @@ export default class Tickets extends React.Component {
 
     _onMenuItemChange(used) {
         const { usedTickts, unusedTikects } = this.props
+        if (used) {
+            if (!usedTickts || (Array.isArray(usedTickts) && usedTickts.length === 0)) {
+                this.props.getUsedTickts()
+            }
+        } else {
+            if (!unusedTikects || (Array.isArray(unusedTikects) && unusedTikects.length === 0)) {
+                this.props.getUnusedTikects()
+            }
+        }
         this.setState({ used })
-        if (used && usedTickts && Array.isArray(usedTickts) && usedTickts.length === 0) {
-            this.props.getUsedTickts()
-        }
-        if (!used && unusedTikects && Array.isArray(unusedTikects) && unusedTikects.length === 0) {
-            this.props.getUnusedTikects()
-        }
     }
 
     _viewTicket(ticket) {
@@ -76,7 +79,7 @@ export default class Tickets extends React.Component {
                 {this.state.selectedTicket && <TicketDetail visible={this.state.showSelectedTicket} onCancel={this.closeViewTickets} ticket={this.state.selectedTicket} />}
                 <Header user={this.props.user} onMenuItemChange={this.onMenuItemChange} />
                 <div className={styles.ticketWrap}>
-                    { tickets.map((ticket) =>(<Ticket key={ticket.id} viewTicket={this.viewTicket} ticket={ticket} />)) }
+                    { tickets && tickets.map((ticket) =>(<Ticket key={ticket.id} viewTicket={this.viewTicket} ticket={ticket} />)) }
                 </div>
                 <TicketTool onTicketToolBarClick={this.handleClickTicketToolBar} />
             </div>
