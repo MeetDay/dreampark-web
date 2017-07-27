@@ -10,10 +10,8 @@ smsCodeRouter.post('/code', (req, res) => {
         .accept('application/json')
         .send(Object.assign({ appkey: projectConfig.smsAPPKey }, req.body))
         .end((err, { body, text } = {}) => {
-            console.log(err)
             if (err) return res.status(400).send(err)
             const result = isEmptyObject(body) ? JSON.parse(text) : body
-            console.log(result)
             res.status(result.status).send(result)
         })
 })

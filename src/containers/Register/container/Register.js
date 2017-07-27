@@ -50,6 +50,7 @@ export default class Register extends React.Component {
     // 注册
     _userSignup() {
         const { weChatInfo, accessToken } = this.props
+        console.log(weChatInfo)
         this.props.userSignup({
             phone: clearWhiteSpaceOf(this.state.phonenumber),
             password: sha256(this.state.password),
