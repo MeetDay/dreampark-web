@@ -66,6 +66,7 @@ function getWechatUserInfo(tokenInfo) {
 
 function getUserInfo(weChatInfo) {
     const { weChatUserInfo, accessToken } = weChatInfo
+    console.log(weChatUserInfo)
     const data = {
         auth_token: accessToken,
         union_id: weChatUserInfo.unionid
