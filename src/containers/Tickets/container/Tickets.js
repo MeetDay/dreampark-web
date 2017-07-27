@@ -44,11 +44,12 @@ export default class Tickets extends React.Component {
     }
 
     _onMenuItemChange(used) {
+        const { usedTickts, unusedTikects } = this.props
         this.setState({ used })
-        if (used && this.props.usedTickts.length === 0) {
+        if (used && usedTickts && Array.isArray(usedTickts) && usedTickts.length === 0) {
             this.props.getUsedTickts()
         }
-        if (!used && this.props.unusedTikects.length === 0) {
+        if (!used && unusedTikects && Array.isArray(unusedTikects) && unusedTikects.length === 0) {
             this.props.getUnusedTikects()
         }
     }
