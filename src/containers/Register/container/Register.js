@@ -54,7 +54,6 @@ export default class Register extends React.Component {
     // 注册
     _userSignup() {
         const { weChatInfo, accessToken } = this.props
-        console.log(weChatInfo)
         this.props.userSignup({
             phone: clearWhiteSpaceOf(this.state.phonenumber),
             password: sha256(this.state.password),
@@ -66,13 +65,17 @@ export default class Register extends React.Component {
 
     // 更新用户信息
     _updateUserInfo() {
-        this.props.updateUserInfo({
-            username: this.state.username,
-            identity_card: this.state.cardno,
-            birthday: this.props.idcardInfo.data.birthday,
-            club_name: this.state.club,
-            trade: this.state.profession
-        })
+        if (this.props.idcardInfo) {
+            this.props.updateUserInfo({
+                username: this.state.username,
+                identity_card: this.state.cardno,
+                birthday: this.props.idcardInfo.data.birthday,
+                gender: this.props.idcardInfo.sex,
+                address: this.props.idcardInfo.address,
+                club_name: this.state.club,
+                trade: this.state.profession
+            })
+        }
     }
 
     /**
