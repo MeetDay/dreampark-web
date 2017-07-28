@@ -8,7 +8,7 @@ export function jumpToWeChatAuthorizationUrl(location) {
 }
 
 export function getWeChatAuthorizationUrl(urlBeforeLeave) {
-    if (typeof urlBeforeLeave === 'string' && !(urlBeforeLeave.includes('register') || urlBeforeLeave.includes('login'))) {
+    if (typeof urlBeforeLeave === 'string' && !(urlBeforeLeave.includes('register') || urlBeforeLeave.includes('login') || urlBeforeLeave.includes('wehchat'))) {
         sessionStorage.setItem(Constant.URL_BEFORE_LEAVE, urlBeforeLeave);
     }
     const redirectUri = 'http%3A%2F%2Fwww.fbpageant.com%2Fwechat';
