@@ -17,7 +17,6 @@ export default class BuyTicket extends React.Component {
     }
 
     _handleSearchFocus(e) {
-        console.log(this.props)
         this.props.push('/buytickets/search')
     }
 
