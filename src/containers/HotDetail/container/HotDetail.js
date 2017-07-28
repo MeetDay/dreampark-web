@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Carousel } from 'antd';
 import { asyncConnect } from 'redux-async-connect';
 import { connect } from 'react-redux';
-import { TitleElement } from '../../../components';
+import { TitleElement, PageNotExist } from '../../../components';
 import { Navbar, ToolBar, Recommend, BuyTicketNow, BuyParkingCoupon } from '../component';
 import { isHotDetailLoaded, getHotDetailBy } from '../module/hotdetail';
 import { convertElementsToComponet } from '../../../utils/elements';
@@ -86,7 +86,7 @@ export default class HotDetail extends React.Component {
     }
 
     render() {
-        if (!this.props.hotDetail) return null;
+        if (!this.props.hotDetail) return (<PageNotExist />);
         const styles = require('./HotDetail.scss');
         const contentWrapStyle = {
             maxHeight: this.state.contentWrapMaxHeight,

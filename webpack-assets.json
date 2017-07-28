@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.df97e4fc681bbd4978e7.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.df97e4fc681bbd4978e7.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.df97e4fc681bbd4978e7.min.js"
+    "main": "http://localhost:3000/dist/main.c666e18f92ff1a51b183.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.c666e18f92ff1a51b183.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.c666e18f92ff1a51b183.min.js"
   },
   "styles": {},
   "assets": {
@@ -316,6 +316,11 @@
     "./src/containers/Tickets/container/Tickets.scss": {
       "ticketWrap": "Tickets__ticketWrap__1-ptD",
       "_style": ".Tickets__ticketWrap__1-ptD {\n  padding: 0 20px;\n  border-bottom: 75px solid transparent; }\n"
+    },
+    "./src/components/PageNotExist/PageNotExist.scss": {
+      "content": "PageNotExist__content__3JpWu",
+      "realCenter": "PageNotExist__realCenter__2SzDB",
+      "_style": ".PageNotExist__content__3JpWu {\n  height: 80px;\n  font-size: 16px;\n  color: #ccc; }\n\n.PageNotExist__realCenter__2SzDB {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto; }\n"
     }
   },
   "webpack": {

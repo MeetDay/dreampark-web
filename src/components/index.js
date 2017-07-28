@@ -10,3 +10,4 @@ export Checkbox from './Checkbox/Checkbox';
 export SearchBar from './SearchBar/SearchBar';
 export LoadMoreButton from './LoadMoreButton/LoadMoreButton';
 export Navbar from './Navbar/Navbar';
+export PageNotExist from './PageNotExist/PageNotExist';
