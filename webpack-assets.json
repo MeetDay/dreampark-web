@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.146307fca122b03508fe.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.146307fca122b03508fe.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.146307fca122b03508fe.min.js"
+    "main": "http://localhost:3000/dist/main.8790c89c8eeb54a1ca07.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.8790c89c8eeb54a1ca07.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.8790c89c8eeb54a1ca07.min.js"
   },
   "styles": {},
   "assets": {
@@ -185,6 +185,10 @@
       "nav": "Login__nav__R83rM",
       "_style": ".Login__loginBack__LQYMw {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-image: url(\"/assets/login_background.png\");\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat; }\n\n.Login__nav__R83rM {\n  margin: 0 20px; }\n"
     },
+    "./src/containers/Login/container/WeChatLoginTransition.scss": {
+      "description": "WeChatLoginTransition__description__32_nB",
+      "_style": ".WeChatLoginTransition__description__32_nB {\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  margin: auto;\n  width: 100%;\n  height: 44px;\n  line-height: 44px;\n  font-size: 14px;\n  text-align: center; }\n"
+    },
     "./src/containers/Register/component/StepFour/StepFour.scss": {
       "stepfour": "StepFour__stepfour__2tS3r",
       "nextstep": "StepFour__nextstep__1IiBH",
@@ -312,10 +316,6 @@
     "./src/containers/Tickets/container/Tickets.scss": {
       "ticketWrap": "Tickets__ticketWrap__1-ptD",
       "_style": ".Tickets__ticketWrap__1-ptD {\n  padding: 0 20px;\n  border-bottom: 75px solid transparent; }\n"
-    },
-    "./src/containers/Login/container/WeChatLoginTransition.scss": {
-      "description": "WeChatLoginTransition__description__32_nB",
-      "_style": ".WeChatLoginTransition__description__32_nB {\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  margin: auto;\n  width: 100%;\n  height: 44px;\n  line-height: 44px;\n  font-size: 14px;\n  text-align: center; }\n"
     }
   },
   "webpack": {

@@ -16,7 +16,7 @@ const actionHandlers = {
 }
 
 const initialState = {
-    user: { id: 1, username: '王超', level: "vip" },
+    user: null,
     unusedTikectsLoading: false,
     unusedTikectsLoaded: false,
     unusedTikectsError: null,
@@ -44,7 +44,7 @@ export function isUsedTicketsLoaded(globalState) {
 export function getUnusedTikects() {
     return (dispatch, getState) => {
         const { authHeaders } = getState().login
-        dispatch({
+        return dispatch({
             type: UNUSED_TICKETS,
             payload: (client) => client.get('/unuse_ticket', {
                 headers: authHeaders
@@ -56,7 +56,7 @@ export function getUnusedTikects() {
 export function getUsedTickts() {
     return (dispatch, getState) => {
         const { authHeaders } = getState().login
-        dispatch({
+        return dispatch({
             type: USED_TICKETS,
             payload: (client) => client.get('/used_ticket', {
                 headers: authHeaders
