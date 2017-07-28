@@ -18,8 +18,10 @@ function isEmptyObject(obj) {
 
 const routes = (store) => {
 	const requireLogin = (nextState, replaceState, callback) => {
-		const { user } = store.getState().login
-		if (isEmptyObject(user)) replaceState('/wechat')
+		const callbackUrl = nextState.location.pathname;
+		const forwardUrl = callbackUrl ? `/wechat?callbackUrl=${callbackUrl}` : '/wechat';
+		const { user } = store.getState().login;
+		if (isEmptyObject(user)) replaceState(forwardUrl)
 		callback()
 	}
 

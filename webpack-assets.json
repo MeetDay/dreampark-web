@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.5a8ce4e3c1d4c11b20b3.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.5a8ce4e3c1d4c11b20b3.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.5a8ce4e3c1d4c11b20b3.min.js"
+    "main": "http://localhost:3000/dist/main.c59832da15e480813336.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.c59832da15e480813336.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.c59832da15e480813336.min.js"
   },
   "styles": {},
   "assets": {
@@ -48,6 +48,11 @@
     "./src/components/Navbar/Navbar.scss": {
       "nav": "Navbar__nav__1jsbZ",
       "_style": ".Navbar__nav__1jsbZ {\n  position: relative;\n  color: white;\n  z-index: 999; }\n"
+    },
+    "./src/components/PageNotExist/PageNotExist.scss": {
+      "content": "PageNotExist__content__3JpWu",
+      "realCenter": "PageNotExist__realCenter__2SzDB",
+      "_style": ".PageNotExist__content__3JpWu {\n  height: 80px;\n  font-size: 16px;\n  color: #ccc; }\n\n.PageNotExist__realCenter__2SzDB {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto; }\n"
     },
     "./src/components/Password/Password.scss": {
       "password": "Password__password__3ixDx",
@@ -316,11 +321,6 @@
     "./src/containers/Tickets/container/Tickets.scss": {
       "ticketWrap": "Tickets__ticketWrap__1-ptD",
       "_style": ".Tickets__ticketWrap__1-ptD {\n  padding: 0 20px;\n  border-bottom: 75px solid transparent; }\n"
-    },
-    "./src/components/PageNotExist/PageNotExist.scss": {
-      "content": "PageNotExist__content__3JpWu",
-      "realCenter": "PageNotExist__realCenter__2SzDB",
-      "_style": ".PageNotExist__content__3JpWu {\n  height: 80px;\n  font-size: 16px;\n  color: #ccc; }\n\n.PageNotExist__realCenter__2SzDB {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto; }\n"
     }
   },
   "webpack": {

@@ -2,8 +2,9 @@ import * as Constant from './constant'
 import { isEmptyObject } from '../containers/Login/module/login'
 import projectConfig from '../../project.config'
 
-export function jumpToWeChatAuthorizationUrl(location) {
-    const weChatAuthorizationUrl = getWeChatAuthorizationUrl(location.href)
+export function jumpToWeChatAuthorizationUrl(location, urlBeforeLeave) {
+    const callbackUrl = urlBeforeLeave ? urlBeforeLeave : location.href;
+    const weChatAuthorizationUrl = getWeChatAuthorizationUrl(callbackUrl)
     location.href = weChatAuthorizationUrl
 }
 
