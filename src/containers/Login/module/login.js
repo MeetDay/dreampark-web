@@ -35,7 +35,17 @@ const actionhandlers = {
     [`${SIGNUP}_REJECTED`]: (state, action) => ({ ...state, signupLoading: false, signupLoaded: false, userSignupError: action.payload }),
 
     [`${UPDATE_USER}_PENDING`]: (state, action) => ({ ...state, updateUserLoading: true, updateUserLoaded: false }),
-    [`${UPDATE_USER}_FULFILLED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: true, user: Object.assign({}, state.user, action.payload) }),
+    [`${UPDATE_USER}_FULFILLED`]: (state, action) => {
+        console.log(action)
+        const updateUser = Object.assign({}, state.user, action.payload)
+        console.log(updateUser)
+        return {
+            ...state,
+            updateUserLoading: false,
+            updateUserLoaded: true,
+            user: updateUser
+        }
+    },
     [`${UPDATE_USER}_REJECTED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: false, updateUserError: action.payload }),
 
     [`${WECHATLOGIN}_PENDING`]: (state, action) => ({ ...state, weChatInfoLoading: true, weChatInfoLoaded: false }),
