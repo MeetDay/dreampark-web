@@ -82,10 +82,11 @@ export default class Tickets extends React.Component {
     render() {
         const styles = require('./Tickets.scss')
         const tickets = this.state.used ? this.props.usedTickts : this.props.unusedTikects
+        const user = this.props.user || {}
         return (
             <div>
                 {this.state.selectedTicket && <TicketDetail visible={this.state.showSelectedTicket} onCancel={this.closeViewTickets} ticket={this.state.selectedTicket} />}
-                <Header key={this.props.user.id} user={this.props.user} onMenuItemChange={this.onMenuItemChange} />
+                <Header key={user.id} user={user} onMenuItemChange={this.onMenuItemChange} />
                 <div className={styles.ticketWrap}>
                     { tickets && tickets.map((ticket) =>(<Ticket key={ticket.id} viewTicket={this.viewTicket} ticket={ticket} />)) }
                 </div>

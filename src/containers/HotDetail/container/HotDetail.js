@@ -9,6 +9,7 @@ import { Navbar, ToolBar, Recommend, BuyTicketNow, BuyParkingCoupon } from '../c
 import { isHotDetailLoaded, getHotDetailBy } from '../module/hotdetail';
 import { convertElementsToComponet } from '../../../utils/elements';
 import { appendQiNiuQueryParamsForImageUrl } from '../../../helpers/QiNiuHelpers';
+import { jumpToWeChatAuthorizationUrl } from '../../../utils/wechat'
 
 @asyncConnect([{
     deferred: true,
@@ -20,7 +21,10 @@ import { appendQiNiuQueryParamsForImageUrl } from '../../../helpers/QiNiuHelpers
 }])
 
 @connect(
-    state => ({ hotDetail: state.hotdetail.hotDetail })
+    state => ({
+        user: state.login.user,
+        hotDetail: state.hotdetail.hotDetail
+    })
 )
 
 export default class HotDetail extends React.Component {
@@ -30,12 +34,18 @@ export default class HotDetail extends React.Component {
         this.handleClickBuyTicketNow = (e) => this._handleClickBuyTicketNow(e);
         this.handleClickAddToCart = (e) => this._handleClickAddToCart(e);
         this.handleClickCancel = (e) => this._handleClickCancel(e);
+        this.handleClickToolBar = (e) => this._handleClickToolBar(e);
+
         this.state = {
             contentWrapMaxHeight: '175px',
             contentWrapOverflow: 'hidden',
             viewMoreWrapDisplay: 'block',
             showBuyTicketNow: false,
         };
+    }
+
+    componentDidMount() {
+
     }
 
     _handleClickViewMore(e) {
@@ -49,16 +59,30 @@ export default class HotDetail extends React.Component {
 
     _handleClickBuyTicketNow(e) {
         e.preventDefault();
-        this.setState({ showBuyTicketNow: true });
+        if (this.props.user) {
+
+        } else {
+            jumpToWeChatAuthorizationUrl(location)
+        }
     }
 
     _handleClickAddToCart(e) {
         e.preventDefault();
+        if (this.props.user) {
+
+        } else {
+            jumpToWeChatAuthorizationUrl(location)
+        }
     }
 
     _handleClickCancel(e) {
         e.preventDefault();
         this.setState({ showBuyTicketNow: false });
+    }
+
+    _handleClickToolBar(e) {
+        e.preventDefault();
+        this.setState({ showBuyTicketNow: true });
     }
 
     render() {
@@ -118,8 +142,13 @@ export default class HotDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-                <ToolBar price={123} onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} />
-                <BuyTicketNow show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} />
+                <ToolBar price={123} onClickBuyTicketNow={this.handleClickToolBar} />
+                <BuyTicketNow
+                    show={this.state.showBuyTicketNow}
+                    onClickCancel={this.handleClickCancel}
+                    onClickBuyTicketNow={this.handleClickBuyTicketNow}
+                    onClickAddToCart={this.handleClickAddToCart}
+                />
                 {/* <BuyParkingCoupon show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} /> */}
             </div>
         );

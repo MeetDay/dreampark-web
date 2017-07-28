@@ -5,6 +5,8 @@ import { ticketExisted } from './ticketHelper'
 
 export default class BuyTicketNow extends React.Component {
     static propTypes = {
+        onClickBuyTicketNow: PropTypes.func,
+        onClickAddToCart: PropTypes.func,
         tickets: PropTypes.array,
         show: PropTypes.bool,
         onClickCancel: PropTypes.func.isRequired
