@@ -1,5 +1,6 @@
 const UNUSED_TICKETS = 'redux/tickets/unused'
 const USED_TICKETS = 'redux/tickets/used'
+const SEARCH_TICKETS = 'redux/tickets/search_tickets'
 
 const actionHandlers = {
     [`${UNUSED_TICKETS}_PENDING`]: (state, action) => ({ ...state, unusedTikectsLoading: true, unusedTikectsLoaded: false }),
@@ -12,7 +13,19 @@ const actionHandlers = {
     [`${USED_TICKETS}_FULFILLED`]: (state, action) => {
         return { ...state, usedTicktsLoading: false, usedTicktsLoaded: true, usedTickts: action.payload }
     },
-    [`${USED_TICKETS}_REJECTED`]: (state, action) => ({ ...state, usedTicktsLoading: false, usedTicktsLoaded: false, usedTicktsError: action.payload })
+    [`${USED_TICKETS}_REJECTED`]: (state, action) => ({ ...state, usedTicktsLoading: false, usedTicktsLoaded: false, usedTicktsError: action.payload }),
+
+    [`${SEARCH_TICKETS}_PENDING`]: (state, action) => ({...state, searchTicketsLoading: true, searchTicketsLoaded: false }),
+    [`${SEARCH_TICKETS}_FULFILLED`]: (state, action) => {
+        console.log(action)
+        return {
+            ...state,
+            searchTicketsLoading: false,
+            searchTicketsLoaded: true,
+            searchTickets: action.payload
+        }
+    },
+    [`${SEARCH_TICKETS}_REJECTED`]: (state, action) => ({...state, searchTicketsLoading: false, searchTicketsLoaded: false, searchTicketError: action.payload })
 }
 
 const initialState = {
@@ -25,7 +38,12 @@ const initialState = {
     usedTicktsLoading: false,
     usedTicktsLoaded: false,
     usedTicktsError: null,
-    usedTickts: []
+    usedTickts: [],
+
+    searchTicketsLoading: false,
+    searchTicketsLoaded: false,
+    searchTicketError: null,
+    searchTickets: []
 }
 
 export default function tickets(state=initialState, action) {
@@ -61,6 +79,15 @@ export function getUsedTickts() {
             payload: (client) => client.get('/used_ticket', {
                 headers: authHeaders
             })
+        })
+    }
+}
+
+export function searchTickets(title) {
+    return {
+        type: SEARCH_TICKETS,
+        payload: (client) => client.get('/pois/search', {
+            params: { title: title }
         })
     }
 }

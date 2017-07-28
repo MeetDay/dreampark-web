@@ -10,6 +10,7 @@ import { isHotDetailLoaded, getHotDetailBy } from '../module/hotdetail';
 import { convertElementsToComponet } from '../../../utils/elements';
 import { appendQiNiuQueryParamsForImageUrl } from '../../../helpers/QiNiuHelpers';
 import { jumpToWeChatAuthorizationUrl } from '../../../utils/wechat'
+import { isEmptyObject } from '../../Login/module/login'
 
 @asyncConnect([{
     deferred: true,
@@ -86,7 +87,7 @@ export default class HotDetail extends React.Component {
     }
 
     render() {
-        if (!this.props.hotDetail) return (<PageNotExist />);
+        if (!this.props.hotDetail || isEmptyObject(this.props.hotDetail)) return (<PageNotExist />);
         const styles = require('./HotDetail.scss');
         const contentWrapStyle = {
             maxHeight: this.state.contentWrapMaxHeight,
