@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { asyncConnect } from 'redux-async-connect'
 import { connect } from 'react-redux'
+import { isEmptyObject } from '../../Login/module/login'
 import { CoverImage, TitleElement, TextElement, ImageElement, BigImageElement } from '../../../components'
 import { isTermLoaded, getUserTermsBy } from '../module/dreamparkTerms'
 
@@ -44,7 +45,7 @@ export default class TermsOfService extends React.Component {
         const styles = require('./TermsOfService.scss')
         return (
             <div className={styles.container}>
-                { this.props.coverImage && <CoverImage src={this.props.coverImage.name} /> }
+                { !isEmptyObject(this.props.coverImage) && <CoverImage src={this.props.coverImage.name} /> }
                 { this.props.title && <TitleElement title={this.props.title} textAlign="center" /> }
                 { this.props.elements.map(this.convertElementToComponet())}
             </div>
