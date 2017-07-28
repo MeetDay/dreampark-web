@@ -2,25 +2,28 @@ import React from 'react'
 import sha256 from 'js-sha256'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { push } from 'react-router-redux'
 import { message } from 'antd'
 import { StepOne, StepTwo, StepThree, StepFour } from '../component'
 import { Navbar } from '../../Login/component'
 import { userSignup, updateUserInfo } from '../../Login/module/login'
 import { comfirmUserInfo, getSMSCodeAccordingTo } from '../module/register'
 import { clearWhiteSpaceOf } from '../../../utils/regex'
+import { isFullUser } from '../../../utils/wechat'
 
 @connect(
     state => ({
         user: state.login.user,
         userSignupError: state.login.userSignupError,
-
+        updateUserError: state.login.updateUserError,
         smsCodeError: state.register.smsCodeError,
         idcardInfo: state.register.idcardInfo,
 
         weChatInfo: state.login.weChatInfo,
+        weChatInfoError: state.login.weChatInfoError,
         accessToken: state.login.accessToken
     }),
-    dispatch => bindActionCreators({ userSignup, updateUserInfo, getSMSCodeAccordingTo, comfirmUserInfo }, dispatch)
+    dispatch => bindActionCreators({ push, userSignup, updateUserInfo, getSMSCodeAccordingTo, comfirmUserInfo }, dispatch)
 )
 
 export default class Register extends React.Component {
@@ -49,6 +52,18 @@ export default class Register extends React.Component {
 
     componentDidMount() {
         console.log(this.props.weChatInfo)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { user, updateUserError, weChatInfoError } = nextProps
+        if (isFullUser(user)) {
+            const forwardUrl = sessionStorage.getItem(Constant.URL_BEFORE_LEAVE)
+            this.props.push(forwardUrl || '/tickets')
+        } else if (updateUserError && updateUserError !== this.props.updateUserError) {
+            message.error('注册失败, 请重新尝试...')
+        } else if (weChatInfoError && weChatInfoError !== this.props.weChatInfoError) {
+            message.error('微信登录失败, 请重新尝试...')
+        }
     }
 
     // 注册

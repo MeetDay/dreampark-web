@@ -42,7 +42,7 @@ export default class StepTwo extends React.Component {
     componentWillReceiveProps(nextProps) {
         const { smsCodeError, signUser, userSignupError } = nextProps
         if (smsCodeError && smsCodeError !== this.props.smsCodeError) {
-            setTimeout(_ => message.error(smsCodeError.error), 1000)
+            setTimeout(_ => message.error('获取短信验证码失败, 请重新尝试获取...'), 1000)
         }
 
         if (userSignupError && userSignupError !== this.props.userSignupError) {

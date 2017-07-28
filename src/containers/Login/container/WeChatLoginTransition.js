@@ -6,6 +6,7 @@ import { push } from 'react-router-redux'
 import * as Constant from '../../../utils/constant'
 import { jumpToWeChatAuthorizationUrl } from '../../../utils/wechat'
 import { isWechatInfoLoaded, wechatLogin } from '../../Login/module/login'
+import { isFullUser } from '../../../utils/wechat'
 
 @asyncConnect([{
     deferred: false,
@@ -43,7 +44,7 @@ export default class WeChatLoginTransition extends React.Component {
         const { user, weChatInfo, weChatInfoError } = nextProps
         if (weChatInfo && weChatInfoError && weChatInfoError.code === 10080) {
             this.props.push('/register#stepone')
-        } else if (weChatInfo && user && !Object.hasOwnProperty.call(user, 'username')) {
+        } else if (weChatInfo && user && !isFullUser(user)) {
             this.props.push('/register#stepthree')
         } else if (weChatInfo && !weChatInfoError && user) {
             const forwardUrl = sessionStorage.getItem(Constant.URL_BEFORE_LEAVE)
