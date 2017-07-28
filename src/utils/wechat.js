@@ -20,10 +20,11 @@ export function getWeChatAuthorizationUrl(urlBeforeLeave) {
 
 export function isFullUser(user) {
     if (isEmptyObject(user)) return false;
+    let isFullUser = false;
     if (Object.prototype.hasOwnProperty.call(user, 'username') &&
         Object.prototype.hasOwnProperty.call(user, 'userid') &&
         Object.prototype.hasOwnProperty.call(user, 'access_token')) {
-        return true;
+        isFullUser = true;
     }
-    return false;
+    return isFullUser;
 }

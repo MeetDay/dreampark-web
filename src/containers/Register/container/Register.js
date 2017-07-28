@@ -56,6 +56,7 @@ export default class Register extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         const { user, updateUserError, weChatInfoError } = nextProps
+        console.log(user)
         if (isFullUser(user)) {
             const forwardUrl = sessionStorage.getItem(Constant.URL_BEFORE_LEAVE)
             this.props.push(forwardUrl || '/tickets')
