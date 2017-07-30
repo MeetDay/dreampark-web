@@ -1,5 +1,6 @@
 const UNUSED_TICKETS = 'redux/tickets/unused'
 const USED_TICKETS = 'redux/tickets/used'
+const UNPAID_TICKETS = 'redux/tickets/unpaid'
 const SEARCH_TICKETS = 'redux/tickets/search_tickets'
 
 const actionHandlers = {
@@ -40,6 +41,11 @@ const initialState = {
     usedTicktsError: null,
     usedTickts: [],
 
+    unpaidTicketsLoading: false,
+    unpaidTicketsLoaded: false,
+    unpaidTicketsError: null,
+    unpaidTickets: [],
+
     searchTicketsLoading: false,
     searchTicketsLoaded: false,
     searchTicketError: null,
@@ -57,6 +63,10 @@ export function isUnusedTicketsLoaded(globalState) {
 
 export function isUsedTicketsLoaded(globalState) {
     return globalState.tickets && globalState.tickets.usedTicktsLoaded
+}
+
+export function isUnpaidTicketsLoaded(globalState) {
+    return globalState.tickets && globalState.tickets.unpaidTickets
 }
 
 export function getUnusedTikects() {
@@ -77,6 +87,18 @@ export function getUsedTickts() {
         return dispatch({
             type: USED_TICKETS,
             payload: (client) => client.get('/used_ticket', {
+                headers: authHeaders
+            })
+        })
+    }
+}
+
+export function getUnpaidTickets() {
+    return (dispatch, getState) => {
+        const { authHeaders } = getState().login
+        return dispatch({
+            type: UNPAID_TICKETS,
+            payload: (client) => client.get('/xxxx', {
                 headers: authHeaders
             })
         })

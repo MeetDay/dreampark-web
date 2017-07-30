@@ -10,14 +10,14 @@ export default class Header extends React.Component {
     constructor(props) {
         super(props)
         this.handleClick = (e) => this._handleClick(e)
-        this.state = { used: false }
+        this.state = { selectedItemType: 'unused' }
     }
-
+    
     _handleClick(e) {
         e.preventDefault();
-        const used = e.currentTarget.id === 'used'
-        this.setState({ used: used })
-        this.props.onMenuItemChange(used)
+        const currentSelectedItem = e.currentTarget.id;
+        this.setState({ selectedItemType: currentSelectedItem })
+        this.props.onMenuItemChange(currentSelectedItem)
     }
 
     render() {
@@ -41,8 +41,9 @@ export default class Header extends React.Component {
                     </div>
                 </div>
                 <div className={styles.bottom}>
-                    <div id="unused" onClick={this.handleClick}><span className={classNames({ [styles.item]: true, [styles.itemActive]: !this.state.used })}>未使用</span></div>
-                    <div id="used" onClick={this.handleClick}><span className={classNames({ [styles.item]: true, [styles.itemActive]: this.state.used })}>已使用</span></div>
+                    <div id="unused" onClick={this.handleClick}><span className={classNames({ [styles.item]: true, [styles.itemActive]: this.state.selectedItemType === 'unused'  })}>未使用</span></div>
+                    <div id="used" onClick={this.handleClick}><span className={classNames({ [styles.item]: true, [styles.itemActive]: this.state.selectedItemType === 'used' })}>已使用</span></div>
+                    <div id="unpaid" onClick={this.handleClick}><span className={classNames({ [styles.item]: true, [styles.itemActive]: this.state.selectedItemType === 'unpaid' })}>未支付</span></div>
                 </div>
             </div>
         );

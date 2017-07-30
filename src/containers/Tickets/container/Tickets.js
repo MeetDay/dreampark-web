@@ -4,7 +4,7 @@ import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { asyncConnect } from 'redux-async-connect'
 import { bindActionCreators } from 'redux'
-import { isUsedTicketsLoaded, getUsedTickts,isUnusedTicketsLoaded, getUnusedTikects } from '../module/tickets'
+import { isUsedTicketsLoaded, getUsedTickts,isUnusedTicketsLoaded, getUnusedTikects, isUnpaidTicketsLoaded, getUnpaidTickets } from '../module/tickets'
 import { Header, Ticket, TicketDetail, TicketTool } from '../component'
 
 @asyncConnect([{
@@ -14,7 +14,9 @@ import { Header, Ticket, TicketDetail, TicketTool } from '../component'
         const ticketType = getQueryValueOf('type')
         if (!isUsedTicketsLoaded(getState()) && ticketType === 'used') {
             return dispatch(getUsedTickts())
-        } else if(!isUnusedTicketsLoaded(getState())) {
+        } else if(!isUnpaidTicketsLoaded(getState()) && ticketType === 'unpaid') {
+            return dispatch(getUnpaidTickets())
+        } else if (!isUnusedTicketsLoaded(getState())){
             return dispatch(getUnusedTikects())
         }
     }
@@ -24,9 +26,10 @@ import { Header, Ticket, TicketDetail, TicketTool } from '../component'
     state => ({
         user: state.tickets.user,
         unusedTikects: state.tickets.unusedTikects,
-        usedTickts: state.tickets.usedTickts
+        usedTickts: state.tickets.usedTickts,
+        unpaidTickets: state.tickets.unpaidTickets
     }),
-    dispatch => bindActionCreators({ push, getUnusedTikects, getUsedTickts }, dispatch)
+    dispatch => bindActionCreators({ push, getUnusedTikects, getUsedTickts, getUnpaidTickets }, dispatch)
 )
 
 export default class Tickets extends React.Component {
@@ -43,26 +46,30 @@ export default class Tickets extends React.Component {
         };
     }
 
-    componentDidMount() {
-        const getQueryValueOf = key => decodeURIComponent(location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
-        const ticketType = getQueryValueOf('type')
-        if (ticketType === 'used') {
-            setTimeout(_ => { this.setState({ used: true }) }, 0)
-        }
-    }
+    // componentDidMount() {
+    //     const getQueryValueOf = key => decodeURIComponent(location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
+    //     const ticketType = getQueryValueOf('type')
+    //     if (ticketType === 'used') {
+    //         setTimeout(_ => { this.setState({ used: true }) }, 0)
+    //     }
+    // }
 
-    _onMenuItemChange(used) {
-        const { usedTickts, unusedTikects } = this.props
-        if (used) {
+    _onMenuItemChange(selectedItemType) {
+        const { usedTickts, unusedTikects, unpaidTickets } = this.props
+        if (selectedItemType === 'used') {
             if (!usedTickts || (Array.isArray(usedTickts) && usedTickts.length === 0)) {
                 this.props.getUsedTickts()
             }
-        } else {
+        } else if (selectedItemType === 'unused') {
             if (!unusedTikects || (Array.isArray(unusedTikects) && unusedTikects.length === 0)) {
                 this.props.getUnusedTikects()
             }
+        } else if (selectedItemType === 'unpaid') {
+            if (!unpaidTickets || (Array.isArray(unpaidTickets) && unpaidTickets.length === 0)) {
+                this.props.getUnpaidTickets()
+            }
         }
-        this.setState({ used })
+        this.setState({ selectedItemType })
     }
 
     _viewTicket(ticket) {
@@ -81,8 +88,15 @@ export default class Tickets extends React.Component {
 
     render() {
         const styles = require('./Tickets.scss')
-        const tickets = this.state.used ? this.props.usedTickts : this.props.unusedTikects
         const user = this.props.user || {}
+        let tickets = null
+        if (this.state.selectedItemType === 'used') {
+            tickets = this.props.usedTickts
+        } else if (this.state.selectedItemType === 'used') {
+            tickets = this.props.unusedTikects
+        } else if (this.state.selectedItemType === 'unpaid') {
+            tickets = this.props.unpaidTickets
+        }
         return (
             <div>
                 {this.state.selectedTicket && <TicketDetail visible={this.state.showSelectedTicket} onCancel={this.closeViewTickets} ticket={this.state.selectedTicket} />}
