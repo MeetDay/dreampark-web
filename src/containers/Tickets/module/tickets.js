@@ -87,7 +87,8 @@ export function searchTickets(title) {
     return {
         type: SEARCH_TICKETS,
         payload: (client) => client.get('/pois/search', {
-            params: { title: title }
+            params: { title: title },
+            subpath: '/api/v1'
         })
     }
 }

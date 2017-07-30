@@ -9,7 +9,7 @@ export default class TicketTool extends React.Component {
         const styles = require('./TicketTool.scss');
         return (
             <div className={styles.tool} onClick={this.props.onTicketToolBarClick}>
-                <img className={styles.cartImg} src="/assets/cart_white_menu.png" alt="cart"/>
+                <img className={styles.cartImg} src="/assets/ticket_white.png" alt="cart"/>
                 <span className={styles.ticket}>购买门票</span>
             </div>
         );
