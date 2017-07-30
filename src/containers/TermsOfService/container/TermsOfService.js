@@ -18,9 +18,6 @@ import { isTermLoaded, getUserTermsBy } from '../module/dreamparkTerms'
 
 @connect(
     state => ({
-        title: state.dreamparkTerms.title,
-        coverImage: state.dreamparkTerms.coverImage,
-        elements: state.dreamparkTerms.elements,
         term: state.dreamparkTerms.term
     })
 )
@@ -45,7 +42,7 @@ export default class TermsOfService extends React.Component {
     render() {
         if (!this.props.term || isEmptyObject(this.props.term)) return (<PageNotExist />);
         const styles = require('./TermsOfService.scss')
-        const { title, cover_image: coverImage, elements } = this.props;
+        const { title, cover_image: coverImage, elements } = this.props.term;
         return (
             <div className={styles.container}>
                 { !isEmptyObject(coverImage) && <CoverImage src={coverImage.name} /> }
