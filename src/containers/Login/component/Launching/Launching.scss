@@ -24,6 +24,15 @@ $launchingTopHeight: 44px;
     background-color: transparent;
 }
 
+.dreampark {
+    width: 100%;
+    margin-top: 50px;
+    & > img {
+        width: 100%;
+        vertical-align: top;
+    }
+}
+
 $logoHeight: 70px;
 .appLogo {
     margin-top: 44px;

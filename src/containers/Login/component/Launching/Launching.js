@@ -30,9 +30,10 @@ export default class Launching extends React.Component {
                 <div className={styles.launchingTop}>
                     <button className={styles.loginButton} onClick={this.handleClickLoginButton}>登&nbsp;录</button>
                 </div>
-                <div className={styles.appLogo}>
+                {/* <div className={styles.appLogo}>
                     <img src="/assets/logo.png" alt="appLogo" />
-                </div>
+                </div> */}
+                <div className={styles.dreampark}><img src="/assets/dreampark.png" alt="胸章"/></div>
                 <div className={styles.description}>
                     <span>欢迎来到梦想盛会。</span>
                 </div>
@@ -51,7 +52,7 @@ export default class Launching extends React.Component {
                     />
                 </div>
                 <div className={styles.declare}>
-                    <span>“注册账号”或“登录”表示即代表我同意接受梦想盛会的<a href="/terms/agreement">用户协议</a>及<a href="/terms/privacy">隐私声明</a></span>
+                    <span>“注册账号”或“登录”表示即代表我同意接受梦想盛会的<a href="/terms/1">用户协议</a>及<a href="/terms/2">隐私声明</a></span>
                 </div>
             </div>
         );
