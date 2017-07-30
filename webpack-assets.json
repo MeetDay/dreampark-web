@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.11ba8cb5cbc5b054f4d3.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.11ba8cb5cbc5b054f4d3.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.11ba8cb5cbc5b054f4d3.min.js"
+    "main": "http://localhost:3000/dist/main.02c9749993caf735b0b1.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.02c9749993caf735b0b1.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.02c9749993caf735b0b1.min.js"
   },
   "styles": {},
   "assets": {
@@ -241,10 +241,6 @@
     "./src/containers/Shoppingcart/container/Shoppingcart.scss": {
       "shoppingcart": "Shoppingcart__shoppingcart__NudCF",
       "_style": ".Shoppingcart__shoppingcart__NudCF {\n  padding: 0 5%;\n  margin-bottom: 75px;\n  background-color: #f5f6f9; }\n"
-    },
-    "./src/containers/TermsOfService/container/TermsOfService.scss": {
-      "container": "TermsOfService__container__33eVz",
-      "_style": ".TermsOfService__container__33eVz {\n  margin: 20px; }\n"
     },
     "./src/containers/Tickets/component/Header/Header.scss": {
       "header": "Header__header__3AhMC",

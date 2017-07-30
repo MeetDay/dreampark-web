@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import { asyncConnect } from 'redux-async-connect'
 import { connect } from 'react-redux'
 import { isEmptyObject } from '../../Login/module/login'
-import { CoverImage, TitleElement, TextElement, ImageElement, BigImageElement } from '../../../components'
+import { PageNotExist, CoverImage, TitleElement, TextElement, ImageElement, BigImageElement } from '../../../components'
 import { isTermLoaded, getUserTermsBy } from '../module/dreamparkTerms'
+import { isEmptyObject } from '../../Login/module/login'
 
 @asyncConnect([{
     deferred: true,
@@ -20,7 +21,8 @@ import { isTermLoaded, getUserTermsBy } from '../module/dreamparkTerms'
     state => ({
         title: state.dreamparkTerms.title,
         coverImage: state.dreamparkTerms.coverImage,
-        elements: state.dreamparkTerms.elements
+        elements: state.dreamparkTerms.elements,
+        term: state.dreamparkTerms.term
     })
 )
 
@@ -42,12 +44,14 @@ export default class TermsOfService extends React.Component {
     }
 
     render() {
+        if (!this.props.term || isEmptyObject(this.props.term)) return (<PageNotExist />);
         const styles = require('./TermsOfService.scss')
+        const { title, cover_image: coverImage, elements } = this.props;
         return (
             <div className={styles.container}>
-                { !isEmptyObject(this.props.coverImage) && <CoverImage src={this.props.coverImage.name} /> }
-                { this.props.title && <TitleElement title={this.props.title} textAlign="center" /> }
-                { this.props.elements && this.props.elements.map(this.convertElementToComponet())}
+                { !isEmptyObject(coverImage) && <CoverImage src={coverImage.name} /> }
+                { title && <TitleElement title={title} textAlign="center" /> }
+                { elements && elements.map(this.convertElementToComponet())}
             </div>
         );
     }
