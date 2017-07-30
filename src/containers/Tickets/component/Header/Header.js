@@ -12,7 +12,7 @@ export default class Header extends React.Component {
         this.handleClick = (e) => this._handleClick(e)
         this.state = { selectedItemType: 'unused' }
     }
-    
+
     _handleClick(e) {
         e.preventDefault();
         const currentSelectedItem = e.currentTarget.id;
@@ -23,7 +23,7 @@ export default class Header extends React.Component {
     render() {
         const styles = require('./Header.scss');
         const { user } = this.props;
-        const username = user ? user.username : '';
+        const username = user ? user.username : '未设置用户名';
         const isVip = user ? user.level == 'vip' : false;
         return (
             <div>
