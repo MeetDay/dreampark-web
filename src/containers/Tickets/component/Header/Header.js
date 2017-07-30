@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { isEmptyObject } from '../../../Login/module/login'
 
 export default class Header extends React.Component {
     static propTypes = {
@@ -23,8 +24,8 @@ export default class Header extends React.Component {
     render() {
         const styles = require('./Header.scss');
         const { user } = this.props;
-        const username = user ? user.username : '未设置用户名';
-        const isVip = user ? user.level == 'vip' : false;
+        const username = !isEmptyObject(user) ? user.username : '未设置用户名';
+        const isVip = !isEmptyObject(user) ? user.level == 'vip' : false;
         return (
             <div>
                 <div className={styles.header}>
