@@ -30,7 +30,7 @@ export default class LoadMoreButton extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         const { isActive } = nextProps
-        if (isActive && isActive !== this.props.isActive) {
+        if (isActive) {
             const clockID = setInterval(_ => {
                 this.setState((preState) => ({ rotateDegree: (preState.rotateDegree + 1) % 360 }))
             }, 1000 / 360)
