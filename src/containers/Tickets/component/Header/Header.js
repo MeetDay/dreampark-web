@@ -6,12 +6,22 @@ import { isEmptyObject } from '../../../Login/module/login'
 export default class Header extends React.Component {
     static propTypes = {
         user: PropTypes.object,
+        selectedItemType: PropTypes.string,
         onMenuItemChange: PropTypes.func
     }
+    static defaultProps = {
+        selectedItemType: 'unused'
+    }
+
     constructor(props) {
         super(props)
         this.handleClick = (e) => this._handleClick(e)
-        this.state = { selectedItemType: 'unused' }
+        this.state = { selectedItemType: props.selectedItemType }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { selectedItemType } = nextProps
+        this.setState({ selectedItemType: selectedItemType })
     }
 
     _handleClick(e) {
