@@ -47,7 +47,7 @@ export default class TermsOfService extends React.Component {
             <div className={styles.container}>
                 { !isEmptyObject(this.props.coverImage) && <CoverImage src={this.props.coverImage.name} /> }
                 { this.props.title && <TitleElement title={this.props.title} textAlign="center" /> }
-                { this.props.elements.map(this.convertElementToComponet())}
+                { this.props.elements && this.props.elements.map(this.convertElementToComponet())}
             </div>
         );
     }
