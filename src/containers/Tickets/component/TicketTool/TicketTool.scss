@@ -10,7 +10,7 @@ $toolPadding: 10px;
     background-color: #E62A10;
 }
 
-$imgHeight: 30px;
+$imgHeight: 22px;
 .cartImg {
     height: $imgHeight;
     margin-top: ($toolHeight - $imgHeight) / 2;
@@ -18,7 +18,7 @@ $imgHeight: 30px;
 
 .ticket {
     display: inline-block;
-    margin-left: 4px;
+    margin-left: 10px;
     height: $toolHeight;
     line-height: $toolHeight;
     vertical-align: top;
