@@ -1,0 +1,33 @@
+$loadingHeight: 44px;
+.loading {
+    position: relative;
+    height: $loadingHeight;
+    margin: 30px 20px;
+    border-radius: 4px;
+    background-color: #eeeff2;
+}
+
+.loadingWrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+$loadingImageHeight: 28px;
+.loadingImage {
+    height: $loadingImageHeight;
+    margin: 0;
+    vertical-align: top;
+}
+
+.loadingText {
+    display: inline-block;
+    margin-left: 15px;
+    min-width: 110px;
+    font-size: 14px;
+    text-align: left;
+    line-height: $loadingImageHeight;
+    color: #2c2c2c;
+}

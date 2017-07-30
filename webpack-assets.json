@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.6ad8f1a3cbbede4301a6.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.6ad8f1a3cbbede4301a6.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.6ad8f1a3cbbede4301a6.min.js"
+    "main": "http://localhost:3000/dist/main.afc68b59764e0c0a9815.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.afc68b59764e0c0a9815.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.afc68b59764e0c0a9815.min.js"
   },
   "styles": {},
   "assets": {
@@ -38,6 +38,13 @@
       "image": "Element__image__16Kw0",
       "bigImageElement": "Element__bigImageElement__1vK5C",
       "_style": ".Element__title__1B9fH {\n  padding: 14px 0;\n  border-bottom: 1px solid #DEDEDE;\n  font-size: 20px;\n  color: black; }\n\n.Element__text__2a5Tg {\n  margin: 14px 0;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  color: black;\n  white-space: pre-line; }\n\n.Element__image__16Kw0 {\n  margin: 14px 0; }\n  .Element__image__16Kw0 > img {\n    display: block;\n    margin: auto;\n    width: 100%;\n    vertical-align: top; }\n\n.Element__bigImageElement__1vK5C {\n  margin: 14px -20px; }\n  .Element__bigImageElement__1vK5C > img {\n    display: block;\n    width: 100%;\n    vertical-align: top; }\n  .Element__bigImageElement__1vK5C > div {\n    display: -webkit-box;\n    box-sizing: content-box;\n    max-height: 75px;\n    padding: 5px 20px;\n    font-size: 14px;\n    line-height: 25px;\n    text-overflow: ellipsis;\n    -webkit-line-clamp: 2;\n    -webkit-box-orient: vertical;\n    color: white;\n    background-color: #2D343B; }\n"
+    },
+    "./src/components/LoadMoreButton/LoadMoreButton.scss": {
+      "loading": "LoadMoreButton__loading__1KEy6",
+      "loadingWrap": "LoadMoreButton__loadingWrap__1thF_",
+      "loadingImage": "LoadMoreButton__loadingImage__35tkh",
+      "loadingText": "LoadMoreButton__loadingText__34H_b",
+      "_style": ".LoadMoreButton__loading__1KEy6 {\n  position: relative;\n  height: 44px;\n  margin: 30px 20px;\n  border-radius: 4px;\n  background-color: #eeeff2; }\n\n.LoadMoreButton__loadingWrap__1thF_ {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  text-align: center; }\n\n.LoadMoreButton__loadingImage__35tkh {\n  height: 28px;\n  margin: 0;\n  vertical-align: top; }\n\n.LoadMoreButton__loadingText__34H_b {\n  display: inline-block;\n  margin-left: 15px;\n  min-width: 110px;\n  font-size: 14px;\n  text-align: left;\n  line-height: 28px;\n  color: #2c2c2c; }\n"
     },
     "./src/components/LoginButton/LoginButton.scss": {
       "button": "LoginButton__button__3qjBC",
