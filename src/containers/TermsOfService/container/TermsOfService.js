@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { isEmptyObject } from '../../Login/module/login'
 import { PageNotExist, CoverImage, TitleElement, TextElement, ImageElement, BigImageElement } from '../../../components'
 import { isTermLoaded, getUserTermsBy } from '../module/dreamparkTerms'
-import { isEmptyObject } from '../../Login/module/login'
 
 @asyncConnect([{
     deferred: true,
