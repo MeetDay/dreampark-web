@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { Modal } from 'antd'
+import { Phone } from '../../../components'
 
 export default class CompleteBuyTicketInfo extends React.Component {
 
@@ -10,11 +12,30 @@ export default class CompleteBuyTicketInfo extends React.Component {
 
     constructor(props) {
         super(props)
+        this.handleClickInsurance = (e) => this._handleClickInsurance(e)
+        this.handleClickPayment = (e) => this._handleClickPayment(e)
+        this.handleClickCancel = (e) => this._handleClickCancel(e)
+        this.onUsernameChange = (e) => this._onUsernameChange(e)
+        this.onCardNumberChange = (e) => this._onCardNumberChange(e)
+
         this.contactChecked = (checkedContact) => this._contactChecked(checkedContact)
         this.addContact = () => this._addContact()
         this.state = {
+            showAddContact: false,
+            username: '',
+            idCardNo: '',
             checkedContacts: []
         }
+    }
+
+    _handleClickInsurance(e) {
+        e.preventDefault()
+        console.log('救援服务')
+    }
+
+    _handleClickPayment(e) {
+        e.preventDefault()
+        console.log('支付')
     }
 
     _contactChecked(checkedContact) {
@@ -28,7 +49,22 @@ export default class CompleteBuyTicketInfo extends React.Component {
     }
 
     _addContact() {
-        console.log('添加联系人...')
+        this.setState({ showAddContact: true })
+    }
+    _handleClickCancel(e) {
+        e.preventDefault()
+        this.setState({ showAddContact: false })
+    }
+
+    _onUsernameChange(e) {
+        e.preventDefault()
+        console.log(e.target.value)
+        this.setState({ username: e.target.value })
+    }
+    _onCardNumberChange(e) {
+        e.preventDefault()
+        console.log(e.target.value)
+        this.setState({ idCardNo: e.target.value })
     }
 
     existedContact(checkedContacts, checkedContact) {
@@ -61,7 +97,37 @@ export default class CompleteBuyTicketInfo extends React.Component {
                     <div className={styles.checkedContactInfo}>
                         {this.state.checkedContacts.map(checkedContact => (<SingleInfo key={checkedContact.id} contact={checkedContact} deleteCheckedContact={this.contactChecked} />))}
                     </div>
+                    <div className={styles.insuranceService}>
+                        <div className={styles.insuranceServiceWrap}>
+                            <span className={styles.imageWrap}><img className={styles.imgsafe} src="/assets/safe.png" alt="safe"/></span>
+                            <span className={styles.insuranceText}>{`救援服务保险 ￥40×${this.state.checkedContacts.length}`}</span>
+                            <span onClick={this.handleClickInsurance} className={styles.imageWrap}><img className={styles.goDetailArrow} src="/assets/go_detail_gray.png" alt="goDetail"/></span>
+                        </div>
+                    </div>
                 </div>
+                <div className={styles.toolbar}>
+                    <div className={styles.price}><span>价格</span><span>1440￥</span></div>
+                    <div onClick={this.handleClickPayment} className={styles.nextStep}><span>支付</span></div>
+                </div>
+                {this.state.showAddContact &&
+                    <Modal
+                        visible={this.state.showAddContact}
+                        title={<div className={styles.addContactTitle}>新增联系人</div>}
+                        footer={null}
+                        onCancel={this.handleClickCancel}
+                    >
+                        <div className={styles.addContactContent}>
+                            <div className={styles.addContactAttention}>
+                                <span>注意</span>
+                                <span>系统将验证身份证号码与姓名是否匹配，根据活动要求及保险政策必须使用真实的身份信息，否则造成的相关责任由使用者自行承担。</span>
+                            </div>
+                            <div>
+                                <Phone type="text" theme="dark" usedFor="other" title="您的真实姓名" zone={false} value={this.state.username} onChange={this.onUsernameChange} />
+                                <Phone type="tel" theme="dark" usedFor="idcard" title="身份证号码" zone={false} value={this.state.idCardNo} onChange={this.onCardNumberChange} />
+                            </div>
+                        </div>
+                    </Modal>
+                }
             </div>
         );
     }
@@ -127,16 +193,26 @@ class SingleInfo extends React.Component {
         deleteCheckedContact: PropTypes.func
     }
 
+    constructor(props) {
+        super(props)
+        this.handleClick = (e) => this._handleClick(e)
+    }
+
+    _handleClick(e) {
+        e.preventDefault()
+        this.props.deleteCheckedContact(this.props.contact)
+    }
+
     render() {
         const styles = require('./CompleteBuyTicketInfo.scss')
         const { contact } = this.props;
         return (
             <div className={styles.singleInfo}>
-                <div className={styles.minus}><img src="/assets/minus_red.png" alt="minus"/></div>
+                <div onClick={this.handleClick} className={styles.minus}><img src="/assets/minus_red.png" alt="minus"/></div>
                 <div className={styles.infoContent}>
                     <div className={styles.infoContentWrap}>
                         <span>{contact.name}</span>
-                        <span>42108319900376380</span>
+                        <span>{`身份证号码 42108319900376380`}</span>
                     </div>
                 </div>
             </div>

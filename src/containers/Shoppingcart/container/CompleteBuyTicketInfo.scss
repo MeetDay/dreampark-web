@@ -19,6 +19,7 @@ $navHeight: 44px;
 
 .pageContent {
     padding-top: 44px;
+    margin-bottom: 65px;
 }
 
 // 联系人列表
@@ -118,18 +119,131 @@ $minusImageHeight: 25px;
 }
 
 .infoContent {
+    position: relative;
     display: inline-block;
 }
 
+$infoWrapMinWidth: 220px;
 .infoContentWrap {
-    margin-left: 16px;
+    position: absolute;
+    top: 50%;
+    min-width: $infoWrapMinWidth;
+    transform: translateY(-50%);
 
+    margin-left: 16px;
+    & > span {
+        display: block;
+        color: #1C2123;
+    }
     & > span:first-child {
         font-family: PingFangSC-Semibold;
         font-size: 18px;
-        color: #1C2123;
     }
     & > span:last-child {
+        margin-top: 5px;
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+    }
+}
 
+$insuranceServiceHeight: 60px;
+.insuranceService {
+    background-color: #EFEFF4;
+    height: $insuranceServiceHeight;
+    padding: 5px 0;
+}
+
+.insuranceServiceWrap {
+    position: relative;
+    height: $insuranceServiceHeight - 10px;
+    padding: 0 20px;
+    background-color: white;
+
+    & > span {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+
+        display: inline-block;
+        vertical-align: top;
+    }
+    & > span:last-child {
+        float: right;
+    }
+}
+.imageWrap {
+    display: inline-block;
+    font-size: 0px;
+}
+.imgsafe {
+    width: 20px;
+    height: 22px;
+}
+.insuranceText {
+    margin-left: 20px;
+    font-size: 16px;
+    color: #1C2123;
+}
+.goDetailArrow {
+    width: 18px;
+    height: 18px;
+}
+
+// 底部的工具栏
+$toolbarHeight: 55px;
+.toolbar {
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+
+    height: $toolbarHeight;
+    text-align: center;
+    line-height: $toolbarHeight;
+    background-color: #2D343B;
+}
+.price {
+    display: inline-block;
+    font-size: 16px;
+    color: white;
+
+    & > span:last-child {
+        margin-left: 18px;
+        color: #EC0539
+    }
+}
+.nextStep {
+    position: absolute;
+    right: 5px;
+    display: inline-block;
+    padding: 0 20px;
+    font-size: 16px;
+    color: white;
+}
+
+// 新增联系人
+.addContactTitle {
+    text-align: center;
+}
+
+.addContactContent {
+
+}
+
+.addContactAttention {
+    border-bottom: 1px solid #EEEFF2;
+    & > span {
+        display: block;
+    }
+    & > span:first-child {
+        font-family: PingFangSC-Medium;
+        font-size: 16px;
+        color: black;
+    }
+    & > span:last-child {
+        margin: 15px 0 25px 0;
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: #9B9B9B;
     }
 }

@@ -1,21 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import { appendWhiteSpaceOnMatchCharacter } from '../../utils/regex'
 
 export default class Phone extends React.Component {
     static propTypes = {
         type: PropTypes.string,
-        usedFor: PropTypes.oneOf(['phone', 'idcard', 'other']),
         title: PropTypes.string,
         zone: PropTypes.bool,
         value: PropTypes.string,
         // defaultValue: PropTypes.string,
         imgShow: PropTypes.bool,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        theme: PropTypes.oneOf(['white', 'dark']),
+        usedFor: PropTypes.oneOf(['phone', 'idcard', 'other'])
     }
     static defaultProps = {
         type: 'tel',
         usedFor: 'phone',
+        theme: 'white',
         title: '电话号码',
         zone: true,
         imgShow: false,
@@ -23,7 +26,7 @@ export default class Phone extends React.Component {
 
     render() {
         const styles = require('./Phone.scss');
-        const { imgShow, value, type, zone, usedFor } = this.props;
+        const { imgShow, value, type, zone, usedFor, theme } = this.props;
         const display = imgShow ? 'inline-block' : 'none';
         const marginLeft = zone ? '20px' : '2px';
         const maxWidth = zone ? '190px' : '240px';
@@ -31,12 +34,13 @@ export default class Phone extends React.Component {
         let formatValue = value
         // phonenumber
         if (usedFor === 'phone') {
-            formatValue = appendWhiteSpaceOnMatchCharacter(value)
+            formatValue = appendWhiteSpaceOnMatchCharacter(value);
         } else if (usedFor === 'idcard') {
-            formatValue = appendWhiteSpaceOnMatchCharacter(value, false)
+            formatValue = appendWhiteSpaceOnMatchCharacter(value, false);
         }
+        const isDark = theme === 'dark';
         return (
-            <div className={styles.phone}>
+            <div className={classNames([styles.phone]: true, [styles.phoneDarkTheme]: isDark)}>
                 <span className={styles.title}>{this.props.title}</span>
                 <div className={styles.bottom}>
                     {this.props.zone && <label className={styles.zone}>+86</label>}
