@@ -1,0 +1,44 @@
+.shoppingcartV2 {
+    position: relative;
+    top: 0;
+}
+
+$navHeight: 44px;
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: $navHeight;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    line-height: $navHeight;
+    text-align: center;
+    color: white;
+    background-color: #1C2123;
+    z-index: 999;
+}
+
+$contentMarginTop: 44px;
+.content {
+    padding-top: $contentMarginTop;
+}
+
+.ticketsWrap {
+    padding: 0 20px;
+}
+
+.nonGoods {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+
+    width: 100%;
+    height: 80px;
+
+    font-size: 16px;
+    text-align: center;
+    color: #ccc;
+}
