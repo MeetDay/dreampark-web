@@ -93,7 +93,13 @@ export default class CompleteBuyTicketInfo extends React.Component {
                     <div className={styles.ticketInfo}>
                         <span className={styles.ticketImageWrap}><img src="/assets/ticket_border_big.png" alt="ticket"/></span>
                         <div className={styles.ticketDetails}>
-                            <div></div>
+                            <div className={styles.ticketDescription}>
+                                <div className={styles.ticketDescriptionWrap}>
+                                    <span className={styles.ticketTitle}>腾格里国际音乐节</span>
+                                    <span className={styles.ticketTimeInfo}>2017年10月2日 星期三</span>
+                                    <span className={styles.ticketDuration}>8:00-9:00</span>
+                                </div>
+                            </div>
                             <span className={styles.ticketPrice}>￥680</span>
                         </div>
                     </div>

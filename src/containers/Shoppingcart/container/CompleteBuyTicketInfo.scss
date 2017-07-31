@@ -49,9 +49,55 @@ $ticketContentMargin: 24px;
     right: $ticketContentMargin;
 }
 
+.ticketDescription {
+    display: inline-block;
+    padding: 10px;
+    max-width: 80%;
+}
+.ticketDescriptionWrap {
+    & > span {
+        display: block;
+        margin: 5px;
+
+        @media (max-width: 320px) {
+            margin: 0;
+        }
+    }
+}
+.ticketTitle {
+    font-family: PingFangSC-Semibold;
+    font-size: 20px;
+    color: black;
+}
+.ticketTimeInfo {
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: black;
+}
+.ticketDuration {
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #9B9B9B;
+}
+
 .ticketPrice {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: inline-block;
+    float: right;
+    height: 30px;
+    margin-right: 10px;
+
     font-family: PingFangSC-Regular;
     font-size: 18px;
+    line-height: 30px;
+    color: #E62A10;
+
+    @media (max-width: 320px) {
+        margin-right: 0px;
+    }
 }
 
 // 联系人列表
