@@ -5,7 +5,7 @@ import Home from './containers/Home';
 import { Tickets, BuyTicket, SearchTicket } from './containers/Tickets';
 import Details from './containers/Details';
 import HotDetail from './containers/HotDetail';
-import Shoppingcart from './containers/Shoppingcart';
+import Shoppingcart, { CompleteBuyTicketInfo } from './containers/Shoppingcart';
 import Login, { WeChatLoginTransition } from './containers/Login';
 import Register from './containers/Register';
 import TermsOfService from './containers/TermsOfService';
@@ -30,6 +30,7 @@ const routes = (store) => {
 			<IndexRoute component={Home} />
 			<Route path="home" component={Home} />
 			<Route path="tickets" component={Tickets} onEnter={requireLogin} />
+			<Route path="buyticket/detailinfo/:id" component={CompleteBuyTicketInfo} onEnter={requireLogin} />
 			<Route path="buytickets" component={BuyTicket} />
 			<Route path="buytickets/search" component={SearchTicket} />
 			<Route path="detail/:id" component={Details} />

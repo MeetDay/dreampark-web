@@ -1,0 +1,135 @@
+
+$navHeight: 44px;
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $navHeight;
+    text-align: center;
+    background-color: #1C2123;
+}
+
+.navTitle {
+    display: inline-block;
+    line-height: $navHeight;
+    font-size: 16px;
+    color: white;
+}
+
+.pageContent {
+    padding-top: 44px;
+}
+
+// 联系人列表
+.contactList {
+    padding: 20px 20px;
+    border-bottom: 1px solid #DEDEDE;
+}
+
+.contactListHeader {
+    margin-bottom: 15px;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #1C2123;
+    & > span:last-child {
+        float: right;
+        color: #939393;
+    }
+}
+
+.contactListWrap {
+    margin: 0 -5px;
+}
+
+// 联系人
+.contactWrap {
+    display: inline-block;
+    vertical-align: top;
+}
+
+$contactWidth: 80px;
+$contactHeight: 40px;
+.contact {
+    display: inline-block;
+    height: $contactHeight;
+    width: $contactWidth;
+    margin: 5px 3px;
+    border-radius: 3px;
+    border: 1px solid #D6D6D6;
+    text-align: center;
+    background-color: #FFFFFF;
+
+    @media (max-width: 320px) {
+        width: 65px;
+    }
+    @media (min-width: 400px) {
+        width: 90px;
+    }
+}
+
+$contactNameLineHeight: 20px;
+.contactName {
+    display: inline-block;
+    padding-top: ($contactHeight - $contactNameLineHeight) / 2;
+    line-height: $contactNameLineHeight;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #1C2123;
+}
+
+.checkedContact {
+    border: 1px solid #E62A10;
+}
+
+// 新增联系人
+.addContact {
+    color: #E62A10;
+    line-height: 20px;
+    margin-top: 9px;
+    & > img {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+        vertical-align: top;
+    }
+}
+
+// 联系人信息
+.checkedContactInfo {
+    margin-left: 20px;
+}
+
+$singleInfoHeight: 70px;
+.singleInfo {
+    height: $singleInfoHeight;
+    border-bottom: 1px solid #DEDEDE;
+}
+
+$minusImageHeight: 25px;
+.minus {
+    display: inline-block;
+    margin-top: ($singleInfoHeight - $minusImageHeight) / 2;
+    & > img {
+        width: $minusImageHeight;
+        height: $minusImageHeight;
+        vertical-align: top;
+    }
+}
+
+.infoContent {
+    display: inline-block;
+}
+
+.infoContentWrap {
+    margin-left: 16px;
+
+    & > span:first-child {
+        font-family: PingFangSC-Semibold;
+        font-size: 18px;
+        color: #1C2123;
+    }
+    & > span:last-child {
+
+    }
+}
