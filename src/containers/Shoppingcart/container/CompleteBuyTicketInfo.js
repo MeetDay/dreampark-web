@@ -17,6 +17,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
         this.handleClickCancel = (e) => this._handleClickCancel(e)
         this.onUsernameChange = (e) => this._onUsernameChange(e)
         this.onCardNumberChange = (e) => this._onCardNumberChange(e)
+        this.handleClickFinished = (e) => this._handleClickFinished(e)
 
         this.contactChecked = (checkedContact) => this._contactChecked(checkedContact)
         this.addContact = () => this._addContact()
@@ -67,6 +68,11 @@ export default class CompleteBuyTicketInfo extends React.Component {
         this.setState({ idCardNo: e.target.value })
     }
 
+    _handleClickFinished(e) {
+        e.preventDefault()
+        console.log('完成')
+    }
+
     existedContact(checkedContacts, checkedContact) {
         let existed = false;
         if (checkedContacts && Array.isArray(checkedContacts) && checkedContacts.length > 0) {
@@ -84,8 +90,12 @@ export default class CompleteBuyTicketInfo extends React.Component {
                     <span className={styles.navTitle}>补充订单信息</span>
                 </div>
                 <div className={styles.pageContent}>
-                    <div>
-                        票信息
+                    <div className={styles.ticketInfo}>
+                        <span className={styles.ticketImageWrap}><img src="/assets/ticket_border_big.png" alt="ticket"/></span>
+                        <div className={styles.ticketDetails}>
+                            <div></div>
+                            <span className={styles.ticketPrice}>￥680</span>
+                        </div>
                     </div>
                     <div className={styles.contactList}>
                         <div className={styles.contactListHeader}><span>请选择联系人</span><span>{`已选择: ${this.state.checkedContacts.length}人`}</span></div>
@@ -121,9 +131,10 @@ export default class CompleteBuyTicketInfo extends React.Component {
                                 <span>注意</span>
                                 <span>系统将验证身份证号码与姓名是否匹配，根据活动要求及保险政策必须使用真实的身份信息，否则造成的相关责任由使用者自行承担。</span>
                             </div>
-                            <div>
+                            <div className={styles.addContactInteraction}>
                                 <Phone type="text" theme="dark" usedFor="other" title="您的真实姓名" zone={false} value={this.state.username} onChange={this.onUsernameChange} />
                                 <Phone type="tel" theme="dark" usedFor="idcard" title="身份证号码" zone={false} value={this.state.idCardNo} onChange={this.onCardNumberChange} />
+                                <div onClick={this.handleClickFinished} className={styles.finishedButton}>完成</div>
                             </div>
                         </div>
                     </Modal>

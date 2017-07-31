@@ -40,11 +40,11 @@ export default class Phone extends React.Component {
         }
         const isDark = theme === 'dark';
         return (
-            <div className={classNames([styles.phone]: true, [styles.phoneDarkTheme]: isDark)}>
+            <div className={classNames({ [styles.phone]: true, [styles.phoneDarkTheme]: isDark })}>
                 <span className={styles.title}>{this.props.title}</span>
                 <div className={styles.bottom}>
                     {this.props.zone && <label className={styles.zone}>+86</label>}
-                    <input id="phonenumber" style={{ fontSize, marginLeft, maxWidth, width: maxWidth }} className={styles.inputphone} onChange={this.props.onChange} type={this.props.type} value={formatValue} />
+                    <input id="phonenumber" style={{ fontSize, marginLeft, maxWidth, width: maxWidth }} className={classNames({[styles.inputphone]: true, [styles.inputphoneDarkTheme]: isDark})} onChange={this.props.onChange} type={this.props.type} value={formatValue} />
                     <img style={{ display }} className={styles.checkd} src="/assets/checked_cart.png" alt="checked"/>
                 </div>
             </div>

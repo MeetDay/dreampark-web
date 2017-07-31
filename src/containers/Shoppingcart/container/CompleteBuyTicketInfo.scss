@@ -22,6 +22,38 @@ $navHeight: 44px;
     margin-bottom: 65px;
 }
 
+// 票面信息
+.ticketInfo {
+    position: relative;
+    padding: 20px;
+    background-color: #E62A10;
+
+    @media (max-width: 320px) {
+        padding: 15px;
+    }
+}
+.ticketImageWrap {
+    font-size: 0px;
+    & > img {
+        width: 100%;
+        vertical-align: top;
+    }
+}
+
+$ticketContentMargin: 24px;
+.ticketDetails {
+    position: absolute;
+    top: $ticketContentMargin;
+    bottom: $ticketContentMargin;
+    left: $ticketContentMargin;
+    right: $ticketContentMargin;
+}
+
+.ticketPrice {
+    font-family: PingFangSC-Regular;
+    font-size: 18px;
+}
+
 // 联系人列表
 .contactList {
     padding: 20px 20px;
@@ -241,9 +273,28 @@ $toolbarHeight: 55px;
         color: black;
     }
     & > span:last-child {
-        margin: 15px 0 25px 0;
+        margin: 5px 0 5px 0;
         font-family: PingFangSC-Regular;
         font-size: 14px;
         color: #9B9B9B;
     }
+}
+
+.addContactInteraction {
+    & > div {
+        margin: 15px 0;
+    }
+}
+
+$finishedButtonHeight: 44px;
+.finishedButton {
+    height: $finishedButtonHeight;
+    margin-bottom: 0px !important;
+    border-radius: 3px;
+
+    font-size: 16px;
+    line-height: $finishedButtonHeight;
+    text-align: center;
+    color: white;
+    background-color: #2D343B;
 }
