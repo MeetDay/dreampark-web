@@ -10,16 +10,11 @@ export default class Navbar extends React.Component {
     constructor() {
         super();
         this.handleClickBack = (e) => this._handleClickBack(e);
-        this.handleClickLike = (e) => this._handleClickLike(e);
     }
 
     _handleClickBack(e) {
         e.preventDefault();
         history.back();
-    }
-
-    _handleClickLike(e) {
-        e.preventDefault();
     }
 
     render() {
