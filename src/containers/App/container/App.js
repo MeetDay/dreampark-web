@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { push } from 'react-router-redux'
 import { asyncConnect } from 'redux-async-connect'
 import Cookies from 'universal-cookie'
 import * as Constant from '../../../utils/constant'
@@ -21,15 +23,21 @@ import { isFullUser } from '../../../utils/wechat'
 @connect(
 	state => ({
 		user: state.login.user
-	})
+	}),
+	dispatch => bindActionCreators({ push }, dispatch)
 )
 
 export default class App extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.user && nextProps.user !== this.props.user && isFullUser(nextProps.user)) {
-			const cookies = new Cookies()
-			cookies.set(Constant.USER_COOKIE, nextProps.user, { path: '/' })
+		const { user: nextUser } = nextProps;
+		if (nextUser && nextUser !== this.props.user) {
+			if (isFullUser(nextUser)) {
+				const cookies = new Cookies()
+				cookies.set(Constant.USER_COOKIE, nextProps.user, { path: '/' })
+			} else {
+				this.props.push('/register#stepthree')
+			}
 		}
 	}
 

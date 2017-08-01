@@ -70,7 +70,7 @@ export default class HotDetail extends React.Component {
     _handleClickAddToCart(selectedTicket) {
         console.log(selectedTicket)
         if (this.props.user) {
-
+            
         } else {
             jumpToWeChatAuthorizationUrl(location)
         }
