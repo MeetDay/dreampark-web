@@ -1,5 +1,6 @@
 const SHOPPINGCART = 'redux/shoppingcart/shoppingcart'
 const DELETE_SHOPPINGCART_GOODS = 'redux/shoppingcart/delelte_shoppingcart_goods'
+const ADD_CONTACT = 'redux/shoppingcart/add_contact'
 const GOODS_COUNT_PER_REQUEST = 20
 
 const actionHandlers = {
@@ -29,7 +30,11 @@ const actionHandlers = {
             deleteGoodsLoaded: true
         }
     },
-    [`${DELETE_SHOPPINGCART_GOODS}_REJECTED`]: (state, action) => ({ ...state, deleteGoodsLoading: false, deleteGoodsLoaded:false })
+    [`${DELETE_SHOPPINGCART_GOODS}_REJECTED`]: (state, action) => ({ ...state, deleteGoodsLoading: false, deleteGoodsLoaded:false }),
+
+    [`${ADD_CONTACT}_PENDING`]: (state, action) => ({ contactLoading: true, contactLoaded: false }),
+    [`${ADD_CONTACT}_FULFILLED`]: (state, action) => ({ contactLoading: false, contactLoaded: true, contact: action.payload }),
+    [`${ADD_CONTACT}_REJECTED`]: (state, action) => ({ contactLoading: false, contactLoaded: false, contactError: action.payload })
 }
 
 const initialState = {
@@ -42,7 +47,12 @@ const initialState = {
     maxGoodsID: 0,
 
     deleteGoodsLoading: false,
-    deleteGoodsLoaded: false
+    deleteGoodsLoaded: false,
+
+    contactLoading: false,
+    contactLoaded: false,
+    contactError: null,
+    contact: null,
 }
 
 export default function shoppingcart(state=initialState, action) {
@@ -75,6 +85,19 @@ export function deleteGoodsFromShoppingCart(goods) {
             type: DELETE_SHOPPINGCART_GOODS,
             payload: (client) => client.del(`/cart/${goods.id}`, {
                 headers: authHeaders
+            })
+        })
+    }
+}
+
+export function addContact(contact) {
+    return (dispatch, getState) => {
+        const { authHeaders } = getState().login
+        dispatch({
+            type: ADD_CONTACT,
+            payload: (client) => client.post('/contacter', {
+                headers: authHeaders,
+                data: contact
             })
         })
     }

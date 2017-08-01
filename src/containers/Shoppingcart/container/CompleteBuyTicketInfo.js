@@ -3,14 +3,22 @@ import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types'
 import superagent from 'superagent'
 import classNames from 'classnames'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Modal, message } from 'antd'
+import { addContact } from '../module/shoppingcartV2'
 import { Phone } from '../../../components'
 import { clearWhiteSpaceOf, illegalCardNumber } from '../../../utils/regex'
+
+@connect(
+    state => ({ contact: state.shoppingcart.contact }),
+    dispatch => bindActionCreators({ addContact }, dispatch)
+)
 
 export default class CompleteBuyTicketInfo extends React.Component {
 
     static defaultProps = {
-        contactList: [{id: 1, name: '王超'}, {id: 2, name: '耿德宁'}, {id: 3, name: '徐玉林'}, {id: 4, name: '郭胜利'}, {id: 6, name: '于晨龙'}, {id: 7, name: '王超'}]
+        contactList: [{name: '王超', identity_card: 4211278678231}, {identity_card: 4211212331231231231, name: '耿德宁'}, {identity_card: 42112123231231231, name: '徐玉林'}, {identity_card: 4123211231231231231, name: '郭胜利'}, {identity_card: 421129991231, name: '于晨龙'}, {identity_card: 34534523423423423, name: '王超'}]
     }
 
     constructor(props) {
@@ -28,7 +36,15 @@ export default class CompleteBuyTicketInfo extends React.Component {
             showAddContact: false,
             username: '',
             idCardNo: '',
-            checkedContacts: [props.contactList[0]]
+            checkedContacts: [props.contactList[0]],
+            contactList: props.contactList
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { contact } = nextProps
+        if (contact && contact !== this.props.contact) {
+            this.setState({ contactList: [...this.state.contactList, contact] })
         }
     }
 
@@ -45,7 +61,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
     _contactChecked(checkedContact) {
         if (this.existedContact(this.state.checkedContacts, checkedContact)) {
             if (this.state.checkedContacts.length > 1) {
-                const results = this.state.checkedContacts.filter(contact => contact.id !== checkedContact.id)
+                const results = this.state.checkedContacts.filter(contact => contact.identity_card !== checkedContact.identity_card)
                 this.setState({ checkedContacts: [...results] })
             }
         } else {
@@ -79,11 +95,11 @@ export default class CompleteBuyTicketInfo extends React.Component {
         if (username.length > 0 && illegalCardNumber(idCardNo)) {
             superagent.get('http://www.fbpageant.com/actions/user/login/idcard')
                 .query({ name: username, cardno: idCardNo })
-                .end((err, { body }) => {
+                .end((err, { body } = {}) => {
                     if (err || body.resp.code !== 0) {
                         message.warning('身份认证失败, 请检查后重试...')
                     } else {
-
+                        this.props.addContact({ name: this.state.username, identity_card: this.state.idCardNo })
                     }
                 })
         } else {
@@ -94,7 +110,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
     existedContact(checkedContacts, checkedContact) {
         let existed = false;
         if (checkedContacts && Array.isArray(checkedContacts) && checkedContacts.length > 0) {
-            const result = checkedContacts.find(contact => contact.id === checkedContact.id)
+            const result = checkedContacts.find(contact => contact.identity_card === checkedContact.identity_card)
             if (result) existed = true
         }
         return existed
@@ -122,12 +138,12 @@ export default class CompleteBuyTicketInfo extends React.Component {
                     <div className={styles.contactList}>
                         <div className={styles.contactListHeader}><span>请选择联系人</span><span>{`已选择: ${this.state.checkedContacts.length}人`}</span></div>
                         <div className={styles.contactListWrap}>
-                            {this.props.contactList.map(contact => (<ContactCard key={contact.id} contact={contact} contactChecked={this.contactChecked} checked={this.existedContact(this.state.checkedContacts, contact)} />))}
+                            {this.state.contactList.map(contact => (<ContactCard key={contact.identity_card} contact={contact} contactChecked={this.contactChecked} checked={this.existedContact(this.state.checkedContacts, contact)} />))}
                             <ContactCard type="add" addContact={this.addContact} />
                         </div>
                     </div>
                     <div className={styles.checkedContactInfo}>
-                        {this.state.checkedContacts.map(checkedContact => (<SingleInfo key={checkedContact.id} contact={checkedContact} deleteCheckedContact={this.contactChecked} />))}
+                        {this.state.checkedContacts.map(checkedContact => (<SingleInfo key={checkedContact.identity_card} contact={checkedContact} deleteCheckedContact={this.contactChecked} />))}
                     </div>
                     <div className={styles.insuranceService}>
                         <div className={styles.insuranceServiceWrap}>
@@ -168,11 +184,11 @@ export default class CompleteBuyTicketInfo extends React.Component {
 
 class ContactCard extends React.Component {
     static propTypes = {
-        type: PropTypes.oneOf(['contact', 'add']),
         checked: PropTypes.bool,
         contact: PropTypes.object,
         contactChecked: PropTypes.func,
-        addContact: PropTypes.func
+        addContact: PropTypes.func,
+        type: PropTypes.oneOf(['contact', 'add'])
     }
     static defaultProps = {
         type: 'contact'
@@ -246,7 +262,7 @@ class SingleInfo extends React.Component {
                 <div className={styles.infoContent}>
                     <div className={styles.infoContentWrap}>
                         <span>{contact.name}</span>
-                        <span>{`身份证号码 42108319900376380`}</span>
+                        <span>{`身份证号码 ${contact.identity_card}`}</span>
                     </div>
                 </div>
             </div>
