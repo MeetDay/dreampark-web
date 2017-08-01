@@ -30,7 +30,7 @@ const routes = (store) => {
 			<IndexRoute component={Home} />
 			<Route path="home" component={Home} />
 			<Route path="tickets" component={Tickets} onEnter={requireLogin} />
-			<Route path="buyticket/detailinfo/:id" component={CompleteBuyTicketInfo} />
+			<Route path="buyticket/ticketinfo/:id" component={CompleteBuyTicketInfo} />
 			<Route path="buytickets" component={BuyTicket} />
 			<Route path="buytickets/search" component={SearchTicket} />
 			<Route path="detail/:id" component={Details} />

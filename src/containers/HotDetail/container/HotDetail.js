@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Carousel } from 'antd';
+import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux';
 import { asyncConnect } from 'redux-async-connect';
 import { connect } from 'react-redux';
 import { TitleElement, PageNotExist } from '../../../components';
@@ -25,17 +27,18 @@ import { isEmptyObject } from '../../Login/module/login'
     state => ({
         user: state.login.user,
         hotDetail: state.hotdetail.hotDetail
-    })
+    }),
+    dispatch => bindActionCreators({ push }, dispatch)
 )
 
 export default class HotDetail extends React.Component {
     constructor() {
         super();
         this.handleClickViewMore = (e) => this._handleClickViewMore(e);
-        this.handleClickBuyTicketNow = (e) => this._handleClickBuyTicketNow(e);
-        this.handleClickAddToCart = (e) => this._handleClickAddToCart(e);
         this.handleClickCancel = (e) => this._handleClickCancel(e);
         this.handleClickToolBar = (e) => this._handleClickToolBar(e);
+        this.handleClickBuyTicketNow = (selectedTicket) => this._handleClickBuyTicketNow(selectedTicket);
+        this.handleClickAddToCart = (selectedTicket) => this._handleClickAddToCart(selectedTicket);
 
         this.state = {
             contentWrapMaxHeight: '175px',
@@ -43,10 +46,6 @@ export default class HotDetail extends React.Component {
             viewMoreWrapDisplay: 'block',
             showBuyTicketNow: false,
         };
-    }
-
-    componentDidMount() {
-
     }
 
     _handleClickViewMore(e) {
@@ -58,17 +57,17 @@ export default class HotDetail extends React.Component {
         });
     }
 
-    _handleClickBuyTicketNow(e) {
-        e.preventDefault();
+    _handleClickBuyTicketNow(selectedTicket) {
+        console.log(selectedTicket)
         if (this.props.user) {
-
+            this.props.push('/buyticket/ticketinfo/1')
         } else {
             jumpToWeChatAuthorizationUrl(location)
         }
     }
 
-    _handleClickAddToCart(e) {
-        e.preventDefault();
+    _handleClickAddToCart(selectedTicket) {
+        console.log(selectedTicket)
         if (this.props.user) {
 
         } else {
@@ -95,7 +94,7 @@ export default class HotDetail extends React.Component {
         };
         const viewMoreWrapStyle = { display: this.state.viewMoreWrapDisplay };
         // 转换数据
-        const { title, slides, content, attention, place, location, time_info } = this.props.hotDetail;
+        const { title, slides, content, attention, place, location, time_info, price } = this.props.hotDetail;
         return (
             <div className={styles.detail}>
                 <Navbar title={title} />
@@ -143,7 +142,7 @@ export default class HotDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-                <ToolBar price={123} onClickBuyTicketNow={this.handleClickToolBar} />
+                <ToolBar price={price} onClickBuyTicketNow={this.handleClickToolBar} />
                 <BuyTicketNow
                     show={this.state.showBuyTicketNow}
                     onClickCancel={this.handleClickCancel}

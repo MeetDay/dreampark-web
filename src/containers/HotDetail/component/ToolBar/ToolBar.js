@@ -5,7 +5,7 @@ export default class ToolBar extends React.Component {
     static propTypes = {
         price: PropTypes.number.isRequired,
         onClickBuyTicketNow: PropTypes.func.isRequired,
-        onClickAddToCart: PropTypes.func.isRequired,
+        onClickAddToCart: PropTypes.func,
     };
 
     render() {
