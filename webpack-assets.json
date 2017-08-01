@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.1c1f6dafb575723386b5.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.1c1f6dafb575723386b5.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.1c1f6dafb575723386b5.min.js"
+    "main": "http://localhost:3000/dist/main.2e321f291c8097ec5fe3.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.2e321f291c8097ec5fe3.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.2e321f291c8097ec5fe3.min.js"
   },
   "styles": {},
   "assets": {
@@ -207,7 +207,7 @@
     },
     "./src/containers/Register/component/StepOne/StepOne.scss": {
       "stepone": "StepOne__stepone__2LgEs",
-      "_style": ".StepOne__stepone__2LgEs {\n  margin: 0 5%; }\n"
+      "_style": ".StepOne__stepone__2LgEs {\n  margin: 0 5%;\n  background-color: transparent; }\n"
     },
     "./src/containers/Register/component/StepThree/StepThree.scss": {
       "stepthree": "StepThree__stepthree__2PEG-",
