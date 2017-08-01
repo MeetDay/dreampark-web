@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.d05c4d44513430531926.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.d05c4d44513430531926.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.d05c4d44513430531926.min.js"
+    "main": "http://localhost:3000/dist/main.479c90ebfd22f5111c25.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.479c90ebfd22f5111c25.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.479c90ebfd22f5111c25.min.js"
   },
   "styles": {},
   "assets": {
@@ -358,7 +358,7 @@
     },
     "./src/containers/Tickets/container/BuyTicket.scss": {
       "buyTicket": "BuyTicket__buyTicket__2gXOK",
-      "_style": ".BuyTicket__buyTicket__2gXOK {\n  margin-top: 44px; }\n"
+      "_style": ".BuyTicket__buyTicket__2gXOK {\n  padding: 44px 0; }\n"
     },
     "./src/containers/Tickets/container/SearchTicket.scss": {
       "searchTicket": "SearchTicket__searchTicket__2OKE1",
