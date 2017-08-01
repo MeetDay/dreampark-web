@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
 import { Carousel } from 'antd';
 import { bindActionCreators } from 'redux';
@@ -8,7 +9,7 @@ import { asyncConnect } from 'redux-async-connect';
 import { connect } from 'react-redux';
 import { TitleElement, PageNotExist } from '../../../components';
 import { Navbar, ToolBar, Recommend, BuyTicketNow, BuyParkingCoupon } from '../component';
-import { isHotDetailLoaded, getHotDetailBy, collectHotDetail } from '../module/hotdetail';
+import { isHotDetailLoaded, getHotDetailBy } from '../module/hotdetail';
 import { convertElementsToComponet } from '../../../utils/elements';
 import { appendQiNiuQueryParamsForImageUrl } from '../../../helpers/QiNiuHelpers';
 import { jumpToWeChatAuthorizationUrl } from '../../../utils/wechat'
@@ -28,7 +29,7 @@ import { isEmptyObject } from '../../Login/module/login'
         user: state.login.user,
         hotDetail: state.hotdetail.hotDetail
     }),
-    dispatch => bindActionCreators({ push, collectHotDetail }, dispatch)
+    dispatch => bindActionCreators({ push }, dispatch)
 )
 
 export default class HotDetail extends React.Component {
@@ -37,7 +38,6 @@ export default class HotDetail extends React.Component {
         this.handleClickViewMore = (e) => this._handleClickViewMore(e);
         this.handleClickCancel = (e) => this._handleClickCancel(e);
         this.handleClickToolBar = (e) => this._handleClickToolBar(e);
-        this.handleClickLike = (e) => this._handleClickLike(e);
         this.handleClickBuyTicketNow = (selectedTicket) => this._handleClickBuyTicketNow(selectedTicket);
         this.handleClickAddToCart = (selectedTicket) => this._handleClickAddToCart(selectedTicket);
 
@@ -45,8 +45,7 @@ export default class HotDetail extends React.Component {
             contentWrapMaxHeight: '175px',
             contentWrapOverflow: 'hidden',
             viewMoreWrapDisplay: 'block',
-            showBuyTicketNow: false,
-            isLike: false
+            showBuyTicketNow: false
         };
     }
 
@@ -87,12 +86,6 @@ export default class HotDetail extends React.Component {
         this.setState({ showBuyTicketNow: true });
     }
 
-    _handleClickLike(e) {
-        e.preventDefault()
-        this.props.collectHotDetail(this.props.hotDetail.id)
-        this.setState({ isLike: !this.state.isLike })
-    }
-
     render() {
         if (!this.props.hotDetail || isEmptyObject(this.props.hotDetail)) return (<PageNotExist />);
         const styles = require('./HotDetail.scss');
@@ -102,10 +95,10 @@ export default class HotDetail extends React.Component {
         };
         const viewMoreWrapStyle = { display: this.state.viewMoreWrapDisplay };
         // 转换数据
-        const { title, is_collect, slides, content, attention, place, location, time_info, price } = this.props.hotDetail;
+        const { title, slides, content, attention, place, location, time_info, price } = this.props.hotDetail;
         return (
             <div className={styles.detail}>
-                <Navbar title={title} isLike={is_collect || this.state.isLike} onClickLike={this.handleClickLike} />
+                <Helmet><title>{title}</title></Helmet>
                 <div className={styles.carousel}>
                     <Carousel autoplay>
                         { slides && slides.map(element => (<div key={element.id}><CarouselCard carousel={element} /></div>)) }
@@ -150,7 +143,7 @@ export default class HotDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-                <ToolBar price={price} onClickBuyTicketNow={this.handleClickToolBar} />
+                <ToolBar price={price || 0} onClickBuyTicketNow={this.handleClickToolBar} />
                 <BuyTicketNow
                     show={this.state.showBuyTicketNow}
                     onClickCancel={this.handleClickCancel}
