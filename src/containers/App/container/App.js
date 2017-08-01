@@ -7,6 +7,7 @@ import Cookies from 'universal-cookie'
 import * as Constant from '../../../utils/constant'
 import { Navbar as NavigationBar } from '../../../components'
 import { loadCookie, isCookieLoaded } from '../../Login/module/login'
+import { isFullUser } from '../../../utils/wechat'
 
 @asyncConnect([{
 	deferred: true,
@@ -26,7 +27,7 @@ import { loadCookie, isCookieLoaded } from '../../Login/module/login'
 export default class App extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.user && nextProps.user !== this.props.user) {
+		if (nextProps.user && nextProps.user !== this.props.user && isFullUser(nextProps.user)) {
 			const cookies = new Cookies()
 			cookies.set(Constant.USER_COOKIE, nextProps.user, { path: '/' })
 		}
