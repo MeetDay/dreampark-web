@@ -46,7 +46,7 @@ export default class HotDetail extends React.Component {
             contentWrapOverflow: 'hidden',
             viewMoreWrapDisplay: 'block',
             showBuyTicketNow: false,
-            isLike: props.hotDetail.is_collect
+            isLike: false
         };
     }
 
@@ -102,10 +102,10 @@ export default class HotDetail extends React.Component {
         };
         const viewMoreWrapStyle = { display: this.state.viewMoreWrapDisplay };
         // 转换数据
-        const { title, slides, content, attention, place, location, time_info, price } = this.props.hotDetail;
+        const { title, is_collect, slides, content, attention, place, location, time_info, price } = this.props.hotDetail;
         return (
             <div className={styles.detail}>
-                <Navbar title={title} isLike={this.state.isLike} onClickLike={this.handleClickLike} />
+                <Navbar title={title} isLike={is_collect || this.state.isLike} onClickLike={this.handleClickLike} />
                 <div className={styles.carousel}>
                     <Carousel autoplay>
                         { slides && slides.map(element => (<div key={element.id}><CarouselCard carousel={element} /></div>)) }
