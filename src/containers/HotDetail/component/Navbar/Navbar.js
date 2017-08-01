@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 export default class Navbar extends React.Component {
     static propTypes = {
-        title: PropTypes.string
+        title: PropTypes.string,
+        isLike: PropTypes.bool,
+        onClickLike: PropTypes.func
     }
     constructor() {
         super();
@@ -22,15 +24,16 @@ export default class Navbar extends React.Component {
 
     render() {
         const styles = require('./Navbar.scss');
-        const { title } = this.props;
+        const { title, isLike } = this.props;
+        const likeImageUrl = isLike ? '/assets/likes_nav_selected.png' : '/assets/likes_nav.png';
         return (
             <div className={styles.navbar}>
                 <div className={styles.imgWrap} onClick={this.handleClickBack}>
                     <img className={styles.back} src="/assets/back.png" alt="back"/>
                 </div>
                 {title && <div className={styles.title}>{title}</div>}
-                <div className={styles.imgWrap} onClick={this.handleClickLike}>
-                    <img className={styles.like} src="/assets/likes_nav_selected.png" alt="like"/>
+                <div className={styles.imgWrap} onClick={this.props.onClickLike}>
+                    <img className={styles.like} src={likeImageUrl} alt="like"/>
                 </div>
             </div>
         );

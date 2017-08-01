@@ -8,7 +8,7 @@ import { asyncConnect } from 'redux-async-connect';
 import { connect } from 'react-redux';
 import { TitleElement, PageNotExist } from '../../../components';
 import { Navbar, ToolBar, Recommend, BuyTicketNow, BuyParkingCoupon } from '../component';
-import { isHotDetailLoaded, getHotDetailBy } from '../module/hotdetail';
+import { isHotDetailLoaded, getHotDetailBy, collectHotDetail } from '../module/hotdetail';
 import { convertElementsToComponet } from '../../../utils/elements';
 import { appendQiNiuQueryParamsForImageUrl } from '../../../helpers/QiNiuHelpers';
 import { jumpToWeChatAuthorizationUrl } from '../../../utils/wechat'
@@ -28,15 +28,16 @@ import { isEmptyObject } from '../../Login/module/login'
         user: state.login.user,
         hotDetail: state.hotdetail.hotDetail
     }),
-    dispatch => bindActionCreators({ push }, dispatch)
+    dispatch => bindActionCreators({ push, collectHotDetail }, dispatch)
 )
 
 export default class HotDetail extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.handleClickViewMore = (e) => this._handleClickViewMore(e);
         this.handleClickCancel = (e) => this._handleClickCancel(e);
         this.handleClickToolBar = (e) => this._handleClickToolBar(e);
+        this.handleClickLike = (e) => this._handleClickLike(e);
         this.handleClickBuyTicketNow = (selectedTicket) => this._handleClickBuyTicketNow(selectedTicket);
         this.handleClickAddToCart = (selectedTicket) => this._handleClickAddToCart(selectedTicket);
 
@@ -45,6 +46,7 @@ export default class HotDetail extends React.Component {
             contentWrapOverflow: 'hidden',
             viewMoreWrapDisplay: 'block',
             showBuyTicketNow: false,
+            isLike: props.hotDetail.is_collect
         };
     }
 
@@ -85,6 +87,12 @@ export default class HotDetail extends React.Component {
         this.setState({ showBuyTicketNow: true });
     }
 
+    _handleClickLike(e) {
+        e.preventDefault()
+        this.props.collectHotDetail(this.props.hotDetail.id)
+        this.setState({ isLike: !this.state.isLike })
+    }
+
     render() {
         if (!this.props.hotDetail || isEmptyObject(this.props.hotDetail)) return (<PageNotExist />);
         const styles = require('./HotDetail.scss');
@@ -97,7 +105,7 @@ export default class HotDetail extends React.Component {
         const { title, slides, content, attention, place, location, time_info, price } = this.props.hotDetail;
         return (
             <div className={styles.detail}>
-                <Navbar title={title} />
+                <Navbar title={title} isLike={this.state.isLike} onClickLike={this.handleClickLike} />
                 <div className={styles.carousel}>
                     <Carousel autoplay>
                         { slides && slides.map(element => (<div key={element.id}><CarouselCard carousel={element} /></div>)) }

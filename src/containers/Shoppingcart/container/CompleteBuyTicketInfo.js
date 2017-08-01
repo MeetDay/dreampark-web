@@ -27,7 +27,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
             showAddContact: false,
             username: '',
             idCardNo: '',
-            checkedContacts: []
+            checkedContacts: [props.contactList[0]]
         }
     }
 
@@ -80,7 +80,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                     if (err || body.resp.code !== 0) {
                         message.warning('身份认证失败, 请检查后重试...')
                     } else {
-                        
+
                     }
                 })
         } else {

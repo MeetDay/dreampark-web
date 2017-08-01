@@ -28,6 +28,16 @@ export function getHotDetailBy(id) {
     }
 }
 
+export function collectHotDetail(id) {
+    return (dispatch, getState) => {
+        const { authHeaders } = getState().login;
+        return dispatch({
+            type: 'redux/hotdetail/collect',
+            payload: (client) => client.post(`/${id}/collect`, { headers: authHeaders })
+        })
+    }
+}
+
 export function isHotDetailLoaded(globalState) {
     return globalState.hotdetail && globalState.hotdetail.hotDetail
 }
