@@ -130,6 +130,7 @@ $ticketContentMargin: 24px;
 $contactWidth: 80px;
 $contactHeight: 40px;
 .contact {
+    position: relative;
     display: inline-block;
     height: $contactHeight;
     width: $contactWidth;
@@ -156,7 +157,17 @@ $contactNameLineHeight: 20px;
     font-size: 14px;
     color: #1C2123;
 }
-
+.contactSelected {
+    position: absolute;
+    display: inline-block;
+    right: -1px;
+    bottom: -1px;
+    font-size: 0;
+    & > img {
+        vertical-align: top;
+        width: 17px;
+    }
+}
 .checkedContact {
     border: 1px solid #E62A10;
 }

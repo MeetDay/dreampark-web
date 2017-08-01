@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import superagent from 'superagent'
 import classNames from 'classnames'
-import { Modal } from 'antd'
+import { Modal, message } from 'antd'
 import { Phone } from '../../../components'
+import { clearWhiteSpaceOf, illegalCardNumber } from '../../../utils/regex'
 
 export default class CompleteBuyTicketInfo extends React.Component {
 
@@ -40,7 +42,6 @@ export default class CompleteBuyTicketInfo extends React.Component {
     }
 
     _contactChecked(checkedContact) {
-        console.log(checkedContact)
         if (this.existedContact(this.state.checkedContacts, checkedContact)) {
             const results = this.state.checkedContacts.filter(contact => contact.id !== checkedContact.id)
             this.setState({ checkedContacts: [...results] })
@@ -70,7 +71,21 @@ export default class CompleteBuyTicketInfo extends React.Component {
 
     _handleClickFinished(e) {
         e.preventDefault()
-        console.log('完成')
+        const username = clearWhiteSpaceOf(this.state.username)
+        const idCardNo = clearWhiteSpaceOf(this.state.idCardNo)
+        if (username.length > 0 && illegalCardNumber(idCardNo)) {
+            superagent.get('http://www.fbpageant.com/actions/user/login/idcard')
+                .query({ name: username, cardno: idCardNo })
+                .end((err, { body }) => {
+                    if (err || body.resp.code !== 0) {
+                        message.warning('身份认证失败, 请检查后重试...')
+                    } else {
+                        
+                    }
+                })
+        } else {
+            message.warning('请输入正确的姓名和身份证号码...')
+        }
     }
 
     existedContact(checkedContacts, checkedContact) {
@@ -186,6 +201,7 @@ class ContactCard extends React.Component {
             content = (
                 <div onClick={this.onContactChecked} className={classNames({ [styles.contact]: true, [styles.checkedContact]: checked })}>
                     <span className={styles.contactName}>{contact.name}</span>
+                    { checked && <span className={styles.contactSelected}><img src="/assets/contacts_selected.png" alt="selected"/></span> }
                 </div>
             );
         } else {

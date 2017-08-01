@@ -4,8 +4,6 @@ import { message } from 'antd'
 import { LoginButton, Phone } from '../../../../components'
 import { illegalCardNumber, clearWhiteSpaceOf } from '../../../../utils/regex'
 
-const IDCARD_WARNING_MESSAGE = '请输入正确的姓名和身份证号码!'
-
 export default class StepThree extends React.Component {
     static propTypes = {
         idcardInfo: PropTypes.object,
@@ -35,7 +33,7 @@ export default class StepThree extends React.Component {
             if (idcardInfo && idcardInfo.resp.code === 0) {
                 location.hash = '#stepfour'
             } else {
-                message.error(IDCARD_WARNING_MESSAGE)
+                message.error('请输入正确的姓名和身份证号码!')
             }
         }
     }
