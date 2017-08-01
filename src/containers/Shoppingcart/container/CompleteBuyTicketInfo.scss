@@ -106,27 +106,20 @@ $ticketContentMargin: 24px;
 .contactWrap {
     display: inline-block;
     vertical-align: top;
+    width: 25%;
 }
 
-$contactWidth: 80px;
 $contactHeight: 40px;
 .contact {
     position: relative;
     display: inline-block;
     height: $contactHeight;
-    width: $contactWidth;
+    width: 90%;
     margin: 5px 3px;
     border-radius: 3px;
     border: 1px solid #D6D6D6;
     text-align: center;
     background-color: #FFFFFF;
-
-    @media (max-width: 320px) {
-        width: 65px;
-    }
-    @media (min-width: 400px) {
-        width: 85px;
-    }
 }
 
 $contactNameLineHeight: 20px;
