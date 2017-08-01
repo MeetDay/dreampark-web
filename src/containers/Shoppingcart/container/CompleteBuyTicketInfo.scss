@@ -61,8 +61,9 @@ $ticketContentMargin: 24px;
 }
 
 .ticketPrice {
-    position: relative;
+    position: absolute;
     top: 50%;
+    right: 0;
     transform: translateY(-50%);
 
     display: inline-block;
@@ -124,7 +125,7 @@ $contactHeight: 40px;
         width: 65px;
     }
     @media (min-width: 400px) {
-        width: 90px;
+        width: 85px;
     }
 }
 
