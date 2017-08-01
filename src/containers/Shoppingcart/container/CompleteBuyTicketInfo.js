@@ -44,8 +44,10 @@ export default class CompleteBuyTicketInfo extends React.Component {
 
     _contactChecked(checkedContact) {
         if (this.existedContact(this.state.checkedContacts, checkedContact)) {
-            const results = this.state.checkedContacts.filter(contact => contact.id !== checkedContact.id)
-            this.setState({ checkedContacts: [...results] })
+            if (this.state.checkedContacts.length > 1) {
+                const results = this.state.checkedContacts.filter(contact => contact.id !== checkedContact.id)
+                this.setState({ checkedContacts: [...results] })
+            }
         } else {
             this.setState({ checkedContacts: [...this.state.checkedContacts, checkedContact] })
         }
