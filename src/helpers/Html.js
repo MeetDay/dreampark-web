@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
-
+import { Helmet } from 'react-helmet';
 
 export default class Html extends React.Component {
 	static propTypes = {
@@ -14,10 +14,16 @@ export default class Html extends React.Component {
 	render() {
 		const { assets, component, store } = this.props;
 		const content = component ? renderToString(component) : '';
+		const helmet = Helmet.renderStatic();
+		const htmlAttrs = helmet.htmlAttributes.toComponent();
+		const bodyAttrs = helmet.bodyAttributes.toComponent();
 		return (
-			<html lang="en-US">
+			<html lang="en-US" {...htmlAttrs}>
 				<head>
-					<title>梦想公园</title>
+					{helmet.title.toComponent()}
+					{helmet.base.toComponent()}
+					{helmet.meta.toComponent()}
+					{helmet.link.toComponent()}
 		            <meta name="msapplication-TileColor" content="#ffffff" />
 		            <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
 		            <meta name="theme-color" content="#ffffff" />
@@ -27,7 +33,7 @@ export default class Html extends React.Component {
 							.map((style) => (<link key={style} type="text/css" rel="stylesheet" media="screen, projection" href={assets.styles[style]} charSet="utf-8" />))
 					}
 		        </head>
-	            <body>
+	            <body {...bodyAttrs}>
 	           		<div id="app" dangerouslySetInnerHTML={{ __html: content }} />
 	           		<script dangerouslySetInnerHTML={{ __html: `window.__redux_data__=${serialize(store.getState())};` }} charSet="UTF-8" />
 					{

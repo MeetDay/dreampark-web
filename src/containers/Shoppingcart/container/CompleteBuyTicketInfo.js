@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types'
 import superagent from 'superagent'
 import classNames from 'classnames'
@@ -101,9 +102,9 @@ export default class CompleteBuyTicketInfo extends React.Component {
         const styles = require('./CompleteBuyTicketInfo.scss')
         return (
             <div>
-                <div className={styles.nav}>
-                    <span className={styles.navTitle}>补充订单信息</span>
-                </div>
+                <Helmet>
+                    <title>补充订单信息</title>
+                </Helmet>
                 <div className={styles.pageContent}>
                     <div className={styles.ticketInfo}>
                         <span className={styles.ticketImageWrap}><img src="/assets/ticket_border_big.png" alt="ticket"/></span>
