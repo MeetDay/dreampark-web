@@ -1,6 +1,7 @@
 const SHOPPINGCART = 'redux/shoppingcart/shoppingcart'
 const DELETE_SHOPPINGCART_GOODS = 'redux/shoppingcart/delelte_shoppingcart_goods'
 const ADD_CONTACT = 'redux/shoppingcart/add_contact'
+const TICKET_INFO = 'redux/shoppingcart/ticketinfo'
 const GOODS_COUNT_PER_REQUEST = 20
 
 const actionHandlers = {
@@ -32,9 +33,22 @@ const actionHandlers = {
     },
     [`${DELETE_SHOPPINGCART_GOODS}_REJECTED`]: (state, action) => ({ ...state, deleteGoodsLoading: false, deleteGoodsLoaded:false }),
 
-    [`${ADD_CONTACT}_PENDING`]: (state, action) => ({ contactLoading: true, contactLoaded: false }),
-    [`${ADD_CONTACT}_FULFILLED`]: (state, action) => ({ contactLoading: false, contactLoaded: true, contact: action.payload }),
-    [`${ADD_CONTACT}_REJECTED`]: (state, action) => ({ contactLoading: false, contactLoaded: false, contactError: action.payload })
+    [`${ADD_CONTACT}_PENDING`]: (state, action) => ({ ...state, contactLoading: true, contactLoaded: false }),
+    [`${ADD_CONTACT}_FULFILLED`]: (state, action) => {
+        const contact = action.payload
+        console.log(contact)
+        return {
+            ...state,
+            contactLoading: false,
+            contactLoaded: true,
+            contactList: [...state.contactList, contact]
+        }
+    },
+    [`${ADD_CONTACT}_REJECTED`]: (state, action) => ({ ...state, contactLoading: false, contactLoaded: false, contactError: action.payload }),
+
+    [`${TICKET_INFO}_PENDING`]: (state, action) => ({ ...state, ticketInfoLoading: true, ticketInfoLoaded: false }),
+    [`${TICKET_INFO}_FULFILLED`]: (state, action) => ({ ...state, ticketInfoLoading: false, ticketInfoLoaded: true, ticketInfo: action.payload.ticket, contactList: action.payload.contacters }),
+    [`${TICKET_INFO}_REJECTED`]: (state, action) => ({ ...state, ticketInfoLoading: false, ticketInfoLoaded: false, ticketInfoError: action.payload }),
 }
 
 const initialState = {
@@ -52,7 +66,12 @@ const initialState = {
     contactLoading: false,
     contactLoaded: false,
     contactError: null,
-    contact: null,
+
+    ticketInfoLoading: false,
+    ticketInfoLoaded: false,
+    ticketInfoError: null,
+    ticketInfo: null,
+    contactList: []
 }
 
 export default function shoppingcart(state=initialState, action) {
@@ -64,11 +83,15 @@ export function isShoppingcartLoaded(globalState) {
     return globalState.shoppingcart && globalState.shoppingcart.shoppingcarts
 }
 
+export function isTicketInfoLoaded(globalState) {
+    return globalState.shoppingcart && globalState.shoppingcart.ticketInfo
+}
+
 export function getShoppingcart() {
     return (dispatch, getState) => {
         const { authHeaders } = getState().login
         const { maxGoodsID } = getState().shoppingcart
-        dispatch({
+        return dispatch({
             type: SHOPPINGCART,
             payload: (client) => client.get('/cart', {
                 params: { max_id: maxGoodsID },
@@ -81,7 +104,7 @@ export function getShoppingcart() {
 export function deleteGoodsFromShoppingCart(goods) {
     return (dispatch, getState) => {
         const { authHeaders } = getState().login
-        dispatch({
+        return dispatch({
             type: DELETE_SHOPPINGCART_GOODS,
             payload: (client) => client.del(`/cart/${goods.id}`, {
                 headers: authHeaders
@@ -90,15 +113,36 @@ export function deleteGoodsFromShoppingCart(goods) {
     }
 }
 
-export function addContact(contact) {
+export function getTicketInfoBy(ticketID) {
     return (dispatch, getState) => {
         const { authHeaders } = getState().login
-        dispatch({
-            type: ADD_CONTACT,
-            payload: (client) => client.post('/contacter', {
-                headers: authHeaders,
-                data: contact
+        return dispatch({
+            type: TICKET_INFO,
+            payload: (client) => client.get(`/tickets/ticket_order_info/${ticketID}`, {
+                headers: authHeaders
             })
         })
+    }
+}
+
+export function addContact(contact) {
+    return {
+        type: ADD_CONTACT,
+        payload: (client) =>
+            client.get('/login/idcard', { params: contact, subpath: '/actions/user' })
+                .then((err, { body } = {}) => {
+                    if (!err && body && body.resp.code === 0) {
+                        return (dispatch, getState) => {
+                            const { authHeaders } = getState().login
+                            return dispatch({
+                                type: ADD_CONTACT,
+                                payload: (client) => client.post('/contacter', {
+                                    headers: authHeaders,
+                                    data: contact
+                                })
+                            })
+                        }
+                    }
+                }).catch(err => console.log(err))
     }
 }

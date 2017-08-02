@@ -1,17 +1,30 @@
-import React from 'react'
+import React from 'react';
 import { Helmet } from 'react-helmet';
-import PropTypes from 'prop-types'
-import superagent from 'superagent'
-import classNames from 'classnames'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { Modal, message } from 'antd'
-import { addContact } from '../module/shoppingcartV2'
-import { Phone } from '../../../components'
-import { clearWhiteSpaceOf, illegalCardNumber } from '../../../utils/regex'
+import PropTypes from 'prop-types';
+import superagent from 'superagent';
+import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { asyncConnect } from 'redux-async-connect';
+import { bindActionCreators } from 'redux';
+import { Modal, message } from 'antd';
+import { isTicketInfoLoaded, getTicketInfoBy, addContact } from '../module/shoppingcartV2';
+import { Phone } from '../../../components';
+import { clearWhiteSpaceOf, illegalCardNumber } from '../../../utils/regex';
+
+@asyncConnect([{
+    deferred: true,
+    promise: ({ params, store:{ dispatch, getState }, helpers }) => {
+        if (!isTicketInfoLoaded(getState())) {
+            return dispatch(getTicketInfoBy(params.id))
+        }
+    }
+}])
 
 @connect(
-    state => ({ contact: state.shoppingcart.contact }),
+    state => ({
+        ticketInfo: state.shoppingcart.ticketCount,
+        contactList: state.shoppingcart.contactList
+    }),
     dispatch => bindActionCreators({ addContact }, dispatch)
 )
 
@@ -36,15 +49,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
             showAddContact: false,
             username: '',
             idCardNo: '',
-            checkedContacts: [props.contactList[0]],
-            contactList: props.contactList
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        const { contact } = nextProps
-        if (contact && contact !== this.props.contact) {
-            this.setState({ contactList: [...this.state.contactList, contact] })
+            checkedContacts: [props.contactList[0]]
         }
     }
 
@@ -69,6 +74,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
         }
     }
 
+    // 控制显示隐藏添加常用联系人的弹窗
     _addContact() {
         this.setState({ showAddContact: true })
     }
@@ -77,14 +83,13 @@ export default class CompleteBuyTicketInfo extends React.Component {
         this.setState({ showAddContact: false })
     }
 
+    // 添加常用联系人
     _onUsernameChange(e) {
         e.preventDefault()
-        console.log(e.target.value)
         this.setState({ username: e.target.value })
     }
     _onCardNumberChange(e) {
         e.preventDefault()
-        console.log(e.target.value)
         this.setState({ idCardNo: e.target.value })
     }
 
@@ -93,15 +98,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
         const username = clearWhiteSpaceOf(this.state.username)
         const idCardNo = clearWhiteSpaceOf(this.state.idCardNo)
         if (username.length > 0 && illegalCardNumber(idCardNo)) {
-            superagent.get('http://www.fbpageant.com/actions/user/login/idcard')
-                .query({ name: username, cardno: idCardNo })
-                .end((err, { body } = {}) => {
-                    if (err || body.resp.code !== 0) {
-                        message.warning('身份认证失败, 请检查后重试...')
-                    } else {
-                        this.props.addContact({ name: this.state.username, identity_card: this.state.idCardNo })
-                    }
-                })
+            this.props.addContact({ name: this.state.username, identity_card: this.state.idCardNo })
         } else {
             message.warning('请输入正确的姓名和身份证号码...')
         }
@@ -138,7 +135,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                     <div className={styles.contactList}>
                         <div className={styles.contactListHeader}><span>请选择联系人</span><span>{`已选择: ${this.state.checkedContacts.length}人`}</span></div>
                         <div className={styles.contactListWrap}>
-                            {this.state.contactList.map(contact => (<ContactCard key={contact.identity_card} contact={contact} contactChecked={this.contactChecked} checked={this.existedContact(this.state.checkedContacts, contact)} />))}
+                            {this.props.contactList.map(contact => (<ContactCard key={contact.identity_card} contact={contact} contactChecked={this.contactChecked} checked={this.existedContact(this.state.checkedContacts, contact)} />))}
                             <ContactCard type="add" addContact={this.addContact} />
                         </div>
                     </div>
