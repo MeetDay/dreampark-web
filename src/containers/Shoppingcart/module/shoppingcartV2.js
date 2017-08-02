@@ -152,7 +152,9 @@ export function submitTicketOrder(totalPrice, ticketInfo, selectedContacts) {
             type: TICEKT_ORDER,
             payload: (client) =>
                 client.post('/add_order', { headers: authHeaders, data: order })
-                    .then(result => client.post('/charge', { headers: authHeaders, data: { id: results.orders_id, pay_type: 'wx_pub', amount: totalPrice }}))
+                    .then(result => {
+                        return client.post('/charge', { headers: authHeaders, data: { id: result.orders_id, pay_type: 'wx_pub', amount: totalPrice }})
+                    })
                     .then(result => console.log(result))
         })
     }
