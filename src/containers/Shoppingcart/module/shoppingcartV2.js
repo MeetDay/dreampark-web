@@ -3,6 +3,7 @@ const SHOPPINGCART = 'redux/shoppingcart/shoppingcart'
 const DELETE_SHOPPINGCART_GOODS = 'redux/shoppingcart/delelte_shoppingcart_goods'
 const ADD_CONTACT = 'redux/shoppingcart/add_contact'
 const TICKET_INFO = 'redux/shoppingcart/ticketinfo'
+const TICEKT_ORDER = 'redux/shoppingcart/ticket_order'
 const GOODS_COUNT_PER_REQUEST = 20
 
 const actionHandlers = {
@@ -147,7 +148,7 @@ export function submitTicketOrder(ticketInfo, selectedContacts) {
         const { authHeaders } = getState.login
         return dispatch({
             type: 'sdkfj',
-            payload: (client) => client.post('/add_order', { headers: authHeaders, data: {} })
+            payload: (client) => client.post('/add_order', { headers: authHeaders, data: {  })
         })
     }
 }
