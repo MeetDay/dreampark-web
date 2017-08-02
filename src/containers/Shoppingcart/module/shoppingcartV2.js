@@ -4,6 +4,7 @@ const DELETE_SHOPPINGCART_GOODS = 'redux/shoppingcart/delelte_shoppingcart_goods
 const ADD_CONTACT = 'redux/shoppingcart/add_contact'
 const TICKET_INFO = 'redux/shoppingcart/ticketinfo'
 const TICEKT_ORDER = 'redux/shoppingcart/ticket_order'
+const PAYMENT = 'redux/shoppingcart/payment'
 const GOODS_COUNT_PER_REQUEST = 20
 
 const actionHandlers = {
@@ -143,12 +144,30 @@ export function addContact(contact) {
 }
 
 // 生成订单
-export function submitTicketOrder(ticketInfo, selectedContacts) {
+export function submitTicketOrder(totalPrice, ticketInfo, selectedContacts) {
+    const order = { amount: totalPrice, ticket: { id: ticketInfo.id, contacters: selectedContacts.map(contact => contact.id) } }
     return (dispatch, getState) => {
-        const { authHeaders } = getState.login
+        const { authHeaders } = getState().login
         return dispatch({
-            type: 'sdkfj',
-            payload: (client) => client.post('/add_order', { headers: authHeaders, data: {  })
+            type: TICEKT_ORDER,
+            payload: (client) =>
+                client.post('/add_order', { headers: authHeaders, data: order })
+                    .then(result => client.post('/charge', { headers: authHeaders, data: { id: results.orders_id, pay_type: 'wx_pub', amount: totalPrice }}))
+                    .then(result => console.log(result))
+        })
+    }
+}
+
+// 支付
+export function payment(payment) {
+    const realPayment = Object.assign({ pay_type: 'wx_pub'}, payment)
+    return (dispatch, getState) => {
+        const { authHeaders } = getState().login
+        return dispatch({
+            type: PAYMENT,
+            payload: (client) =>
+                client.post('/charge', { headers: authHeaders, data: realPayment })
+                    .then(result => console.log(result))
         })
     }
 }

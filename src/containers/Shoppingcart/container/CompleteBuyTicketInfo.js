@@ -8,7 +8,7 @@ import { asyncConnect } from 'redux-async-connect';
 import { bindActionCreators } from 'redux';
 import { Modal, message } from 'antd';
 import { PageNotExist } from '../../../components'
-import { isTicketInfoLoaded, getTicketInfoBy, addContact } from '../module/shoppingcartV2';
+import { isTicketInfoLoaded, getTicketInfoBy, addContact, submitTicketOrder } from '../module/shoppingcartV2';
 import { Phone } from '../../../components';
 import { clearWhiteSpaceOf, illegalCardNumber } from '../../../utils/regex';
 import { convertToLocalDate } from '../../../utils/dateformat'
@@ -30,7 +30,7 @@ import { convertToLocalDate } from '../../../utils/dateformat'
         ticketInfo: state.shoppingcart.ticketInfo,
         contactList: state.shoppingcart.contactList
     }),
-    dispatch => bindActionCreators({ addContact }, dispatch)
+    dispatch => bindActionCreators({ addContact, submitTicketOrder }, dispatch)
 )
 
 export default class CompleteBuyTicketInfo extends React.Component {
@@ -85,6 +85,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
     _handleClickPayment(e) {
         e.preventDefault()
         console.log('支付')
+        this.props.submitTicketOrder(this.state.totalPrice, this.props.ticketInfo, this.state.checkedContacts)
     }
 
     _contactChecked(checkedContact) {
