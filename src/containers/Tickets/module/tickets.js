@@ -23,7 +23,7 @@ const actionHandlers = {
             ...state,
             searchTicketsLoading: false,
             searchTicketsLoaded: true,
-            searchTickets: action.payload
+            searchedTickets: action.payload
         }
     },
     [`${SEARCH_TICKETS}_REJECTED`]: (state, action) => ({...state, searchTicketsLoading: false, searchTicketsLoaded: false, searchTicketError: action.payload })
@@ -49,7 +49,7 @@ const initialState = {
     searchTicketsLoading: false,
     searchTicketsLoaded: false,
     searchTicketError: null,
-    searchTickets: []
+    searchedTickets: []
 }
 
 export default function tickets(state=initialState, action) {

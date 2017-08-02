@@ -7,7 +7,7 @@ import { searchTickets } from '../module/tickets'
 
 @connect(
     state => ({
-        searchTickets: state.tickets.searchTickets,
+        searchedTickets: state.tickets.searchedTickets,
         searchTicketsLoading: state.tickets.searchTicketsLoading,
         searchTicketsLoaded: state.tickets.searchTicketsLoaded
     }),
@@ -40,8 +40,8 @@ export default class SearchTicket extends React.Component {
 
     render() {
         const styles = require('./SearchTicket.scss')
-        const { searchTickets } = this.props;
-        const hasTickets = this.hasTickets(searchTickets)
+        const { searchedTickets } = this.props;
+        const hasTickets = this.hasTickets(searchedTickets)
 
         return (
             <div className={styles.searchTicket}>
@@ -58,7 +58,7 @@ export default class SearchTicket extends React.Component {
                     }
                     {hasTickets &&
                         <div className={styles.items}>
-                            { tickets.map(ticket => (<SearchItem key={ticket.id} ticket={ticket} />)) }
+                            { searchedTickets.map(ticket => (<SearchItem key={ticket.id} ticket={ticket} />)) }
                         </div>
                     }
                 </div>
