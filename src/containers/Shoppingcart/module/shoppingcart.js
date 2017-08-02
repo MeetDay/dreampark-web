@@ -25,9 +25,10 @@ const actionHandlers = {
     [`${SHOPPINGCART}_PENDING`]: (state, action) => ({ ...state, shoppingcartLoading: true, shoppingcartLoaded: false }),
     [`${SHOPPINGCART}_FULFILLED`]: (state, action) => {
         let shoppingcarts = action.payload, hasMoreGoods = false, maxGoodsID = 0
-        if (state.hasMoreGoods && state.maxGoodsID > 0) shoppingcarts = [...state.shoppingcarts, ...shoppingcarts]
         if (shoppingcarts.length >= GOODS_COUNT_PER_REQUEST) hasMoreGoods = true
         if (hasMoreGoods) maxGoodsID = shoppingcarts[shoppingcarts.length - 1].id
+        if (state.hasMoreGoods && state.maxGoodsID > 0) shoppingcarts = [...state.shoppingcarts, ...shoppingcarts]
+
         return {
             ...state,
             shoppingcarts: shoppingcarts,

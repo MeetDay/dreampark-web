@@ -1,28 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { appendQiNiuQueryParamsForImageUrl } from '../../../../helpers/QiNiuHelpers';
 
 export default class TicketCard extends React.Component {
-    constructor() {
-        super();
-        this.handleClick = (e) => this._handleClick(e);
-    }
-
-    _handleClick(e) {
-        e.preventDefault();
-        location.href = `hotdetail/${1}`;
+    static propTypes = {
+        ticket: PropTypes.object
     }
 
     render() {
+        if (!this.props.ticket) return null;
         const styles = require('./TicketCard.scss');
+        const { ticket } = this.props;
         return (
-            <div className={styles.card} onClick={this.handleClick}>
-                <img className={styles.cover} src="http://o9vi0jo2t.bkt.clouddn.com/client_uploads/images/27/71F4FAB2867A8F6C24707C3869E9A76D" alt="ticket-cover" />
-                <div className={styles.info}>
-                    <span className={styles.title}>腾格里国际音乐节</span>
-                    <span>时间：2017.10.1 3:00-4:00</span>
-                    <span>场馆：星光大道南侧</span>
-                    <span>300元</span>
-                </div>
+            <div className={styles.card}>
+                <img className={styles.cover} src={appendQiNiuQueryParamsForImageUrl(ticket.media.name, { w: 80 })} alt="ticket-cover" />
+                <a href={`/hotdetail/${ticket.id}`}>
+                    <div className={styles.info}>
+                        <span className={styles.title}>{ticket.ticket_name}</span>
+                        <span>{`时间：${ticket.start_date} ${ticket.start_time}-${ticket.end_time}`}</span>
+                        <span>{`场馆：${place}`}</span>
+                        <span>{`${ticket.price}元`}</span>
+                    </div>
+                </a>
             </div>
         );
     }

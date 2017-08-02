@@ -46,9 +46,7 @@ export default class App extends React.Component {
 		const styles = require('./App.scss');
 		return (
 			<div className={styles.app}>
-				<Helmet encodeSpecialCharacters={true} defaultTitle="梦想公园" >
-					<meta charSet="utf-8" />
-				</Helmet>
+				<Helmet encodeSpecialCharacters={true} defaultTitle="梦想公园" ><meta charSet="utf-8" /></Helmet>
 				<div>
 					{this.props.children}
 				</div>

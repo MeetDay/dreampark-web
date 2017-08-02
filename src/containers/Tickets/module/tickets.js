@@ -1,7 +1,10 @@
 const UNUSED_TICKETS = 'redux/tickets/unused'
 const USED_TICKETS = 'redux/tickets/used'
 const UNPAID_TICKETS = 'redux/tickets/unpaid'
+const RECOMMEND_TICKETS = 'redux/tickets/recommend/tickets'
 const SEARCH_TICKETS = 'redux/tickets/search_tickets'
+
+const TICKET_COUNT_PER_REQUEST = 10
 
 const actionHandlers = {
     [`${UNUSED_TICKETS}_PENDING`]: (state, action) => ({ ...state, unusedTikectsLoading: true, unusedTikectsLoaded: false }),
@@ -16,16 +19,27 @@ const actionHandlers = {
     },
     [`${USED_TICKETS}_REJECTED`]: (state, action) => ({ ...state, usedTicktsLoading: false, usedTicktsLoaded: false, usedTicktsError: action.payload }),
 
-    [`${SEARCH_TICKETS}_PENDING`]: (state, action) => ({...state, searchTicketsLoading: true, searchTicketsLoaded: false }),
-    [`${SEARCH_TICKETS}_FULFILLED`]: (state, action) => {
-        console.log(action)
+    [`${RECOMMEND_TICKETS}_PENDING`]: (state, action) => ({ ...state, recommendTicketsLoading: true, recommendTicketsLoaded: false }),
+    [`${RECOMMEND_TICKETS}_FULFILLED`]: (state, action) => {
+        let tickets = action.payload, hasMoreRecommendTickets = false, recommendTicketMaxID = undefined
+        if (tickets && Array.isArray(tickets) && tickets.length >= TICKET_COUNT_PER_REQUEST) {
+            hasMoreRecommendTickets = true
+            recommendTicketMaxID = tickets[0].id
+        }
+        if (state.hasMoreRecommendTickets) tickets = [...state.recommendTickets, ...tickets]
         return {
             ...state,
-            searchTicketsLoading: false,
-            searchTicketsLoaded: true,
-            searchedTickets: action.payload
+            recommendTicketsLoading: false,
+            recommendTicketsLoaded: true,
+            recommendTickets: tickets,
+            hasMoreRecommendTickets: hasMoreRecommendTickets,
+            recommendTicketMaxID: recommendTicketMaxID
         }
     },
+    [`${RECOMMEND_TICKETS}_REJECTED`]: (state, action) => ({ ...state, recommendTicketsLoading: false, recommendTicketsLoaded: false, recommendTicketsError: action.payload }),
+
+    [`${SEARCH_TICKETS}_PENDING`]: (state, action) => ({...state, searchTicketsLoading: true, searchTicketsLoaded: false }),
+    [`${SEARCH_TICKETS}_FULFILLED`]: (state, action) => ({ ...state, searchTicketsLoading: false, searchTicketsLoaded: true, searchedTickets: action.payload }),
     [`${SEARCH_TICKETS}_REJECTED`]: (state, action) => ({...state, searchTicketsLoading: false, searchTicketsLoaded: false, searchTicketError: action.payload })
 }
 
@@ -45,6 +59,13 @@ const initialState = {
     unpaidTicketsLoaded: false,
     unpaidTicketsError: null,
     unpaidTickets: [],
+
+    recommendTicketsLoading: false,
+    recommendTicketsLoaded: false,
+    recommendTicketsError: null,
+    recommendTickets: [],
+    hasMoreRecommendTickets: false,
+    recommendTicketMaxID: undefined,
 
     searchTicketsLoading: false,
     searchTicketsLoaded: false,
@@ -67,6 +88,10 @@ export function isUsedTicketsLoaded(globalState) {
 
 export function isUnpaidTicketsLoaded(globalState) {
     return globalState.tickets && globalState.tickets.unpaidTickets
+}
+
+export function isRecommendTicketsLoaded(globalState) {
+    return globalState.tickets && globalState.tickets.recommendTickets
 }
 
 export function getUnusedTikects() {
@@ -98,13 +123,28 @@ export function getUnpaidTickets() {
         const { authHeaders } = getState().login
         return dispatch({
             type: UNPAID_TICKETS,
-            payload: (client) => client.get('/xxxx', {
+            payload: (client) => client.get('/unpaid_orders', {
                 headers: authHeaders
             })
         })
     }
 }
 
+//门票列表
+export function getRecommendTickets() {
+    return (dispatch, getState) => {
+        const { recommendTicketMaxID } = getState().tickets
+        return dispatch({
+            type: RECOMMEND_TICKETS,
+            payload: (client) => client.get('/tickets/list', {
+                params: { count: TICKET_COUNT_PER_REQUEST, max_id: recommendTicketMaxID },
+                subpath: '/api/v1'
+            })
+        })
+    }
+}
+
+// 搜索门票
 export function searchTickets(title) {
     return {
         type: SEARCH_TICKETS,
