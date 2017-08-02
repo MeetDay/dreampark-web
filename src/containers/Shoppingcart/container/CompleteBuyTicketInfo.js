@@ -7,9 +7,11 @@ import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-async-connect';
 import { bindActionCreators } from 'redux';
 import { Modal, message } from 'antd';
+import { PageNotExist } from '../../../components'
 import { isTicketInfoLoaded, getTicketInfoBy, addContact } from '../module/shoppingcartV2';
 import { Phone } from '../../../components';
 import { clearWhiteSpaceOf, illegalCardNumber } from '../../../utils/regex';
+import { convertToLocalDate } from '../../../utils/dateformat'
 
 @asyncConnect([{
     deferred: true,
@@ -22,7 +24,10 @@ import { clearWhiteSpaceOf, illegalCardNumber } from '../../../utils/regex';
 
 @connect(
     state => ({
-        ticketInfo: state.shoppingcart.ticketCount,
+        contactLoading: state.shoppingcart.contactLoading,
+        contactError: state.shoppingcart.contactError,
+        contact: state.shoppingcart.contact,
+        ticketInfo: state.shoppingcart.ticketInfo,
         contactList: state.shoppingcart.contactList
     }),
     dispatch => bindActionCreators({ addContact }, dispatch)
@@ -31,7 +36,8 @@ import { clearWhiteSpaceOf, illegalCardNumber } from '../../../utils/regex';
 export default class CompleteBuyTicketInfo extends React.Component {
 
     static defaultProps = {
-        contactList: [{name: '王超', identity_card: 4211278678231}, {identity_card: 4211212331231231231, name: '耿德宁'}, {identity_card: 42112123231231231, name: '徐玉林'}, {identity_card: 4123211231231231231, name: '郭胜利'}, {identity_card: 421129991231, name: '于晨龙'}, {identity_card: 34534523423423423, name: '王超'}]
+        contactList: [{name: '王超', identity_card: 4211278678231}, {identity_card: 4211212331231231231, name: '耿德宁'}, {identity_card: 42112123231231231, name: '徐玉林'}, {identity_card: 4123211231231231231, name: '郭胜利'}, {identity_card: 421129991231, name: '于晨龙'}, {identity_card: 34534523423423423, name: '王超'}],
+        insurancePrice: 40
     }
 
     constructor(props) {
@@ -49,7 +55,25 @@ export default class CompleteBuyTicketInfo extends React.Component {
             showAddContact: false,
             username: '',
             idCardNo: '',
-            checkedContacts: [props.contactList[0]]
+            totalPrice: 0,
+            checkedContacts: []
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.ticketInfo) {
+            setTimeout(_ => {
+                this.setState((preState, props) => ({ totalPrice: props.ticketInfo.price + props.insurancePrice, checkedContacts:[props.contactList[0]] }))
+            }, 0)
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { contact, contactError } = nextProps
+        if (contact && contact !== this.props.contact) {
+            this.setState({ showAddContact: false })
+        } else if (contactError && contactError !== this.props.contactError) {
+            message.error(contactError.error_message);
         }
     }
 
@@ -64,13 +88,22 @@ export default class CompleteBuyTicketInfo extends React.Component {
     }
 
     _contactChecked(checkedContact) {
+        const { insurancePrice } = this.props;
+        const { price } = this.props.ticketInfo
         if (this.existedContact(this.state.checkedContacts, checkedContact)) {
             if (this.state.checkedContacts.length > 1) {
                 const results = this.state.checkedContacts.filter(contact => contact.identity_card !== checkedContact.identity_card)
-                this.setState({ checkedContacts: [...results] })
+                this.setState({
+                    checkedContacts: [...results],
+                    totalPrice: (insurancePrice + price) * results.length,
+                })
             }
         } else {
-            this.setState({ checkedContacts: [...this.state.checkedContacts, checkedContact] })
+            const checkedContacts = [...this.state.checkedContacts, checkedContact]
+            this.setState({
+                checkedContacts: checkedContacts,
+                totalPrice: (insurancePrice + price) * checkedContacts.length
+            })
         }
     }
 
@@ -98,7 +131,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
         const username = clearWhiteSpaceOf(this.state.username)
         const idCardNo = clearWhiteSpaceOf(this.state.idCardNo)
         if (username.length > 0 && illegalCardNumber(idCardNo)) {
-            this.props.addContact({ name: this.state.username, identity_card: this.state.idCardNo })
+            this.props.addContact({ name: clearWhiteSpaceOf(this.state.username), cardno: clearWhiteSpaceOf(this.state.idCardNo) })
         } else {
             message.warning('请输入正确的姓名和身份证号码...')
         }
@@ -114,7 +147,11 @@ export default class CompleteBuyTicketInfo extends React.Component {
     }
 
     render() {
+        if (!this.props.ticketInfo) return (<PageNotExist />);
         const styles = require('./CompleteBuyTicketInfo.scss')
+        const { ticketInfo } = this.props;
+        const ticketStartTimeObject = convertToLocalDate(ticketInfo.start_time)
+        const ticketEndTimeObject = convertToLocalDate(ticketInfo.end_time)
         return (
             <div>
                 <Helmet><title>补充订单信息</title></Helmet>
@@ -124,12 +161,12 @@ export default class CompleteBuyTicketInfo extends React.Component {
                         <div className={styles.ticketDetails}>
                             <div className={styles.ticketDescription}>
                                 <div className={styles.ticketDescriptionWrap}>
-                                    <span className={styles.ticketTitle}>腾格里国际音乐节</span>
-                                    <span className={styles.ticketTimeInfo}>2017年10月2日 星期三</span>
-                                    <span className={styles.ticketDuration}>8:00-9:00</span>
+                                    <span className={styles.ticketTitle}>{ticketInfo.ticket_name}</span>
+                                    <span className={styles.ticketTimeInfo}>{`${ticketStartTimeObject.date} ${ticketStartTimeObject.week}`}</span>
+                                    <span className={styles.ticketDuration}>{`${ticketStartTimeObject.time}-${ticketEndTimeObject.time}`}</span>
                                 </div>
                             </div>
-                            <span className={styles.ticketPrice}>￥680</span>
+                            <span className={styles.ticketPrice}>￥{ticketInfo.price}</span>
                         </div>
                     </div>
                     <div className={styles.contactList}>
@@ -145,22 +182,17 @@ export default class CompleteBuyTicketInfo extends React.Component {
                     <div className={styles.insuranceService}>
                         <div className={styles.insuranceServiceWrap}>
                             <span className={styles.imageWrap}><img className={styles.imgsafe} src="/assets/safe.png" alt="safe"/></span>
-                            <span className={styles.insuranceText}>{`救援服务保险 ￥40×${this.state.checkedContacts.length}`}</span>
+                            <span className={styles.insuranceText}>{`救援服务保险 ￥${this.props.insurancePrice}×${this.state.checkedContacts.length}`}</span>
                             <span onClick={this.handleClickInsurance} className={styles.imageWrap}><img className={styles.goDetailArrow} src="/assets/go_detail_gray.png" alt="goDetail"/></span>
                         </div>
                     </div>
                 </div>
                 <div className={styles.toolbar}>
-                    <div className={styles.price}><span>价格</span><span>1440￥</span></div>
+                    <div className={styles.price}><span>价格</span><span>￥{this.state.totalPrice}</span></div>
                     <div onClick={this.handleClickPayment} className={styles.nextStep}><span>支付</span></div>
                 </div>
                 {this.state.showAddContact &&
-                    <Modal
-                        visible={this.state.showAddContact}
-                        title={<div className={styles.addContactTitle}>新增联系人</div>}
-                        footer={null}
-                        onCancel={this.handleClickCancel}
-                    >
+                    <Modal visible={this.state.showAddContact} title={<div className={styles.addContactTitle}>新增联系人</div>} footer={null} onCancel={this.handleClickCancel}>
                         <div className={styles.addContactContent}>
                             <div className={styles.addContactAttention}>
                                 <span>注意</span>
@@ -169,7 +201,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                             <div className={styles.addContactInteraction}>
                                 <Phone type="text" theme="dark" usedFor="other" title="您的真实姓名" zone={false} value={this.state.username} onChange={this.onUsernameChange} />
                                 <Phone type="tel" theme="dark" usedFor="idcard" title="身份证号码" zone={false} value={this.state.idCardNo} onChange={this.onCardNumberChange} />
-                                <div onClick={this.handleClickFinished} className={styles.finishedButton}>完成</div>
+                                <button disabled={this.props.contactLoading} onClick={this.handleClickFinished} className={styles.finishedButton}>完成</button>
                             </div>
                         </div>
                     </Modal>

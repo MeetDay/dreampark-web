@@ -1,3 +1,4 @@
+import superagent from 'superagent'
 const SHOPPINGCART = 'redux/shoppingcart/shoppingcart'
 const DELETE_SHOPPINGCART_GOODS = 'redux/shoppingcart/delelte_shoppingcart_goods'
 const ADD_CONTACT = 'redux/shoppingcart/add_contact'
@@ -36,19 +37,15 @@ const actionHandlers = {
     [`${ADD_CONTACT}_PENDING`]: (state, action) => ({ ...state, contactLoading: true, contactLoaded: false }),
     [`${ADD_CONTACT}_FULFILLED`]: (state, action) => {
         const contact = action.payload
-        console.log(contact)
-        return {
-            ...state,
-            contactLoading: false,
-            contactLoaded: true,
-            contactList: [...state.contactList, contact]
-        }
+        return { ...state, contactLoading: false, contactLoaded: true, contact: action.payload, contactList: [...state.contactList, contact] }
     },
     [`${ADD_CONTACT}_REJECTED`]: (state, action) => ({ ...state, contactLoading: false, contactLoaded: false, contactError: action.payload }),
 
     [`${TICKET_INFO}_PENDING`]: (state, action) => ({ ...state, ticketInfoLoading: true, ticketInfoLoaded: false }),
-    [`${TICKET_INFO}_FULFILLED`]: (state, action) => ({ ...state, ticketInfoLoading: false, ticketInfoLoaded: true, ticketInfo: action.payload.ticket, contactList: action.payload.contacters }),
-    [`${TICKET_INFO}_REJECTED`]: (state, action) => ({ ...state, ticketInfoLoading: false, ticketInfoLoaded: false, ticketInfoError: action.payload }),
+    [`${TICKET_INFO}_FULFILLED`]: (state, action) => {
+        return { ...state, ticketInfoLoading: false, ticketInfoLoaded: true, ticketInfo: action.payload.ticket, contactList: action.payload.contacters }
+    },
+    [`${TICKET_INFO}_REJECTED`]: (state, action) => ({ ...state, ticketInfoLoading: false, ticketInfoLoaded: false, ticketInfoError: action.payload })
 }
 
 const initialState = {
@@ -66,6 +63,7 @@ const initialState = {
     contactLoading: false,
     contactLoaded: false,
     contactError: null,
+    contact: null,
 
     ticketInfoLoading: false,
     ticketInfoLoaded: false,
@@ -113,36 +111,43 @@ export function deleteGoodsFromShoppingCart(goods) {
     }
 }
 
+// 补充订单信息
 export function getTicketInfoBy(ticketID) {
     return (dispatch, getState) => {
         const { authHeaders } = getState().login
         return dispatch({
             type: TICKET_INFO,
             payload: (client) => client.get(`/tickets/ticket_order_info/${ticketID}`, {
-                headers: authHeaders
+                headers: authHeaders,
+                subpath: '/fbpark/v1'
             })
         })
     }
 }
 
 export function addContact(contact) {
-    return {
-        type: ADD_CONTACT,
-        payload: (client) =>
-            client.get('/login/idcard', { params: contact, subpath: '/actions/user' })
-                .then((err, { body } = {}) => {
-                    if (!err && body && body.resp.code === 0) {
-                        return (dispatch, getState) => {
-                            const { authHeaders } = getState().login
-                            return dispatch({
-                                type: ADD_CONTACT,
-                                payload: (client) => client.post('/contacter', {
-                                    headers: authHeaders,
-                                    data: contact
-                                })
-                            })
-                        }
-                    }
-                }).catch(err => console.log(err))
+    return (dispatch, getState) => {
+        const { authHeaders } = getState().login
+        return dispatch({
+            type: ADD_CONTACT,
+            payload: (client) => client.get('http://localhost:3000/actions/user/login/idcard', { params: contact, subpath: '/actions/user' })
+                .then(result => {
+                    return client.post('/contacter', {
+                        headers: authHeaders,
+                        data: { name: contact.name, identity_card: contact.cardno }
+                    })
+                })
+        })
+    }
+}
+
+// 生成订单
+export function submitTicketOrder(ticketInfo, selectedContacts) {
+    return (dispatch, getState) => {
+        const { authHeaders } = getState.login
+        return dispatch({
+            type: 'sdkfj',
+            payload: (client) => client.post('/add_order', { headers: authHeaders, data: {} })
+        })
     }
 }

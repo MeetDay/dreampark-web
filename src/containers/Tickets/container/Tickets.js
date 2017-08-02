@@ -6,6 +6,7 @@ import { asyncConnect } from 'redux-async-connect'
 import { bindActionCreators } from 'redux'
 import { isUsedTicketsLoaded, getUsedTickts,isUnusedTicketsLoaded, getUnusedTikects, isUnpaidTicketsLoaded, getUnpaidTickets } from '../module/tickets'
 import { Header, Ticket, TicketDetail, TicketTool } from '../component'
+import { convertToLocalDate } from '../../../utils/dateformat'
 const existedTicketTypes = ['unused', 'used', 'unpaid']
 
 @asyncConnect([{
@@ -90,7 +91,7 @@ export default class Tickets extends React.Component {
 
     render() {
         const styles = require('./Tickets.scss')
-        const user = this.props.user || {}
+        console.log(convertToLocalDate(1501659534))
         let tickets = null
         if (this.state.selectedItemType === 'used') {
             tickets = this.props.usedTickts
@@ -101,12 +102,12 @@ export default class Tickets extends React.Component {
         }
         return (
             <div>
-                {this.state.selectedTicket && <TicketDetail visible={this.state.showSelectedTicket} onCancel={this.closeViewTickets} ticket={this.state.selectedTicket} />}
-                <Header key={user.id} user={user} selectedItemType={this.state.selectedItemType} onMenuItemChange={this.onMenuItemChange} />
+                <Header user={this.props.user || {}} selectedItemType={this.state.selectedItemType} onMenuItemChange={this.onMenuItemChange} />
                 <div className={styles.ticketWrap}>
                     { tickets && tickets.map((ticket) =>(<Ticket key={ticket.id} viewTicket={this.viewTicket} ticket={ticket} />)) }
                 </div>
                 <TicketTool onTicketToolBarClick={this.handleClickTicketToolBar} />
+                {this.state.selectedTicket && <TicketDetail visible={this.state.showSelectedTicket} onCancel={this.closeViewTickets} ticket={this.state.selectedTicket} />}
             </div>
         );
     }

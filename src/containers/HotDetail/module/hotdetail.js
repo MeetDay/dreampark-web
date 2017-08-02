@@ -23,7 +23,7 @@ export function getHotDetailBy(id) {
         const { authHeaders } = getState().login
         return dispatch({
             type: HOTDETAIL,
-            payload: (client) => client.get(`/pois/${id}`, { headers: authHeaders, subpath: '/api/v1' })
+            payload: (client) => client.get(`/pois/${id}`, { headers: authHeaders, subpath: '/fbpark/v1' })
         })
     }
 }

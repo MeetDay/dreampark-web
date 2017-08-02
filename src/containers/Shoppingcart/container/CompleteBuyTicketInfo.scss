@@ -186,7 +186,7 @@ $minusImageHeight: 25px;
     display: inline-block;
 }
 
-$infoWrapMinWidth: 220px;
+$infoWrapMinWidth: 240px;
 .infoContentWrap {
     position: absolute;
     top: 50%;
@@ -319,9 +319,12 @@ $toolbarHeight: 55px;
 
 $finishedButtonHeight: 44px;
 .finishedButton {
+    width: 100%;
     height: $finishedButtonHeight;
     margin-bottom: 0px !important;
+    border: none;
     border-radius: 3px;
+    outline: none;
 
     font-size: 16px;
     line-height: $finishedButtonHeight;

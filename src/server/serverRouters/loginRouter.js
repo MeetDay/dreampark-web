@@ -11,9 +11,10 @@ loginRouter.get('/idcard', (req, res) => {
         .query(req.query)
         .end((err, { body } = {}) => {
             if (err) {
-                res.status(400).send(body || err)
+                res.status(400).json(body || err)
             } else {
-                res.status(200).send(body)
+
+                res.status(200).json(body)
             }
         })
 })
@@ -73,7 +74,7 @@ function getUserInfo(weChatInfo) {
     }
     return new Promise((resolve, reject) => {
         let baseUrl = __DEV__ ? projectConfig.devBaseUrl : projectConfig.baseUrl
-        const linkAccountUrl = baseUrl + '/api/v1/users/login/linked_account'
+        const linkAccountUrl = baseUrl + '/fbpark/v1/users/login/linked_account'
         superagent.post(linkAccountUrl)
             .send(data)
             .end((err, { body, text } = {}) => {

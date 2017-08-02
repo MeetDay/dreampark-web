@@ -102,13 +102,14 @@ export default function login(state=initialState, action) {
 // user login
 export function userLogin(username, password) {
     const data = {
-        username,
+        zone: 86,
+        phone: username,
         password: sha256(password),
         timestamp: Math.floor(Date.now() / 1000)
     }
     return {
         type: LOGIN,
-        payload: (client) => client.get('/signin', { data })
+        payload: (client) => client.post('/signin', { data })
     }
 }
 
