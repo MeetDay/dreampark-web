@@ -47,14 +47,16 @@ export default class BuyTicket extends React.Component {
 
     render() {
         const styles = require('./BuyTicket.scss');
-        const { recommendTickets } = this.props;
+        const { hasMoreRecommendTickets, recommendTickets } = this.props;
         return (
             <div className={styles.buyTicket}>
                 <TicketSearchBar onFocus={this.handleSearchFocus}/>
                 { recommendTickets &&
                     recommendTickets.map(ticket => <TicketCard key={ticket.id} ticket={ticket} />)
                 }
-                {this.props.hasMoreRecommendTickets && <LoadMoreButton onClick={this.handleClickLoadMore} isActive={this.props.recommendTicketsLoading} />}
+                { hasMoreRecommendTickets &&
+                    (<LoadMoreButton onClick={this.handleClickLoadMore} isActive={this.props.recommendTicketsLoading} />)
+                }
             </div>
         );
     }
