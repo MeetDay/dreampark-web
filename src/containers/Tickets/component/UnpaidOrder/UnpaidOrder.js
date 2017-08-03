@@ -15,7 +15,7 @@ export default class UnpaidOrder extends React.Component {
         this.handleClickCancelOrder = (e) => this._handleClickCancelOrder(e)
     }
 
-    _handlePayment(e) {
+    _handleClickPayment(e) {
         e.preventDefault()
         console.log('去支付')
     }
