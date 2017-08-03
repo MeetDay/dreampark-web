@@ -17,6 +17,7 @@ const existedTicketTypes = ['unused', 'used', 'unpaid']
         if (!isUsedTicketsLoaded(getState()) && ticketType === 'used') {
             return dispatch(getUsedTickts())
         } else if(!isUnpaidTicketsLoaded(getState()) && ticketType === 'unpaid') {
+            console.log('actionHandlers')
             return dispatch(getUnpaidTickets())
         } else if (!isUnusedTicketsLoaded(getState())){
             return dispatch(getUnusedTikects())

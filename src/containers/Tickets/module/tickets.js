@@ -91,11 +91,11 @@ export function isUsedTicketsLoaded(globalState) {
 }
 
 export function isUnpaidTicketsLoaded(globalState) {
-    return globalState.tickets && globalState.tickets.unpaidTickets
+    return globalState.tickets && globalState.tickets.unpaidTicketsLoaded
 }
 
 export function isRecommendTicketsLoaded(globalState) {
-    return globalState.tickets && globalState.tickets.recommendTickets
+    return globalState.tickets && globalState.tickets.searchTicketsLoaded
 }
 
 export function getUnusedTikects() {

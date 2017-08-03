@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.72a1dcd10f349ed50f6e.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.72a1dcd10f349ed50f6e.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.72a1dcd10f349ed50f6e.min.js"
+    "main": "http://localhost:3000/dist/main.00abd5720ef7a6605cde.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.00abd5720ef7a6605cde.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.00abd5720ef7a6605cde.min.js"
   },
   "styles": {},
   "assets": {
@@ -356,6 +356,11 @@
       "ticket": "TicketTool__ticket__1Dfly",
       "_style": ".TicketTool__tool__3s1E2 {\n  position: fixed;\n  left: 10px;\n  right: 10px;\n  bottom: 10px;\n  height: 55px;\n  text-align: center;\n  background-color: #E62A10; }\n\n.TicketTool__cartImg__2b1zV {\n  height: 22px;\n  margin-top: 16.5px; }\n\n.TicketTool__ticket__1Dfly {\n  display: inline-block;\n  margin-left: 10px;\n  height: 55px;\n  line-height: 55px;\n  vertical-align: top;\n  font-size: 18px;\n  font-family: PingFangSC-Regular;\n  color: white; }\n"
     },
+    "./src/containers/Tickets/component/UnpaidOrder/UnpaidOrder.scss": {
+      "cancelOrder": "UnpaidOrder__cancelOrder__2RVJS",
+      "gopayment": "UnpaidOrder__gopayment__2FCb-",
+      "_style": ".UnpaidOrder__cancelOrder__2RVJS {\n  width: 60px;\n  height: 24px;\n  border-radius: 3px;\n  border: 1px solid #D6D6D6;\n  text-align: center;\n  line-height: 24px;\n  color: #D6D6D6; }\n\n.UnpaidOrder__gopayment__2FCb- > span {\n  display: inline-block;\n  min-width: 50px;\n  text-align: center;\n  font-size: 16px;\n  line-height: 45px;\n  color: #143B6E; }\n"
+    },
     "./src/containers/Tickets/container/BuyTicket.scss": {
       "buyTicket": "BuyTicket__buyTicket__2gXOK",
       "_style": ".BuyTicket__buyTicket__2gXOK {\n  padding: 44px 0; }\n"
@@ -371,11 +376,6 @@
     "./src/containers/Tickets/container/Tickets.scss": {
       "ticketWrap": "Tickets__ticketWrap__1-ptD",
       "_style": ".Tickets__ticketWrap__1-ptD {\n  padding: 0 20px;\n  border-bottom: 75px solid transparent; }\n"
-    },
-    "./src/containers/Tickets/component/UnpaidOrder/UnpaidOrder.scss": {
-      "cancelOrder": "UnpaidOrder__cancelOrder__2RVJS",
-      "gopayment": "UnpaidOrder__gopayment__2FCb-",
-      "_style": ".UnpaidOrder__cancelOrder__2RVJS {\n  width: 60px;\n  height: 24px;\n  border-radius: 3px;\n  border: 1px solid #D6D6D6;\n  text-align: center;\n  line-height: 24px;\n  color: #D6D6D6; }\n\n.UnpaidOrder__gopayment__2FCb- > span {\n  display: inline-block;\n  min-width: 50px;\n  text-align: center;\n  font-size: 16px;\n  line-height: 45px;\n  color: #143B6E; }\n"
     }
   },
   "webpack": {

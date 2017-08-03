@@ -11,12 +11,17 @@ export default class UnpaidOrder extends React.Component {
 
     constructor(props) {
         super(props)
-        this.handlePayment = (e) => this._handlePayment(e)
+        this.handleClickPayment = (e) => this._handleClickPayment(e)
+        this.handleClickCancelOrder = (e) => this._handleClickCancelOrder(e)
     }
 
     _handlePayment(e) {
         e.preventDefault()
         console.log('去支付')
+    }
+    _handleClickCancelOrder(e) {
+        e.preventDefault()
+        console.log('取消订单')
     }
 
     render() {
@@ -37,11 +42,11 @@ export default class UnpaidOrder extends React.Component {
                         </a>
                         <div className={styles.rest}>
                             <span className={styles.ticketCount}>{`${ticketCount}张票`}</span>
-                            <div className={classNames(styles.refundTicket, unpaidStyles.cancelOrder)}><span>取消订单</span></div>
+                            <div onClick={this.handleClickCancelOrder} className={classNames(styles.refundTicket, unpaidStyles.cancelOrder)}><span>取消订单</span></div>
                         </div>
                     </div>
                     <div className={styles.qrcode}>
-                        <div onClick={this.handlePayment} className={classNames(styles.qrcodeWrap, unpaidStyles.gopayment)}><span>去支付</span></div>
+                        <div onClick={this.handleClickPayment} className={classNames(styles.qrcodeWrap, unpaidStyles.gopayment)}><span>去支付</span></div>
                     </div>
                 </div>
             </div>
