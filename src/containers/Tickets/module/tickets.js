@@ -19,6 +19,10 @@ const actionHandlers = {
     },
     [`${USED_TICKETS}_REJECTED`]: (state, action) => ({ ...state, usedTicktsLoading: false, usedTicktsLoaded: false, usedTicktsError: action.payload }),
 
+    [`${UNPAID_TICKETS}_PENDING`]: (state, action) => ({ ...state, unpaidTicketsLoading:true, unpaidTicketsLoaded: false }),
+    [`${UNPAID_TICKETS}_FULFILLED`]: (state, action) => ({ ...state, unpaidTicketsLoading:false, unpaidTicketsLoaded: true, unpaidTickets: action.payload }),
+    [`${UNPAID_TICKETS}_REJECTED`]: (state, action) => ({ ...state, unpaidTicketsLoading:false, unpaidTicketsLoaded: false, unpaidTicketsError: action.payload }),
+
     [`${RECOMMEND_TICKETS}_PENDING`]: (state, action) => ({ ...state, recommendTicketsLoading: true, recommendTicketsLoaded: false }),
     [`${RECOMMEND_TICKETS}_FULFILLED`]: (state, action) => {
         let tickets = action.payload, hasMoreRecommendTickets = false, recommendTicketMaxID = undefined

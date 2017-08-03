@@ -1,0 +1,20 @@
+.cancelOrder {
+    width: 60px;
+    height: 24px;
+    border-radius: 3px;
+    border: 1px solid #D6D6D6;
+    text-align: center;
+    line-height: 24px;
+    color: #D6D6D6;
+}
+
+.gopayment {
+    & > span {
+        display: inline-block;
+        min-width: 50px;
+        text-align: center;
+        font-size: 16px;
+        line-height: 45px;
+        color: #143B6E;
+    }
+}

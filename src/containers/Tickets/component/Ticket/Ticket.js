@@ -26,9 +26,7 @@ export default class Ticket extends React.Component {
         const styles = require('./Ticket.scss')
         return (
             <div className={styles.ticket}>
-                <div className={styles.ticketBorder}>
-                    <img src="/assets/ticket_border_big.png" alt="ticket_border_big" />
-                </div>
+                <div className={styles.ticketBorder}><img src="/assets/ticket_border_big.png" alt="ticket_border_big" /></div>
                 <div className={styles.ticketWrap}>
                     <div className={styles.info}>
                         <a href={`hotdetail/${this.props.ticket.id}`}>
@@ -37,7 +35,7 @@ export default class Ticket extends React.Component {
                             <span className={styles.time}>8:00-9:00</span>
                         </a>
                         <div className={styles.rest}>
-                            <span className={styles.ticketCount}>3张标准票</span>
+                            <span className={styles.ticketCount}>3张票</span>
                             <div onClick={this.handleRefundTicket} className={styles.refundTicket}>
                                 <img src="/assets/info.png" alt="info"/>
                                 <span>申请退票</span>

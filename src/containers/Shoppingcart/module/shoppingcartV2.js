@@ -143,7 +143,7 @@ export function addContact(contact) {
     }
 }
 
-// 生成订单
+// 生成订单并且提交支付
 export function submitTicketOrder(totalPrice, ticketInfo, selectedContacts) {
     const order = { amount: totalPrice, ticket: { id: ticketInfo.id, contacters: selectedContacts.map(contact => contact.id) } }
     return (dispatch, getState) => {

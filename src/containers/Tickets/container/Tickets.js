@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { asyncConnect } from 'redux-async-connect'
 import { bindActionCreators } from 'redux'
 import { isUsedTicketsLoaded, getUsedTickts,isUnusedTicketsLoaded, getUnusedTikects, isUnpaidTicketsLoaded, getUnpaidTickets } from '../module/tickets'
-import { Header, Ticket, TicketDetail, TicketTool } from '../component'
+import { Header, Ticket, UnpaidOrder, TicketDetail, TicketTool } from '../component'
 import { convertToLocalDate } from '../../../utils/dateformat'
 const existedTicketTypes = ['unused', 'used', 'unpaid']
 
@@ -91,20 +91,21 @@ export default class Tickets extends React.Component {
 
     render() {
         const styles = require('./Tickets.scss')
-        console.log(convertToLocalDate(1501659534))
-        let tickets = null
+        let tickets = null, isTicketOrder = false
         if (this.state.selectedItemType === 'used') {
             tickets = this.props.usedTickts
         } else if (this.state.selectedItemType === 'used') {
             tickets = this.props.unusedTikects
         } else if (this.state.selectedItemType === 'unpaid') {
             tickets = this.props.unpaidTickets
+            isTicketOrder = true
         }
         return (
             <div>
                 <Header user={this.props.user || {}} selectedItemType={this.state.selectedItemType} onMenuItemChange={this.onMenuItemChange} />
                 <div className={styles.ticketWrap}>
-                    { tickets && tickets.map((ticket) =>(<Ticket key={ticket.id} viewTicket={this.viewTicket} ticket={ticket} />)) }
+                    { (!isTicketOrder && tickets) && tickets.map((ticket) =>(<Ticket key={ticket.id} viewTicket={this.viewTicket} ticket={ticket} />)) }
+                    { (isTicketOrder && tickets) && tickets.map((ticket) =>(<UnpaidOrder key={ticket.id} unpaidOrder={ticket} />)) }
                 </div>
                 <TicketTool onTicketToolBarClick={this.handleClickTicketToolBar} />
                 {this.state.selectedTicket && <TicketDetail visible={this.state.showSelectedTicket} onCancel={this.closeViewTickets} ticket={this.state.selectedTicket} />}
