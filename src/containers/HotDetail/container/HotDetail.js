@@ -61,7 +61,7 @@ export default class HotDetail extends React.Component {
     _handleClickBuyTicketNow(selectedTicket) {
         console.log(selectedTicket)
         if (this.props.user) {
-            this.props.push('/buyticket/ticketinfo/1')
+            this.props.push('/pay/ticketinfo/1')
         } else {
             jumpToWeChatAuthorizationUrl(location)
         }
@@ -70,7 +70,7 @@ export default class HotDetail extends React.Component {
     _handleClickAddToCart(selectedTicket) {
         console.log(selectedTicket)
         if (this.props.user) {
-            
+
         } else {
             jumpToWeChatAuthorizationUrl(location)
         }

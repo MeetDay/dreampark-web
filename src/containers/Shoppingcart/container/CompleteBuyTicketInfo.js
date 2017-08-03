@@ -8,7 +8,7 @@ import { asyncConnect } from 'redux-async-connect';
 import { bindActionCreators } from 'redux';
 import { Modal, message } from 'antd';
 import { PageNotExist } from '../../../components'
-import { isTicketInfoLoaded, getTicketInfoBy, addContact, submitTicketOrder } from '../module/shoppingcartV2';
+import { isTicketInfoLoaded, getTicketInfoBy, addContact, isTicketOrderInfoLoaded, getTicketOrderInfoBy, payment, submitTicketOrder } from '../module/shoppingcartV2';
 import { Phone } from '../../../components';
 import { clearWhiteSpaceOf, illegalCardNumber } from '../../../utils/regex';
 import { convertToLocalDate } from '../../../utils/dateformat'
@@ -16,7 +16,9 @@ import { convertToLocalDate } from '../../../utils/dateformat'
 @asyncConnect([{
     deferred: true,
     promise: ({ params, store:{ dispatch, getState }, helpers }) => {
-        if (!isTicketInfoLoaded(getState())) {
+        if (params.type === 'ticketorder' && !isTicketOrderInfoLoaded(getState())) {
+            return dispatch(getTicketOrderInfoBy(params.id))
+        } else if (!isTicketInfoLoaded(getState())) {
             return dispatch(getTicketInfoBy(params.id))
         }
     }
@@ -28,16 +30,16 @@ import { convertToLocalDate } from '../../../utils/dateformat'
         contactError: state.shoppingcart.contactError,
         contact: state.shoppingcart.contact,
         ticketInfo: state.shoppingcart.ticketInfo,
-        contactList: state.shoppingcart.contactList
+        contactList: state.shoppingcart.contactList,
+
+        isTicketOrderInfo: state.shoppingcart.isTicketOrderInfo
     }),
-    dispatch => bindActionCreators({ addContact, submitTicketOrder }, dispatch)
+    dispatch => bindActionCreators({ addContact, payment, submitTicketOrder }, dispatch)
 )
 
 export default class CompleteBuyTicketInfo extends React.Component {
-
     static defaultProps = {
-        contactList: [{name: '王超', identity_card: 4211278678231}, {identity_card: 4211212331231231231, name: '耿德宁'}, {identity_card: 42112123231231231, name: '徐玉林'}, {identity_card: 4123211231231231231, name: '郭胜利'}, {identity_card: 421129991231, name: '于晨龙'}, {identity_card: 34534523423423423, name: '王超'}],
-        insurancePrice: 40
+        insurancePrice: 0.1
     }
 
     constructor(props) {
@@ -63,7 +65,19 @@ export default class CompleteBuyTicketInfo extends React.Component {
     componentDidMount() {
         if (this.props.ticketInfo) {
             setTimeout(_ => {
-                this.setState((preState, props) => ({ totalPrice: props.ticketInfo.price + props.insurancePrice, checkedContacts:[props.contactList[0]] }))
+                this.setState((preState, props) => {
+                    if (props.isTicketOrderInfo) {
+                        return {
+                            totalPrice: Number((props.ticketInfo.price + props.insurancePrice) * props.contactList.length).toFixed(2),
+                            checkedContacts: [...props.contactList]
+                        };
+                    } else {
+                        return {
+                            totalPrice: Number(props.ticketInfo.price + props.insurancePrice).toFixed(2),
+                            checkedContacts:[props.contactList[0]]
+                        };
+                    }
+                });
             }, 0)
         }
     }
@@ -77,15 +91,16 @@ export default class CompleteBuyTicketInfo extends React.Component {
         }
     }
 
-    _handleClickInsurance(e) {
-        e.preventDefault()
-        console.log('救援服务')
-    }
-
     _handleClickPayment(e) {
         e.preventDefault()
-        console.log('支付')
-        this.props.submitTicketOrder(this.state.totalPrice, this.props.ticketInfo, this.state.checkedContacts)
+        if (this.props.isTicketOrderInfo) {
+            this.props.payment({
+                id: this.props.ticketInfo.orders_id,
+                amount: this.state.totalPrice
+            })
+        } else {
+            this.props.submitTicketOrder(this.state.totalPrice, this.props.ticketInfo, this.state.checkedContacts)
+        }
     }
 
     _contactChecked(checkedContact) {
@@ -96,14 +111,14 @@ export default class CompleteBuyTicketInfo extends React.Component {
                 const results = this.state.checkedContacts.filter(contact => contact.identity_card !== checkedContact.identity_card)
                 this.setState({
                     checkedContacts: [...results],
-                    totalPrice: (insurancePrice + price) * results.length,
+                    totalPrice: Number((insurancePrice + price) * results.length).toFixed(2),
                 })
             }
         } else {
             const checkedContacts = [...this.state.checkedContacts, checkedContact]
             this.setState({
                 checkedContacts: checkedContacts,
-                totalPrice: (insurancePrice + price) * checkedContacts.length
+                totalPrice: Number((insurancePrice + price) * checkedContacts.length).toFixed(2)
             })
         }
     }
@@ -149,13 +164,15 @@ export default class CompleteBuyTicketInfo extends React.Component {
 
     render() {
         if (!this.props.ticketInfo) return (<PageNotExist />);
-        const styles = require('./CompleteBuyTicketInfo.scss')
+        const styles = require('./CompleteBuyTicketInfo.scss');
+        const pageTitle = this.props.isTicketOrderInfo ? '订单信息' : '补充订单信息';
+        const contactTitle = this.props.isTicketOrderInfo ? '联系人' : '请选择联系人';
         const { ticketInfo } = this.props;
         const ticketStartTimeObject = convertToLocalDate(ticketInfo.start_time)
         const ticketEndTimeObject = convertToLocalDate(ticketInfo.end_time)
         return (
             <div>
-                <Helmet><title>补充订单信息</title></Helmet>
+                <Helmet><title>{pageTitle}</title></Helmet>
                 <div className={styles.pageContent}>
                     <div className={styles.ticketInfo}>
                         <span className={styles.ticketImageWrap}><img src="/assets/ticket_border_big.png" alt="ticket"/></span>
@@ -171,26 +188,32 @@ export default class CompleteBuyTicketInfo extends React.Component {
                         </div>
                     </div>
                     <div className={styles.contactList}>
-                        <div className={styles.contactListHeader}><span>请选择联系人</span><span>{`已选择: ${this.state.checkedContacts.length}人`}</span></div>
-                        <div className={styles.contactListWrap}>
-                            {this.props.contactList.map(contact => (<ContactCard key={contact.identity_card} contact={contact} contactChecked={this.contactChecked} checked={this.existedContact(this.state.checkedContacts, contact)} />))}
-                            <ContactCard type="add" addContact={this.addContact} />
-                        </div>
+                        <div className={styles.contactListHeader}><span>{contactTitle}</span><span>{`已选择: ${this.state.checkedContacts.length}人`}</span></div>
+                        {!this.props.isTicketOrderInfo &&
+                            <div className={styles.contactListWrap}>
+                                {this.props.contactList.map(contact => (<ContactCard key={contact.identity_card} contact={contact} contactChecked={this.contactChecked} checked={this.existedContact(this.state.checkedContacts, contact)} />))}
+                                <ContactCard type="add" addContact={this.addContact} />
+                            </div>
+                        }
                     </div>
                     <div className={styles.checkedContactInfo}>
-                        {this.state.checkedContacts.map(checkedContact => (<SingleInfo key={checkedContact.identity_card} contact={checkedContact} deleteCheckedContact={this.contactChecked} />))}
+                        {this.props.isTicketOrderInfo &&
+                            this.state.checkedContacts.map(checkedContact => (<SingleInfo key={checkedContact.identity_card} contact={checkedContact} />))
+                        }
                     </div>
                     <div className={styles.insuranceService}>
                         <div className={styles.insuranceServiceWrap}>
                             <span className={styles.imageWrap}><img className={styles.imgsafe} src="/assets/safe.png" alt="safe"/></span>
                             <span className={styles.insuranceText}>{`救援服务保险 ￥${this.props.insurancePrice}×${this.state.checkedContacts.length}`}</span>
-                            <span onClick={this.handleClickInsurance} className={styles.imageWrap}><img className={styles.goDetailArrow} src="/assets/go_detail_gray.png" alt="goDetail"/></span>
+                            <span className={styles.imageWrap}>
+                                <a href="/terms/4"><img className={styles.goDetailArrow} src="/assets/go_detail_gray.png" alt="goDetail"/></a>
+                            </span>
                         </div>
                     </div>
                 </div>
                 <div className={styles.toolbar}>
                     <div className={styles.price}><span>价格</span><span>￥{this.state.totalPrice}</span></div>
-                    <div onClick={this.handleClickPayment} className={styles.nextStep}><span>支付</span></div>
+                    <div onClick={this.handleClickPayment} className={styles.nextStep}><span>去支付</span></div>
                 </div>
                 {this.state.showAddContact &&
                     <Modal visible={this.state.showAddContact} title={<div className={styles.addContactTitle}>新增联系人</div>} footer={null} onCancel={this.handleClickCancel}>
@@ -270,7 +293,7 @@ class ContactCard extends React.Component {
 class SingleInfo extends React.Component {
     static propTypes = {
         contact: PropTypes.object.isRequired,
-        deleteCheckedContact: PropTypes.func
+        // deleteCheckedContact: PropTypes.func
     }
 
     constructor(props) {
@@ -278,17 +301,17 @@ class SingleInfo extends React.Component {
         this.handleClick = (e) => this._handleClick(e)
     }
 
-    _handleClick(e) {
-        e.preventDefault()
-        this.props.deleteCheckedContact(this.props.contact)
-    }
+    // _handleClick(e) {
+    //     e.preventDefault()
+    //     this.props.deleteCheckedContact(this.props.contact)
+    // }
 
     render() {
         const styles = require('./CompleteBuyTicketInfo.scss')
         const { contact } = this.props;
         return (
             <div className={styles.singleInfo}>
-                <div onClick={this.handleClick} className={styles.minus}><img src="/assets/minus_red.png" alt="minus"/></div>
+                <div className={styles.minus}><img src="/assets/avatar_order.png" alt="minus"/></div>
                 <div className={styles.infoContent}>
                     <div className={styles.infoContentWrap}>
                         <span>{contact.name}</span>

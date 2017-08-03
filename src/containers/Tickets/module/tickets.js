@@ -3,6 +3,7 @@ const USED_TICKETS = 'redux/tickets/used'
 const UNPAID_TICKETS = 'redux/tickets/unpaid'
 const RECOMMEND_TICKETS = 'redux/tickets/recommend/tickets'
 const SEARCH_TICKETS = 'redux/tickets/search_tickets'
+const CANCEL_ORDER = 'redux/tickets/cancel_order'
 
 const TICKET_COUNT_PER_REQUEST = 10
 
@@ -44,7 +45,15 @@ const actionHandlers = {
 
     [`${SEARCH_TICKETS}_PENDING`]: (state, action) => ({...state, searchTicketsLoading: true, searchTicketsLoaded: false }),
     [`${SEARCH_TICKETS}_FULFILLED`]: (state, action) => ({ ...state, searchTicketsLoading: false, searchTicketsLoaded: true, searchedTickets: action.payload }),
-    [`${SEARCH_TICKETS}_REJECTED`]: (state, action) => ({...state, searchTicketsLoading: false, searchTicketsLoaded: false, searchTicketError: action.payload })
+    [`${SEARCH_TICKETS}_REJECTED`]: (state, action) => ({...state, searchTicketsLoading: false, searchTicketsLoaded: false, searchTicketError: action.payload }),
+
+    [`${CANCEL_ORDER}_PENDING`]: (state, action) => ({...state, cancelOrderLoading: true, cancelOrderLoaded: false }),
+    [`${CANCEL_ORDER}_FULFILLED`]: (state, action) => {
+        const cancelOrder = action.payload
+        const unpaidTickets = state.unpaidTickets.filter(unpaidOrder => unpaidOrder.id !== cancelOrder.id)
+        return { ...state, cancelOrderLoading: false, cancelOrderLoaded: true, unpaidTickets: unpaidTickets }
+    },
+    [`${CANCEL_ORDER}_REJECTED`]: (state, action) => ({...state, cancelOrderLoading: false, cancelOrderLoaded: false, cancelOrderError: action.payload })
 }
 
 const initialState = {
@@ -74,7 +83,11 @@ const initialState = {
     searchTicketsLoading: false,
     searchTicketsLoaded: false,
     searchTicketError: null,
-    searchedTickets: []
+    searchedTickets: [],
+
+    cancelOrderLoading: false,
+    cancelOrderLoaded: false,
+    cancelOrderError: null
 }
 
 export default function tickets(state=initialState, action) {
@@ -130,6 +143,17 @@ export function getUnpaidTickets() {
             payload: (client) => client.get('/unpaid_orders', {
                 headers: authHeaders
             })
+        })
+    }
+}
+
+//取消订单
+export function cancelOrder(orderID) {
+    return (dispatch, getState) => {
+        const { authHeaders } = getState().login
+        return dispatch({
+            type: CANCEL_ORDER,
+            payload: (client) => client.put('/cancel_orders', { headers: authHeaders, data: { id: orderID } })
         })
     }
 }

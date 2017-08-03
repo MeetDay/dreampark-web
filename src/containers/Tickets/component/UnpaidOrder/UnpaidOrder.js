@@ -1,27 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { Popconfirm } from 'antd'
 import { convertToLocalDate } from '../../../../utils/dateformat'
 
 export default class UnpaidOrder extends React.Component {
     static defaultProps = {
         unpaidOrder: PropTypes.object,
-        goPayment: PropTypes.func
+        deleteOrder: PropTypes.func
     }
 
     constructor(props) {
         super(props)
-        this.handleClickPayment = (e) => this._handleClickPayment(e)
-        this.handleClickCancelOrder = (e) => this._handleClickCancelOrder(e)
+        this.confirm = (e) => this._confirm(e);
     }
 
-    _handleClickPayment(e) {
-        e.preventDefault()
-        console.log('去支付')
-    }
-    _handleClickCancelOrder(e) {
-        e.preventDefault()
-        console.log('取消订单')
+    _confirm(e) {
+        this.props.deleteOrder(this.props.unpaidOrder.id)
     }
 
     render() {
@@ -35,18 +30,22 @@ export default class UnpaidOrder extends React.Component {
                 <div className={styles.ticketBorder}><img src="/assets/ticket_border_big.png" alt="ticket_border_big" /></div>
                 <div className={styles.ticketWrap}>
                     <div className={styles.info}>
-                        <a href={`/buyticket/ticketinfo/${this.props.unpaidOrder.id}`}>
+                        <a>
                             <span className={styles.title}>{ticketName}</span>
                             <span className={styles.date}>{`${startTimeDate.date} ${startTimeDate.week}`}</span>
                             <span className={styles.time}>{`${startTimeDate.time}-${endTimeDate.time}`}</span>
                         </a>
                         <div className={styles.rest}>
                             <span className={styles.ticketCount}>{`${ticketCount}张票`}</span>
-                            <div onClick={this.handleClickCancelOrder} className={classNames(styles.refundTicket, unpaidStyles.cancelOrder)}><span>取消订单</span></div>
+                            <Popconfirm title="确定要取消订单吗？" onConfirm={this.confirm}>
+                                <div className={classNames(styles.refundTicket, unpaidStyles.cancelOrder)}><span>取消订单</span></div>
+                            </Popconfirm>
                         </div>
                     </div>
                     <div className={styles.qrcode}>
-                        <div onClick={this.handleClickPayment} className={classNames(styles.qrcodeWrap, unpaidStyles.gopayment)}><span>去支付</span></div>
+                        <a href={`/pay/ticketinfo/${this.props.unpaidOrder.orders_no}/ticketorder`}>
+                            <div className={classNames(styles.qrcodeWrap, unpaidStyles.gopayment)}><span>去支付</span></div>
+                        </a>
                     </div>
                 </div>
             </div>

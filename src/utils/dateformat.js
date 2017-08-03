@@ -17,5 +17,9 @@ function getLocalWeekString(date) {
 }
 
 function getLocalTimeString(date) {
-    return `${date.getHours()}:${date.getMinutes()}`
+    const hours = date.getHours()
+    const mins = date.getMinutes()
+    const hourString = hours < 10 ? `0${hours}` : `${hours}`
+    const minsString = mins < 10 ? `0${mins}` : `${mins}`
+    return `${hourString}:${minsString}`
 }

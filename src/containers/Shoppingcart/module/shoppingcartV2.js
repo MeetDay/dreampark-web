@@ -1,13 +1,16 @@
+// var pingpp = require('pingpp-js');
 import superagent from 'superagent'
 const SHOPPINGCART = 'redux/shoppingcart/shoppingcart'
 const DELETE_SHOPPINGCART_GOODS = 'redux/shoppingcart/delelte_shoppingcart_goods'
 const ADD_CONTACT = 'redux/shoppingcart/add_contact'
 const TICKET_INFO = 'redux/shoppingcart/ticketinfo'
+const TICKET_ORDER_INFO = 'redux/shoppingcart/ticket_order_info'
 const TICEKT_ORDER = 'redux/shoppingcart/ticket_order'
 const PAYMENT = 'redux/shoppingcart/payment'
 const GOODS_COUNT_PER_REQUEST = 20
 
 const actionHandlers = {
+    // 购物车
     [`${SHOPPINGCART}_PENDING`]: (state, action) => ({ ...state, shoppingcartLoading: true, shoppingcartLoaded: false }),
     [`${SHOPPINGCART}_FULFILLED`]: (state, action) => {
         let shoppingcarts = action.payload, hasMoreGoods = false, maxGoodsID = 0
@@ -23,6 +26,7 @@ const actionHandlers = {
     },
     [`${SHOPPINGCART}_REJECTED`]: (state, action) => ({ ...state, shoppingcartLoading: false, shoppingcartLoaded: true, shoppingcartError: action.payload }),
 
+    // 删除商品
     [`${DELETE_SHOPPINGCART_GOODS}_PENDING`]: (state, action) => ({ ...state, deleteGoodsLoading: true, deleteGoodsLoaded:false }),
     [`${DELETE_SHOPPINGCART_GOODS}_FULFILLED`]: (state, action) => {
         const { id: goodsID } = action.payload
@@ -36,6 +40,7 @@ const actionHandlers = {
     },
     [`${DELETE_SHOPPINGCART_GOODS}_REJECTED`]: (state, action) => ({ ...state, deleteGoodsLoading: false, deleteGoodsLoaded:false }),
 
+    // 添加联系人
     [`${ADD_CONTACT}_PENDING`]: (state, action) => ({ ...state, contactLoading: true, contactLoaded: false }),
     [`${ADD_CONTACT}_FULFILLED`]: (state, action) => {
         const contact = action.payload
@@ -43,11 +48,27 @@ const actionHandlers = {
     },
     [`${ADD_CONTACT}_REJECTED`]: (state, action) => ({ ...state, contactLoading: false, contactLoaded: false, contactError: action.payload }),
 
+    // 票务详情
     [`${TICKET_INFO}_PENDING`]: (state, action) => ({ ...state, ticketInfoLoading: true, ticketInfoLoaded: false }),
     [`${TICKET_INFO}_FULFILLED`]: (state, action) => {
         return { ...state, ticketInfoLoading: false, ticketInfoLoaded: true, ticketInfo: action.payload.ticket, contactList: action.payload.contacters }
     },
-    [`${TICKET_INFO}_REJECTED`]: (state, action) => ({ ...state, ticketInfoLoading: false, ticketInfoLoaded: false, ticketInfoError: action.payload })
+    [`${TICKET_INFO}_REJECTED`]: (state, action) => ({ ...state, ticketInfoLoading: false, ticketInfoLoaded: false, ticketInfoError: action.payload }),
+
+    // 生成订单
+    [`${TICEKT_ORDER}_PENDING`]: (state, action) => ({ ...state }),
+    [`${TICEKT_ORDER}_FULFILLED`]: (state, action) => ({ ...state }),
+    [`${TICEKT_ORDER}_REJECTED`]: (state, action) => ({ ...state }),
+
+    // 订单详情
+    [`${TICKET_ORDER_INFO}_PENDING`]: (state, action) => ({ ...state, ticektOrderInfoLoading: true, ticketOrderInfoLoaded: false, isTicketOrderInfo:false }),
+    [`${TICKET_ORDER_INFO}_FULFILLED`]: (state, action) => {
+        const ticketOrderInfo = action.payload
+        const contactList = ticketOrderInfo.contacters;
+        delete ticketOrderInfo.contacters;
+        return { ...state, ticektOrderInfoLoading: false, ticketOrderInfoLoaded: true, isTicketOrderInfo:true, ticketInfo: ticketOrderInfo, contactList: contactList }
+    },
+    [`${TICKET_ORDER_INFO}_REJECTED`]: (state, action) => ({ ...state, ticektOrderInfoLoading: false, ticketOrderInfoLoaded: false, isTicketOrderInfo:false, ticketOrderInfoError: action.payload })
 }
 
 const initialState = {
@@ -71,7 +92,12 @@ const initialState = {
     ticketInfoLoaded: false,
     ticketInfoError: null,
     ticketInfo: null,
-    contactList: []
+    contactList: [],
+
+    ticektOrderInfoLoading: false,
+    ticketOrderInfoLoaded: false,
+    ticketOrderInfoError: null,
+    isTicketOrderInfo: false
 }
 
 export default function shoppingcart(state=initialState, action) {
@@ -80,11 +106,15 @@ export default function shoppingcart(state=initialState, action) {
 }
 
 export function isShoppingcartLoaded(globalState) {
-    return globalState.shoppingcart && globalState.shoppingcart.shoppingcarts
+    return globalState.shoppingcart && globalState.shoppingcart.shoppingcartLoaded
 }
 
 export function isTicketInfoLoaded(globalState) {
-    return globalState.shoppingcart && globalState.shoppingcart.ticketInfo
+    return globalState.shoppingcart && globalState.shoppingcart.ticketInfoLoaded
+}
+
+export function isTicketOrderInfoLoaded(globalState) {
+    return globalState.shoppingcart && globalState.shoppingcart.ticketOrderInfoLoaded
 }
 
 export function getShoppingcart() {
@@ -112,6 +142,18 @@ export function deleteGoodsFromShoppingCart(goods) {
         })
     }
 }
+
+//得到订单详情
+export function getTicketOrderInfoBy(ticketOrderNo) {
+    return (dispatch, getState) => {
+        const { authHeaders } = getState().login
+        return dispatch({
+            type: TICKET_ORDER_INFO,
+            payload: (client) => client.get(`/orders_info/${ticketOrderNo}`, { headers: authHeaders })
+        })
+    }
+}
+
 
 // 补充订单信息
 export function getTicketInfoBy(ticketID) {
@@ -155,21 +197,40 @@ export function submitTicketOrder(totalPrice, ticketInfo, selectedContacts) {
                     .then(result => {
                         return client.post('/charge', { headers: authHeaders, data: { id: result.orders_id, pay_type: 'wx_pub', amount: totalPrice }})
                     })
-                    .then(result => console.log(result))
+                    .then(charge => {
+                        console.log(charge)
+                        pingpp.createPayment(charge, (result, error) => {
+                            console.log(result)
+                            console.log(error)
+                        })
+                    })
         })
     }
 }
 
 // 支付
 export function payment(payment) {
-    const realPayment = Object.assign({ pay_type: 'wx_pub'}, payment)
+    const realPayment = Object.assign({ pay_type: 'wx_pub', open_id: 'oUr10wDQslvet8jtmGa_JAoAVvmI' }, payment)
     return (dispatch, getState) => {
         const { authHeaders } = getState().login
         return dispatch({
             type: PAYMENT,
             payload: (client) =>
                 client.post('/charge', { headers: authHeaders, data: realPayment })
-                    .then(result => console.log(result))
+                    .then(charge => {
+                        pingpp.createPayment(charge, (result, error) => {
+                            if (result == 'success') {
+                                return client.post('/check_charge', { headers: authHeaders, data: { id: payment.id } })
+                            } else if (result == 'fail') {
+
+                            } else if (result === 'cancel') {
+
+                            }
+                        })
+                    })
+                    .then(result => {
+                        console.log(result)
+                    })
         })
     }
 }
