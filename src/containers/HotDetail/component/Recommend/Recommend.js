@@ -1,17 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { appendQiNiuQueryParamsForImageUrl } from '../../../../helpers/QiNiuHelpers'
 
 export default class Recommend extends React.Component {
+    static propTypes = {
+        recommend: PropTypes.object
+    }
+
     render() {
         const styles = require('./Recommend.scss');
-        const imageUrl = "http://o9vi0jo2t.bkt.clouddn.com/client_uploads/images/31/A447C7528DCFB0B61C68D6C525AA6714";
-        const style = {
-            backgroundImage: 'url('+ imageUrl +')'
-        };
+        const { id, title, cover_image: coverImage } = this.props.recommend
+        const style = { backgroundImage: 'url(' + appendQiNiuQueryParamsForImageUrl(coverImage.name, { w: 200 }) + ')' };
         return (
-            <div className={styles.cover} style={style}>
-                <span className={styles.title}>2016英雄传说亚洲巅峰</span>
-            </div>
+            <a href={`/hotdetail/${id}`}>
+                <div className={styles.cover} style={style}>
+                    <span className={styles.title}>{title}</span>
+                </div>
+            </a>
         );
     }
 }

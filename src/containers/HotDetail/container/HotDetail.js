@@ -95,7 +95,10 @@ export default class HotDetail extends React.Component {
         };
         const viewMoreWrapStyle = { display: this.state.viewMoreWrapDisplay };
         // 转换数据
-        const { title, slides, content, attention, place, location, time_info, price } = this.props.hotDetail;
+        const { title, slides, content, attention, place, location, time_info, classify_type, recommandation, price } = this.props.hotDetail;
+        const isHotel = classify_type === 'hotel', isTicket = classify_type === 'tickets', isParking = classify_type === 'parking', isNormal = (classify_type === 'normal' || classify_type === undefined);
+        const buyTicketTitle = isHotel ? '购买住宿券' : isTicket ? '购买门票' : ''
+
         return (
             <div className={styles.detail}>
                 <Helmet><title>{title}</title></Helmet>
@@ -111,11 +114,8 @@ export default class HotDetail extends React.Component {
                             { content && convertElementsToComponet(content.elements) }
                         </div>
                         <div style={viewMoreWrapStyle} className={styles.viewMoreWrap} onClick={this.handleClickViewMore}>
-                            <div className={styles.gradient}/>
-                            <div className={styles.viewMore}>
-                                <span>查看全部</span>
-                                <img src="/assets/checked_cart.png" alt="viewMore"/>
-                            </div>
+                            <div className={styles.gradient} />
+                            <div className={styles.viewMore}> <span>查看全部</span> <img src="/assets/checked_cart.png" alt="viewMore"/></div>
                         </div>
                     </div>
                     <div className={styles.item}>
@@ -130,27 +130,20 @@ export default class HotDetail extends React.Component {
                         <div className={classNames(styles.tip)}>注意事项</div>
                         <div className={classNames(styles.textOfWhiteSpaceDeal, styles.attention)}>{attention}</div>
                     </div>
-                    <div className={styles.item}>
-                        <div className={classNames(styles.tip)}>相关推荐</div>
-                        <div className={styles.recommend}>
-                            <div className={styles.recommendWarp}>
-                                <Recommend />
-                                <Recommend />
-                                <Recommend />
-                                <Recommend />
-                                <Recommend />
+                    {(recommandation && recommandation.length > 0) &&
+                        <div className={styles.item}>
+                            <div className={classNames(styles.tip)}>相关推荐</div>
+                            <div className={styles.recommend}>
+                                <div className={styles.recommendWarp}>
+                                    { recommandation && recommandation.map(recommend => <Recommend key={recommend.id} recommend={recommend} />) }
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 </div>
-                <ToolBar price={price || 0} onClickBuyTicketNow={this.handleClickToolBar} />
-                <BuyTicketNow
-                    show={this.state.showBuyTicketNow}
-                    onClickCancel={this.handleClickCancel}
-                    onClickBuyTicketNow={this.handleClickBuyTicketNow}
-                    onClickAddToCart={this.handleClickAddToCart}
-                />
-                {/* <BuyParkingCoupon show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} /> */}
+                {!isNormal && <ToolBar price={price || 0} onClickBuyTicketNow={this.handleClickToolBar} />}
+                {(isHotel || isTicket) && <BuyTicketNow title={buyTicketTitle} show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} />}
+                {isParking && <BuyParkingCoupon show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} />}
             </div>
         );
     }
