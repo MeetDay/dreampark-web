@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import { asyncConnect } from 'redux-async-connect'
 import { bindActionCreators } from 'redux'
@@ -48,7 +49,7 @@ export default class ShoppingcartV2 extends React.Component {
         }
         return (
             <div className={styles.shoppingcartV2}>
-                <div className={styles.nav}><span>购物车</span></div>
+                <Helmet><title>购物车</title></Helmet>
                 <div className={styles.content}>
                     { content }
                 </div>

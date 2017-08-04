@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.8ee3206c006c4c797317.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.8ee3206c006c4c797317.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.8ee3206c006c4c797317.min.js"
+    "main": "http://localhost:3000/dist/main.666f117a3f2ae7a9a323.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.666f117a3f2ae7a9a323.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.666f117a3f2ae7a9a323.min.js"
   },
   "styles": {},
   "assets": {
@@ -286,7 +286,7 @@
       "content": "ShoppingcartV2__content__2WZ6R",
       "ticketsWrap": "ShoppingcartV2__ticketsWrap__2KFd4",
       "nonGoods": "ShoppingcartV2__nonGoods__31jmQ",
-      "_style": ".ShoppingcartV2__shoppingcartV2__3nFez {\n  position: relative;\n  top: 0; }\n\n.ShoppingcartV2__nav__30zaf {\n  position: fixed;\n  top: 0;\n  width: 100%;\n  height: 44px;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  line-height: 44px;\n  text-align: center;\n  color: white;\n  background-color: #1C2123;\n  z-index: 999; }\n\n.ShoppingcartV2__content__2WZ6R {\n  padding-top: 44px; }\n\n.ShoppingcartV2__ticketsWrap__2KFd4 {\n  padding: 0 20px; }\n\n.ShoppingcartV2__nonGoods__31jmQ {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  margin: auto;\n  width: 100%;\n  height: 80px;\n  font-size: 16px;\n  text-align: center;\n  color: #ccc; }\n"
+      "_style": ".ShoppingcartV2__shoppingcartV2__3nFez {\n  position: relative;\n  top: 0; }\n\n.ShoppingcartV2__nav__30zaf {\n  position: fixed;\n  top: 0;\n  width: 100%;\n  height: 44px;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  line-height: 44px;\n  text-align: center;\n  color: white;\n  background-color: #1C2123;\n  z-index: 999; }\n\n.ShoppingcartV2__content__2WZ6R {\n  padding-top: 0px; }\n\n.ShoppingcartV2__ticketsWrap__2KFd4 {\n  padding: 0 20px; }\n\n.ShoppingcartV2__nonGoods__31jmQ {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  margin: auto;\n  width: 100%;\n  height: 80px;\n  font-size: 16px;\n  text-align: center;\n  color: #ccc; }\n"
     },
     "./src/containers/TermsOfService/container/TermsOfService.scss": {
       "container": "TermsOfService__container__33eVz",
