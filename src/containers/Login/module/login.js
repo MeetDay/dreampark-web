@@ -51,8 +51,6 @@ const actionhandlers = {
     [`${WECHATLOGIN}_PENDING`]: (state, action) => ({ ...state, weChatInfoLoading: true, weChatInfoLoaded: false }),
     [`${WECHATLOGIN}_FULFILLED`]: (state, action) => {
         const { data } = action.payload
-        const cookies = new Cookies()
-        cookies.set(Constant.USER_OPENID, data.weChatUserInfo.openid)
         return {
             ...state,
             weChatInfoLoading: false,
