@@ -1,4 +1,5 @@
 import superagent from 'superagent'
+import * as Constant from '../../utils/constant'
 import Express from 'express'
 var loginRouter = Express.Router()
 import { isEmptyObject } from '../../containers/Login/module/login'
@@ -26,7 +27,10 @@ loginRouter.get('/wechat', (req, res) => {
         getWechatToken(code)
             .then((tokenInfo) => getWechatUserInfo(tokenInfo))
             .then((weChatUserInfo) => getUserInfo(weChatUserInfo))
-            .then((userInfo) => { res.json({ code: 10000, message: 'success', data: userInfo}) })
+            .then((userInfo) => {
+                res.set('Set-Cookie', `${Constant.USER_OPENID}=${userInfo.weChatUserInfo.openid}; Max-Age=${3600*2}; Path=/`)
+                res.json({ code: 10000, message: 'success', data: userInfo})
+            })
             .catch((err) => { res.json(Object.assign({ code: 10002 }, data: err)) })
     } else {
         res.json({ code: 10001, message: '缺少参数'})
@@ -74,7 +78,7 @@ function getUserInfo(weChatInfo) {
     }
     return new Promise((resolve, reject) => {
         let baseUrl = __DEV__ ? projectConfig.devBaseUrl : projectConfig.baseUrl
-        const linkAccountUrl = baseUrl + '/fbpark/v1/users/login/linked_account'
+        const linkAccountUrl = baseUrl + '/api/v1/users/login/linked_account'
         superagent.post(linkAccountUrl)
             .send(data)
             .end((err, { body, text } = {}) => {

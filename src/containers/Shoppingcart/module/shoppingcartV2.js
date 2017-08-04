@@ -1,5 +1,7 @@
-// var pingpp = require('pingpp-js');
+import Cookies from 'universal-cookie'
 import superagent from 'superagent'
+import * as Constant from '../../../utils/constant'
+
 const SHOPPINGCART = 'redux/shoppingcart/shoppingcart'
 const DELETE_SHOPPINGCART_GOODS = 'redux/shoppingcart/delelte_shoppingcart_goods'
 const ADD_CONTACT = 'redux/shoppingcart/add_contact'
@@ -163,7 +165,7 @@ export function getTicketInfoBy(ticketID) {
             type: TICKET_INFO,
             payload: (client) => client.get(`/tickets/ticket_order_info/${ticketID}`, {
                 headers: authHeaders,
-                subpath: '/fbpark/v1'
+                subpath: '/api/v1'
             })
         })
     }
@@ -174,7 +176,7 @@ export function addContact(contact) {
         const { authHeaders } = getState().login
         return dispatch({
             type: ADD_CONTACT,
-            payload: (client) => client.get('http://localhost:3000/actions/user/login/idcard', { params: contact, subpath: '/actions/user' })
+            payload: (client) => client.get('/login/idcard', { params: contact, subpath: '/actions/user' })
                 .then(result => {
                     return client.post('/contacter', {
                         headers: authHeaders,
@@ -186,51 +188,59 @@ export function addContact(contact) {
 }
 
 // 生成订单并且提交支付
-export function submitTicketOrder(totalPrice, ticketInfo, selectedContacts) {
-    const order = { amount: totalPrice, ticket: { id: ticketInfo.id, contacters: selectedContacts.map(contact => contact.id) } }
+export function submitTicketOrder(ticketInfo) {
     return (dispatch, getState) => {
         const { authHeaders } = getState().login
         return dispatch({
             type: TICEKT_ORDER,
-            payload: (client) =>
-                client.post('/add_order', { headers: authHeaders, data: order })
-                    .then(result => {
-                        return client.post('/charge', { headers: authHeaders, data: { id: result.orders_id, pay_type: 'wx_pub', amount: totalPrice }})
+            payload: (client) => client.post('/add_order', { headers: authHeaders, data: ticketInfo })
+                .then(orderInfo => {
+                    const cookies = new Cookies()
+                    const openID = cookies.get(Constant.USER_OPENID)
+                    return client.post('/charge', { headers: authHeaders, data: { id: orderInfo.orders_id, amount: ticketInfo.amount, open_id: openID, pay_type: 'wx_pub' }})
+                })
+                .then(charge => {
+                    pingpp.createPayment(charge, (result, error) => {
+                        if (result == 'success') {
+                            return client.post('/check_charge', { headers: authHeaders, data: { id: ticketInfo.ticket.id } })
+                        } else if (result == 'fail' ) {
+
+                        } else if (result == 'cancel') {
+
+                        }
                     })
-                    .then(charge => {
-                        console.log(charge)
-                        pingpp.createPayment(charge, (result, error) => {
-                            console.log(result)
-                            console.log(error)
-                        })
-                    })
+                })
+                .then(result => {
+
+                })
         })
     }
 }
 
 // 支付
 export function payment(payment) {
-    const realPayment = Object.assign({ pay_type: 'wx_pub', open_id: 'oUr10wDQslvet8jtmGa_JAoAVvmI' }, payment)
+    const cookies = new Cookies()
+    const openID = cookies.get(Constant.USER_OPENID)
+    const realPayment = Object.assign({ pay_type: 'wx_pub', open_id: openID }, payment)
     return (dispatch, getState) => {
         const { authHeaders } = getState().login
         return dispatch({
             type: PAYMENT,
-            payload: (client) =>
-                client.post('/charge', { headers: authHeaders, data: realPayment })
-                    .then(charge => {
-                        pingpp.createPayment(charge, (result, error) => {
-                            if (result == 'success') {
-                                return client.post('/check_charge', { headers: authHeaders, data: { id: payment.id } })
-                            } else if (result == 'fail') {
+            payload: (client) => client.post('/charge', { headers: authHeaders, data: realPayment })
+                .then(charge => {
+                    pingpp.createPayment(charge, (result, error) => {
+                        if (result == 'success') {
+                            return client.post('/check_charge', { headers: authHeaders, data: { id: payment.id } })
+                        } else if (result == 'fail') {
 
-                            } else if (result === 'cancel') {
+                        } else if (result === 'cancel') {
 
-                            }
-                        })
+                        }
                     })
-                    .then(result => {
-                        console.log(result)
-                    })
+                })
+                .then(result => {
+                    console.log(result)
+                })
         })
     }
 }

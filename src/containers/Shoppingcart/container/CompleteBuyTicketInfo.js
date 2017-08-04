@@ -32,16 +32,14 @@ import { convertToLocalDate } from '../../../utils/dateformat'
         ticketInfo: state.shoppingcart.ticketInfo,
         contactList: state.shoppingcart.contactList,
 
-        isTicketOrderInfo: state.shoppingcart.isTicketOrderInfo
+        isTicketOrderInfo: state.shoppingcart.isTicketOrderInfo,
+        hasInsurance: state.shoppingcart.ticketInfo ? state.shoppingcart.ticketInfo.is_insurance === 1 : false,
+        insurancePrice: state.shoppingcart.ticketInfo ? state.shoppingcart.ticketInfo.insurance_price || 0 : 0
     }),
     dispatch => bindActionCreators({ addContact, payment, submitTicketOrder }, dispatch)
 )
 
 export default class CompleteBuyTicketInfo extends React.Component {
-    static defaultProps = {
-        insurancePrice: 0.1
-    }
-
     constructor(props) {
         super(props)
         this.handleClickInsurance = (e) => this._handleClickInsurance(e)
@@ -57,28 +55,8 @@ export default class CompleteBuyTicketInfo extends React.Component {
             showAddContact: false,
             username: '',
             idCardNo: '',
-            totalPrice: 0,
-            checkedContacts: []
-        }
-    }
-
-    componentDidMount() {
-        if (this.props.ticketInfo) {
-            setTimeout(_ => {
-                this.setState((preState, props) => {
-                    if (props.isTicketOrderInfo) {
-                        return {
-                            totalPrice: Number((props.ticketInfo.price + props.insurancePrice) * props.contactList.length).toFixed(2),
-                            checkedContacts: [...props.contactList]
-                        };
-                    } else {
-                        return {
-                            totalPrice: Number(props.ticketInfo.price + props.insurancePrice).toFixed(2),
-                            checkedContacts:[props.contactList[0]]
-                        };
-                    }
-                });
-            }, 0)
+            totalPrice: props.ticketInfo ? (props.isTicketOrderInfo ? Number(props.ticketInfo.amount).toFixed(2) : Number(props.ticketInfo.price + props.insurancePrice).toFixed(2)) : 0,
+            checkedContacts: props.ticketInfo ? (props.isTicketOrderInfo ? [...props.contactList] : [props.contactList[0]]) : []
         }
     }
 
@@ -99,7 +77,13 @@ export default class CompleteBuyTicketInfo extends React.Component {
                 amount: this.state.totalPrice
             })
         } else {
-            this.props.submitTicketOrder(this.state.totalPrice, this.props.ticketInfo, this.state.checkedContacts)
+            this.props.submitTicketOrder({
+                amount: this.state.totalPrice,
+                ticket: {
+                    id: this.props.ticketInfo.id,
+                    contacters: this.state.checkedContacts.map(contact => contact.id)
+                }
+            });
         }
     }
 
@@ -181,7 +165,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                                 <div className={styles.ticketDescriptionWrap}>
                                     <span className={styles.ticketTitle}>{ticketInfo.ticket_name}</span>
                                     <span className={styles.ticketTimeInfo}>{`${ticketStartTimeObject.date} ${ticketStartTimeObject.week}`}</span>
-                                    <span className={styles.ticketDuration}>{`${ticketStartTimeObject.time}-${ticketEndTimeObject.time}`}</span>
+                                    <span className={styles.ticketDuration}>{`${ticketStartTimeObject.time} - ${ticketEndTimeObject.time}`}</span>
                                 </div>
                             </div>
                             <span className={styles.ticketPrice}>￥{ticketInfo.price}</span>
@@ -201,15 +185,17 @@ export default class CompleteBuyTicketInfo extends React.Component {
                             this.state.checkedContacts.map(checkedContact => (<SingleInfo key={checkedContact.identity_card} contact={checkedContact} />))
                         }
                     </div>
-                    <div className={styles.insuranceService}>
-                        <div className={styles.insuranceServiceWrap}>
-                            <span className={styles.imageWrap}><img className={styles.imgsafe} src="/assets/safe.png" alt="safe"/></span>
-                            <span className={styles.insuranceText}>{`救援服务保险 ￥${this.props.insurancePrice}×${this.state.checkedContacts.length}`}</span>
-                            <span className={styles.imageWrap}>
-                                <a href="/terms/4"><img className={styles.goDetailArrow} src="/assets/go_detail_gray.png" alt="goDetail"/></a>
-                            </span>
+                    {this.props.hasInsurance &&
+                        <div className={styles.insuranceService}>
+                            <div className={styles.insuranceServiceWrap}>
+                                <span className={styles.imageWrap}><img className={styles.imgsafe} src="/assets/safe.png" alt="safe"/></span>
+                                <span className={styles.insuranceText}>{`救援服务保险 ￥${this.props.insurancePrice}×${this.state.checkedContacts.length}`}</span>
+                                <span className={styles.imageWrap}>
+                                    <a href="/terms/4"><img className={styles.goDetailArrow} src="/assets/go_detail_gray.png" alt="goDetail"/></a>
+                                </span>
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
                 <div className={styles.toolbar}>
                     <div className={styles.price}><span>价格</span><span>￥{this.state.totalPrice}</span></div>
