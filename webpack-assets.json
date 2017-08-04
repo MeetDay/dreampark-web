@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.877ab3694e3f8e663257.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.877ab3694e3f8e663257.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.877ab3694e3f8e663257.min.js"
+    "main": "http://localhost:3000/dist/main.6e4b57b5d00ed06224e6.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.6e4b57b5d00ed06224e6.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.6e4b57b5d00ed06224e6.min.js"
   },
   "styles": {},
   "assets": {
@@ -93,7 +93,7 @@
       "carnumberDescription": "BuyParkingCoupon__carnumberDescription__XN20Z",
       "carnumberInput": "BuyParkingCoupon__carnumberInput__1D3KQ",
       "priceInfoContent": "BuyParkingCoupon__priceInfoContent__3D7T_",
-      "_style": ".BuyParkingCoupon__description__u_YLZ {\n  margin: 24px 20px;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  line-height: 22px;\n  color: #71767A; }\n\n.BuyParkingCoupon__carnumber__1Re7L {\n  margin: 24px 20px;\n  font-size: 0; }\n\n.BuyParkingCoupon__carnumberDescription__XN20Z {\n  margin: 0px;\n  padding: 0px;\n  font-family: PingFangSC-Regular;\n  font-size: 20px;\n  line-height: 28px;\n  color: #71767A; }\n\n.BuyParkingCoupon__carnumberInput__1D3KQ {\n  padding-top: 30px;\n  margin-bottom: 50px;\n  border-bottom: 1px solid #E62A10; }\n  .BuyParkingCoupon__carnumberInput__1D3KQ > input {\n    width: 100%;\n    height: 40px;\n    outline-style: none;\n    font-family: PingFangSC-Semibold;\n    line-height: 40px;\n    font-size: 28px;\n    color: #E62A10; }\n\n.BuyParkingCoupon__priceInfoContent__3D7T_ {\n  text-align: center;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  color: #FFFFFF; }\n  .BuyParkingCoupon__priceInfoContent__3D7T_ > span:nth-child(2) {\n    margin: 0 10px;\n    font-family: PingFangSC-Semibold;\n    color: #EC0539; }\n"
+      "_style": ".BuyParkingCoupon__description__u_YLZ {\n  margin: 24px 20px;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  line-height: 22px;\n  color: #71767A; }\n\n.BuyParkingCoupon__carnumber__1Re7L {\n  margin: 24px 20px;\n  font-size: 0; }\n\n.BuyParkingCoupon__carnumberDescription__XN20Z {\n  margin: 0px;\n  padding: 0px;\n  font-family: PingFangSC-Regular;\n  font-size: 20px;\n  line-height: 28px;\n  color: #71767A; }\n\n.BuyParkingCoupon__carnumberInput__1D3KQ {\n  padding-top: 30px;\n  margin-bottom: 50px;\n  border-bottom: 1px solid #E62A10; }\n  .BuyParkingCoupon__carnumberInput__1D3KQ > input {\n    width: 100%;\n    height: 40px;\n    outline-style: none;\n    font-family: PingFangSC-Semibold;\n    line-height: 40px;\n    font-size: 28px;\n    outline: none;\n    color: #E62A10; }\n\n.BuyParkingCoupon__priceInfoContent__3D7T_ {\n  text-align: center;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  color: #FFFFFF; }\n  .BuyParkingCoupon__priceInfoContent__3D7T_ > span:nth-child(2) {\n    margin: 0 10px;\n    font-family: PingFangSC-Semibold;\n    color: #EC0539; }\n"
     },
     "./src/containers/HotDetail/component/BuyTicketNow/BuyTicketNow.scss": {
       "buyTicketNow": "BuyTicketNow__buyTicketNow__dD5Pe",
