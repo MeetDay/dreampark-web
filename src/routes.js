@@ -11,6 +11,7 @@ import Register from './containers/Register';
 import TermsOfService from './containers/TermsOfService';
 import NotFound from './containers/NotFound';
 import projectConfig from '../project.config';
+import { isFullUser } from './utils/wechat';
 
 function isEmptyObject(obj) {
 	return obj === undefined || obj === null || Object.keys(obj).length === 0
@@ -25,6 +26,14 @@ const routes = (store) => {
 		callback()
 	}
 
+	const checkAlreadyLogin = (nextState, replaceState, callback) => {
+		const { user } = store.getState().login
+		if (isFullUser(user)) {
+			replaceState('/tickets')
+		}
+		callback()
+	}
+
 	return (
 		<Route path="/" component={App}>
 			<IndexRoute component={Home} />
@@ -36,9 +45,9 @@ const routes = (store) => {
 			<Route path="detail/:id" component={Details} />
 			<Route path="hotdetail/:id" component={HotDetail} />
 			<Route path="shoppingcart" component={Shoppingcart} onEnter={requireLogin} />
-			<Route path="login" component={Login} />
+			<Route path="login" component={Login} onEnter={checkAlreadyLogin} />
 			<Route path="wechat" component={WeChatLoginTransition} />
-			<Route path="register" component={Register} />
+			<Route path="register" component={Register} onEnter={checkAlreadyLogin} />
 			<Route path="terms/:serviceType" component={TermsOfService} />
 			<Route path="*" component={NotFound} status={404} />
 		</Route>
