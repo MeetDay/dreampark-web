@@ -77,7 +77,7 @@ const initialState = {
     shoppingcartLoading: false,
     shoppingcartLoaded: false,
     shoppingcartError: null,
-    shoppingcarts: [{id:1, total: 423}, {id:2, total: 23}, {id:3, total: 234}, {id:4, total: 767}, {id:5, total: 345}, {id:6, total: 908}, {id:7, total: 438}, {id:8, total: 656}],
+    shoppingcarts: [],
 
     hasMoreGoods: false,
     maxGoodsID: 0,
