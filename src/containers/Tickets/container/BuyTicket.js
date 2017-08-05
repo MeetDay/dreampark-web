@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet'
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-async-connect';
@@ -48,9 +49,14 @@ export default class BuyTicket extends React.Component {
     render() {
         const styles = require('./BuyTicket.scss');
         const { hasMoreRecommendTickets, recommendTickets } = this.props;
+        if (recommendTickets && recommendTickets.length <= 0)
         return (
             <div className={styles.buyTicket}>
+                <Helmet><title>购买门票</title></Helmet>
                 <TicketSearchBar onFocus={this.handleSearchFocus}/>
+                {(recommendTickets && recommendTickets.length <= 0) &&
+                    <div className={styles.noRecomedDescription}>噢 喔...<br /> 暂时没有任何推荐的门票!</div>
+                }
                 { recommendTickets &&
                     recommendTickets.map(ticket => <TicketCard key={ticket.id} ticket={ticket} />)
                 }

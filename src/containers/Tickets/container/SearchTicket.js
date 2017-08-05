@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Helmet } from 'react-helmet'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { TicketSearchBar, SearchItem } from '../component'
@@ -45,6 +46,7 @@ export default class SearchTicket extends React.Component {
 
         return (
             <div className={styles.searchTicket}>
+                <Helmet><title>搜索门票</title></Helmet>
                 <TicketSearchBar onSearch={this.handleSearch} />
                 <div className={styles.contentWrap}>
                     {!hasTickets &&

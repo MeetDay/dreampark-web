@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.876c2782f0222d67ddf4.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.876c2782f0222d67ddf4.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.876c2782f0222d67ddf4.min.js"
+    "main": "http://localhost:3000/dist/main.65f876ad682f7da539af.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.65f876ad682f7da539af.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.65f876ad682f7da539af.min.js"
   },
   "styles": {},
   "assets": {
@@ -365,7 +365,8 @@
     },
     "./src/containers/Tickets/container/BuyTicket.scss": {
       "buyTicket": "BuyTicket__buyTicket__2gXOK",
-      "_style": ".BuyTicket__buyTicket__2gXOK {\n  padding: 44px 0; }\n"
+      "noRecomedDescription": "BuyTicket__noRecomedDescription__2NivF",
+      "_style": ".BuyTicket__buyTicket__2gXOK {\n  padding: 44px 0; }\n\n.BuyTicket__noRecomedDescription__2NivF {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto;\n  width: 100%;\n  height: 80px;\n  font-size: 16px;\n  text-align: center;\n  color: #ccc; }\n"
     },
     "./src/containers/Tickets/container/SearchTicket.scss": {
       "searchTicket": "SearchTicket__searchTicket__2OKE1",

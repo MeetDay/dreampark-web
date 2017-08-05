@@ -57,10 +57,15 @@ const actionHandlers = {
     },
     [`${TICKET_INFO}_REJECTED`]: (state, action) => ({ ...state, ticketInfoLoading: false, ticketInfoLoaded: false, ticketInfoError: action.payload }),
 
-    // 生成订单
+    // 生成订单并支付
     [`${TICEKT_ORDER}_PENDING`]: (state, action) => ({ ...state }),
     [`${TICEKT_ORDER}_FULFILLED`]: (state, action) => ({ ...state }),
     [`${TICEKT_ORDER}_REJECTED`]: (state, action) => ({ ...state }),
+
+    // 支付订单
+    [`${PAYMENT}_PENDING`]: (state, action) => ({ ...state }),
+    [`${PAYMENT}_FULFILLED`]: (state, action) => ({ ...state }),
+    [`${PAYMENT}_REJECTED`]: (state, action) => ({ ...state }),
 
     // 订单详情
     [`${TICKET_ORDER_INFO}_PENDING`]: (state, action) => ({ ...state, ticektOrderInfoLoading: true, ticketOrderInfoLoaded: false, isTicketOrderInfo:false }),
@@ -74,6 +79,7 @@ const actionHandlers = {
 }
 
 const initialState = {
+    // 购物车
     shoppingcartLoading: false,
     shoppingcartLoaded: false,
     shoppingcartError: null,
@@ -82,24 +88,40 @@ const initialState = {
     hasMoreGoods: false,
     maxGoodsID: 0,
 
+    // 删除联系人
     deleteGoodsLoading: false,
     deleteGoodsLoaded: false,
 
+    // 添加联系人
     contactLoading: false,
     contactLoaded: false,
     contactError: null,
     contact: null,
 
+    // 票务信息页
     ticketInfoLoading: false,
     ticketInfoLoaded: false,
     ticketInfoError: null,
     ticketInfo: null,
     contactList: [],
 
+    // 订单详情页
     ticektOrderInfoLoading: false,
     ticketOrderInfoLoaded: false,
     ticketOrderInfoError: null,
-    isTicketOrderInfo: false
+    isTicketOrderInfo: false,
+
+    // 票务信息页生成订单并支付
+    generatorTicketOrderLoading: false,
+    generatorTicketOrderLoaded: false,
+    generatorTicketOrderError: null,
+    generatorTicketOrder: null,
+
+    // 订单支付
+    paymentLoading: false,
+    paymentLoaded: false,
+    paymentError: null,
+    payment: null
 }
 
 export default function shoppingcart(state=initialState, action) {
@@ -165,7 +187,7 @@ export function getTicketInfoBy(ticketID) {
             type: TICKET_INFO,
             payload: (client) => client.get(`/tickets/ticket_order_info/${ticketID}`, {
                 headers: authHeaders,
-                subpath: '/api/v1'
+                subpath: '/fbpark/v1'
             })
         })
     }
@@ -197,21 +219,20 @@ export function submitTicketOrder(ticketInfo) {
                 .then(orderInfo => {
                     const cookies = new Cookies()
                     const openID = cookies.get(Constant.USER_OPENID)
-                    return client.post('/charge', { headers: authHeaders, data: { id: orderInfo.orders_id, amount: ticketInfo.amount, open_id: openID, pay_type: 'wx_pub' }})
+                    return client.post('/charge', { headers: authHeaders, data: { id: orderInfo.orders_id, amount: ticketInfo.amount, open_id: 'oUr10wDQslvet8jtmGa_JAoAVvmI', pay_type: 'wx_pub' }})
                 })
                 .then(charge => {
                     pingpp.createPayment(charge, (result, error) => {
                         if (result == 'success') {
-                            return client.post('/check_charge', { headers: authHeaders, data: { id: ticketInfo.ticket.id } })
+                            return client.post('/check_charge', { headers: authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } })
                         } else if (result == 'fail' ) {
-
+                            console.log('支付失败...', error)
+                            return Promise.reject(error)
                         } else if (result == 'cancel') {
-
+                            console.log('取消支付...')
+                            return Promise.reject(error)
                         }
                     })
-                })
-                .then(result => {
-
                 })
         })
     }
@@ -221,7 +242,7 @@ export function submitTicketOrder(ticketInfo) {
 export function payment(payment) {
     const cookies = new Cookies()
     const openID = cookies.get(Constant.USER_OPENID)
-    const realPayment = Object.assign({ pay_type: 'wx_pub', open_id: openID }, payment)
+    const realPayment = Object.assign({ pay_type: 'wx_pub', open_id: 'oUr10wDQslvet8jtmGa_JAoAVvmI' }, payment)
     return (dispatch, getState) => {
         const { authHeaders } = getState().login
         return dispatch({
@@ -230,16 +251,15 @@ export function payment(payment) {
                 .then(charge => {
                     pingpp.createPayment(charge, (result, error) => {
                         if (result == 'success') {
-                            return client.post('/check_charge', { headers: authHeaders, data: { id: payment.id } })
+                            return client.post('/check_charge', { headers: authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } })
                         } else if (result == 'fail') {
-
+                            console.log('支付失败...', error)
+                            return Promise.reject(error)
                         } else if (result === 'cancel') {
-
+                            console.log('取消支付...')
+                            return Promise.reject(error)
                         }
                     })
-                })
-                .then(result => {
-                    console.log(result)
                 })
         })
     }
