@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { TitleElement, PageNotExist } from '../../../components';
 import { Navbar, ToolBar, Recommend, BuyTicketNow, BuyParkingCoupon } from '../component';
 import { isHotDetailLoaded, getHotDetailBy } from '../module/hotdetail';
+import { addTicketToShoppingcart } from '../../Shoppingcart/module/shoppingcartV2';
 import { convertElementsToComponet } from '../../../utils/elements';
 import { appendQiNiuQueryParamsForImageUrl } from '../../../helpers/QiNiuHelpers';
 import { jumpToWeChatAuthorizationUrl } from '../../../utils/wechat'
@@ -29,7 +30,7 @@ import { isEmptyObject } from '../../Login/module/login'
         user: state.login.user,
         hotDetail: state.hotdetail.hotDetail
     }),
-    dispatch => bindActionCreators({ push }, dispatch)
+    dispatch => bindActionCreators({ push, addTicketToShoppingcart }, dispatch)
 )
 
 export default class HotDetail extends React.Component {
@@ -59,18 +60,16 @@ export default class HotDetail extends React.Component {
     }
 
     _handleClickBuyTicketNow(selectedTicket) {
-        console.log(selectedTicket)
         if (this.props.user) {
-            this.props.push('/pay/ticketinfo/1')
+            this.props.push(`/pay/ticketinfo/${selectedTicket.id}`)
         } else {
             jumpToWeChatAuthorizationUrl(location)
         }
     }
 
     _handleClickAddToCart(selectedTicket) {
-        console.log(selectedTicket)
         if (this.props.user) {
-
+            this.props.addTicketToShoppingcart(selectedTicket.id)
         } else {
             jumpToWeChatAuthorizationUrl(location)
         }

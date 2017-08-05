@@ -4,6 +4,7 @@ import * as Constant from '../../../utils/constant'
 
 const SHOPPINGCART = 'redux/shoppingcart/shoppingcart'
 const DELETE_SHOPPINGCART_GOODS = 'redux/shoppingcart/delelte_shoppingcart_goods'
+const ADD_TICKET_TO_SHOPPINGCART = 'redux/shoppingcart/add_ticket_to_shoppingcart'
 const ADD_CONTACT = 'redux/shoppingcart/add_contact'
 const TICKET_INFO = 'redux/shoppingcart/ticketinfo'
 const TICKET_ORDER_INFO = 'redux/shoppingcart/ticket_order_info'
@@ -27,6 +28,9 @@ const actionHandlers = {
         }
     },
     [`${SHOPPINGCART}_REJECTED`]: (state, action) => ({ ...state, shoppingcartLoading: false, shoppingcartLoaded: true, shoppingcartError: action.payload }),
+
+    // 添加至购物车
+    [`${ADD_TICKET_TO_SHOPPINGCART}_PENDING`]: ({ ...state,  })
 
     // 删除商品
     [`${DELETE_SHOPPINGCART_GOODS}_PENDING`]: (state, action) => ({ ...state, deleteGoodsLoading: true, deleteGoodsLoaded:false }),
@@ -151,6 +155,16 @@ export function getShoppingcart() {
                 params: { max_id: maxGoodsID },
                 headers: authHeaders
             })
+        })
+    }
+}
+
+export function addTicketToShoppingcart(ticketID) {
+    return (dispatch, getState) => {
+        const { authHeaders } = getState().login
+        return dispatch({
+            type: ADD_TICKET_TO_SHOPPINGCART,
+            payload: (client) => client.post('/cart/add', { headers: authHeaders , ticket_id: ticketID })
         })
     }
 }
