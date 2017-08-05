@@ -30,7 +30,9 @@ const actionHandlers = {
     [`${SHOPPINGCART}_REJECTED`]: (state, action) => ({ ...state, shoppingcartLoading: false, shoppingcartLoaded: true, shoppingcartError: action.payload }),
 
     // 添加至购物车
-    [`${ADD_TICKET_TO_SHOPPINGCART}_PENDING`]: ({ ...state,  })
+    [`${ADD_TICKET_TO_SHOPPINGCART}_PENDING`]: ({ ...state, addTicketToShoppingcartLoading: true, addTicketToShoppingcartLoaded: false }),
+    [`${ADD_TICKET_TO_SHOPPINGCART}_FULFILLED`]: ({ ...state, addTicketToShoppingcartLoading: false, addTicketToShoppingcartLoaded: true, addTicketToShoppingcart: action.payload }),
+    [`${ADD_TICKET_TO_SHOPPINGCART}_REJECTED`]: ({ ...state, addTicketToShoppingcartLoading: false, addTicketToShoppingcartLoaded: false, addTicketToShoppingcartError: action.payload }),
 
     // 删除商品
     [`${DELETE_SHOPPINGCART_GOODS}_PENDING`]: (state, action) => ({ ...state, deleteGoodsLoading: true, deleteGoodsLoaded:false }),
@@ -92,9 +94,15 @@ const initialState = {
     hasMoreGoods: false,
     maxGoodsID: 0,
 
-    // 删除联系人
+    // 删除票
     deleteGoodsLoading: false,
     deleteGoodsLoaded: false,
+
+    // 添加至购物车
+    addTicketToShoppingcartLoading: false,
+    addTicketToShoppingcartLoaded: false,
+    addTicketToShoppingcartError: null,
+    addTicketToShoppingcart: null,
 
     // 添加联系人
     contactLoading: false,

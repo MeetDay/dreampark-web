@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
+import { message } from 'antd';
 import classNames from 'classnames';
 import { Carousel } from 'antd';
 import { bindActionCreators } from 'redux';
@@ -28,7 +29,10 @@ import { isEmptyObject } from '../../Login/module/login'
 @connect(
     state => ({
         user: state.login.user,
-        hotDetail: state.hotdetail.hotDetail
+        hotDetail: state.hotdetail.hotDetail,
+
+        addTicketToShoppingcart: state.shoppingcart.addTicketToShoppingcart,
+        addTicketToShoppingcartError: state.shoppingcart.addTicketToShoppingcartError
     }),
     dispatch => bindActionCreators({ push, addTicketToShoppingcart }, dispatch)
 )
@@ -48,6 +52,13 @@ export default class HotDetail extends React.Component {
             viewMoreWrapDisplay: 'block',
             showBuyTicketNow: false
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { addTicketToShoppingcartError } = nextProps
+        if (addTicketToShoppingcartError && addTicketToShoppingcartError !== this.props.addTicketToShoppingcartError) {
+            message.error('添加至购物车失败, 请稍后重试...')
+        }
     }
 
     _handleClickViewMore(e) {
