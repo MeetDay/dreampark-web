@@ -30,9 +30,9 @@ const actionHandlers = {
     [`${SHOPPINGCART}_REJECTED`]: (state, action) => ({ ...state, shoppingcartLoading: false, shoppingcartLoaded: true, shoppingcartError: action.payload }),
 
     // 添加至购物车
-    [`${ADD_TICKET_TO_SHOPPINGCART}_PENDING`]: ({ ...state, addTicketToShoppingcartLoading: true, addTicketToShoppingcartLoaded: false }),
-    [`${ADD_TICKET_TO_SHOPPINGCART}_FULFILLED`]: ({ ...state, addTicketToShoppingcartLoading: false, addTicketToShoppingcartLoaded: true, addTicketToShoppingcart: action.payload }),
-    [`${ADD_TICKET_TO_SHOPPINGCART}_REJECTED`]: ({ ...state, addTicketToShoppingcartLoading: false, addTicketToShoppingcartLoaded: false, addTicketToShoppingcartError: action.payload }),
+    [`${ADD_TICKET_TO_SHOPPINGCART}_PENDING`]: (state, action) => ({ ...state, addTicketToShoppingcartLoading: true, addTicketToShoppingcartLoaded: false }),
+    [`${ADD_TICKET_TO_SHOPPINGCART}_FULFILLED`]: (state, action) => ({ ...state, addTicketToShoppingcartLoading: false, addTicketToShoppingcartLoaded: true, addTicketToShoppingcart: action.payload }),
+    [`${ADD_TICKET_TO_SHOPPINGCART}_REJECTED`]: (state, action) => ({ ...state, addTicketToShoppingcartLoading: false, addTicketToShoppingcartLoaded: false, addTicketToShoppingcartError: action.payload }),
 
     // 删除商品
     [`${DELETE_SHOPPINGCART_GOODS}_PENDING`]: (state, action) => ({ ...state, deleteGoodsLoading: true, deleteGoodsLoaded:false }),
@@ -66,7 +66,7 @@ const actionHandlers = {
     // 生成订单并支付
     [`${TICEKT_ORDER}_PENDING`]: (state, action) => ({ ...state, generatorTicketOrderLoading: true, generatorTicketOrderLoaded: false }),
     [`${TICEKT_ORDER}_FULFILLED`]: (state, action) => ({ ...state, generatorTicketOrderLoading: false, generatorTicketOrderLoaded: true, generatorTicketOrder: action.payload }),
-    [`${TICEKT_ORDER}_REJECTED`]: (state, action) => ({ ...state, generatorTicketOrderLoading: false, generatorTicketOrderLoaded: false, generatorTicketOrderError: action.payload  }),
+    [`${TICEKT_ORDER}_REJECTED`]: (state, action) => ({ ...state, generatorTicketOrderLoading: false, generatorTicketOrderLoaded: false, generatorTicketOrderError: action.payload }),
 
     // 支付订单
     [`${PAYMENT}_PENDING`]: (state, action) => ({ ...state, paymentLoading: true, paymentLoaded: false }),

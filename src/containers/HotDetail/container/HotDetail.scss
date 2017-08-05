@@ -122,3 +122,26 @@ $carouselHeight: 200px;
 .recommendWarp::-webkit-scrollbar {
     display: none;
 }
+
+$toolBarHeight: 55px;
+$toolBarMargin: 10px;
+$toolBarPadding: 12px;
+.noTickets {
+    position: fixed;
+    left: $toolBarMargin;
+    right: $toolBarMargin;
+    bottom: $toolBarMargin;
+    height: $toolBarHeight;
+    padding: $toolBarPadding 20px;
+
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    line-height: ($toolBarHeight - $toolBarPadding * 2);
+    text-align: center;
+    white-space: nowrap;
+    background-color: #D6D6D6;
+
+    @media screen and (max-width: 370px) {
+        padding: $toolBarPadding 10px;
+    }
+}
