@@ -83,7 +83,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
             message.success('购票成功！')
             this.props.push('/tickets')
         } else if (generatorTicketOrderError && generatorTicketOrderError !== this.props.generatorTicketOrderError) {
-            message.error('购票失败，请重新选择支付！')
+            message.error('支付已成功，出票失败，您所支付的款项将原路退回')
             this.props.push('/tickets?type=unpaid')
         }
         // 订单详情页支付
@@ -93,7 +93,6 @@ export default class CompleteBuyTicketInfo extends React.Component {
         } else if (paymentError && paymentError !== this.props.paymentError) {
             message.info('支付失败，请重新尝试...')
         }
-
     }
 
     _handleClickPayment(e) {
