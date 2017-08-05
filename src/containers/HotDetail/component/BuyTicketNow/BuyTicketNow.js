@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { ticketExisted } from './ticketHelper'
+import { convertToLocalDate } from '../../../../utils/dateformat'
 
 export default class BuyTicketNow extends React.Component {
     static propTypes = {
@@ -177,6 +178,9 @@ class TimeSlotTicket extends React.Component {
     render() {
         const styles = require('./BuyTicketNow.scss');
         const triangleStyle = { display: this.props.selected ? 'block' : 'none' };
+        const { start_time, end_time } = this.props.ticket;
+        const startTime = convertToLocalDate(start_time);
+        const endTime = convertToLocalDate(end_time);
         return (
             <div className={styles.timeSlotTicket} onClick={this.handleClick}>
                 <img className={styles.ticketBorder} src="/assets/ticket_border.png" alt="ticket_border" />
@@ -185,8 +189,8 @@ class TimeSlotTicket extends React.Component {
                 </div>
                 {/* <div className={styles.separatorLine} /> */}
                 <div className={styles.ticketContent}>
-                    <div className={styles.ticketTop}>10月 <span>4日</span></div>
-                    <div className={styles.ticketBottom}>8:00-9:00</div>
+                    <div className={styles.ticketTop}>{startTime.month} <span>{startTime.day}</span></div>
+                    <div className={styles.ticketBottom}>{`${startTime.time} - ${endTime.time}`}</div>
                 </div>
             </div>
         );
