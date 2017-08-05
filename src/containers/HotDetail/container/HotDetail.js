@@ -50,7 +50,8 @@ export default class HotDetail extends React.Component {
             contentWrapMaxHeight: '175px',
             contentWrapOverflow: 'hidden',
             viewMoreWrapDisplay: 'block',
-            showBuyTicketNow: false
+            showBuyTicketNow: false,
+            showBuyParkingNow: false
         };
     }
 
@@ -88,12 +89,20 @@ export default class HotDetail extends React.Component {
 
     _handleClickCancel(e) {
         e.preventDefault();
-        this.setState({ showBuyTicketNow: false });
+        this.setState({
+            showBuyTicketNow: false,
+            showBuyParkingNow: false
+        });
     }
 
     _handleClickToolBar(e) {
         e.preventDefault();
-        this.setState({ showBuyTicketNow: true });
+        const { classify_type: classifyType } = this.props.hotDetail
+        if (classifyType === 'parking') {
+            this.setState({ showBuyParkingNow: true })
+        } else if (classifyType === 'hotel' || classifyType === 'tickets') {
+            this.setState({ showBuyTicketNow: true })
+        }
     }
 
     render() {
@@ -107,17 +116,20 @@ export default class HotDetail extends React.Component {
         // 转换数据
         const { title, slides, content, tickets, recommandation, price } = this.props.hotDetail;
         const { attention, place, location, time_info, classify_type, no_tickets } = this.props.hotDetail;
-        const isHotel = classify_type === 'hotel', isTicket = classify_type === 'tickets', isParking = classify_type === 'parking', isNormal = (classify_type === 'normal' || classify_type === undefined);
-        const buyTicketTitle = isHotel ? '购买住宿券' : isTicket ? '购买门票' : ''
+        const isNormal = (classify_type === 'normal' || classify_type === undefined);
+        const isHotel = classify_type === 'hotel';
+        const buyTicketTitle = isHotel ? '购买住宿券' : '购买门票';
 
         return (
             <div className={styles.detail}>
                 <Helmet><title>{title}</title></Helmet>
-                <div className={styles.carousel}>
-                    <Carousel autoplay>
-                        { slides && slides.map(element => (<div key={element.id}><CarouselCard carousel={element} /></div>)) }
-                    </Carousel>
-                </div>
+                {slides &&
+                    <div className={styles.carousel}>
+                        <Carousel autoplay>
+                            { slides.map(element => (<div key={element.id}><CarouselCard carousel={element} /></div>)) }
+                        </Carousel>
+                    </div>
+                }
                 <div className={styles.container}>
                     <div className={styles.item}>
                         <div className={styles.title}>{ title }</div>
@@ -152,16 +164,11 @@ export default class HotDetail extends React.Component {
                         </div>
                     }
                 </div>
-                {(no_tickets === 'no') &&
-                    <div>
-                        {!isNormal && <ToolBar price={price || 0} onClickBuyTicketNow={this.handleClickToolBar} />}
-                        {(isHotel || isTicket) && <BuyTicketNow title={buyTicketTitle} tickets={tickets} show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} />}
-                        {isParking && <BuyParkingCoupon show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} />}
-                    </div>
-                }
-                {(no_tickets === 'yes') &&
-                    <div className={styles.noTickets}><span>门票已售完</span></div>
-                }
+
+                {!isNormal && <ToolBar price={price || 0} onClickBuyTicketNow={this.handleClickToolBar} />}
+                <BuyTicketNow title={buyTicketTitle} tickets={tickets} show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} />
+                <BuyParkingCoupon show={this.state.showBuyParkingNow} onClickCancel={this.handleClickCancel} />
+                {(no_tickets === 'yes') && <div className={styles.noTickets}><span>门票已售完</span></div>}
             </div>
         );
     }

@@ -133,7 +133,7 @@ const initialState = {
     paymentLoading: false,
     paymentLoaded: false,
     paymentError: null,
-    payment: null
+    paymentObject: null
 }
 
 export default function shoppingcart(state=initialState, action) {
@@ -209,7 +209,7 @@ export function getTicketInfoBy(ticketID) {
             type: TICKET_INFO,
             payload: (client) => client.get(`/tickets/ticket_order_info/${ticketID}`, {
                 headers: authHeaders,
-                subpath: '/api/v1'
+                subpath: '/fbpark/v1'
             })
         })
     }
@@ -244,16 +244,18 @@ export function submitTicketOrder(ticketInfo) {
                     return client.post('/charge', { headers: authHeaders, data: { id: orderInfo.orders_id, amount: ticketInfo.amount, open_id: 'oUr10wDQslvet8jtmGa_JAoAVvmI', pay_type: 'wx_pub' }})
                 })
                 .then(charge => {
-                    pingpp.createPayment(charge, (result, error) => {
-                        if (result == 'success') {
-                            return client.post('/check_charge', { headers: authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } })
-                        } else if (result == 'fail' ) {
-                            console.log('支付失败...', error)
-                            return Promise.reject(error)
-                        } else if (result == 'cancel') {
-                            console.log('取消支付...')
-                            return Promise.reject(error)
-                        }
+                    return new Promise((resolve, reject) => {
+                        pingpp.createPayment(charge, (result, error) => {
+                            if (result == 'success') {
+                                resolve(client.post('/check_charge', { headers: authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } }))
+                            } else if (result == 'fail' ) {
+                                console.log('支付失败...', error)
+                                reject(error)
+                            } else if (result == 'cancel') {
+                                console.log('取消支付...')
+                                reject(error)
+                            }
+                        })
                     })
                 })
         })
@@ -271,16 +273,18 @@ export function payment(payment) {
             type: PAYMENT,
             payload: (client) => client.post('/charge', { headers: authHeaders, data: realPayment })
                 .then(charge => {
-                    pingpp.createPayment(charge, (result, error) => {
-                        if (result == 'success') {
-                            return client.post('/check_charge', { headers: authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } })
-                        } else if (result == 'fail') {
-                            console.log('支付失败...', error)
-                            return Promise.reject(error)
-                        } else if (result === 'cancel') {
-                            console.log('取消支付...')
-                            return Promise.reject(error)
-                        }
+                    return new Promise((resolve, reject) => {
+                        pingpp.createPayment(charge, (result, error) => {
+                            if (result == 'success') {
+                                resolve(client.post('/check_charge', { headers: authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } }))
+                            } else if (result == 'fail') {
+                                console.log('支付失败...', error)
+                                reject(error)
+                            } else if (result === 'cancel') {
+                                console.log('取消支付...')
+                                reject(error)
+                            }
+                        })
                     })
                 })
         })

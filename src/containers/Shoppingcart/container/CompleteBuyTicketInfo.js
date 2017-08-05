@@ -42,7 +42,7 @@ import { convertToLocalDate } from '../../../utils/dateformat'
         generatorTicketOrderError: state.shoppingcart.generatorTicketOrderError,
 
         paymentLoading: state.shoppingcart.paymentLoading,
-        payment: state.shoppingcart.payment,
+        paymentObject: state.shoppingcart.paymentObject,
         paymentError: state.shoppingcart.paymentError
     }),
     dispatch => bindActionCreators({ push, addContact, payment, submitTicketOrder }, dispatch)
@@ -77,7 +77,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
             message.error(contactError.error_message);
         }
 
-        const { payment, generatorTicketOrder, generatorTicketOrderError, paymentError } = nextProps
+        const { paymentObject, generatorTicketOrder, generatorTicketOrderError, paymentError } = nextProps
         // 提交订单并支付
         if (generatorTicketOrder && generatorTicketOrder !== this.props.generatorTicketOrder) {
             message.success('购票成功！')
@@ -87,10 +87,13 @@ export default class CompleteBuyTicketInfo extends React.Component {
             this.props.push('/tickets?type=unpaid')
         }
         // 订单详情页支付
-        if (payment && payment !== this.props.payment) {
+        if (paymentObject && paymentObject !== this.props.paymentObject) {
             message.success('购票成功！')
             this.props.push('/tickets')
+        } else if (paymentError && paymentError !== this.props.paymentError) {
+            message.info('支付失败，请重新尝试...')
         }
+
     }
 
     _handleClickPayment(e) {

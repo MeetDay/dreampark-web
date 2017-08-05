@@ -13,7 +13,7 @@ const methods = ['get', 'post', 'put', 'del'];
 export default class APIClient {
 	constructor(req) {
 		methods.forEach(method => {
-			this[method] = (path, { params, data, headers, subpath='/api/v1/users' } = {}) => new Promise((resolve, reject) => {
+			this[method] = (path, { params, data, headers, subpath='/fbpark/v1/users' } = {}) => new Promise((resolve, reject) => {
 				const request = superagent[method](formatUrl(path, subpath));
 				request.set('Content-Type', 'application/json');
 				request.set('Accept', 'application/json');
@@ -24,7 +24,7 @@ export default class APIClient {
 						request.set(key, headers[key]);
 					});
 				}
-				request.end((err, { body } = {}) => (err || (Object.hasOwnProperty.call(body, 'code') && body.code > 10000)) ? reject(body || err) : resolve(body))
+				request.end((err, { body } = {}) => (err || (body && Object.hasOwnProperty.call(body, 'code') && body.code > 10000)) ? reject(body || err) : resolve(body))
 			})
 		});
 	}
