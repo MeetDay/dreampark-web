@@ -37,7 +37,7 @@ import { convertToLocalDate } from '../../../utils/dateformat'
         hasInsurance: state.shoppingcart.ticketInfo ? state.shoppingcart.ticketInfo.is_insurance === 1 : false,
         insurancePrice: state.shoppingcart.ticketInfo ? state.shoppingcart.ticketInfo.insurance_price || 0 : 0,
 
-        generatorTicketOrderLoading: state.shoppingcart,generatorTicketOrderLoading,
+        generatorTicketOrderLoading: state.shoppingcart.generatorTicketOrderLoading,
         generatorTicketOrder: state.shoppingcart.generatorTicketOrder,
         generatorTicketOrderError: state.shoppingcart.generatorTicketOrderError,
 
