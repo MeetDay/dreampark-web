@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-async-connect';
 import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux';
 import { Modal, message } from 'antd';
 import { PageNotExist } from '../../../components'
 import { isTicketInfoLoaded, getTicketInfoBy, addContact, isTicketOrderInfoLoaded, getTicketOrderInfoBy, payment, submitTicketOrder } from '../module/shoppingcartV2';
@@ -34,9 +35,17 @@ import { convertToLocalDate } from '../../../utils/dateformat'
 
         isTicketOrderInfo: state.shoppingcart.isTicketOrderInfo,
         hasInsurance: state.shoppingcart.ticketInfo ? state.shoppingcart.ticketInfo.is_insurance === 1 : false,
-        insurancePrice: state.shoppingcart.ticketInfo ? state.shoppingcart.ticketInfo.insurance_price || 0 : 0
+        insurancePrice: state.shoppingcart.ticketInfo ? state.shoppingcart.ticketInfo.insurance_price || 0 : 0,
+
+        generatorTicketOrderLoading: state.shoppingcart,generatorTicketOrderLoading,
+        generatorTicketOrder: state.shoppingcart.generatorTicketOrder,
+        generatorTicketOrderError: state.shoppingcart.generatorTicketOrderError,
+
+        paymentLoading: state.shoppingcart.paymentLoading,
+        payment: state.shoppingcart.payment,
+        paymentError: state.shoppingcart.paymentError
     }),
-    dispatch => bindActionCreators({ addContact, payment, submitTicketOrder }, dispatch)
+    dispatch => bindActionCreators({ push, addContact, payment, submitTicketOrder }, dispatch)
 )
 
 export default class CompleteBuyTicketInfo extends React.Component {
@@ -67,23 +76,42 @@ export default class CompleteBuyTicketInfo extends React.Component {
         } else if (contactError && contactError !== this.props.contactError) {
             message.error(contactError.error_message);
         }
+
+        const { payment, generatorTicketOrder, generatorTicketOrderError, paymentError } = nextProps
+        // 提交订单并支付
+        if (generatorTicketOrder && generatorTicketOrder !== this.props.generatorTicketOrder) {
+            message.error('购票成功！')
+            this.props.push('/tickets')
+        } else if (generatorTicketOrderError && generatorTicketOrderError !== this.props.generatorTicketOrderError) {
+            message.error('购票失败，请重新选择支付！')
+            this.props.push('/tickets?type=unpaid')
+        }
+        // 订单详情页支付
+        if (payment && payment !== this.props.payment) {
+            message.error('购票成功！')
+            this.props.push('/tickets')
+        }
     }
 
     _handleClickPayment(e) {
         e.preventDefault()
         if (this.props.isTicketOrderInfo) {
-            this.props.payment({
-                id: this.props.ticketInfo.orders_id,
-                amount: this.state.totalPrice
-            })
+            if (!this.props.paymentLoading) {
+                this.props.payment({
+                    id: this.props.ticketInfo.orders_id,
+                    amount: this.state.totalPrice
+                })
+            }
         } else {
-            this.props.submitTicketOrder({
-                amount: this.state.totalPrice,
-                ticket: {
-                    id: this.props.ticketInfo.id,
-                    contacters: this.state.checkedContacts.map(contact => contact.id)
-                }
-            });
+            if (!this.props.generatorTicketOrderLoading) {
+                this.props.submitTicketOrder({
+                    amount: this.state.totalPrice,
+                    ticket: {
+                        id: this.props.ticketInfo.id,
+                        contacters: this.state.checkedContacts.map(contact => contact.id)
+                    }
+                });
+            }
         }
     }
 

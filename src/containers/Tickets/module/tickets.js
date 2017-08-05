@@ -16,12 +16,12 @@ const actionHandlers = {
 
     [`${USED_TICKETS}_PENDING`]: (state, action) => ({ ...state, usedTicktsLoading: true, usedTicktsLoaded: false }),
     [`${USED_TICKETS}_FULFILLED`]: (state, action) => {
-        return { ...state, usedTicktsLoading: false, usedTicktsLoaded: true, usedTickts: action.payload }
+        return { ...state, usedTicktsLoading: false, usedTicktsLoaded: true, usedTickts: action.payload.order_tickets, user: action.payload.user }
     },
     [`${USED_TICKETS}_REJECTED`]: (state, action) => ({ ...state, usedTicktsLoading: false, usedTicktsLoaded: false, usedTicktsError: action.payload }),
 
     [`${UNPAID_TICKETS}_PENDING`]: (state, action) => ({ ...state, unpaidTicketsLoading:true, unpaidTicketsLoaded: false }),
-    [`${UNPAID_TICKETS}_FULFILLED`]: (state, action) => ({ ...state, unpaidTicketsLoading:false, unpaidTicketsLoaded: true, unpaidTickets: action.payload }),
+    [`${UNPAID_TICKETS}_FULFILLED`]: (state, action) => ({ ...state, unpaidTicketsLoading:false, unpaidTicketsLoaded: true, unpaidTickets: action.payload.orders, user: action.payload.user }),
     [`${UNPAID_TICKETS}_REJECTED`]: (state, action) => ({ ...state, unpaidTicketsLoading:false, unpaidTicketsLoaded: false, unpaidTicketsError: action.payload }),
 
     [`${RECOMMEND_TICKETS}_PENDING`]: (state, action) => ({ ...state, recommendTicketsLoading: true, recommendTicketsLoaded: false }),

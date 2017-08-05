@@ -64,14 +64,14 @@ const actionHandlers = {
     [`${TICKET_INFO}_REJECTED`]: (state, action) => ({ ...state, ticketInfoLoading: false, ticketInfoLoaded: false, ticketInfoError: action.payload }),
 
     // 生成订单并支付
-    [`${TICEKT_ORDER}_PENDING`]: (state, action) => ({ ...state }),
-    [`${TICEKT_ORDER}_FULFILLED`]: (state, action) => ({ ...state }),
-    [`${TICEKT_ORDER}_REJECTED`]: (state, action) => ({ ...state }),
+    [`${TICEKT_ORDER}_PENDING`]: (state, action) => ({ ...state, generatorTicketOrderLoading: true, generatorTicketOrderLoaded: false }),
+    [`${TICEKT_ORDER}_FULFILLED`]: (state, action) => ({ ...state, generatorTicketOrderLoading: false, generatorTicketOrderLoaded: true, generatorTicketOrder: action.payload }),
+    [`${TICEKT_ORDER}_REJECTED`]: (state, action) => ({ ...state, generatorTicketOrderLoading: false, generatorTicketOrderLoaded: false, generatorTicketOrderError: action.payload  }),
 
     // 支付订单
-    [`${PAYMENT}_PENDING`]: (state, action) => ({ ...state }),
-    [`${PAYMENT}_FULFILLED`]: (state, action) => ({ ...state }),
-    [`${PAYMENT}_REJECTED`]: (state, action) => ({ ...state }),
+    [`${PAYMENT}_PENDING`]: (state, action) => ({ ...state, paymentLoading: true, paymentLoaded: false }),
+    [`${PAYMENT}_FULFILLED`]: (state, action) => ({ ...state, paymentLoading: false, paymentLoaded: true, payment: action.payload }),
+    [`${PAYMENT}_REJECTED`]: (state, action) => ({ ...state, paymentLoading: false, paymentLoaded: false, paymentError: action.payload }),
 
     // 订单详情
     [`${TICKET_ORDER_INFO}_PENDING`]: (state, action) => ({ ...state, ticektOrderInfoLoading: true, ticketOrderInfoLoaded: false, isTicketOrderInfo:false }),
