@@ -80,7 +80,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
         const { payment, generatorTicketOrder, generatorTicketOrderError, paymentError } = nextProps
         // 提交订单并支付
         if (generatorTicketOrder && generatorTicketOrder !== this.props.generatorTicketOrder) {
-            message.error('购票成功！')
+            message.success('购票成功！')
             this.props.push('/tickets')
         } else if (generatorTicketOrderError && generatorTicketOrderError !== this.props.generatorTicketOrderError) {
             message.error('购票失败，请重新选择支付！')
@@ -88,7 +88,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
         }
         // 订单详情页支付
         if (payment && payment !== this.props.payment) {
-            message.error('购票成功！')
+            message.success('购票成功！')
             this.props.push('/tickets')
         }
     }
