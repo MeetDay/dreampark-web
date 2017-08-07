@@ -55,7 +55,12 @@ $avatarHeight: 60px;
         margin-left: 15px;
     }
     vertical-align: top;
-    background-color: gray;
+
+    & > img {
+        width: 100%;
+        font-size: 0;
+        vertical-align: top;
+    }
 }
 
 $bottomHeight: 40px;

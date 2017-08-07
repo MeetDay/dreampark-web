@@ -47,9 +47,7 @@ export default class Header extends React.Component {
                         </div>
                         <div className={styles.tip}>点击显示我的二维码</div>
                     </div>
-                    <div className={styles.qrcode}>
-                        二维码
-                    </div>
+                    <div className={styles.qrcode}><img src="assets/qrcode_big.png" alt="qrcode" /></div>
                 </div>
                 <div className={styles.bottom}>
                     <div id="unused" onClick={this.handleClick}><span className={classNames({ [styles.item]: true, [styles.itemActive]: this.state.selectedItemType === 'unused'  })}>未使用</span></div>

@@ -42,7 +42,7 @@ export default class Tickets extends React.Component {
     constructor() {
         super();
         this.onMenuItemChange = (value) => this._onMenuItemChange(value);
-        this.viewTicket = (e) => this._viewTicket(e);
+        this.viewTicket = (ticket) => this._viewTicket(ticket);
         this.closeViewTickets = (e) => this._closeViewTickets(e);
         this.handleClickTicketToolBar = (e) => this._handleClickTicketToolBar(e);
         this.state = {
@@ -102,10 +102,11 @@ export default class Tickets extends React.Component {
 
     render() {
         const styles = require('./Tickets.scss')
-        let tickets = null, isTicketOrder = false
+        let tickets = null, isTicketOrder = false, ticketType = 'unused'
         if (this.state.selectedItemType === 'used') {
             tickets = this.props.usedTickts
-        } else if (this.state.selectedItemType === 'used') {
+            ticketType = 'used'
+        } else if (this.state.selectedItemType === 'unused') {
             tickets = this.props.unusedTikects
         } else if (this.state.selectedItemType === 'unpaid') {
             tickets = this.props.unpaidTickets
@@ -115,7 +116,7 @@ export default class Tickets extends React.Component {
             <div>
                 <Header user={this.props.user || {}} selectedItemType={this.state.selectedItemType} onMenuItemChange={this.onMenuItemChange} />
                 <div className={styles.ticketWrap}>
-                    { (!isTicketOrder && tickets) && tickets.map((ticket) =>(<Ticket key={ticket.id} viewTicket={this.viewTicket} ticket={ticket} />)) }
+                    { (!isTicketOrder && tickets) && tickets.map((ticket) =>(<Ticket key={ticket.orderTicket_id} viewTicket={this.viewTicket} type={ticketType} ticket={ticket} />)) }
                     { (isTicketOrder && tickets) && tickets.map((ticket) =>(<UnpaidOrder key={ticket.id} unpaidOrder={ticket} deleteOrder={this.props.cancelOrder} />)) }
                 </div>
                 <TicketTool onTicketToolBarClick={this.handleClickTicketToolBar} />
