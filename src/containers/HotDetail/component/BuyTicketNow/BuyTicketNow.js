@@ -15,7 +15,6 @@ export default class BuyTicketNow extends React.Component {
     }
     static defaultProps = {
         title: '购买门票',
-        tickets: [{id:1, price: 450}, {id:2, price: 300}, {id:3, price: 128}, {id: 4, price: 934}],
         show: false
     }
 
