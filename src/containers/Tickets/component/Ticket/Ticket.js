@@ -39,7 +39,7 @@ export default class Ticket extends React.Component {
                 <div className={styles.ticketBorder}><img src="/assets/ticket_border_big.png" alt="ticket_border_big" /></div>
                 <div className={styles.ticketWrap}>
                     <div className={styles.info}>
-                        <a href={`hotdetail/${this.props.ticket.id}`}>
+                        <a>
                             <span className={styles.title}>{ticket_name}</span>
                             <span className={styles.date}>{startTime.date}</span>
                             <span className={styles.time}>{`${startTime.time} - ${endTime.time}`}</span>
