@@ -18,7 +18,7 @@ import { jumpToWeChatAuthorizationUrl } from '../../../utils/wechat'
 import { isEmptyObject } from '../../Login/module/login'
 
 @asyncConnect([{
-    deferred: false,
+    deferred: true,
     promise: ({ params, store: { dispatch, getState }, helpers }) => {
         if (!isHotDetailLoaded(getState())) {
             return dispatch(getHotDetailBy(params.id))
