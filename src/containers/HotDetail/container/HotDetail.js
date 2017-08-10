@@ -18,7 +18,7 @@ import { jumpToWeChatAuthorizationUrl } from '../../../utils/wechat'
 import { isEmptyObject } from '../../Login/module/login'
 
 @asyncConnect([{
-    deferred: true,
+    deferred: false,
     promise: ({ params, store: { dispatch, getState }, helpers }) => {
         if (!isHotDetailLoaded(getState())) {
             return dispatch(getHotDetailBy(params.id))
@@ -166,7 +166,7 @@ export default class HotDetail extends React.Component {
                 </div>
 
                 {!isNormal && <ToolBar price={price || 0} onClickBuyTicketNow={this.handleClickToolBar} />}
-                <BuyTicketNow title={buyTicketTitle} tickets={tickets} show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} />
+                {(tickets && tickets.length > 0) && <BuyTicketNow title={buyTicketTitle} tickets={tickets} show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} /> }
                 <BuyParkingCoupon show={this.state.showBuyParkingNow} onClickCancel={this.handleClickCancel} />
                 {(no_tickets === 'yes') && <div className={styles.noTickets}><span>门票已售完</span></div>}
             </div>
