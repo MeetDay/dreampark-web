@@ -30,7 +30,7 @@ export default class TermsOfService extends React.Component {
             let mappedElement = null
             if (content.type === 'text') {
                 mappedElement = <TextElement key={id} text={content.media.plain_text} />
-            } else if (content.type === 'image' && content.media.caption.length > 0) {
+            } else if (content.type === 'image' && content.media.caption && content.media.caption.length > 0) {
                 mappedElement = <BigImageElement key={id} src={content.media.name} captionText={content.media.caption} />
             } else if (content.type === 'image') {
                 mappedElement = <ImageElement key={id} src={content.media.name} />
