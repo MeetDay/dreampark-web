@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.e0c331ff212dd342201b.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.e0c331ff212dd342201b.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.e0c331ff212dd342201b.min.js"
+    "main": "http://localhost:3000/dist/main.c6854a8f53396f6088a7.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.c6854a8f53396f6088a7.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.c6854a8f53396f6088a7.min.js"
   },
   "styles": {},
   "assets": {
@@ -289,8 +289,8 @@
       "_style": ".ShoppingcartV2__nav__30zaf {\n  position: fixed;\n  top: 0;\n  width: 100%;\n  height: 44px;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  line-height: 44px;\n  text-align: center;\n  color: white;\n  background-color: #1C2123;\n  z-index: 999; }\n\n.ShoppingcartV2__content__2WZ6R {\n  padding-top: 0px; }\n\n.ShoppingcartV2__ticketsWrap__2KFd4 {\n  padding: 0 20px; }\n\n.ShoppingcartV2__nonGoods__31jmQ {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  margin: auto;\n  width: 100%;\n  height: 80px;\n  font-size: 16px;\n  text-align: center;\n  color: #ccc; }\n"
     },
     "./src/containers/TermsOfService/container/TermsOfService.scss": {
-      "container": "TermsOfService__container__33eVz",
-      "_style": ".TermsOfService__container__33eVz {\n  margin: 20px; }\n"
+      "termsWrapper": "TermsOfService__termsWrapper__1Lr-g",
+      "_style": ".TermsOfService__termsWrapper__1Lr-g {\n  margin: 0 20px 20px 20px; }\n"
     },
     "./src/containers/Tickets/component/Header/Header.scss": {
       "header": "Header__header__3AhMC",
