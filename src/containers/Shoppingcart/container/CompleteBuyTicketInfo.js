@@ -15,7 +15,7 @@ import { clearWhiteSpaceOf, illegalCardNumber } from '../../../utils/regex';
 import { convertToLocalDate } from '../../../utils/dateformat'
 
 @asyncConnect([{
-    deferred: true,
+    deferred: false,
     promise: ({ params, store:{ dispatch, getState }, helpers }) => {
         if (params.type === 'ticketorder' && !isTicketOrderInfoLoaded(getState())) {
             return dispatch(getTicketOrderInfoBy(params.id))
@@ -70,6 +70,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        // 添加联系人
         const { contact, contactError } = nextProps
         if (contact && contact !== this.props.contact) {
             this.setState({ showAddContact: false })
@@ -77,7 +78,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
             message.error(contactError.error_message);
         }
 
-        const { paymentObject, generatorTicketOrder, generatorTicketOrderError, paymentError } = nextProps
+        const { paymentObject, paymentError, generatorTicketOrder, generatorTicketOrderError } = nextProps
         // 提交订单并支付
         if (generatorTicketOrder && generatorTicketOrder !== this.props.generatorTicketOrder) {
             message.success('购票成功！')

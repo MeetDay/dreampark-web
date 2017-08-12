@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.2ed3423d90113fc89ce7.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.2ed3423d90113fc89ce7.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.2ed3423d90113fc89ce7.min.js"
+    "main": "http://localhost:3000/dist/main.68add1941cf0ddb63613.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.68add1941cf0ddb63613.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.68add1941cf0ddb63613.min.js"
   },
   "styles": {},
   "assets": {
@@ -40,7 +40,7 @@
       "text": "Element__text__2a5Tg",
       "image": "Element__image__16Kw0",
       "bigImageElement": "Element__bigImageElement__1vK5C",
-      "_style": ".Element__title__1B9fH {\n  padding: 14px 0;\n  border-bottom: 1px solid #DEDEDE;\n  font-size: 20px;\n  color: black; }\n\n.Element__text__2a5Tg {\n  margin: 14px 0;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  color: black;\n  white-space: pre-line; }\n\n.Element__image__16Kw0 {\n  margin: 14px 0; }\n  .Element__image__16Kw0 > img {\n    display: block;\n    margin: auto;\n    width: 100%;\n    vertical-align: top; }\n\n.Element__bigImageElement__1vK5C {\n  margin: 14px -20px; }\n  .Element__bigImageElement__1vK5C > img {\n    display: block;\n    width: 100%;\n    vertical-align: top; }\n  .Element__bigImageElement__1vK5C > div {\n    box-sizing: content-box;\n    max-height: 75px;\n    padding: 5px 20px;\n    color: white;\n    background-color: #2D343B; }\n"
+      "_style": ".Element__title__1B9fH {\n  padding: 14px 0;\n  border-bottom: 1px solid #DEDEDE;\n  font-size: 20px;\n  color: black; }\n\n.Element__text__2a5Tg {\n  margin: 14px 0;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  color: black;\n  white-space: pre-line; }\n\n.Element__image__16Kw0 {\n  margin: 14px 0; }\n  .Element__image__16Kw0 > img {\n    display: block;\n    margin: auto;\n    width: 100%;\n    vertical-align: top; }\n\n.Element__bigImageElement__1vK5C {\n  margin: 14px -20px; }\n  .Element__bigImageElement__1vK5C > img {\n    display: block;\n    width: 100%;\n    vertical-align: top; }\n  .Element__bigImageElement__1vK5C > div {\n    box-sizing: content-box;\n    padding: 5px 20px;\n    color: white;\n    background-color: #2D343B; }\n"
     },
     "./src/components/LoadMoreButton/LoadMoreButton.scss": {
       "loading": "LoadMoreButton__loading__1KEy6",

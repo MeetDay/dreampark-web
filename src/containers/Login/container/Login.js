@@ -10,11 +10,15 @@ import Navbar from '../component/Navbar/Navbar'
 import { userLogin } from '../module/login'
 import { legalPhoneNumber, clearWhiteSpaceOf } from '../../../utils/regex'
 
+const MAX_LENGTH_OF_PHONE = 11;
+const MIN_LENGTH_OF_PASSWORD = 8;
+const MAX_LENGTH_OF_SMS_CODE = 4;
+
 @connect(
     state => ({
-
+        userLoginError: state.login.userLoginError
     }),
-    dispatch => bindActionCreators({ userLogin }, dispatch)
+    dispatch => bindActionCreators({ push, userLogin }, dispatch)
 )
 
 export default class Login extends React.Component {
@@ -31,9 +35,20 @@ export default class Login extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        const { userLoginError, user } = nextProps;
+        if (userLoginError && userLoginError !== this.props.userLoginError) {
+            message.error(userLoginError.error_message);
+        }
+
+        if (user !== this.porps.user) {
+            this.props.push('/tickets')
+        }
+    }
+
     _onPhonenNmberChange(e) {
         e.preventDefault()
-        if (clearWhiteSpaceOf(e.target.value).length > 11) return
+        if (clearWhiteSpaceOf(e.target.value).length > MAX_LENGTH_OF_PHONE) return
         this.setState({ phonenumber: e.target.value })
     }
 
@@ -45,16 +60,16 @@ export default class Login extends React.Component {
 
     _onSMSCodeChange(e) {
         e.preventDefault()
-        if (clearWhiteSpaceOf(e.target.value).length > 4) return
+        if (clearWhiteSpaceOf(e.target.value).length > MAX_LENGTH_OF_SMS_CODE) return
         this.setState({ code: e.target.value })
     }
 
     _userLogin(e) {
         e.preventDefault()
-        if (legalPhoneNumber(this.state.phonenumber) && this.state.password.length >= 8) {
+        if (legalPhoneNumber(this.state.phonenumber) && this.state.password.length >= MIN_LENGTH_OF_PASSWORD) {
             this.props.userLogin(clearWhiteSpaceOf(this.state.phonenumber), this.state.password)
         } else {
-            message.error('用户名或密码错误...')
+            message.error('请输入正确的用户名或密码...');
         }
     }
 

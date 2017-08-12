@@ -209,7 +209,7 @@ export function getTicketInfoBy(ticketID) {
             type: TICKET_INFO,
             payload: (client) => client.get(`/tickets/ticket_order_info/${ticketID}`, {
                 headers: authHeaders,
-                subpath: '/api/v1'
+                subpath: '/fbpark/v1'
             })
         })
     }
@@ -224,7 +224,12 @@ export function addContact(contact) {
                 .then(result => {
                     return client.post('/contacter', {
                         headers: authHeaders,
-                        data: { name: contact.name, identity_card: contact.cardno }
+                        data: {
+                            name: contact.name,
+                            identity_card: contact.cardno,
+                            gender: result.data.sex,
+                            birthday: result.data.birthday
+                        }
                     })
                 })
         })
@@ -249,10 +254,8 @@ export function submitTicketOrder(ticketInfo) {
                             if (result == 'success') {
                                 resolve(client.post('/check_charge', { headers: authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } }))
                             } else if (result == 'fail' ) {
-                                console.log('支付失败...', error)
                                 reject(error)
                             } else if (result == 'cancel') {
-                                console.log('取消支付...')
                                 reject(error)
                             }
                         })
@@ -278,10 +281,8 @@ export function payment(payment) {
                             if (result == 'success') {
                                 resolve(client.post('/check_charge', { headers: authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } }))
                             } else if (result == 'fail') {
-                                console.log('支付失败...', error)
                                 reject(error)
                             } else if (result === 'cancel') {
-                                console.log('取消支付...')
                                 reject(error)
                             }
                         })
