@@ -67,16 +67,19 @@ const actionHandlers = {
     // 票务详情
     [`${TICKET_INFO}_PENDING`]: (state, action) => ({ ...state, ticketInfoLoading: true, ticketInfoLoaded: false }),
     [`${TICKET_INFO}_FULFILLED`]: (state, action) => {
-        let checkedContactsNoInsurance = [], contacters = action.payload.contacters;
-        if (contacters && contacters.length > 0 && contacters[0].insurant == 'no') {
-            checkedContactsNoInsurance = [contacters[0]];
+        let checkedContactsNoInsurance = [], contactList = [], contacters = action.payload.contacters;
+        if (contacters && contacters.length > 0) {
+            contactList = [... contacters];
+            if (contacters[0].insurant == 'no') {
+                checkedContactsNoInsurance = [contacters[0]];
+            }
         }
         return {
             ...state,
             ticketInfoLoading: false,
             ticketInfoLoaded: true,
             ticketInfo: action.payload.ticket,
-            contactList: action.payload.contacters,
+            contactList: [...contactList],
             checkedContactsNoInsurance: checkedContactsNoInsurance
         }
     },
