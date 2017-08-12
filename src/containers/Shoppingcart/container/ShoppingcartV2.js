@@ -11,7 +11,7 @@ import { LoadMoreButton } from '../../../components';
 import { isShoppingcartLoaded, getShoppingcart, deleteGoodsFromShoppingCart } from '../module/shoppingcartV2';
 
 @asyncConnect([{
-    deferred: false,
+    deferred: true,
     promise: ({ params, store: { dispatch, getState }, helpers }) => {
         if (!isShoppingcartLoaded(getState())) {
             return dispatch(getShoppingcart())

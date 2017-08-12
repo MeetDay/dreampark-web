@@ -23,7 +23,9 @@ const actionHandlers = {
         if (shoppingcarts && Array.isArray(shoppingcarts) && shoppingcarts.length == GOODS_COUNT_PER_REQUEST){
             hasMoreGoods = true;
         }
-        maxGoodsID = shoppingcarts[shoppingcarts.length - 1].id;
+        if (shoppingcarts && Array.isArray(shoppingcarts) && shoppingcarts.length > 0) {
+            maxGoodsID = shoppingcarts[shoppingcarts.length - 1].id;
+        }
         return {
             ...state,
             shoppingcartLoading: false,
