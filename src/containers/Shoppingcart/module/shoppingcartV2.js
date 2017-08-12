@@ -278,7 +278,7 @@ export function submitTicketOrder(ticketInfo) {
                 .then(orderInfo => {
                     const cookies = new Cookies()
                     const openID = cookies.get(Constant.USER_OPENID)
-                    return client.post('/charge', { headers: authHeaders, data: { id: orderInfo.orders_id, amount: ticketInfo.amount, open_id: 'oUr10wDQslvet8jtmGa_JAoAVvmI', pay_type: 'wx_pub' }})
+                    return client.post('/charge', { headers: authHeaders, data: { id: orderInfo.orders_id, amount: ticketInfo.amount, open_id: openID, pay_type: 'wx_pub' }})
                 })
                 .then(charge => {
                     return new Promise((resolve, reject) => {
@@ -303,7 +303,7 @@ export function submitTicketOrder(ticketInfo) {
 export function payment(payment) {
     const cookies = new Cookies()
     const openID = cookies.get(Constant.USER_OPENID)
-    const realPayment = Object.assign({ pay_type: 'wx_pub', open_id: 'oUr10wDQslvet8jtmGa_JAoAVvmI' }, payment)
+    const realPayment = Object.assign({ pay_type: 'wx_pub', open_id: openID }, payment)
     return (dispatch, getState) => {
         const { authHeaders } = getState().login
         return dispatch({
