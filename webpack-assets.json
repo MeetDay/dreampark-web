@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.4daa711fbb17728c559d.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.4daa711fbb17728c559d.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.4daa711fbb17728c559d.min.js"
+    "main": "http://localhost:3000/dist/main.1150f808aca42cdf69dc.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.1150f808aca42cdf69dc.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.1150f808aca42cdf69dc.min.js"
   },
   "styles": {},
   "assets": {
@@ -365,7 +365,9 @@
     "./src/containers/Tickets/component/UnpaidOrder/UnpaidOrder.scss": {
       "cancelOrder": "UnpaidOrder__cancelOrder__2RVJS",
       "gopayment": "UnpaidOrder__gopayment__2FCb-",
-      "_style": ".UnpaidOrder__cancelOrder__2RVJS {\n  width: 60px;\n  height: 24px;\n  border-radius: 3px;\n  border: 1px solid #D6D6D6;\n  text-align: center;\n  line-height: 24px;\n  color: #D6D6D6; }\n\n.UnpaidOrder__gopayment__2FCb- > span {\n  display: inline-block;\n  min-width: 50px;\n  text-align: center;\n  font-size: 16px;\n  line-height: 45px;\n  color: #143B6E; }\n"
+      "others": "UnpaidOrder__others__1GbTN",
+      "center": "UnpaidOrder__center__1Ua0j",
+      "_style": ".UnpaidOrder__cancelOrder__2RVJS {\n  width: 60px;\n  height: 24px;\n  border-radius: 3px;\n  border: 1px solid #D6D6D6;\n  text-align: center;\n  line-height: 24px;\n  color: #D6D6D6; }\n\n.UnpaidOrder__gopayment__2FCb- > span {\n  display: inline-block;\n  min-width: 50px;\n  text-align: center;\n  font-size: 16px;\n  line-height: 45px;\n  color: #143B6E; }\n\n.UnpaidOrder__others__1GbTN {\n  width: 80px;\n  height: 45px;\n  text-align: center; }\n  .UnpaidOrder__others__1GbTN > span {\n    display: inline-block;\n    min-width: 50px;\n    text-align: center;\n    font-size: 14px;\n    line-height: 45px;\n    color: #9B9B9B; }\n\n.UnpaidOrder__center__1Ua0j {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto; }\n"
     },
     "./src/containers/Tickets/container/BuyTicket.scss": {
       "buyTicket": "BuyTicket__buyTicket__2gXOK",
@@ -381,8 +383,9 @@
       "_style": ".SearchTicket__searchTicket__2OKE1 {\n  background-color: #FFFFFF; }\n\n.SearchTicket__contentWrap__GHM6C {\n  margin-top: 44px; }\n\n.SearchTicket__noSearchResult__3Q_8d {\n  margin-top: 144px; }\n\n.SearchTicket__searchImg__3FyFs {\n  width: 100%;\n  height: 93px;\n  text-align: center; }\n  .SearchTicket__searchImg__3FyFs > img {\n    height: 100%;\n    vertical-align: top; }\n\n.SearchTicket__noSearchDescription__35rxw {\n  margin-top: 35px;\n  text-align: center; }\n  .SearchTicket__noSearchDescription__35rxw > span:first-child {\n    display: inline-block;\n    width: 100%;\n    font-family: PingFangSC-Semibold;\n    font-size: 16px;\n    color: #393939; }\n  .SearchTicket__noSearchDescription__35rxw > span:last-child {\n    display: inline-block;\n    margin-top: 20px;\n    font-family: PingFangSC-Regular;\n    font-size: 14px;\n    color: #D6D6D6; }\n"
     },
     "./src/containers/Tickets/container/Tickets.scss": {
+      "ticketContent": "Tickets__ticketContent__3Hk8V",
       "ticketWrap": "Tickets__ticketWrap__1-ptD",
-      "_style": ".Tickets__ticketWrap__1-ptD {\n  padding: 0 20px;\n  border-bottom: 75px solid transparent; }\n"
+      "_style": ".Tickets__ticketContent__3Hk8V {\n  border-bottom: 75px solid transparent; }\n\n.Tickets__ticketWrap__1-ptD {\n  padding: 0 20px; }\n"
     }
   },
   "webpack": {

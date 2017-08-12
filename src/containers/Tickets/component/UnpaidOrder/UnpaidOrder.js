@@ -4,6 +4,8 @@ import classNames from 'classnames'
 import { Popconfirm } from 'antd'
 import { convertToLocalDate } from '../../../../utils/dateformat'
 
+const MESSAGES = ['去支付', '已过期', '已售完', '余票不足', '已失效'];
+
 export default class UnpaidOrder extends React.Component {
     static defaultProps = {
         unpaidOrder: PropTypes.object,
@@ -22,9 +24,10 @@ export default class UnpaidOrder extends React.Component {
     render() {
         const styles = require('../Ticket/Ticket.scss')
         const unpaidStyles = require('./UnpaidOrder.scss')
-        const { count: ticketCount, ticket_name: ticketName, start_time: startTime, end_time: endTime } = this.props.unpaidOrder
+        const { count: ticketCount, ticket_name: ticketName, start_time: startTime, end_time: endTime, type } = this.props.unpaidOrder
         const startTimeDate = convertToLocalDate(startTime)
         const endTimeDate = convertToLocalDate(endTime)
+
         return (
             <div className={styles.ticket}>
                 <div className={styles.ticketBorder}><img src="/assets/ticket_border_big.png" alt="ticket_border_big" /></div>
@@ -43,9 +46,14 @@ export default class UnpaidOrder extends React.Component {
                         </div>
                     </div>
                     <div className={styles.qrcode}>
-                        <a href={`/pay/ticketinfo/${this.props.unpaidOrder.orders_no}/ticketorder`}>
-                            <div className={classNames(styles.qrcodeWrap, unpaidStyles.gopayment)}><span>去支付</span></div>
-                        </a>
+                        {(type === 0) &&
+                            <a href={`/pay/ticketinfo/${this.props.unpaidOrder.orders_no}/ticketorder`}>
+                                <div className={classNames(styles.qrcodeWrap, unpaidStyles.gopayment)}><span>去支付</span></div>
+                            </a>
+                        }
+                        {(type !== 0) &&
+                            <div className={classNames(unpaidStyles.center, unpaidStyles.others)}><span>{MESSAGES[type]}</span></div>
+                        }
                     </div>
                 </div>
             </div>

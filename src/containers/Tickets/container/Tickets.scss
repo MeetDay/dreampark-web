@@ -1,5 +1,8 @@
 $ticketBorderBottom: 75px;
+.ticketContent {
+    border-bottom: $ticketBorderBottom solid transparent;
+}
+
 .ticketWrap {
     padding: 0 20px;
-    border-bottom: $ticketBorderBottom solid transparent;   
 }

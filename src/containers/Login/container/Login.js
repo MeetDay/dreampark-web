@@ -41,7 +41,7 @@ export default class Login extends React.Component {
             message.error(userLoginError.error_message);
         }
 
-        if (user !== this.porps.user) {
+        if (user !== this.props.user) {
             this.props.push('/tickets')
         }
     }

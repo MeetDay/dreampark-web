@@ -18,3 +18,26 @@
         color: #143B6E;
     }
 }
+
+.others {
+    width: 80px;
+    height: 45px;
+    text-align: center;
+    & > span {
+        display: inline-block;
+        min-width: 50px;
+        text-align: center;
+        font-size: 14px;
+        line-height: 45px;
+        color: #9B9B9B;
+    }
+}
+
+.center {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
