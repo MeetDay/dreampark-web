@@ -16,19 +16,19 @@ const actionHandlers = {
     // 购物车
     [`${SHOPPINGCART}_PENDING`]: (state, action) => ({ ...state, shoppingcartLoading: true, shoppingcartLoaded: false }),
     [`${SHOPPINGCART}_FULFILLED`]: (state, action) => {
-        let goods = action.payload, fullShoppingcarts=[...state.shoppingcarts], hasMoreGoods = false, maxGoodsID = undefined;
-        if (state.hasMoreGoods && goods.length > 0) {
-            fullShoppingcarts = [...fullShoppingcarts, ...goods];
-        } else if (goods.length > 0) {
-            fullShoppingcarts = [...goods];
+        let shoppingcarts = action.payload, hasMoreGoods = false, maxGoodsID = undefined;
+        if (state.hasMoreGoods && shoppingcarts && Array.isArray(shoppingcarts)) {
+            shoppingcarts = [...state.shoppingcarts, ...shoppingcarts];
         }
-        if (goods.length == GOODS_COUNT_PER_REQUEST) hasMoreGoods = true;
-        maxGoodsID = fullShoppingcarts[fullShoppingcarts.length - 1].id;
+        if (shoppingcarts && Array.isArray(shoppingcarts) && shoppingcarts.length == GOODS_COUNT_PER_REQUEST){
+            hasMoreGoods = true;
+        }
+        maxGoodsID = shoppingcarts[shoppingcarts.length - 1].id;
         return {
             ...state,
             shoppingcartLoading: false,
             shoppingcartLoaded: true,
-            shoppingcarts: fullShoppingcarts,
+            shoppingcarts: shoppingcarts,
             hasMoreGoods: hasMoreGoods,
             maxGoodsID: maxGoodsID
         }
