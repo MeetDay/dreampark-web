@@ -65,7 +65,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
             showAddContact: false,
             username: '',
             idCardNo: '',
-            checkedContacts: props.ticketInfo ? (props.isTicketOrderInfo ? [...props.contactList] : [props.contactList[0]]) : [],
+            checkedContacts: props.ticketInfo ? (props.isTicketOrderInfo ? [...props.contactList] : ((props.contactList && props.contactList.length > 0) ? [props.contactList[0]] : [])) : [],
             checkedContactsNoInsurance: props.checkedContactsNoInsurance,
             totalPrice: props.ticketInfo ? (props.isTicketOrderInfo ? Number(props.ticketInfo.amount).toFixed(2) : Number(props.ticketInfo.price + props.insurancePrice*props.checkedContactsNoInsurance.length).toFixed(2)) : 0,
         }

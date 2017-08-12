@@ -156,7 +156,7 @@ export default class Tickets extends React.Component {
                         { (!isTicketOrder && tickets) && tickets.map((ticket) =>(<Ticket key={ticket.orderTicket_id} viewTicket={this.viewTicket} type={ticketType} ticket={ticket} />)) }
                         { (isTicketOrder && tickets) && tickets.map((ticket) =>(<UnpaidOrder key={ticket.id} unpaidOrder={ticket} deleteOrder={this.props.cancelOrder} />)) }
                     </div>
-                    <LoadMoreButton onClick={this.handleClickLoadMore} hasMore={hasMore} isActive={isActive} />
+                    {(tickets && tickets.length > 0) && <LoadMoreButton onClick={this.handleClickLoadMore} hasMore={hasMore} isActive={isActive} /> }
                 </div>
                 <TicketTool onTicketToolBarClick={this.handleClickTicketToolBar} />
                 {this.state.selectedTicket && <TicketDetail visible={this.state.showSelectedTicket} onCancel={this.closeViewTickets} ticket={this.state.selectedTicket} />}
