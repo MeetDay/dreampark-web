@@ -212,7 +212,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                         <div className={styles.contactListHeader}><span>{contactTitle}</span><span>{`已选择: ${this.state.checkedContacts.length}人`}</span></div>
                         {!this.props.isTicketOrderInfo &&
                             <div className={styles.contactListWrap}>
-                                {this.props.contactList.map(contact => (<ContactCard key={contact.identity_card} contact={contact} contactChecked={this.contactChecked} checked={this.existedContact(this.state.checkedContacts, contact)} />))}
+                                {this.props.contactList.length > 0 && this.props.contactList.map(contact => (<ContactCard key={contact.identity_card} contact={contact} contactChecked={this.contactChecked} checked={this.existedContact(this.state.checkedContacts, contact)} />))}
                                 <ContactCard type="add" addContact={this.addContact} />
                             </div>
                         }
