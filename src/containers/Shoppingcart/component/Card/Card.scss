@@ -34,6 +34,7 @@ $coverHeight: 80px;
     vertical-align: top;
     & > img {
         width: $coverHeight;
+        height: $coverHeight;
         vertical-align: top;
     }
 }

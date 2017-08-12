@@ -16,13 +16,19 @@ const actionHandlers = {
     // 购物车
     [`${SHOPPINGCART}_PENDING`]: (state, action) => ({ ...state, shoppingcartLoading: true, shoppingcartLoaded: false }),
     [`${SHOPPINGCART}_FULFILLED`]: (state, action) => {
-        let shoppingcarts = action.payload, hasMoreGoods = false, maxGoodsID = 0
-        if (state.hasMoreGoods && state.maxGoodsID > 0) shoppingcarts = [...state.shoppingcarts, ...shoppingcarts]
-        if (shoppingcarts.length >= GOODS_COUNT_PER_REQUEST) hasMoreGoods = true
-        if (hasMoreGoods) maxGoodsID = shoppingcarts[shoppingcarts.length - 1].id
+        let goods = action.payload, fullShoppingcarts=[...state.shoppingcarts], hasMoreGoods = false, maxGoodsID = undefined;
+        if (state.hasMoreGoods && goods.length > 0) {
+            fullShoppingcarts = [...fullShoppingcarts, ...goods];
+        } else if (goods.length > 0) {
+            fullShoppingcarts = [...goods];
+        }
+        if (goods.length == GOODS_COUNT_PER_REQUEST) hasMoreGoods = true;
+        maxGoodsID = fullShoppingcarts[fullShoppingcarts.length - 1].id;
         return {
             ...state,
-            shoppingcarts: shoppingcarts,
+            shoppingcartLoading: false,
+            shoppingcartLoaded: true,
+            shoppingcarts: fullShoppingcarts,
             hasMoreGoods: hasMoreGoods,
             maxGoodsID: maxGoodsID
         }
@@ -59,7 +65,18 @@ const actionHandlers = {
     // 票务详情
     [`${TICKET_INFO}_PENDING`]: (state, action) => ({ ...state, ticketInfoLoading: true, ticketInfoLoaded: false }),
     [`${TICKET_INFO}_FULFILLED`]: (state, action) => {
-        return { ...state, ticketInfoLoading: false, ticketInfoLoaded: true, ticketInfo: action.payload.ticket, contactList: action.payload.contacters }
+        let checkedContactsNoInsurance = [], contacters = action.payload.contacters;
+        if (contacters && contacters.length > 0 && contacters[0].insurant == 'no') {
+            checkedContactsNoInsurance = [contacters[0]];
+        }
+        return {
+            ...state,
+            ticketInfoLoading: false,
+            ticketInfoLoaded: true,
+            ticketInfo: action.payload.ticket,
+            contactList: action.payload.contacters,
+            checkedContactsNoInsurance: checkedContactsNoInsurance
+        }
     },
     [`${TICKET_INFO}_REJECTED`]: (state, action) => ({ ...state, ticketInfoLoading: false, ticketInfoLoaded: false, ticketInfoError: action.payload }),
 
@@ -74,14 +91,26 @@ const actionHandlers = {
     [`${PAYMENT}_REJECTED`]: (state, action) => ({ ...state, paymentLoading: false, paymentLoaded: false, paymentError: action.payload }),
 
     // 订单详情
-    [`${TICKET_ORDER_INFO}_PENDING`]: (state, action) => ({ ...state, ticektOrderInfoLoading: true, ticketOrderInfoLoaded: false, isTicketOrderInfo:false }),
+    [`${TICKET_ORDER_INFO}_PENDING`]: (state, action) => ({ ...state, ticektOrderInfoLoading: true, ticketOrderInfoLoaded: false, isTicketOrderInfo:true }),
     [`${TICKET_ORDER_INFO}_FULFILLED`]: (state, action) => {
-        const ticketOrderInfo = action.payload
+        let checkedContactsNoInsurance = [];
+        const ticketOrderInfo = action.payload;
         const contactList = ticketOrderInfo.contacters;
         delete ticketOrderInfo.contacters;
-        return { ...state, ticektOrderInfoLoading: false, ticketOrderInfoLoaded: true, isTicketOrderInfo:true, ticketInfo: ticketOrderInfo, contactList: contactList }
+        if (contactList && contactList.length > 0) {
+            checkedContactsNoInsurance = contactList.filter(contact => contact.insurant == 'no');
+        }
+        return {
+            ...state,
+            ticektOrderInfoLoading: false,
+            ticketOrderInfoLoaded: true,
+            isTicketOrderInfo:true,
+            ticketInfo: ticketOrderInfo,
+            contactList: contactList,
+            checkedContactsNoInsurance: checkedContactsNoInsurance
+        }
     },
-    [`${TICKET_ORDER_INFO}_REJECTED`]: (state, action) => ({ ...state, ticektOrderInfoLoading: false, ticketOrderInfoLoaded: false, isTicketOrderInfo:false, ticketOrderInfoError: action.payload })
+    [`${TICKET_ORDER_INFO}_REJECTED`]: (state, action) => ({ ...state, ticektOrderInfoLoading: false, ticketOrderInfoLoaded: false, isTicketOrderInfo:true, ticketOrderInfoError: action.payload })
 }
 
 const initialState = {
@@ -92,7 +121,7 @@ const initialState = {
     shoppingcarts: [],
 
     hasMoreGoods: false,
-    maxGoodsID: 0,
+    maxGoodsID: undefined,
 
     // 删除票
     deleteGoodsLoading: false,
@@ -116,6 +145,7 @@ const initialState = {
     ticketInfoError: null,
     ticketInfo: null,
     contactList: [],
+    checkedContactsNoInsurance: [],
 
     // 订单详情页
     ticektOrderInfoLoading: false,
@@ -172,7 +202,7 @@ export function addTicketToShoppingcart(ticketID) {
         const { authHeaders } = getState().login
         return dispatch({
             type: ADD_TICKET_TO_SHOPPINGCART,
-            payload: (client) => client.post('/cart/add', { headers: authHeaders , ticket_id: ticketID })
+            payload: (client) => client.post('/cart/add', { headers: authHeaders, data: { ticket_id: ticketID } })
         })
     }
 }
@@ -254,8 +284,10 @@ export function submitTicketOrder(ticketInfo) {
                             if (result == 'success') {
                                 resolve(client.post('/check_charge', { headers: authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } }))
                             } else if (result == 'fail' ) {
+                                console.log(error)
                                 reject(error)
                             } else if (result == 'cancel') {
+                                console.log(error)
                                 reject(error)
                             }
                         })

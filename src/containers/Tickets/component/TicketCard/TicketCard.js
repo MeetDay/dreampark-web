@@ -1,25 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { convertToLocalDate } from '../../../../utils/dateformat';
 import { appendQiNiuQueryParamsForImageUrl } from '../../../../helpers/QiNiuHelpers';
 
 export default class TicketCard extends React.Component {
     static propTypes = {
-        ticket: PropTypes.object
+        ticket: PropTypes.object.isRequired
     }
 
     render() {
         if (!this.props.ticket) return null;
         const styles = require('./TicketCard.scss');
-        const { ticket } = this.props;
+        const { start_time, end_time, price, ticket_name: ticketName,place, poi_id: poiID, cover_image: coverImage } = this.props.ticket;
+        const startTime = convertToLocalDate(start_time);
+        const endTime = convertToLocalDate(end_time);
         return (
             <div className={styles.card}>
-                <img className={styles.cover} src={appendQiNiuQueryParamsForImageUrl(ticket.media.name, { w: 80 })} alt="ticket-cover" />
-                <a href={`/hotdetail/${ticket.id}`}>
+                <img className={styles.cover} src={appendQiNiuQueryParamsForImageUrl(coverImage.name, { w: 160 })} alt="ticket-cover" />
+                <a href={`/hotdetail/${poiID}`}>
                     <div className={styles.info}>
-                        <span className={styles.title}>{ticket.ticket_name}</span>
-                        <span>{`时间：${ticket.start_date} ${ticket.start_time}-${ticket.end_time}`}</span>
+                        <span className={styles.title}>{ticketName}</span>
+                        <span>{`时间：${startTime.date} ${startTime.time}-${endTime.time}`}</span>
                         <span>{`场馆：${place}`}</span>
-                        <span>{`${ticket.price}元`}</span>
+                        <span>{`${price}元`}</span>
                     </div>
                 </a>
             </div>

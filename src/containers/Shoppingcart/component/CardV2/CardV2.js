@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { convertToLocalDate } from '../../../../utils/dateformat';
 import { appendQiNiuQueryParamsForImageUrl } from '../../../../helpers/QiNiuHelpers'
 
 export default class CardV2 extends React.Component {
@@ -26,20 +27,23 @@ export default class CardV2 extends React.Component {
     }
     render() {
         const styles = require('../Card/Card.scss');
-        const imageUrl = "http://o9vi0jo2t.bkt.clouddn.com/client_uploads/images/178/D9A78555151B824B0E5374671B12D39E";
+        const { ticket, total: totalPrice, num } = this.props.goods;
+        const { price, cover_image: coverImage, ticket_id: ticketID, ticket_name: ticketName } = ticket;
+        const startTime = convertToLocalDate(ticket.start_time);
+        const endTime = convertToLocalDate(ticket.end_time);
         return (
             <div>
                 <div className={styles.card}>
-                    <div className={styles.totalPrice}><span>{this.props.goods.total}</span></div>
+                    <div className={styles.totalPrice}>
+                        {/* <span>{totalPrice}</span> */}
+                    </div>
                     <div className={styles.info}>
-                        <div className={styles.cover}>
-                            <img src={appendQiNiuQueryParamsForImageUrl(imageUrl, { w: 80 })} alt="cover" />
-                        </div>
+                        <div className={styles.cover}><img src={appendQiNiuQueryParamsForImageUrl(coverImage.name, { w: 160 })} alt="cover" /></div>
                         <div className={styles.description}>
-                            <div><span>Monster Jam 大脚车表演</span></div>
-                            <div><span>数量</span><span>20件</span></div>
-                            <div><span>时间</span><span>2017年10月02日 4:30</span></div>
-                            <div><span>单价</span><span>116元</span></div>
+                            <div><span>{ticketName}</span></div>
+                            <div><span>数量</span><span>{`${num}件`}</span></div>
+                            <div><span>时间</span><span>{`${startTime.date} ${startTime.time}`}</span></div>
+                            <div><span>单价</span><span>{price}元</span></div>
                         </div>
                     </div>
                     <div className={styles.tool}>

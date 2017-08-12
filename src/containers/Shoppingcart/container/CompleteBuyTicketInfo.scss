@@ -131,6 +131,15 @@ $contactNameLineHeight: 20px;
     font-size: 14px;
     color: #1C2123;
 }
+
+.contactHasSurance {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 10px;
+    height: 11px;
+}
+
 .contactSelected {
     position: absolute;
     display: inline-block;
@@ -250,6 +259,14 @@ $insuranceServiceHeight: 60px;
 .goDetailArrow {
     width: 18px;
     height: 18px;
+}
+
+.insuranceAttention {
+    padding: 15px 20px;
+    font-family: PingFangSC-Regular;
+    line-height: 20px;
+    font-size: 14px;
+    color: #9B9B9B;
 }
 
 // 底部的工具栏

@@ -31,7 +31,7 @@ import { isEmptyObject } from '../../Login/module/login'
         user: state.login.user,
         hotDetail: state.hotdetail.hotDetail,
 
-        addTicketToShoppingcart: state.shoppingcart.addTicketToShoppingcart,
+        addTicketToShoppingcartLoaded: state.shoppingcart.addTicketToShoppingcartLoaded,
         addTicketToShoppingcartError: state.shoppingcart.addTicketToShoppingcartError
     }),
     dispatch => bindActionCreators({ push, addTicketToShoppingcart }, dispatch)
@@ -56,9 +56,11 @@ export default class HotDetail extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const { addTicketToShoppingcartError } = nextProps
+        const { addTicketToShoppingcartLoaded, addTicketToShoppingcartError } = nextProps
         if (addTicketToShoppingcartError && addTicketToShoppingcartError !== this.props.addTicketToShoppingcartError) {
             message.error('添加至购物车失败, 请稍后重试...')
+        } else if (addTicketToShoppingcartLoaded && addTicketToShoppingcartLoaded !== this.porps.addTicketToShoppingcartLoaded) {
+            message.success('添加至购物车成功!')
         }
     }
 
@@ -141,18 +143,24 @@ export default class HotDetail extends React.Component {
                             <div className={styles.viewMore}> <span>查看全部</span> <img src="/assets/checked_cart.png" alt="viewMore"/></div>
                         </div>
                     </div>
-                    <div className={styles.item}>
-                        <div className={classNames(styles.tip)}>活动时间</div>
-                        <div className={classNames(styles.textOfWhiteSpaceDeal, styles.activityTime)}>{time_info}</div>
-                    </div>
-                    <div className={styles.item}>
-                        <div className={classNames(styles.tip)}>场馆</div>
-                        <div className={styles.activityLocation}>{place}</div>
-                    </div>
-                    <div className={styles.item}>
-                        <div className={classNames(styles.tip)}>注意事项</div>
-                        <div className={classNames(styles.textOfWhiteSpaceDeal, styles.attention)}>{attention}</div>
-                    </div>
+                    {(time_info && time_info.length > 0)&&
+                        <div className={styles.item}>
+                            <div className={classNames(styles.tip)}>活动时间</div>
+                            <div className={classNames(styles.textOfWhiteSpaceDeal, styles.activityTime)}>{time_info}</div>
+                        </div>
+                    }
+                    {(place && place.length > 0) &&
+                        <div className={styles.item}>
+                            <div className={classNames(styles.tip)}>场馆</div>
+                            <div className={styles.activityLocation}>{place}</div>
+                        </div>
+                    }
+                    {(attention && attention.length > 0) &&
+                        <div className={styles.item}>
+                            <div className={classNames(styles.tip)}>注意事项</div>
+                            <div className={classNames(styles.textOfWhiteSpaceDeal, styles.attention)}>{attention}</div>
+                        </div>
+                    }
                     {(recommandation && recommandation.length > 0) &&
                         <div className={styles.item}>
                             <div className={classNames(styles.tip)}>相关推荐</div>

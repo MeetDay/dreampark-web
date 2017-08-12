@@ -27,16 +27,18 @@ const actionHandlers = {
     [`${RECOMMEND_TICKETS}_PENDING`]: (state, action) => ({ ...state, recommendTicketsLoading: true, recommendTicketsLoaded: false }),
     [`${RECOMMEND_TICKETS}_FULFILLED`]: (state, action) => {
         let tickets = action.payload, hasMoreRecommendTickets = false, recommendTicketMaxID = undefined
-        if (tickets && Array.isArray(tickets) && tickets.length >= TICKET_COUNT_PER_REQUEST) {
+        if (state.hasMoreRecommendTickets && tickets && Array.isArray(tickets)) {
+            tickets = [...state.recommendTickets, ...tickets]
+        }
+        if (tickets && Array.isArray(tickets) && tickets.length == TICKET_COUNT_PER_REQUEST) {
             hasMoreRecommendTickets = true
             recommendTicketMaxID = tickets[0].id
         }
-        if (state.hasMoreRecommendTickets) tickets = [...state.recommendTickets, ...tickets]
         return {
             ...state,
             recommendTicketsLoading: false,
             recommendTicketsLoaded: true,
-            recommendTickets: tickets,
+            recommendTickets: [...tickets],
             hasMoreRecommendTickets: hasMoreRecommendTickets,
             recommendTicketMaxID: recommendTicketMaxID
         }
@@ -108,7 +110,7 @@ export function isUnpaidTicketsLoaded(globalState) {
 }
 
 export function isRecommendTicketsLoaded(globalState) {
-    return globalState.tickets && globalState.tickets.searchTicketsLoaded
+    return globalState.tickets && globalState.tickets.recommendTicketsLoaded
 }
 
 export function getUnusedTikects() {
@@ -161,10 +163,12 @@ export function cancelOrder(orderID) {
 //门票列表
 export function getRecommendTickets() {
     return (dispatch, getState) => {
+        const { authHeaders } = getState().login;
         const { recommendTicketMaxID } = getState().tickets
         return dispatch({
             type: RECOMMEND_TICKETS,
             payload: (client) => client.get('/tickets/list', {
+                headers: authHeaders,
                 params: { count: TICKET_COUNT_PER_REQUEST, max_id: recommendTicketMaxID },
                 subpath: '/fbpark/v1'
             })

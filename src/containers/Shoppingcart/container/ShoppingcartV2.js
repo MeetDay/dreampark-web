@@ -4,11 +4,14 @@ import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import { asyncConnect } from 'redux-async-connect'
 import { bindActionCreators } from 'redux'
+import { push } from 'react-router-redux';
+import { message } from 'antd';
 import { CardV2 } from '../component'
+import { LoadMoreButton } from '../../../components';
 import { isShoppingcartLoaded, getShoppingcart, deleteGoodsFromShoppingCart } from '../module/shoppingcartV2';
 
 @asyncConnect([{
-    deferred: true,
+    deferred: false,
     promise: ({ params, store: { dispatch, getState }, helpers }) => {
         if (!isShoppingcartLoaded(getState())) {
             return dispatch(getShoppingcart())
@@ -20,20 +23,38 @@ import { isShoppingcartLoaded, getShoppingcart, deleteGoodsFromShoppingCart } fr
     state => ({
         shoppingcartLoading: state.shoppingcart.shoppingcartLoading,
         shoppingcartLoaded: state.shoppingcart.shoppingcartLoaded,
-        shoppingcarts: state.shoppingcart.shoppingcarts
+        shoppingcarts: state.shoppingcart.shoppingcarts,
+        hasMoreGoods: state.shoppingcart.hasMoreGoods,
+
+        deleteGoodsLoaded: state.shoppingcart.deleteGoodsLoaded
     }),
-    dispatch => bindActionCreators({ getShoppingcart, deleteGoodsFromShoppingCart }, dispatch)
+    dispatch => bindActionCreators({ push, getShoppingcart, deleteGoodsFromShoppingCart }, dispatch)
 )
 
 export default class ShoppingcartV2 extends React.Component {
 
     constructor(props) {
         super(props)
-        this.goPayment = (goods) => this._goPayment(goods)
+        this.goPayment = (goods) => this._goPayment(goods);
+        this.handleClickLoadMoreGoods = (e) => this._handleClickLoadMoreGoods(e);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { deleteGoodsLoaded } = nextProps;
+        if (deleteGoodsLoaded && deleteGoodsLoaded !== this.props.deleteGoodsLoaded) {
+            message.success('该门票已成功从购物车中删除!')
+        }
     }
 
     _goPayment(goods) {
-        console.log('付款....')
+        this.props.push(`/pay/ticketinfo/${goods.ticket.ticket_id}`);
+    }
+
+    _handleClickLoadMoreGoods(e) {
+        e.preventDefault();
+        if (!this.props.shoppingcartLoading && this.props.hasMoreGoods) {
+            this.props.getShoppingcart()
+        }
     }
 
     render() {
@@ -53,6 +74,7 @@ export default class ShoppingcartV2 extends React.Component {
                 <div className={styles.content}>
                     { content }
                 </div>
+                <LoadMoreButton onClick={this.handleClickLoadMoreGoods} hasMore={this.props.hasMoreGoods} isActive={this.props.shoppingcartLoading} />
             </div>
         );
     }

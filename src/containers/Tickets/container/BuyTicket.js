@@ -41,7 +41,7 @@ export default class BuyTicket extends React.Component {
 
     _handleClickLoadMore(e) {
         e.preventDefault()
-        if (!this.props.recommendTicketsLoading) {
+        if (!this.props.recommendTicketsLoading && this.props.hasMoreRecommendTickets) {
             this.props.getRecommendTickets()
         }
     }
@@ -49,20 +49,23 @@ export default class BuyTicket extends React.Component {
     render() {
         const styles = require('./BuyTicket.scss');
         const { hasMoreRecommendTickets, recommendTickets } = this.props;
-        if (recommendTickets && recommendTickets.length <= 0)
+        let content = null;
+        if (!recommendTickets || recommendTickets.length == 0) {
+            content = (<div className={styles.noRecomedDescription}>噢 喔...<br /> 暂时没有任何推荐的门票!</div>);
+        } else if (recommendTickets && recommendTickets.length > 0) {
+            content = (
+                <div>
+                    {recommendTickets.map(ticket => <TicketCard key={ticket.id} ticket={ticket} />)}
+                    <LoadMoreButton onClick={this.handleClickLoadMore} hasMore={hasMoreRecommendTickets}isActive={this.props.recommendTicketsLoading} />
+                </div>
+            );
+        }
+
         return (
             <div className={styles.buyTicket}>
                 <Helmet><title>购买门票</title></Helmet>
                 <TicketSearchBar onFocus={this.handleSearchFocus}/>
-                {(recommendTickets && recommendTickets.length <= 0) &&
-                    <div className={styles.noRecomedDescription}>噢 喔...<br /> 暂时没有任何推荐的门票!</div>
-                }
-                { recommendTickets &&
-                    recommendTickets.map(ticket => <TicketCard key={ticket.id} ticket={ticket} />)
-                }
-                { hasMoreRecommendTickets &&
-                    (<LoadMoreButton onClick={this.handleClickLoadMore} isActive={this.props.recommendTicketsLoading} />)
-                }
+                {content}
             </div>
         );
     }

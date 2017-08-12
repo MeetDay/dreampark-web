@@ -15,7 +15,7 @@ import { clearWhiteSpaceOf, illegalCardNumber } from '../../../utils/regex';
 import { convertToLocalDate } from '../../../utils/dateformat'
 
 @asyncConnect([{
-    deferred: false,
+    deferred: true,
     promise: ({ params, store:{ dispatch, getState }, helpers }) => {
         if (params.type === 'ticketorder' && !isTicketOrderInfoLoaded(getState())) {
             return dispatch(getTicketOrderInfoBy(params.id))
@@ -32,6 +32,7 @@ import { convertToLocalDate } from '../../../utils/dateformat'
         contact: state.shoppingcart.contact,
         ticketInfo: state.shoppingcart.ticketInfo,
         contactList: state.shoppingcart.contactList,
+        checkedContactsNoInsurance: state.shoppingcart.checkedContactsNoInsurance,
 
         isTicketOrderInfo: state.shoppingcart.isTicketOrderInfo,
         hasInsurance: state.shoppingcart.ticketInfo ? state.shoppingcart.ticketInfo.is_insurance === 1 : false,
@@ -64,8 +65,9 @@ export default class CompleteBuyTicketInfo extends React.Component {
             showAddContact: false,
             username: '',
             idCardNo: '',
-            totalPrice: props.ticketInfo ? (props.isTicketOrderInfo ? Number(props.ticketInfo.amount).toFixed(2) : Number(props.ticketInfo.price + props.insurancePrice).toFixed(2)) : 0,
-            checkedContacts: props.ticketInfo ? (props.isTicketOrderInfo ? [...props.contactList] : [props.contactList[0]]) : []
+            checkedContacts: props.ticketInfo ? (props.isTicketOrderInfo ? [...props.contactList] : [props.contactList[0]]) : [],
+            checkedContactsNoInsurance: props.checkedContactsNoInsurance,
+            totalPrice: props.ticketInfo ? (props.isTicketOrderInfo ? Number(props.ticketInfo.amount).toFixed(2) : Number(props.ticketInfo.price + props.insurancePrice*props.checkedContactsNoInsurance.length).toFixed(2)) : 0,
         }
     }
 
@@ -123,17 +125,21 @@ export default class CompleteBuyTicketInfo extends React.Component {
         const { price } = this.props.ticketInfo
         if (this.existedContact(this.state.checkedContacts, checkedContact)) {
             if (this.state.checkedContacts.length > 1) {
-                const results = this.state.checkedContacts.filter(contact => contact.identity_card !== checkedContact.identity_card)
+                const results = this.state.checkedContacts.filter(contact => contact.identity_card !== checkedContact.identity_card);
+                const noInsuranceContacts = results.filter(contact => contact.insurant == 'no');
                 this.setState({
                     checkedContacts: [...results],
-                    totalPrice: Number((insurancePrice + price) * results.length).toFixed(2),
+                    checkedContactsNoInsurance: [...noInsuranceContacts],
+                    totalPrice: Number(price*results.length + insurancePrice*noInsuranceContacts.length).toFixed(2),
                 })
             }
         } else {
-            const checkedContacts = [...this.state.checkedContacts, checkedContact]
+            const checkedContacts = [...this.state.checkedContacts, checkedContact];
+            const noInsuranceContacts = checkedContacts.filter(contact => contact.insurant == 'no');
             this.setState({
                 checkedContacts: checkedContacts,
-                totalPrice: Number((insurancePrice + price) * checkedContacts.length).toFixed(2)
+                checkedContactsNoInsurance: [...noInsuranceContacts],
+                totalPrice: Number(price*checkedContacts.length + insurancePrice*noInsuranceContacts.length).toFixed(2)
             })
         }
     }
@@ -220,13 +226,14 @@ export default class CompleteBuyTicketInfo extends React.Component {
                         <div className={styles.insuranceService}>
                             <div className={styles.insuranceServiceWrap}>
                                 <span className={styles.imageWrap}><img className={styles.imgsafe} src="/assets/safe.png" alt="safe"/></span>
-                                <span className={styles.insuranceText}>{`救援服务保险 ￥${this.props.insurancePrice}×${this.state.checkedContacts.length}`}</span>
+                                <span className={styles.insuranceText}>{`救援服务保险 ￥${this.props.insurancePrice}×${this.state.checkedContactsNoInsurance.length}`}</span>
                                 <span className={styles.imageWrap}>
-                                    <a href="/terms/4"><img className={styles.goDetailArrow} src="/assets/go_detail_gray.png" alt="goDetail"/></a>
+                                    <a href={this.props.ticketInfo.insurance_link}><img className={styles.goDetailArrow} src="/assets/go_detail_gray.png" alt="goDetail"/></a>
                                 </span>
                             </div>
                         </div>
                     }
+                    {!this.props.isTicketOrderInfo && <div className={styles.insuranceAttention}><span>注意：联系人左上角的“盾牌”代表该联系人已购买救援服务，无需再次购买！</span></div>}
                 </div>
                 <div className={styles.toolbar}>
                     <div className={styles.price}><span>价格</span><span>￥{this.state.totalPrice}</span></div>
@@ -287,6 +294,7 @@ class ContactCard extends React.Component {
         if (this.props.type === 'contact') {
             content = (
                 <div onClick={this.onContactChecked} className={classNames({ [styles.contact]: true, [styles.checkedContact]: checked })}>
+                    {this.props.contact.insurant == 'yes' && <img className={styles.contactHasSurance} src="/assets/safe_small.png" alt="safe" />}
                     <span className={styles.contactName}>{contact.name}</span>
                     { checked && <span className={styles.contactSelected}><img src="/assets/contacts_selected.png" alt="selected"/></span> }
                 </div>
