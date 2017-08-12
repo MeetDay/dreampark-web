@@ -45,7 +45,10 @@ $ticketContentMargin: 24px;
     }
 }
 .ticketTitle {
+    white-space: nowrap;
+    overflow: hidden;
     font-family: PingFangSC-Semibold;
+    text-overflow: ellipsis;
     font-size: 20px;
     color: black;
 }
