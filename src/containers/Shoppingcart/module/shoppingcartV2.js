@@ -244,7 +244,7 @@ export function getTicketInfoBy(ticketID) {
             type: TICKET_INFO,
             payload: (client) => client.get(`/tickets/ticket_order_info/${ticketID}`, {
                 headers: authHeaders,
-                subpath: '/fbpark/v1'
+                subpath: '/api/v1'
             })
         })
     }
