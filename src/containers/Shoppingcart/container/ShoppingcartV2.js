@@ -65,6 +65,7 @@ export default class ShoppingcartV2 extends React.Component {
             content = (
                 <div className={styles.ticketsWrap}>
                     { shoppingcarts.map(goods => (<CardV2 key={goods.id} goods={goods} deleteGoodsFromShoppingCart={this.props.deleteGoodsFromShoppingCart} goPayment={this.goPayment} />)) }
+                    <LoadMoreButton onClick={this.handleClickLoadMoreGoods} hasMore={this.props.hasMoreGoods} isActive={this.props.shoppingcartLoading} />
                 </div>
             );
         }
@@ -74,7 +75,6 @@ export default class ShoppingcartV2 extends React.Component {
                 <div className={styles.content}>
                     { content }
                 </div>
-                <LoadMoreButton onClick={this.handleClickLoadMoreGoods} hasMore={this.props.hasMoreGoods} isActive={this.props.shoppingcartLoading} />
             </div>
         );
     }

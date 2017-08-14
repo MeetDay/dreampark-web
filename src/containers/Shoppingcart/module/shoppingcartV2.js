@@ -92,7 +92,7 @@ const actionHandlers = {
 
     // 支付订单
     [`${PAYMENT}_PENDING`]: (state, action) => ({ ...state, paymentLoading: true, paymentLoaded: false }),
-    [`${PAYMENT}_FULFILLED`]: (state, action) => ({ ...state, paymentLoading: false, paymentLoaded: true, payment: action.payload }),
+    [`${PAYMENT}_FULFILLED`]: (state, action) => ({ ...state, paymentLoading: false, paymentLoaded: true, paymentObject: action.payload }),
     [`${PAYMENT}_REJECTED`]: (state, action) => ({ ...state, paymentLoading: false, paymentLoaded: false, paymentError: action.payload }),
 
     // 订单详情

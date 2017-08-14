@@ -22,6 +22,7 @@ export function isFullUser(user) {
     if (isEmptyObject(user)) return false;
     let isFullUser = false;
     if (Object.prototype.hasOwnProperty.call(user, 'username') &&
+        user.username.length > 0 &&
         Object.prototype.hasOwnProperty.call(user, 'userid') &&
         Object.prototype.hasOwnProperty.call(user, 'access_token')) {
         isFullUser = true;

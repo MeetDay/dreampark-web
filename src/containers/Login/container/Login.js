@@ -16,6 +16,7 @@ const MAX_LENGTH_OF_SMS_CODE = 4;
 
 @connect(
     state => ({
+        user: state.login.user,
         userLoginError: state.login.userLoginError
     }),
     dispatch => bindActionCreators({ push, userLogin }, dispatch)
