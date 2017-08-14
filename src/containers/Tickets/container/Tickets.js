@@ -146,9 +146,10 @@ export default class Tickets extends React.Component {
             hasMore = this.props.hasMoreUnpaidTickets;
             isActive = this.props.unpaidTicketsLoading;
         }
+        if (!this.props.user) console.log(this.props.user);
         return (
             <div>
-                <Header user={this.props.user || {}} selectedItemType={this.state.selectedItemType} onMenuItemChange={this.onMenuItemChange} />
+                <Header user={this.props.user} selectedItemType={this.state.selectedItemType} onMenuItemChange={this.onMenuItemChange} />
                 <div className={styles.ticketContent}>
                     <div className={styles.ticketWrap}>
                         { (!isTicketOrder && tickets) && tickets.map((ticket) =>(<Ticket key={ticket.orderTicket_id} viewTicket={this.viewTicket} refundTicket={this.props.refundTicket} type={ticketType} ticket={ticket} />)) }
