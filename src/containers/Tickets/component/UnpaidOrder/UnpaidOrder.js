@@ -46,12 +46,12 @@ export default class UnpaidOrder extends React.Component {
                         </div>
                     </div>
                     <div className={styles.qrcode}>
-                        {(type === 0) &&
+                        {(type == 0) &&
                             <a href={`/pay/ticketinfo/${this.props.unpaidOrder.orders_no}/ticketorder`}>
                                 <div className={classNames(styles.qrcodeWrap, unpaidStyles.gopayment)}><span>去支付</span></div>
                             </a>
                         }
-                        {(type !== 0) &&
+                        {(type != 0) &&
                             <div className={classNames(unpaidStyles.center, unpaidStyles.others)}><span>{MESSAGES[type]}</span></div>
                         }
                     </div>

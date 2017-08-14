@@ -86,7 +86,9 @@ export default class CompleteBuyTicketInfo extends React.Component {
             message.success('购票成功！')
             this.props.push('/tickets')
         } else if (generatorTicketOrderError && generatorTicketOrderError !== this.props.generatorTicketOrderError) {
-            message.error('支付已成功，出票失败，您所支付的款项将原路退回')
+            if (generatorTicketOrderError.code == 10204) {
+                message.error('支付已成功，出票失败，您所支付的款项将原路退回')
+            }
             this.props.push('/tickets?type=unpaid')
         }
         // 订单详情页支付

@@ -28,7 +28,7 @@ export default class Details extends React.Component {
         const { title, cover_image: coverImage, elements } = this.props.detail
         return (
             <div className={styles.details}>
-                <div>{ coverImage && <CoverImage src={coverImage.name} /> }</div>
+                <div>{ (coverImage && !isEmptyObject(coverImage)) && <CoverImage src={coverImage.name} /> }</div>
                 <div className={styles.elements}>
                     { title && <TitleElement title={title} /> }
                     { elements && convertElementsToComponet(elements) }

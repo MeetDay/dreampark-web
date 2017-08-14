@@ -19,7 +19,7 @@ const actionHandlers = {
             hasMoreUnusedTickets = true;
         }
         if (unusedTickets && Array.isArray(unusedTickets) && unusedTickets.length > 0) {
-            maxUnusedTicketsID = unusedTickets[unusedTickets.length - 1][id];
+            maxUnusedTicketsID = unusedTickets[unusedTickets.length - 1].id;
         }
         return {
             ...state,
@@ -44,7 +44,7 @@ const actionHandlers = {
             hasMoreUsedTickets = true;
         }
         if (usedTickets && Array.isArray(usedTickets) && usedTickets.length > 0) {
-            maxUsedTicketsID = usedTickets[usedTickets.length - 1][id];
+            maxUsedTicketsID = usedTickets[usedTickets.length - 1].id;
         }
         return {
             ...state,
@@ -69,7 +69,7 @@ const actionHandlers = {
             hasMoreUnpaidTickets = true;
         }
         if (unpaidTickets && Array.isArray(unpaidTickets) && unpaidTickets.length > 0) {
-            maxUnpaidTicketsID = unpaidTickets[unpaidTickets.length - 1][id];
+            maxUnpaidTicketsID = unpaidTickets[unpaidTickets.length - 1].id;
         }
         return {
             ...state,
