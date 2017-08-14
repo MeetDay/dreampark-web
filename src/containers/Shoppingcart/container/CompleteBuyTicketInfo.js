@@ -75,7 +75,11 @@ export default class CompleteBuyTicketInfo extends React.Component {
         // 添加联系人
         const { contact, contactError } = nextProps
         if (contact && contact !== this.props.contact) {
-            this.setState({ showAddContact: false })
+            this.setState({
+                showAddContact: false,
+                username: '',
+                idCardNo: ''
+            })
         } else if (contactError && contactError !== this.props.contactError) {
             message.error(contactError.error_message);
         }

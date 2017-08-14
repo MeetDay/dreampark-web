@@ -267,7 +267,7 @@ export function getRecommendTickets() {
         const { recommendTicketMaxID } = getState().tickets
         return dispatch({
             type: RECOMMEND_TICKETS,
-            payload: (client) => client.get('/tickets/list', {
+            payload: (client) => client.get('/pois/ticket', {
                 headers: authHeaders,
                 params: { count: TICKET_COUNT_PER_REQUEST, max_id: recommendTicketMaxID },
                 subpath: '/api/v1'
@@ -280,8 +280,8 @@ export function getRecommendTickets() {
 export function searchTickets(title) {
     return {
         type: SEARCH_TICKETS,
-        payload: (client) => client.get('/tickets/list', {
-            params: { ticket_name: title },
+        payload: (client) => client.get('/pois/ticket', {
+            params: { title: title },
             subpath: '/api/v1'
         })
     }

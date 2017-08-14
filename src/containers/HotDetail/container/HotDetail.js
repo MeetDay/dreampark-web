@@ -118,6 +118,7 @@ export default class HotDetail extends React.Component {
         // 转换数据
         const { title, slides, content, tickets, recommandation, price } = this.props.hotDetail;
         const { attention, place, location, time_info, classify_type, no_tickets } = this.props.hotDetail;
+        const autoplay = slides && Array.isArray(slides) && slides.length > 0;
         const isNormal = (classify_type === 'normal' || classify_type === undefined);
         const isHotel = classify_type === 'hotel';
         const buyTicketTitle = isHotel ? '购买住宿券' : '购买门票';
@@ -127,7 +128,7 @@ export default class HotDetail extends React.Component {
                 <Helmet><title>{title}</title></Helmet>
                 {slides &&
                     <div className={styles.carousel}>
-                        <Carousel autoplay>
+                        <Carousel autoplay={autoplay}>
                             { slides.map(element => (<div key={element.id}><CarouselCard carousel={element} /></div>)) }
                         </Carousel>
                     </div>

@@ -55,7 +55,7 @@ export default class BuyTicket extends React.Component {
         } else if (recommendTickets && recommendTickets.length > 0) {
             content = (
                 <div>
-                    {recommendTickets.map(ticket => <TicketCard key={ticket.id} ticket={ticket} />)}
+                    {recommendTickets.map(ticket => <TicketCard key={ticket.poi_id} ticket={ticket} />)}
                     <LoadMoreButton onClick={this.handleClickLoadMore} hasMore={hasMoreRecommendTickets}isActive={this.props.recommendTicketsLoading} />
                 </div>
             );
