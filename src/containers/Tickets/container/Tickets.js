@@ -5,7 +5,7 @@ import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { asyncConnect } from 'redux-async-connect'
 import { bindActionCreators } from 'redux'
-import { isUsedTicketsLoaded, getUsedTickts,isUnusedTicketsLoaded, getUnusedTikects, isUnpaidTicketsLoaded, getUnpaidTickets, cancelOrder } from '../module/tickets'
+import { isUsedTicketsLoaded, getUsedTickts,isUnusedTicketsLoaded, getUnusedTikects, isUnpaidTicketsLoaded, getUnpaidTickets, cancelOrder, refundTicket } from '../module/tickets'
 import { LoadMoreButton } from '../../../components';
 import { Header, Ticket, UnpaidOrder, TicketDetail, TicketTool } from '../component'
 import { convertToLocalDate } from '../../../utils/dateformat'
@@ -30,8 +30,8 @@ const existedTicketTypes = ['unused', 'used', 'unpaid']
     state => ({
         user: state.tickets.user,
 
-        unusedTikects: state.tickets.unusedTikects,
-        unusedTikectsLoading: state.tickets.unusedTikectsLoading,
+        unusedTickets: state.tickets.unusedTickets,
+        unusedTicketsLoading: state.tickets.unusedTicketsLoading,
         hasMoreUnusedTickets: state.tickets.hasMoreUnusedTickets,
 
         usedTickts: state.tickets.usedTickts,
@@ -44,7 +44,7 @@ const existedTicketTypes = ['unused', 'used', 'unpaid']
 
         cancelOrderLoaded: state.tickets.cancelOrderLoaded
     }),
-    dispatch => bindActionCreators({ push, getUnusedTikects, getUsedTickts, getUnpaidTickets, cancelOrder }, dispatch)
+    dispatch => bindActionCreators({ push, getUnusedTikects, getUsedTickts, getUnpaidTickets, cancelOrder, refundTicket }, dispatch)
 )
 
 export default class Tickets extends React.Component {
@@ -80,9 +80,8 @@ export default class Tickets extends React.Component {
 
     _handleClickLoadMore(e) {
         e.preventDefault();
-        console.log('加载更多')
         if (this.state.selectedItemType === 'unused') {
-            if (!this.props.unusedTikectsLoading && this.props.hasMoreUnusedTickets) {
+            if (!this.props.unusedTicketsLoading && this.props.hasMoreUnusedTickets) {
                 this.props.getUnusedTikects();
             }
         } else if (this.state.selectedItemType === 'used') {
@@ -97,13 +96,13 @@ export default class Tickets extends React.Component {
     }
 
     _onMenuItemChange(selectedItemType) {
-        const { usedTickts, unusedTikects, unpaidTickets } = this.props
+        const { usedTickts, unusedTickets, unpaidTickets } = this.props
         if (selectedItemType === 'used') {
             if (!usedTickts || (Array.isArray(usedTickts) && usedTickts.length === 0)) {
                 this.props.getUsedTickts()
             }
         } else if (selectedItemType === 'unused') {
-            if (!unusedTikects || (Array.isArray(unusedTikects) && unusedTikects.length === 0)) {
+            if (!unusedTickets || (Array.isArray(unusedTickets) && unusedTickets.length === 0)) {
                 this.props.getUnusedTikects()
             }
         } else if (selectedItemType === 'unpaid') {
@@ -132,9 +131,9 @@ export default class Tickets extends React.Component {
         const styles = require('./Tickets.scss')
         let isTicketOrder = false,
             ticketType = 'unused',
-            tickets = this.props.unusedTikects,
+            tickets = this.props.unusedTickets,
             hasMore = this.props.hasMoreUnusedTickets,
-            isActive = this.props.unusedTikectsLoading;
+            isActive = this.props.unusedTicketsLoading;
         if (this.state.selectedItemType === 'used') {
             ticketType = 'used';
             tickets = this.props.usedTickts;
@@ -152,7 +151,7 @@ export default class Tickets extends React.Component {
                 <Header user={this.props.user || {}} selectedItemType={this.state.selectedItemType} onMenuItemChange={this.onMenuItemChange} />
                 <div className={styles.ticketContent}>
                     <div className={styles.ticketWrap}>
-                        { (!isTicketOrder && tickets) && tickets.map((ticket) =>(<Ticket key={ticket.orderTicket_id} viewTicket={this.viewTicket} type={ticketType} ticket={ticket} />)) }
+                        { (!isTicketOrder && tickets) && tickets.map((ticket) =>(<Ticket key={ticket.orderTicket_id} viewTicket={this.viewTicket} refundTicket={this.props.refundTicket} type={ticketType} ticket={ticket} />)) }
                         { (isTicketOrder && tickets) && tickets.map((ticket) =>(<UnpaidOrder key={ticket.id} unpaidOrder={ticket} deleteOrder={this.props.cancelOrder} />)) }
                     </div>
                     {(tickets && tickets.length > 0) && <LoadMoreButton onClick={this.handleClickLoadMore} hasMore={hasMore} isActive={isActive} /> }

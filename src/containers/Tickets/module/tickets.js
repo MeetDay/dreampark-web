@@ -4,34 +4,35 @@ const UNPAID_TICKETS = 'redux/tickets/unpaid'
 const RECOMMEND_TICKETS = 'redux/tickets/recommend/tickets'
 const SEARCH_TICKETS = 'redux/tickets/search_tickets'
 const CANCEL_ORDER = 'redux/tickets/cancel_order'
+const REFUND_TICKET = 'redux/tickets/refund_tickets'
 
 const TICKET_COUNT_PER_REQUEST = 20
 
 const actionHandlers = {
     // 未使用
-    [`${UNUSED_TICKETS}_PENDING`]: (state, action) => ({ ...state, unusedTikectsLoading: true, unusedTikectsLoaded: false }),
+    [`${UNUSED_TICKETS}_PENDING`]: (state, action) => ({ ...state, unusedTicketsLoading: true, unusedTicketsLoaded: false }),
     [`${UNUSED_TICKETS}_FULFILLED`]: (state, action) => {
         let unusedTickets = action.payload.order_tickets, hasMoreUnusedTickets = false, maxUnusedTicketsID = undefined;
         if (state.hasMoreUnusedTickets && unusedTickets && Array.isArray(unusedTickets)) {
-            unusedTickets = [...state.unusedTickets, ...unusedTikects];
+            unusedTickets = [...state.unusedTickets, ...unusedTickets];
         }
         if (unusedTickets && Array.isArray(unusedTickets) && unusedTickets.length == TICKET_COUNT_PER_REQUEST) {
             hasMoreUnusedTickets = true;
         }
         if (unusedTickets && Array.isArray(unusedTickets) && unusedTickets.length > 0) {
-            maxUnusedTicketsID = unusedTickets[unusedTickets.length - 1].id;
+            maxUnusedTicketsID = unusedTickets[unusedTickets.length - 1].orderTicket_id;
         }
         return {
             ...state,
-            unusedTikectsLoading: false,
-            unusedTikectsLoaded: true,
-            unusedTikects: [...unusedTickets],
+            unusedTicketsLoading: false,
+            unusedTicketsLoaded: true,
+            unusedTickets: [...unusedTickets],
             hasMoreUnusedTickets: hasMoreUnusedTickets,
             maxUnusedTicketsID: maxUnusedTicketsID,
             user: action.payload.user
         }
     },
-    [`${UNUSED_TICKETS}_REJECTED`]: (state, action) => ({ ...state, unusedTikectsLoading: false, unusedTikectsLoaded: false, unusedTikectsError: action.payload }),
+    [`${UNUSED_TICKETS}_REJECTED`]: (state, action) => ({ ...state, unusedTicketsLoading: false, unusedTicketsLoaded: false, unusedTicketsError: action.payload }),
 
     // 已使用
     [`${USED_TICKETS}_PENDING`]: (state, action) => ({ ...state, usedTicktsLoading: true, usedTicktsLoaded: false }),
@@ -44,7 +45,7 @@ const actionHandlers = {
             hasMoreUsedTickets = true;
         }
         if (usedTickets && Array.isArray(usedTickets) && usedTickets.length > 0) {
-            maxUsedTicketsID = usedTickets[usedTickets.length - 1].id;
+            maxUsedTicketsID = usedTickets[usedTickets.length - 1].orderTicket_id;
         }
         return {
             ...state,
@@ -119,15 +120,19 @@ const actionHandlers = {
         const unpaidTickets = state.unpaidTickets.filter(unpaidOrder => unpaidOrder.id !== cancelOrder.id)
         return { ...state, cancelOrderLoading: false, cancelOrderLoaded: true, unpaidTickets: unpaidTickets }
     },
-    [`${CANCEL_ORDER}_REJECTED`]: (state, action) => ({...state, cancelOrderLoading: false, cancelOrderLoaded: false, cancelOrderError: action.payload })
+    [`${CANCEL_ORDER}_REJECTED`]: (state, action) => ({...state, cancelOrderLoading: false, cancelOrderLoaded: false, cancelOrderError: action.payload }),
+
+    [`${REFUND_TICKET}_PENDING`]: (state, action) => ({...state, refundTicketLoading:true, refundTicketLoaded: false }),
+    [`${REFUND_TICKET}_FULFILLED`]: (state, action) => ({...state, refundTicketLoading:false, refundTicketLoaded: true, refundTicket: action.payload }),
+    [`${REFUND_TICKET}_REJECTED`]: (state, action) => ({...state, refundTicketLoading:false, refundTicketLoaded: false, refundTicketError: action.payload })
 }
 
 const initialState = {
     user: null,
-    unusedTikectsLoading: false,
-    unusedTikectsLoaded: false,
-    unusedTikectsError: null,
-    unusedTikects: [],
+    unusedTicketsLoading: false,
+    unusedTicketsLoaded: false,
+    unusedTicketsError: null,
+    unusedTickets: [],
     hasMoreUnusedTickets: false,
     maxUnusedTicketsID: undefined,
 
@@ -159,7 +164,12 @@ const initialState = {
 
     cancelOrderLoading: false,
     cancelOrderLoaded: false,
-    cancelOrderError: null
+    cancelOrderError: null,
+
+    refundTicketLoading: false,
+    refundTicketLoaded: false,
+    refundTicketError: null,
+    refundTicket: null
 }
 
 export default function tickets(state=initialState, action) {
@@ -236,6 +246,20 @@ export function cancelOrder(orderID) {
     }
 }
 
+// 退票
+export function refundTicket(ticketID) {
+    return (dispatch, getState) => {
+        const { authHeaders } = getState().login;
+        return dispatch({
+            type: REFUND_TICKET,
+            payload: (client) => client.post('/return_ticket', {
+                headers: authHeaders,
+                data: { id: ticketID }
+            })
+        })
+    }
+}
+
 //门票列表
 export function getRecommendTickets() {
     return (dispatch, getState) => {
@@ -246,7 +270,7 @@ export function getRecommendTickets() {
             payload: (client) => client.get('/tickets/list', {
                 headers: authHeaders,
                 params: { count: TICKET_COUNT_PER_REQUEST, max_id: recommendTicketMaxID },
-                subpath: '/api/v1'
+                subpath: '/fbpark/v1'
             })
         })
     }
@@ -258,7 +282,7 @@ export function searchTickets(title) {
         type: SEARCH_TICKETS,
         payload: (client) => client.get('/pois/search', {
             params: { title: title },
-            subpath: '/api/v1'
+            subpath: '/fbpark/v1'
         })
     }
 }

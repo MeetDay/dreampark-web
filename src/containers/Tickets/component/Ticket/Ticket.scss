@@ -40,12 +40,13 @@ $ticketHeight: 130px;
     padding: 12px;
     color: black;
 
-    & > a {
-        display: inline-block;
-        color: black;
-    }
-    & > a > span {
+    & > span {
         display: block;
+        overflow: hidden;
+
+        color: black;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }
 

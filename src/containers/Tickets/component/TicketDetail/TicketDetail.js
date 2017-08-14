@@ -41,7 +41,7 @@ export default class TicketDetail extends React.Component {
                         </div>
                     </div>
                     <div className={styles.qrcode}>
-                        <div><img className={styles.barcode} src="http://boss.zhiyoubao.com/boss/gmCheckCode.htm?aWQ9NTE0M691EDMzMjMmdHlwZT1PcmRlckluZm8mY29kZVR5cGU9Z20=" alt="qrcode"/></div>
+                        <div><img className={styles.barcode} src={barcode} alt="qrcode"/></div>
                     </div>
                 </div>
             </Modal>

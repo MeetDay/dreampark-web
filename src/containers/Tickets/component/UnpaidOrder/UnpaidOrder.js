@@ -33,16 +33,16 @@ export default class UnpaidOrder extends React.Component {
                 <div className={styles.ticketBorder}><img src="/assets/ticket_border_big.png" alt="ticket_border_big" /></div>
                 <div className={styles.ticketWrap}>
                     <div className={styles.info}>
-                        <a>
-                            <span className={styles.title}>{ticketName}</span>
-                            <span className={styles.date}>{`${startTimeDate.date} ${startTimeDate.week}`}</span>
-                            <span className={styles.time}>{`${startTimeDate.time}-${endTimeDate.time}`}</span>
-                        </a>
+                        <span className={styles.title}>{ticketName}</span>
+                        <span className={styles.date}>{`${startTimeDate.date} ${startTimeDate.week}`}</span>
+                        <span className={styles.time}>{`${startTimeDate.time}-${endTimeDate.time}`}</span>
                         <div className={styles.rest}>
                             <span className={styles.ticketCount}>{`${ticketCount}张票`}</span>
-                            <Popconfirm title="确定要取消订单吗？" onConfirm={this.confirm}>
-                                <div className={classNames(styles.refundTicket, unpaidStyles.cancelOrder)}><span>取消订单</span></div>
-                            </Popconfirm>
+                            {(type == 0) &&
+                                <Popconfirm title="确定要取消订单吗？" onConfirm={this.confirm}>
+                                    <div className={classNames(styles.refundTicket, unpaidStyles.cancelOrder)}><span>取消订单</span></div>
+                                </Popconfirm>
+                            }
                         </div>
                     </div>
                     <div className={styles.qrcode}>
