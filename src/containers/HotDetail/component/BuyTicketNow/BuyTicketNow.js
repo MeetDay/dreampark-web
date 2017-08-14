@@ -189,7 +189,7 @@ class TimeSlotTicket extends React.Component {
                 {/* <div className={styles.separatorLine} /> */}
                 <div className={styles.ticketContent}>
                     <div className={styles.ticketTop}>{startTime.month} <span>{startTime.day}</span></div>
-                    <div className={styles.ticketBottom}>{`${startTime.time} - ${endTime.time}`}</div>
+                    <div className={styles.ticketBottom}>{`${startTime.time}-${endTime.time}`}</div>
                 </div>
             </div>
         );
