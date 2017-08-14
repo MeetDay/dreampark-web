@@ -9,10 +9,18 @@ $cardHeight: 130px;
     white-space: nowrap;
 }
 
+.ticketLink {
+    display: inline-block;
+    vertical-align: top;
+}
+
 $coverImageHeight: 90px;
 .cover {
+    display: inline-block;
     width: $coverImageHeight;
     height: $coverImageHeight;
+    font-size: 0;
+    vertical-align: top;
 }
 
 .info {
@@ -23,11 +31,15 @@ $coverImageHeight: 90px;
     & > span {
         display: block;
         margin: 3px 0;
+        line-height: $coverImageHeight / 3;
         font-size: 14px;
         color: #9B9B9B;
     }
     & > span:first-child {
         margin-top: 0px;
+        max-width: 240px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     & > span:last-child {
         font-family: PingFangSC-Semibold;

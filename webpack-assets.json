@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.f238a27d69d0ff6db285.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.f238a27d69d0ff6db285.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.f238a27d69d0ff6db285.min.js"
+    "main": "http://localhost:3000/dist/main.048bbe8f4ffebaf259a0.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.048bbe8f4ffebaf259a0.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.048bbe8f4ffebaf259a0.min.js"
   },
   "styles": {},
   "assets": {
@@ -332,10 +332,11 @@
     },
     "./src/containers/Tickets/component/TicketCard/TicketCard.scss": {
       "card": "TicketCard__card__10vQv",
+      "ticketLink": "TicketCard__ticketLink__b2Mio",
       "cover": "TicketCard__cover__FKOMA",
       "info": "TicketCard__info__NzLJi",
       "title": "TicketCard__title__1jxs2",
-      "_style": ".TicketCard__card__10vQv {\n  height: 130px;\n  box-sizing: padding-box;\n  padding: 20px 0;\n  margin: 0 20px;\n  border: none;\n  border-bottom: 1px solid #DEDEDE;\n  white-space: nowrap; }\n\n.TicketCard__cover__FKOMA {\n  width: 90px;\n  height: 90px; }\n\n.TicketCard__info__NzLJi {\n  display: inline-block;\n  margin-left: 15px;\n  vertical-align: top; }\n  .TicketCard__info__NzLJi > span {\n    display: block;\n    margin: 3px 0;\n    font-size: 14px;\n    color: #9B9B9B; }\n  .TicketCard__info__NzLJi > span:first-child {\n    margin-top: 0px; }\n  .TicketCard__info__NzLJi > span:last-child {\n    font-family: PingFangSC-Semibold;\n    color: #E62A10; }\n\n.TicketCard__title__1jxs2 {\n  font-size: 16px !important;\n  color: black !important; }\n"
+      "_style": ".TicketCard__card__10vQv {\n  height: 130px;\n  box-sizing: padding-box;\n  padding: 20px 0;\n  margin: 0 20px;\n  border: none;\n  border-bottom: 1px solid #DEDEDE;\n  white-space: nowrap; }\n\n.TicketCard__ticketLink__b2Mio {\n  display: inline-block;\n  vertical-align: top; }\n\n.TicketCard__cover__FKOMA {\n  display: inline-block;\n  width: 90px;\n  height: 90px;\n  font-size: 0;\n  vertical-align: top; }\n\n.TicketCard__info__NzLJi {\n  display: inline-block;\n  margin-left: 15px;\n  vertical-align: top; }\n  .TicketCard__info__NzLJi > span {\n    display: block;\n    margin: 3px 0;\n    line-height: 30px;\n    font-size: 14px;\n    color: #9B9B9B; }\n  .TicketCard__info__NzLJi > span:first-child {\n    margin-top: 0px;\n    max-width: 240px;\n    overflow: hidden;\n    text-overflow: ellipsis; }\n  .TicketCard__info__NzLJi > span:last-child {\n    font-family: PingFangSC-Semibold;\n    color: #E62A10; }\n\n.TicketCard__title__1jxs2 {\n  font-size: 16px !important;\n  color: black !important; }\n"
     },
     "./src/containers/Tickets/component/TicketDetail/TicketDetail.scss": {
       "info": "TicketDetail__info__1QCxv",

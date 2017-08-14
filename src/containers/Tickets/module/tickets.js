@@ -280,8 +280,8 @@ export function getRecommendTickets() {
 export function searchTickets(title) {
     return {
         type: SEARCH_TICKETS,
-        payload: (client) => client.get('/pois/search', {
-            params: { title: title },
+        payload: (client) => client.get('/tickets/list', {
+            params: { ticket_name: title },
             subpath: '/api/v1'
         })
     }

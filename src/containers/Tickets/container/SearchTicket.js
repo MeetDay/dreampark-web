@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { TicketSearchBar, SearchItem } from '../component'
+import { TicketSearchBar, TicketCard } from '../component'
 import { searchTickets } from '../module/tickets'
 
 @connect(
@@ -60,7 +60,7 @@ export default class SearchTicket extends React.Component {
                     }
                     {hasTickets &&
                         <div className={styles.items}>
-                            { searchedTickets.map(ticket => (<SearchItem key={ticket.id} ticket={ticket} />)) }
+                            { searchedTickets.map(ticket => (<TicketCard key={ticket.id} ticket={ticket} />)) }
                         </div>
                     }
                 </div>
