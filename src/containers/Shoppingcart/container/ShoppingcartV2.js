@@ -63,8 +63,10 @@ export default class ShoppingcartV2 extends React.Component {
         let content = (<div className={styles.nonGoods}>噢 喔...<br />购物车没有任何商品...</div>);
         if ( shoppingcarts && Array.isArray(shoppingcarts) && shoppingcarts.length > 0 ) {
             content = (
-                <div className={styles.ticketsWrap}>
-                    { shoppingcarts.map(goods => (<CardV2 key={goods.id} goods={goods} deleteGoodsFromShoppingCart={this.props.deleteGoodsFromShoppingCart} goPayment={this.goPayment} />)) }
+                <div>
+                    <div className={styles.ticketsWrap}>
+                        { shoppingcarts.map(goods => (<CardV2 key={goods.id} goods={goods} deleteGoodsFromShoppingCart={this.props.deleteGoodsFromShoppingCart} goPayment={this.goPayment} />)) }
+                    </div>
                     <LoadMoreButton onClick={this.handleClickLoadMoreGoods} hasMore={this.props.hasMoreGoods} isActive={this.props.shoppingcartLoading} />
                 </div>
             );
