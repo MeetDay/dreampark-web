@@ -60,7 +60,7 @@ export default class SearchTicket extends React.Component {
                     }
                     {hasTickets &&
                         <div className={styles.items}>
-                            { searchedTickets.map(ticket => (<TicketCard key={ticket.id} ticket={ticket} />)) }
+                            { searchedTickets.map(ticket => (<TicketCard key={ticket.poi_id} ticket={ticket} />)) }
                         </div>
                     }
                 </div>
