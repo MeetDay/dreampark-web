@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.5a40cf72398291cc9299.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.5a40cf72398291cc9299.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.5a40cf72398291cc9299.min.js"
+    "main": "http://localhost:3000/dist/main.d7a9b03906dfc37929f7.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.d7a9b03906dfc37929f7.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.d7a9b03906dfc37929f7.min.js"
   },
   "styles": {},
   "assets": {
@@ -299,13 +299,14 @@
       "avatar": "Header__avatar__2vCWR",
       "info": "Header__info__3WAxg",
       "username": "Header__username__3lolH",
+      "userBarode": "Header__userBarode__2hYTc",
       "vip": "Header__vip__23co9",
       "tip": "Header__tip__3Bunf",
       "qrcode": "Header__qrcode__tg8WT",
       "bottom": "Header__bottom__2IU04",
       "item": "Header__item__V4vqx",
       "itemActive": "Header__itemActive__266ta",
-      "_style": ".Header__header__3AhMC {\n  height: 130px;\n  white-space: nowrap;\n  background-color: white; }\n\n.Header__avatar__2vCWR {\n  height: 60px;\n  margin: 35px 0;\n  margin-left: 50px; }\n  @media screen and (max-width: 370px) {\n    .Header__avatar__2vCWR {\n      margin-left: 20px; } }\n\n.Header__info__3WAxg {\n  display: inline-block;\n  height: 60px;\n  margin: 35px 0;\n  margin-left: 13px;\n  vertical-align: top; }\n  .Header__info__3WAxg > div {\n    display: block; }\n\n.Header__username__3lolH {\n  font-size: 20px;\n  color: #143B6E; }\n\n.Header__vip__23co9 {\n  width: 56px;\n  height: 22px;\n  margin-left: 13px;\n  vertical-align: text-bottom; }\n\n.Header__tip__3Bunf {\n  margin-top: 5px;\n  font-size: 14px;\n  color: #9B9B9B; }\n\n.Header__qrcode__tg8WT {\n  display: inline-block;\n  height: 60px;\n  width: 60px;\n  margin: 35px 0;\n  margin-left: 45px;\n  vertical-align: top; }\n  @media screen and (max-width: 370px) {\n    .Header__qrcode__tg8WT {\n      margin-left: 15px; } }\n  .Header__qrcode__tg8WT > img {\n    width: 100%;\n    font-size: 0;\n    vertical-align: top; }\n\n.Header__bottom__2IU04 {\n  height: 40px;\n  background-color: #2D343B; }\n  .Header__bottom__2IU04 > div {\n    display: inline-block;\n    width: 33.3%;\n    line-height: 40px;\n    font-size: 16px;\n    color: white;\n    text-align: center; }\n\n.Header__item__V4vqx {\n  display: inline-block;\n  height: 40px;\n  line-height: 40px; }\n\n.Header__itemActive__266ta {\n  border-bottom: 3px solid #E62A10; }\n"
+      "_style": ".Header__header__3AhMC {\n  height: 130px;\n  white-space: nowrap;\n  background-color: white; }\n\n.Header__avatar__2vCWR {\n  height: 60px;\n  margin: 35px 0;\n  margin-left: 50px; }\n  @media screen and (max-width: 370px) {\n    .Header__avatar__2vCWR {\n      margin-left: 20px; } }\n\n.Header__info__3WAxg {\n  display: inline-block;\n  height: 60px;\n  margin: 35px 0;\n  margin-left: 13px;\n  vertical-align: top; }\n  .Header__info__3WAxg > div {\n    display: block; }\n\n.Header__username__3lolH {\n  font-size: 20px;\n  color: #143B6E; }\n\n.Header__userBarode__2hYTc {\n  font-size: 0;\n  vertical-align: top;\n  width: 100%; }\n\n.Header__vip__23co9 {\n  width: 56px;\n  height: 22px;\n  margin-left: 13px;\n  vertical-align: text-bottom; }\n\n.Header__tip__3Bunf {\n  margin-top: 5px;\n  font-size: 14px;\n  color: #9B9B9B; }\n\n.Header__qrcode__tg8WT {\n  display: inline-block;\n  height: 60px;\n  width: 60px;\n  margin: 35px 0;\n  margin-left: 45px;\n  vertical-align: top; }\n  @media screen and (max-width: 370px) {\n    .Header__qrcode__tg8WT {\n      margin-left: 15px; } }\n  .Header__qrcode__tg8WT > img {\n    width: 100%;\n    font-size: 0;\n    vertical-align: top; }\n\n.Header__bottom__2IU04 {\n  height: 40px;\n  background-color: #2D343B; }\n  .Header__bottom__2IU04 > div {\n    display: inline-block;\n    width: 33.3%;\n    line-height: 40px;\n    font-size: 16px;\n    color: white;\n    text-align: center; }\n\n.Header__item__V4vqx {\n  display: inline-block;\n  height: 40px;\n  line-height: 40px; }\n\n.Header__itemActive__266ta {\n  border-bottom: 3px solid #E62A10; }\n"
     },
     "./src/containers/Tickets/component/SearchItem/SearchItem.scss": {
       "item": "SearchItem__item__1WEVn",

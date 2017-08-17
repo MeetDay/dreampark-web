@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Modal } from 'antd';
 import { isEmptyObject } from '../../../Login/module/login'
 
 export default class Header extends React.Component {
@@ -15,8 +16,13 @@ export default class Header extends React.Component {
 
     constructor(props) {
         super(props)
-        this.handleClick = (e) => this._handleClick(e)
-        this.state = { selectedItemType: props.selectedItemType }
+        this.handleClick = (e) => this._handleClick(e);
+        this.handleClickShowBarcode = (e) => this._handleClickShowBarcode(e);
+        this.handleClickCloseBarcode = (e) => this._handleClickCloseBarcode(e);
+        this.state = {
+            selectedItemType: props.selectedItemType,
+            showBarcode: false
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -31,10 +37,24 @@ export default class Header extends React.Component {
         this.props.onMenuItemChange(currentSelectedItem)
     }
 
+    _handleClickShowBarcode(e) {
+        e.preventDefault();
+        this.setState({
+            showBarcode: true
+        })
+    }
+
+    _handleClickCloseBarcode(e) {
+        e.preventDefault();
+        this.setState({
+            showBarcode: false
+        })
+    }
+
     render() {
         const styles = require('./Header.scss');
         const { user } = this.props;
-        const username = !isEmptyObject(user) ? user.username : '未设置用户名';
+        const username = !isEmptyObject(user) ? user.username : '未实名认证';
         const isVip = !isEmptyObject(user) ? user.level == 'vip' : false;
         return (
             <div>
@@ -47,7 +67,19 @@ export default class Header extends React.Component {
                         </div>
                         <div className={styles.tip}>点击显示我的二维码</div>
                     </div>
-                    <div className={styles.qrcode}><img src="assets/qrcode_big.png" alt="qrcode" /></div>
+                    <div onClick={this.handleClickShowBarcode} className={styles.qrcode}><img src="assets/qrcode_big.png" alt="qrcode" /></div>
+                    <div>
+                        {(!isEmptyObject(user) && user.barcode) &&
+                            <Modal
+                                visible={this.state.showBarcode}
+                                closable={false}
+                                onCancel={this.handleClickCloseBarcode}
+                                footer={null}
+                            >
+                                <img className={styles.userBarode} src={user.barcode} alt="barcode" />
+                            </Modal>
+                        }
+                    </div>
                 </div>
                 <div className={styles.bottom}>
                     <div id="unused" onClick={this.handleClick}><span className={classNames({ [styles.item]: true, [styles.itemActive]: this.state.selectedItemType === 'unused'  })}>未使用</span></div>
