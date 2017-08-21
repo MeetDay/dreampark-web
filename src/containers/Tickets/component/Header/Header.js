@@ -70,13 +70,29 @@ export default class Header extends React.Component {
                     <div onClick={this.handleClickShowBarcode} className={styles.qrcode}><img src="assets/qrcode_big.png" alt="qrcode" /></div>
                     <div>
                         {(!isEmptyObject(user) && user.barcode) &&
-                            <Modal
-                                visible={this.state.showBarcode}
-                                closable={false}
-                                onCancel={this.handleClickCloseBarcode}
-                                footer={null}
-                            >
-                                <img className={styles.userBarode} src={user.barcode} alt="barcode" />
+                            <Modal visible={this.state.showBarcode} onCancel={this.handleClickCloseBarcode} footer={null}>
+                                <div className={styles.userqrcode}>
+                                    <div className={styles.userqrcodeWrapper}>
+                                        <div className={styles.userqrcodeTop}>
+                                            <div className={styles.userInfoDetails}>
+                                                <img className={styles.userAvatar} src="/assets/avatar_profile_big.png" alt="avatar" />
+                                                <span className={classNames(styles.username, styles.usernameExpand)}>{username}</span>
+                                                {isVip && <img className={styles.vip} src="/assets/vip_big.png" alt="vip" />}
+                                            </div>
+                                            <div className={styles.userIDCard}><span>{`身份证号码: 421083199109165310`}</span></div>
+                                        </div>
+                                        <div className={styles.userqrcodeBottom}>
+                                            {isVip && <img className={styles.userBarode} src={user.barcode} alt="barcode" />}
+                                            {!isVip &&
+                                                <div>
+                                                    <span className={styles.buyTip}>为了确保您在梦想盛会中的活动安全，<br />请您购买救援服务。</span>
+                                                    <span className={styles.buyTip}>购买救援服务后即可激活个人二维码。</span>
+                                                    <a className={styles.buyHelper} href="">立刻购买</a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
                             </Modal>
                         }
                     </div>

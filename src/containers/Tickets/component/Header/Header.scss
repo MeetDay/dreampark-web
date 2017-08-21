@@ -93,3 +93,75 @@ $bottomHeight: 40px;
 .itemActive {
     border-bottom: 3px solid #E62A10;
 }
+
+// 查看个人二维码
+.userqrcode {
+    margin: 15px 0;
+}
+
+.userqrcodeWrapper {
+    padding: 0px 20px;
+}
+
+.userqrcodeTop {
+    border-bottom: 1px dashed #9B9B9B;
+}
+
+.userInfoDetails {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+$userAvatarHeight: 60px;
+.userAvatar {
+    width: $userAvatarHeight;
+    height: $userAvatarHeight;
+    font-size: 0;
+    vertical-align: top;
+}
+
+$usernameMinWidth: 80px;
+.usernameExpand {
+    display: inline-block;
+    min-width: $usernameMinWidth;
+    text-align: center;
+    line-height: $userAvatarHeight;
+}
+
+.userIDCard {
+    display: block;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #9B9B9B;
+}
+
+.userqrcodeBottom {
+    margin: 15px 0;
+}
+
+.buyTip {
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0;
+    font-size: 14px;
+    text-align: center;
+    color: #9B9B9B;
+}
+
+$buyHelperHeight: 44px;
+.buyHelper {
+    display: block;
+    width: 100%;
+    height: $buyHelperHeight;
+    margin-top: 20px;
+    border-radius: $buyHelperHeight / 2;
+
+    font-size: 14px;
+    line-height: $buyHelperHeight;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #E62A10;
+}
