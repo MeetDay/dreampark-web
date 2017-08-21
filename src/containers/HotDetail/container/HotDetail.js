@@ -173,7 +173,6 @@ export default class HotDetail extends React.Component {
                         </div>
                     }
                 </div>
-
                 {!isNormal && <ToolBar price={price || 0} onClickBuyTicketNow={this.handleClickToolBar} />}
                 {(tickets && tickets.length > 0) && <BuyTicketNow title={buyTicketTitle} tickets={tickets} show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} /> }
                 <BuyParkingCoupon show={this.state.showBuyParkingNow} onClickCancel={this.handleClickCancel} />

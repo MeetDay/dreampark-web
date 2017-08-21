@@ -79,7 +79,7 @@ export default class Header extends React.Component {
                                                 <span className={classNames(styles.username, styles.usernameExpand)}>{username}</span>
                                                 {isVip && <img className={styles.vip} src="/assets/vip_big.png" alt="vip" />}
                                             </div>
-                                            <div className={styles.userIDCard}><span>{`身份证号码: 421083199109165310`}</span></div>
+                                            <div className={styles.userIDCard}><span>{`身份证号码: ${user.identity_card}`}</span></div>
                                         </div>
                                         <div className={styles.userqrcodeBottom}>
                                             {isVip && <img className={styles.userBarode} src={user.barcode} alt="barcode" />}
