@@ -11,6 +11,7 @@ import { userSignup, updateUserInfo } from '../../Login/module/login'
 import { comfirmUserInfo, getSMSCodeAccordingTo } from '../module/register'
 import { clearWhiteSpaceOf } from '../../../utils/regex'
 import { isFullUser } from '../../../utils/wechat'
+const minPasswordLength = 8, maxPasswordLength = 14, SMSCodeLength = 4;
 
 @connect(
     state => ({
@@ -70,14 +71,20 @@ export default class Register extends React.Component {
 
     // 注册
     _userSignup() {
-        const { weChatInfo, accessToken } = this.props
-        this.props.userSignup({
-            phone: clearWhiteSpaceOf(this.state.phonenumber),
-            password: sha256(this.state.password),
-            zone: 86,
-            code: clearWhiteSpaceOf(this.state.code),
-            link_account: weChatInfo ? { union_id: weChatInfo.unionid, auth_token: accessToken } : undefined
-        })
+        if (this.state.password.length < minPasswordLength) {
+            message.info('请输入8至14位的有效密码。。。');
+        } else if (clearWhiteSpaceOf(this.state.code).length != SMSCodeLength) {
+            message.info('请输入4位有效位数的验证码。。。');
+        } else {
+            const { weChatInfo, accessToken } = this.props
+            this.props.userSignup({
+                phone: clearWhiteSpaceOf(this.state.phonenumber),
+                password: sha256(this.state.password),
+                zone: 86,
+                code: clearWhiteSpaceOf(this.state.code),
+                link_account: weChatInfo ? { union_id: weChatInfo.unionid, auth_token: accessToken } : undefined
+            })
+        }
     }
 
     // 更新用户信息
@@ -105,8 +112,10 @@ export default class Register extends React.Component {
     }
     _onPasswordChange(e) {
         e.preventDefault();
-        const password = e.target.value
-        this.setState({ password: password })
+        const password = e.target.value;
+        if (password.length <= maxPasswordLength) {
+            this.setState({ password: password })
+        }
     }
 
     /**
