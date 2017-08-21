@@ -72,9 +72,9 @@ export default class Register extends React.Component {
     // 注册
     _userSignup() {
         if (this.state.password.length < minPasswordLength) {
-            message.info('请输入8至14位的有效密码。。。');
+            message.info(`请输入${minPasswordLength}至${maxPasswordLength}位的有效密码。。。`);
         } else if (clearWhiteSpaceOf(this.state.code).length != SMSCodeLength) {
-            message.info('请输入4位有效位数的验证码。。。');
+            message.info(`请输入${SMSCodeLength}位有效位数的验证码。。。`);
         } else {
             const { weChatInfo, accessToken } = this.props
             this.props.userSignup({
