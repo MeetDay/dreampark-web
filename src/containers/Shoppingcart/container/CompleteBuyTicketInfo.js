@@ -247,7 +247,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                     {!this.props.isTicketOrderInfo && <div className={styles.insuranceAttention}><span>注意：联系人左上角的“盾牌”代表该联系人已购买救援服务，无需再次购买！</span></div>}
                 </div>
                 <div className={styles.toolbar}>
-                    <div className={styles.price}><span>价格</span><span>{this.state.totalPrice ? '免费门票' : `￥${this.state.totalPrice}`}</span></div>
+                    <div className={styles.price}><span>价格</span><span>{this.state.totalPrice == 0 ? '免费门票' : `￥${this.state.totalPrice}`}</span></div>
                     <div onClick={this.handleClickPayment} className={styles.nextStep}><span>去支付</span></div>
                 </div>
                 {this.state.showAddContact &&
