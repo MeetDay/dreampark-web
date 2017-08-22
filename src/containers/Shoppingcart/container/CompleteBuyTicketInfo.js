@@ -137,7 +137,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
         if (this.existedContact(this.state.checkedContacts, checkedContact)) {
             if (this.state.checkedContacts.length > 1) {
                 const results = this.state.checkedContacts.filter(contact => contact.identity_card !== checkedContact.identity_card);
-                const noInsuranceContacts = results.filter(contact => contact.insurant == 'no');
+                const noInsuranceContacts = results.filter(contact => contact.insurant != 'yes');
                 this.setState({
                     checkedContacts: [...results],
                     checkedContactsNoInsurance: [...noInsuranceContacts],
@@ -146,7 +146,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
             }
         } else {
             const checkedContacts = [...this.state.checkedContacts, checkedContact];
-            const noInsuranceContacts = checkedContacts.filter(contact => contact.insurant == 'no');
+            const noInsuranceContacts = checkedContacts.filter(contact => contact.insurant != 'yes');
             this.setState({
                 checkedContacts: checkedContacts,
                 checkedContactsNoInsurance: [...noInsuranceContacts],
