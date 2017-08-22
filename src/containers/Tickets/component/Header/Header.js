@@ -69,7 +69,7 @@ export default class Header extends React.Component {
                     </div>
                     <div onClick={this.handleClickShowBarcode} className={styles.qrcode}><img src="assets/qrcode_big.png" alt="qrcode" /></div>
                     <div>
-                        {(!isEmptyObject(user) && user.barcode) &&
+                        {(!isEmptyObject(user)) &&
                             <Modal visible={this.state.showBarcode} onCancel={this.handleClickCloseBarcode} footer={null}>
                                 <div className={styles.userqrcode}>
                                     <div className={styles.userqrcodeWrapper}>
@@ -82,12 +82,12 @@ export default class Header extends React.Component {
                                             <div className={styles.userIDCard}><span>{`身份证号码: ${user.identity_card}`}</span></div>
                                         </div>
                                         <div className={styles.userqrcodeBottom}>
-                                            {isVip && <img className={styles.userBarode} src={user.barcode} alt="barcode" />}
-                                            {!isVip &&
+                                            {user.barcode && <img className={styles.userBarode} src={user.barcode} alt="barcode" />}
+                                            {!user.barcode &&
                                                 <div>
                                                     <span className={styles.buyTip}>为了确保您在梦想盛会中的活动安全，<br />请您购买救援服务。</span>
                                                     <span className={styles.buyTip}>购买救援服务后即可激活个人二维码。</span>
-                                                    <a className={styles.buyHelper} href="">立刻购买</a>
+                                                    <a className={styles.buyHelper} href="/hotdetail/4">立刻购买</a>
                                                 </div>
                                             }
                                         </div>
