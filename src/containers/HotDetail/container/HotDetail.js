@@ -141,7 +141,7 @@ export default class HotDetail extends React.Component {
                         </div>
                         <div style={viewMoreWrapStyle} className={styles.viewMoreWrap} onClick={this.handleClickViewMore}>
                             <div className={styles.gradient} />
-                            <div className={styles.viewMore}> <span>查看全部</span> <img src="/assets/checked_cart.png" alt="viewMore"/></div>
+                            <div className={styles.viewMore}> <span>查看全部</span> <img src="/assets/arrow_down_white.png" alt="viewMore"/></div>
                         </div>
                     </div>
                     {(time_info && time_info.length > 0)&&
@@ -173,7 +173,7 @@ export default class HotDetail extends React.Component {
                         </div>
                     }
                 </div>
-                {((classify_type == 'tickets' && tickets && tickets.length > 0) || (classify_type == 'hotel' || classify_type == 'parking')) && 
+                {((classify_type == 'tickets' && tickets && tickets.length > 0) || (classify_type == 'hotel' || classify_type == 'parking')) &&
                     <ToolBar price={price || 0} onClickBuyTicketNow={this.handleClickToolBar} />
                 }
                 {(tickets && tickets.length > 0) && <BuyTicketNow title={buyTicketTitle} tickets={tickets} show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} /> }
