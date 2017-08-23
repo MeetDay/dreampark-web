@@ -24,6 +24,11 @@ export default class Phone extends React.Component {
         imgShow: false,
     }
 
+    constructor(props) {
+        super(props);
+        this.handleFocus = (e) => this._handleFocus(e);
+    }
+
     render() {
         const styles = require('./Phone.scss');
         const { imgShow, value, type, zone, usedFor, theme } = this.props;

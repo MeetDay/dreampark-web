@@ -122,7 +122,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
             const cookies = new Cookies()
             const openID = cookies.get(Constant.USER_OPENID)
             const client = new APIClient();
-            client.post('/charge', { headers: authHeaders, data: { id: this.props.ticketInfo.orders_id, amount: this.state.totalPrice, open_id: openID, pay_type: 'wx_pub' } })
+            client.post('/charge', { headers: this.props.authHeaders, data: { id: this.props.ticketInfo.orders_id, amount: this.props.ticketInfo.amount, open_id: openID, pay_type: 'wx_pub' } })
                 .then(charge => {
                     if (charge && !isEmptyObject(charge)) {
                         pingpp.createPayment(charge, (result, error) => {
@@ -347,19 +347,21 @@ export default class CompleteBuyTicketInfo extends React.Component {
                     <div onClick={this.handleClickPayment} className={styles.nextStep}><span>去支付</span></div>
                 </div>
                 {this.state.showAddContact &&
-                    <Modal style={{ top: 30 }} visible={this.state.showAddContact} title={<div className={styles.addContactTitle}>新增联系人</div>} footer={null} onCancel={this.handleClickCancel}>
-                        <div className={styles.addContactContent}>
-                            <div className={styles.addContactAttention}>
-                                <span>注意</span>
-                                <span>系统将验证身份证号码与姓名是否匹配，根据活动要求及保险政策必须使用真实的身份信息，否则造成的相关责任由使用者自行承担。</span>
+                    <div>
+                        <Modal style={{ top: 30 }} visible={this.state.showAddContact} title={<div className={styles.addContactTitle}>新增联系人</div>} footer={null} onCancel={this.handleClickCancel}>
+                            <div className={styles.addContactContent}>
+                                <div className={styles.addContactAttention}>
+                                    <span>注意</span>
+                                    <span>系统将验证身份证号码与姓名是否匹配，根据活动要求及保险政策必须使用真实的身份信息，否则造成的相关责任由使用者自行承担。</span>
+                                </div>
+                                <div className={styles.addContactInteraction}>
+                                    <Phone type="text" theme="dark" usedFor="other" title="您的真实姓名" zone={false} value={this.state.username} onChange={this.onUsernameChange} />
+                                    <Phone type="text" theme="dark" usedFor="idcard" title="身份证号码" zone={false} value={this.state.idCardNo} onChange={this.onCardNumberChange} />
+                                    <button disabled={this.props.contactLoading} onClick={this.handleClickFinished} className={styles.finishedButton}>完成</button>
+                                </div>
                             </div>
-                            <div className={styles.addContactInteraction}>
-                                <Phone type="text" theme="dark" usedFor="other" title="您的真实姓名" zone={false} value={this.state.username} onChange={this.onUsernameChange} />
-                                <Phone type="text" theme="dark" usedFor="idcard" title="身份证号码" zone={false} value={this.state.idCardNo} onChange={this.onCardNumberChange} />
-                                <button disabled={this.props.contactLoading} onClick={this.handleClickFinished} className={styles.finishedButton}>完成</button>
-                            </div>
-                        </div>
-                    </Modal>
+                        </Modal>
+                    </div>
                 }
             </div>
         );

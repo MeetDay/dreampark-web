@@ -16,12 +16,7 @@ export default class TicketDetail extends React.Component {
         const startTime = convertToLocalDate(start_time);
         const endTime = convertToLocalDate(end_time);
         return (
-            <Modal
-                style={{ top: 30 }}
-                visible={this.props.visible}
-                onCancel={this.props.onCancel}
-                footer={null}
-            >
+            <Modal style={{ top: 30 }} visible={this.props.visible} onCancel={this.props.onCancel} footer={null}>
                 <div className={styles.ticketDetail}>
                     <div className={styles.info}>
                         <div className={styles.title}><span>{ticket_name}</span></div>
