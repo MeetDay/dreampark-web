@@ -12,6 +12,7 @@ var serverRouterMiddleware = require('./middleware/serverRouterMiddleware');
 
 var smsCodeRouter = require('./serverRouters/smsCodeRouter');
 var loginRouter = require('./serverRouters/loginRouter');
+var ticketRouter = require('./serverRouters/ticketRouter');
 
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3000;
@@ -55,6 +56,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/actions/user/sms', smsCodeRouter);
 app.use('/actions/user/login', loginRouter);
+app.use('/actions/user/ticket', ticketRouter);
 
 app.use('*', serverRouterMiddleware());
 

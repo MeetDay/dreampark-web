@@ -229,3 +229,11 @@ $ticketCountPartHeight: 40px;
     font-size: 16px;
     color: black;
 }
+
+.doorTicketDescription {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    text-align: center;
+}

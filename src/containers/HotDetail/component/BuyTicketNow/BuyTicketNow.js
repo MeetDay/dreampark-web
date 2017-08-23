@@ -11,7 +11,8 @@ export default class BuyTicketNow extends React.Component {
         onClickAddToCart: PropTypes.func,
         tickets: PropTypes.array,
         show: PropTypes.bool,
-        onClickCancel: PropTypes.func.isRequired
+        onClickCancel: PropTypes.func.isRequired,
+        ticketsType: PropTypes.oneOf(['ticket', 'doorTicket'])
     }
     static defaultProps = {
         title: '购买门票',
@@ -130,7 +131,7 @@ export default class BuyTicketNow extends React.Component {
                         <div className={styles.choiceTicket}>
                             <div className={styles.choiceTicketWrap}>
                                 { this.props.tickets &&
-                                    this.props.tickets.map(ticket => (<TimeSlotTicket key={ticket.id} ticket={ticket} selected={ticketExisted(this.state.selectedTickets, ticket)} onTicketClick={this.handleClickTicket} />))
+                                    this.props.tickets.map(ticket => (<TimeSlotTicket key={ticket.id} ticketType={this.props.ticketsType} ticket={ticket} selected={ticketExisted(this.state.selectedTickets, ticket)} onTicketClick={this.handleClickTicket} />))
                                  }
                             </div>
                         </div>
@@ -158,10 +159,12 @@ class TimeSlotTicket extends React.Component {
     static propTypes = {
         ticket: PropTypes.object,
         onTicketClick: PropTypes.func.isRequired,
-        selected: PropTypes.bool
+        selected: PropTypes.bool,
+        ticketType: PropTypes.string
     };
     static defaultProps = {
-        selected: false
+        selected: false,
+        ticketType: 'ticket'
     };
 
     constructor(props) {
@@ -188,8 +191,15 @@ class TimeSlotTicket extends React.Component {
                 </div>
                 {/* <div className={styles.separatorLine} /> */}
                 <div className={styles.ticketContent}>
-                    <div className={styles.ticketTop}>{startTime.month} <span>{startTime.day}</span></div>
-                    <div className={styles.ticketBottom}>{`${startTime.time}-${endTime.time}`}</div>
+                    {this.props.ticketType === 'ticket' &&
+                        <div>
+                            <div className={styles.ticketTop}>{startTime.month} <span>{startTime.day}</span></div>
+                            <div className={styles.ticketBottom}>{`${startTime.time}-${endTime.time}`}</div>
+                        </div>
+                    }
+                    {this.props.ticketType === 'doorTicket' &&
+                        <div className={styles.doorTicketDescription}><span>入园票</span></div>
+                    }
                 </div>
             </div>
         );

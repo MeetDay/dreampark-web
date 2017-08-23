@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import superagent from 'superagent';
+import Cookies from 'universal-cookie';
 import classNames from 'classnames';
 import { Modal } from 'antd';
-import { isEmptyObject } from '../../../Login/module/login'
+import { isEmptyObject } from '../../../Login/module/login';
+import * as Constant from '../../../../utils/constant';
+import APIClient from '../../../../helpers/APIClient';
 
 export default class Header extends React.Component {
     static propTypes = {
@@ -20,8 +24,25 @@ export default class Header extends React.Component {
         this.handleClickShowBarcode = (e) => this._handleClickShowBarcode(e);
         this.handleClickCloseBarcode = (e) => this._handleClickCloseBarcode(e);
         this.state = {
+            freeTicketID: '',
             selectedItemType: props.selectedItemType,
             showBarcode: false
+        }
+    }
+
+    componentDidMount() {
+        const cookies = new Cookies();
+        const freeTicketID = cookies.get(Constant.FREE_TICKET_ID);
+        if (!freeTicketID) {
+            const client = new APIClient();
+            client.get('/ticket/free', { subpath: '/actions/user' })
+                .then(freeTicket => {
+                    cookies.set(Constant.FREE_TICKET_ID, freeTicket.id, { path: '/', maxAge: 3600 })
+                    this.setState({ freeTicketID: freeTicket.id })
+                })
+                .catch(error => console.log(error))
+        } else {
+            this.setState({ freeTicketID: freeTicketID })
         }
     }
 
@@ -87,7 +108,7 @@ export default class Header extends React.Component {
                                                 <div>
                                                     <span className={styles.buyTip}>为了确保您在梦想盛会中的活动安全，<br />请您购买救援服务。</span>
                                                     <span className={styles.buyTip}>购买救援服务后即可激活个人二维码。</span>
-                                                    <a className={styles.buyHelper} href="/hotdetail/4">立刻购买</a>
+                                                    <a className={styles.buyHelper} href={`/hotdetail/${this.state.freeTicketID}`}>立刻购买</a>
                                                 </div>
                                             }
                                         </div>

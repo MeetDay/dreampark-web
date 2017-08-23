@@ -117,7 +117,8 @@ export default class HotDetail extends React.Component {
         const viewMoreWrapStyle = { display: this.state.viewMoreWrapDisplay };
         // 转换数据
         const { title, slides, content, tickets, recommandation, price } = this.props.hotDetail;
-        const { attention, place, location, time_info, classify_type, no_tickets } = this.props.hotDetail;
+        const { attention, place, location, time_info, classify_type, classify_name, no_tickets } = this.props.hotDetail;
+        const ticketsType = classify_name ? (classify_name == '出入口' ? 'doorTicket' : 'ticket') : 'ticket';
         const autoplay = slides && Array.isArray(slides) && slides.length > 1;
         const isNormal = (classify_type === 'normal' || classify_type === undefined);
         const isHotel = classify_type === 'hotel';
@@ -176,7 +177,7 @@ export default class HotDetail extends React.Component {
                 {((classify_type == 'tickets' && tickets && tickets.length > 0) || (classify_type == 'hotel' || classify_type == 'parking')) &&
                     <ToolBar price={price || 0} onClickBuyTicketNow={this.handleClickToolBar} />
                 }
-                {(tickets && tickets.length > 0) && <BuyTicketNow title={buyTicketTitle} tickets={tickets} show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} /> }
+                {(tickets && tickets.length > 0) && <BuyTicketNow title={buyTicketTitle} ticketsType={ticketsType} tickets={tickets} show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} /> }
                 <BuyParkingCoupon show={this.state.showBuyParkingNow} onClickCancel={this.handleClickCancel} />
                 {(no_tickets === 'yes') && <div className={styles.noTickets}><span>门票已售完</span></div>}
             </div>
