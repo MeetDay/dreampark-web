@@ -17,6 +17,7 @@ export default class TicketDetail extends React.Component {
         const endTime = convertToLocalDate(end_time);
         return (
             <Modal
+                style={{ top: 30 }}
                 visible={this.props.visible}
                 onCancel={this.props.onCancel}
                 footer={null}

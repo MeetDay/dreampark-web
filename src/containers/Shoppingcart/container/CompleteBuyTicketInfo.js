@@ -339,7 +339,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                     <div onClick={this.handleClickPayment} className={styles.nextStep}><span>去支付</span></div>
                 </div>
                 {this.state.showAddContact &&
-                    <Modal visible={this.state.showAddContact} title={<div className={styles.addContactTitle}>新增联系人</div>} footer={null} onCancel={this.handleClickCancel}>
+                    <Modal style={{ top: 30 }} visible={this.state.showAddContact} title={<div className={styles.addContactTitle}>新增联系人</div>} footer={null} onCancel={this.handleClickCancel}>
                         <div className={styles.addContactContent}>
                             <div className={styles.addContactAttention}>
                                 <span>注意</span>

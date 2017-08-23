@@ -70,7 +70,7 @@ export default class Header extends React.Component {
                     <div onClick={this.handleClickShowBarcode} className={styles.qrcode}><img src="assets/qrcode_big.png" alt="qrcode" /></div>
                     <div>
                         {(!isEmptyObject(user)) &&
-                            <Modal visible={this.state.showBarcode} onCancel={this.handleClickCloseBarcode} footer={null}>
+                            <Modal style={{ top: 30 }} visible={this.state.showBarcode} onCancel={this.handleClickCloseBarcode} footer={null}>
                                 <div className={styles.userqrcode}>
                                     <div className={styles.userqrcodeWrapper}>
                                         <div className={styles.userqrcodeTop}>
