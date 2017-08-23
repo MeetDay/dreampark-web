@@ -59,7 +59,7 @@ export default class HotDetail extends React.Component {
         const { addTicketToShoppingcartLoaded, addTicketToShoppingcartError } = nextProps
         if (addTicketToShoppingcartError && addTicketToShoppingcartError !== this.props.addTicketToShoppingcartError) {
             message.error('添加至购物车失败, 请稍后重试...')
-        } else if (addTicketToShoppingcartLoaded && addTicketToShoppingcartLoaded !== this.porps.addTicketToShoppingcartLoaded) {
+        } else if (addTicketToShoppingcartLoaded && addTicketToShoppingcartLoaded !== this.props.addTicketToShoppingcartLoaded) {
             message.success('添加至购物车成功!')
         }
     }

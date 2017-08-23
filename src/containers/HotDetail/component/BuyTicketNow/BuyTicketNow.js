@@ -139,7 +139,7 @@ export default class BuyTicketNow extends React.Component {
                     <div className={styles.toolBar}>
                         <div onClick={this.handleClickBuyTicketNow} className={classNames(toolBarStyles.left, styles.toolBarSupplement)}>
                             <span>价格</span>
-                        <span className={toolBarStyles.price}>{`${this.state.totalPrice || 0}￥`}</span>
+                        <span className={toolBarStyles.price}>{this.state.totalPrice == 0 ? '免费' : `${this.state.totalPrice}￥`}</span>
                             <span>立刻购买</span>
                         </div>
                         <div onClick={this.handleClickAddToCart} className={toolBarStyles.right}>

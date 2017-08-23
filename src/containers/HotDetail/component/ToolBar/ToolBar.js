@@ -10,7 +10,7 @@ export default class ToolBar extends React.Component {
 
     render() {
         const styles = require('./ToolBar.scss');
-        const priceMessage = this.props.price == 0 ? '免费门票' : `${this.props.price}￥`;
+        const priceMessage = this.props.price == 0 ? '免费' : `${this.props.price}￥`;
         return (
             <div className={styles.toolBar}>
                 <div onClick={this.props.onClickBuyTicketNow} className={styles.content}>

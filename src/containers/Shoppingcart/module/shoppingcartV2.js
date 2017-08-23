@@ -257,15 +257,18 @@ export function addContact(contact) {
             type: ADD_CONTACT,
             payload: (client) => client.get('/login/idcard', { params: contact, subpath: '/actions/user' })
                 .then(result => {
-                    return client.post('/contacter', {
-                        headers: authHeaders,
-                        data: {
-                            name: contact.name,
-                            identity_card: contact.cardno,
-                            gender: result.data.sex,
-                            birthday: result.data.birthday
-                        }
-                    })
+                    if (result && Object.prototype.hasOwnProperty.call(result, 'resp') && result.resp.code == 0) {
+                        return client.post('/contacter', {
+                            headers: authHeaders,
+                            data: {
+                                name: contact.name,
+                                identity_card: contact.cardno,
+                                gender: result.data.sex,
+                                birthday: result.data.birthday
+                            }
+                        })
+                    }
+                    return Promise.reject(result);
                 })
         })
     }

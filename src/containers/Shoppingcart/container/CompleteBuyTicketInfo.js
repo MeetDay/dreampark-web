@@ -1,4 +1,5 @@
 import React from 'react';
+import Cookies from 'universal-cookie';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import superagent from 'superagent';
@@ -8,6 +9,9 @@ import { asyncConnect } from 'redux-async-connect';
 import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { Modal, message } from 'antd';
+import * as Constant from '../../../utils/constant';
+import APIClient from '../../../helpers/APIClient';
+import { isEmptyObject } from '../../Login/module/login';
 import { PageNotExist } from '../../../components'
 import { isTicketInfoLoaded, getTicketInfoBy, addContact, isTicketOrderInfoLoaded, getTicketOrderInfoBy, payment, submitTicketOrder } from '../module/shoppingcartV2';
 import { Phone } from '../../../components';
@@ -27,6 +31,7 @@ import { convertToLocalDate } from '../../../utils/dateformat'
 
 @connect(
     state => ({
+        authHeaders: state.login.authHeaders,
         contactLoading: state.shoppingcart.contactLoading,
         contactError: state.shoppingcart.contactError,
         contact: state.shoppingcart.contact,
@@ -84,50 +89,133 @@ export default class CompleteBuyTicketInfo extends React.Component {
             message.error(contactError.error_message);
         }
 
-        const { paymentObject, paymentError, generatorTicketOrder, generatorTicketOrderError } = nextProps
-        // 提交订单并支付
-        if (generatorTicketOrder && generatorTicketOrder !== this.props.generatorTicketOrder) {
-            message.success('购票成功！')
-            this.props.push('/tickets')
-        } else if (generatorTicketOrderError && generatorTicketOrderError !== this.props.generatorTicketOrderError) {
-            if (generatorTicketOrderError.code == 10204 || generatorTicketOrderError.code == 10211) {
-                message.error('支付已成功，出票失败，您所支付的款项将原路退回')
-            }
-            this.props.push('/tickets?type=unpaid')
-        }
-        // 订单详情页支付
-        if (paymentObject && paymentObject !== this.props.paymentObject) {
-            message.success('购票成功！')
-            this.props.push('/tickets')
-        } else if (paymentError && paymentError !== this.props.paymentError) {
-            if (paymentError.code == 10204 || paymentError.code == 10211) {
-                message.error('支付已成功，出票失败，您所支付的款项将原路退回');
-                this.props.push('/tickets?type=unpaid');
-            } else {
-                message.info('支付失败，请重新尝试...')
-            }
-        }
+        // const { paymentObject, paymentError, generatorTicketOrder, generatorTicketOrderError } = nextProps
+        // // 提交订单并支付
+        // if (generatorTicketOrder && generatorTicketOrder !== this.props.generatorTicketOrder) {
+        //     message.success('购票成功！')
+        //     this.props.push('/tickets')
+        // } else if (generatorTicketOrderError && generatorTicketOrderError !== this.props.generatorTicketOrderError) {
+        //     if (generatorTicketOrderError.code == 10204 || generatorTicketOrderError.code == 10211) {
+        //         message.error('支付已成功，出票失败，您所支付的款项将原路退回')
+        //     }
+        //     this.props.push('/tickets?type=unpaid')
+        // }
+        // // 订单详情页支付
+        // if (paymentObject && paymentObject !== this.props.paymentObject) {
+        //     message.success('购票成功！')
+        //     this.props.push('/tickets')
+        // } else if (paymentError && paymentError !== this.props.paymentError) {
+        //     if (paymentError.code == 10204 || paymentError.code == 10211) {
+        //         message.error('支付已成功，出票失败，您所支付的款项将原路退回');
+        //         this.props.push('/tickets?type=unpaid');
+        //     } else {
+        //         message.info('支付失败，请重新尝试...')
+        //     }
+        // }
     }
 
     _handleClickPayment(e) {
         e.preventDefault()
         if (this.props.isTicketOrderInfo) {
-            if (!this.props.paymentLoading) {
-                this.props.payment({
-                    id: this.props.ticketInfo.orders_id,
-                    amount: this.state.totalPrice
-                })
-            }
-        } else {
-            if (!this.props.generatorTicketOrderLoading) {
-                this.props.submitTicketOrder({
-                    amount: this.state.totalPrice,
-                    ticket: {
-                        id: this.props.ticketInfo.id,
-                        contacters: this.state.checkedContacts.map(contact => contact.id)
+            const cookies = new Cookies()
+            const openID = cookies.get(Constant.USER_OPENID)
+            const client = new APIClient();
+            client.post('/charge', { headers: authHeaders, data: { id: this.props.ticketInfo.orders_id, amount: this.state.totalPrice, open_id: openID, pay_type: 'wx_pub' } })
+                .then(charge => {
+                    if (charge && !isEmptyObject(charge)) {
+                        pingpp.createPayment(charge, (result, error) => {
+                            if (result == 'success') {
+                                client.post('/check_charge', { headers: this.props.authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } })
+                                    .then(result => {
+                                        this.props.push('/tickets')
+                                        message.success('购票成功！')
+                                    })
+                                    .catch(error => {
+                                        this.props.push('/tickets?type=unpaid')
+                                        message.error(error.error_message)
+                                    })
+                            } else if (result == 'fail' ) {
+                                message.error('支付失败, 请重新支付')
+                            } else if (result == 'cancel') {
+                                console.log('取消支付')
+                            }
+                        })
+                    } else {
+                        return Promise.reject({ code: 10099, error_message: '返回的charge对象为空' })
                     }
-                });
+                })
+                .catch(error => {
+                    message.error(error.error_message)
+                })
+
+            // if (!this.props.paymentLoading) {
+            //     this.props.payment({
+            //         id: this.props.ticketInfo.orders_id,
+            //         amount: this.state.totalPrice
+            //     })
+            // }
+        } else {
+            const ticketInfo = {
+                amount: this.state.totalPrice,
+                ticket: {
+                    id: this.props.ticketInfo.id,
+                    contacters: this.state.checkedContacts.map(contact => contact.id)
+                }
+            };
+            const client = new APIClient();
+            if (this.state.totalPrice == 0) {
+                client.post('/add_order', { headers: this.props.authHeaders, data: ticketInfo })
+                    .then(orderInfo => client.post('/free', { headers: this.props.authHeaders, data: { id: orderInfo.orders_id } }))
+                    .then(result => {
+                        this.props.push('/tickets')
+                        message.success('购票成功！')
+                    })
+                    .catch(error => {
+                        message.error(error.error_message)
+                        this.props.push('/tickets?type=unpaid')
+                    })
+            } else {
+                const cookies = new Cookies()
+                const openID = cookies.get(Constant.USER_OPENID)
+                client.post('/add_order', { headers: this.props.authHeaders, data: ticketInfo })
+                    .then(orderInfo => client.post('/charge', { headers: this.props.authHeaders, data: { id: orderInfo.orders_id, amount: ticketInfo.amount, open_id: openID, pay_type: 'wx_pub' }}))
+                    .then(charge => {
+                        if (charge && !isEmptyObject(charge)) {
+                            pingpp.createPayment(charge, (result, error) => {
+                                if (result == 'success') {
+                                    client.post('/check_charge', { headers: this.props.authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } })
+                                    .then(result => {
+                                        this.props.push('/tickets')
+                                        message.success('购票成功！')
+                                    })
+                                    .catch(error => {
+                                        this.props.push('/tickets?type=unpaid')
+                                        message.error(error.error_message)
+                                    })
+                                } else if (result == 'fail' ) {
+                                    message.error('支付失败, 请重新支付')
+                                } else if (result == 'cancel') {
+                                    console.log('取消支付')
+                                }
+                            })
+                        } else {
+                            return Promise.reject({ code: 10099, error_message: '返回的charge对象为空' })
+                        }
+                    })
+                    .catch(error => {
+                        message.error(error.error_message)
+                    })
             }
+
+            // if (!this.props.generatorTicketOrderLoading) {
+            //     this.props.submitTicketOrder({
+            //         amount: this.state.totalPrice,
+            //         ticket: {
+            //             id: this.props.ticketInfo.id,
+            //             contacters: this.state.checkedContacts.map(contact => contact.id)
+            //         }
+            //     });
+            // }
         }
     }
 
@@ -216,7 +304,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                                     <span className={styles.ticketDuration}>{`${ticketStartTimeObject.time} - ${ticketEndTimeObject.time}`}</span>
                                 </div>
                             </div>
-                            <span className={styles.ticketPrice}>{ticketInfo.price == 0 ? '免费门票' : `￥${ticketInfo.price}`}</span>
+                            <span className={styles.ticketPrice}>{ticketInfo.price == 0 ? '免费' : `￥${ticketInfo.price}`}</span>
                         </div>
                     </div>
                     <div className={styles.contactList}>
@@ -247,7 +335,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                     {!this.props.isTicketOrderInfo && <div className={styles.insuranceAttention}><span>注意：联系人左上角的“盾牌”代表该联系人已购买救援服务，无需再次购买！</span></div>}
                 </div>
                 <div className={styles.toolbar}>
-                    <div className={styles.price}><span>价格</span><span>{this.state.totalPrice == 0 ? '免费门票' : `￥${this.state.totalPrice}`}</span></div>
+                    <div className={styles.price}><span>价格</span><span>{this.state.totalPrice == 0 ? '免费' : `￥${this.state.totalPrice}`}</span></div>
                     <div onClick={this.handleClickPayment} className={styles.nextStep}><span>去支付</span></div>
                 </div>
                 {this.state.showAddContact &&

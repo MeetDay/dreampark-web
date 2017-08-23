@@ -38,8 +38,9 @@ export default class Ticket extends React.Component {
 
     render() {
         const styles = require('./Ticket.scss')
-        const { ticket_name, start_time, end_time, num: ticketNum, status } = this.props.ticket;
+        const { ticket_name, start_time, end_time, num: ticketNum, status, total } = this.props.ticket;
         const ticketUnused = status == 0 || status == 5;
+        const canRefundTickt = ticketUnused && total != 0;
         const qrcodeImg = (this.props.type == 'unused' && ticketUnused) ? 'assets/qrcode_small.png' : 'assets/qrcode_small_gray.png';
         const startTime = convertToLocalDate(start_time);
         const endTime = convertToLocalDate(end_time);
@@ -53,7 +54,7 @@ export default class Ticket extends React.Component {
                         <span className={styles.time}>{`${startTime.time} - ${endTime.time}`}</span>
                         <div className={styles.rest}>
                             {/* <span className={styles.ticketCount}>{`${ticketNum}张票`}</span> */}
-                            {(this.props.type == 'unused' && ticketUnused) &&
+                            {(this.props.type == 'unused' && canRefundTickt) &&
                                 <Popconfirm title="确定要退票吗？" onConfirm={this.handleRefundTicket}>
                                     <div className={styles.refundTicket}>
                                         <img src="/assets/info.png" alt="info"/>

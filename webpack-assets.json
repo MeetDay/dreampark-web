@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.d718773e849e43242197.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.d718773e849e43242197.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.d718773e849e43242197.min.js"
+    "main": "http://localhost:3000/dist/main.ad71fe96669b8df2a5c3.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.ad71fe96669b8df2a5c3.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.ad71fe96669b8df2a5c3.min.js"
   },
   "styles": {},
   "assets": {
@@ -65,7 +65,7 @@
       "top": "Password__top__3ZQiV",
       "bottom": "Password__bottom__3G0Ls",
       "inputpassword": "Password__inputpassword__2NRh3",
-      "_style": ".Password__password__3ixDx {\n  border: none;\n  border-bottom: 1px solid white; }\n\n.Password__top__3ZQiV {\n  overflow: hidden; }\n  .Password__top__3ZQiV > button {\n    min-width: 80px;\n    min-height: 36px;\n    padding: 0;\n    margin: 0;\n    border: none;\n    outline: none;\n    font-size: 14px;\n    color: white;\n    background-color: transparent; }\n  .Password__top__3ZQiV > button:first-child {\n    float: left;\n    text-align: left; }\n  .Password__top__3ZQiV > button:last-child {\n    float: right;\n    text-align: right; }\n\n.Password__bottom__3G0Ls {\n  margin-top: 5px; }\n\n.Password__inputpassword__2NRh3 {\n  width: 100%;\n  border: none;\n  padding: 0;\n  padding-left: 5px;\n  margin: 0;\n  line-height: 35px;\n  font-size: 24px;\n  outline: none;\n  color: white;\n  background-color: transparent; }\n"
+      "_style": ".Password__password__3ixDx {\n  position: relative;\n  border: none;\n  border-bottom: 1px solid white; }\n\n.Password__top__3ZQiV {\n  overflow: hidden; }\n  .Password__top__3ZQiV > button {\n    min-width: 80px;\n    min-height: 36px;\n    padding: 0;\n    margin: 0;\n    border: none;\n    outline: none;\n    font-size: 14px;\n    color: white;\n    background-color: transparent; }\n  .Password__top__3ZQiV > button:first-child {\n    float: left;\n    text-align: left; }\n  .Password__top__3ZQiV > button:last-child {\n    float: right;\n    text-align: right; }\n\n.Password__bottom__3G0Ls {\n  margin-top: 5px; }\n\n.Password__inputpassword__2NRh3 {\n  width: 100%;\n  border: none;\n  padding: 0;\n  padding-left: 5px;\n  margin: 0;\n  line-height: 35px;\n  font-size: 24px;\n  outline: none;\n  color: white;\n  background-color: transparent; }\n"
     },
     "./src/components/Phone/Phone.scss": {
       "phone": "Phone__phone__16VX8",
@@ -198,7 +198,7 @@
     "./src/containers/Login/container/Login.scss": {
       "loginBack": "Login__loginBack__LQYMw",
       "nav": "Login__nav__R83rM",
-      "_style": ".Login__loginBack__LQYMw {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-image: url(\"/assets/login_background.png\");\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat; }\n\n.Login__nav__R83rM {\n  margin: 0 20px; }\n"
+      "_style": ".Login__loginBack__LQYMw {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-image: url(\"/assets/login_background.png\");\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat; }\n\n.Login__nav__R83rM {\n  margin: 0 20px; }\n"
     },
     "./src/containers/Login/container/WeChatLoginTransition.scss": {
       "description": "WeChatLoginTransition__description__32_nB",
