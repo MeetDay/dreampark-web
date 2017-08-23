@@ -18,6 +18,8 @@ import { Phone } from '../../../components';
 import { clearWhiteSpaceOf, illegalCardNumber } from '../../../utils/regex';
 import { convertToLocalDate } from '../../../utils/dateformat'
 
+const IDCARD_TEXT_MAX_LENGTH = 18;
+
 @asyncConnect([{
     deferred: true,
     promise: ({ params, store:{ dispatch, getState }, helpers }) => {
@@ -249,7 +251,10 @@ export default class CompleteBuyTicketInfo extends React.Component {
     }
     _handleClickCancel(e) {
         e.preventDefault()
-        this.setState({ showAddContact: false })
+        this.setState({
+            showAddContact: false,
+
+        })
     }
 
     // 添加常用联系人
@@ -259,7 +264,10 @@ export default class CompleteBuyTicketInfo extends React.Component {
     }
     _onCardNumberChange(e) {
         e.preventDefault()
-        this.setState({ idCardNo: e.target.value })
+        const cardText = e.target.value;
+        if (clearWhiteSpaceOf(cardText).length <= IDCARD_TEXT_MAX_LENGTH) {
+            this.setState({ idCardNo: cardText })
+        }
     }
 
     _handleClickFinished(e) {
@@ -347,7 +355,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                             </div>
                             <div className={styles.addContactInteraction}>
                                 <Phone type="text" theme="dark" usedFor="other" title="您的真实姓名" zone={false} value={this.state.username} onChange={this.onUsernameChange} />
-                                <Phone type="tel" theme="dark" usedFor="idcard" title="身份证号码" zone={false} value={this.state.idCardNo} onChange={this.onCardNumberChange} />
+                                <Phone type="text" theme="dark" usedFor="idcard" title="身份证号码" zone={false} value={this.state.idCardNo} onChange={this.onCardNumberChange} />
                                 <button disabled={this.props.contactLoading} onClick={this.handleClickFinished} className={styles.finishedButton}>完成</button>
                             </div>
                         </div>
