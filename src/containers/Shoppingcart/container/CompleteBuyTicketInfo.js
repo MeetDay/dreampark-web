@@ -107,7 +107,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                         const paymentID = setTimeout(_ => {
                             message.error(TICKET_PAY_FAIL);
                             this.setState({ paying: false });
-                        }, 25000);
+                        }, 15000);
                         pingpp.createPayment(charge, (result, error) => {
                             if (result == 'success') {
                                 clearTimeout(paymentID);
@@ -152,7 +152,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                             const paymentID = setTimeout(_ => {
                                 message.error(TICKET_PAY_FAIL);
                                 this.setState({ paying: false });
-                            }, 25000);
+                            }, 15000);
                             pingpp.createPayment(charge, (result, error) => {
                                 if (result == 'success') {
                                     clearTimeout(paymentID);
