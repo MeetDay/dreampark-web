@@ -16,7 +16,7 @@ const actionHandlers = {
         if (state.hasMoreUnusedTickets && unusedTickets && Array.isArray(unusedTickets)) {
             unusedTickets = [...state.unusedTickets, ...unusedTickets];
         }
-        if (unusedTickets && Array.isArray(unusedTickets) && unusedTickets.length == TICKET_COUNT_PER_REQUEST) {
+        if (unusedTickets && Array.isArray(unusedTickets) && (unusedTickets.length % TICKET_COUNT_PER_REQUEST == 0)) {
             hasMoreUnusedTickets = true;
         }
         if (unusedTickets && Array.isArray(unusedTickets) && unusedTickets.length > 0) {
@@ -41,7 +41,7 @@ const actionHandlers = {
         if (state.hasMoreUsedTickets && usedTickets && Array.isArray(usedTickets)) {
             usedTickets = [...state.usedTickets, ...usedTickets];
         }
-        if (usedTickets && Array.isArray(usedTickets) && usedTickets.length == TICKET_COUNT_PER_REQUEST) {
+        if (usedTickets && Array.isArray(usedTickets) && (usedTickets.length % TICKET_COUNT_PER_REQUEST == 0)) {
             hasMoreUsedTickets = true;
         }
         if (usedTickets && Array.isArray(usedTickets) && usedTickets.length > 0) {
@@ -66,7 +66,7 @@ const actionHandlers = {
         if (state.hasMoreUnpaidTickets && unpaidTickets && Array.isArray(unpaidTickets)) {
             unpaidTickets = [...state.unpaidTickets, ...unpaidTickets];
         }
-        if (unpaidTickets && Array.isArray(unpaidTickets) && unpaidTickets.length == TICKET_COUNT_PER_REQUEST) {
+        if (unpaidTickets && Array.isArray(unpaidTickets) && (unpaidTickets.length % TICKET_COUNT_PER_REQUEST == 0)) {
             hasMoreUnpaidTickets = true;
         }
         if (unpaidTickets && Array.isArray(unpaidTickets) && unpaidTickets.length > 0) {
@@ -91,7 +91,7 @@ const actionHandlers = {
         if (state.hasMoreRecommendTickets && tickets && Array.isArray(tickets)) {
             tickets = [...state.recommendTickets, ...tickets]
         }
-        if (tickets && Array.isArray(tickets) && tickets.length == TICKET_COUNT_PER_REQUEST) {
+        if (tickets && Array.isArray(tickets) && (tickets.length % TICKET_COUNT_PER_REQUEST == 0)) {
             hasMoreRecommendTickets = true
         }
         if (tickets && Array.isArray(tickets) && tickets.length > 0) {

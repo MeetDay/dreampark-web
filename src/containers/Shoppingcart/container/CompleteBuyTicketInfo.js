@@ -22,6 +22,7 @@ const IDCARD_TEXT_MAX_LENGTH = 18;
 const TICKET_PAY_FAIL = '支付失败, 请重新支付';
 const TICKET_PAY_CANCEL = '支付已取消, 请重新支付';
 const TICKET_PAY_SUCCESS = '出票成功';
+const CONTACT_WARNNING_MESSAGE = '请输入正确的姓名和身份证号码';
 
 @asyncConnect([{
     deferred: true,
@@ -72,6 +73,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
         this.contactChecked = (checkedContact) => this._contactChecked(checkedContact)
         this.addContact = () => this._addContact()
         this.state = {
+            paying: false,
             showAddContact: false,
             username: '',
             idCardNo: '',
@@ -93,6 +95,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
 
     _handleClickPayment(e) {
         e.preventDefault()
+        this.setState({ paying: true });
         if (this.props.isTicketOrderInfo) {
             const cookies = new Cookies()
             const openID = cookies.get(Constant.USER_OPENID)
@@ -100,14 +103,22 @@ export default class CompleteBuyTicketInfo extends React.Component {
             client.post('/charge', { headers: this.props.authHeaders, data: { id: this.props.ticketInfo.orders_id, amount: this.props.ticketInfo.amount, open_id: openID, pay_type: 'wx_pub' } })
                 .then(charge => {
                     if (charge && !isEmptyObject(charge)) {
+                        // 设置支付超时时间为25秒
+                        const paymentID = setTimeout(_ => {
+                            message.error(TICKET_PAY_FAIL);
+                            this.setState({ paying: false });
+                        }, 25000);
                         pingpp.createPayment(charge, (result, error) => {
                             if (result == 'success') {
+                                clearTimeout(paymentID);
                                 client.post('/check_charge', { headers: this.props.authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } })
-                                    .then(result => { this.props.push('/tickets'); message.success(TICKET_PAY_SUCCESS); })
-                                    .catch(error => { this.props.push('/tickets?type=unpaid'); message.error(error.error_message); })
+                                    .then(result => { this.props.push('/tickets'); this.setState({ paying: false }); message.success(TICKET_PAY_SUCCESS); })
+                                    .catch(error => { this.props.push('/tickets?type=unpaid'); this.setState({ paying: false }); message.error(error.error_message); })
                             } else if (result == 'fail' ) {
+                                this.setState({ paying: false });
                                 message.error(TICKET_PAY_FAIL)
                             } else if (result == 'cancel') {
+                                this.setState({ paying: false });
                                 message.info(TICKET_PAY_CANCEL)
                             }
                         })
@@ -115,7 +126,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                         return Promise.reject({ code: 10099, error_message: '返回的charge对象为空' })
                     }
                 })
-                .catch(error => { message.error(error.error_message) })
+                .catch(error => { this.setState({ paying: false }); message.error(error.error_message) })
         } else {
             const ticketInfo = {
                 amount: this.state.totalPrice,
@@ -128,8 +139,8 @@ export default class CompleteBuyTicketInfo extends React.Component {
             if (this.state.totalPrice == 0) {
                 client.post('/add_order', { headers: this.props.authHeaders, data: ticketInfo })
                     .then(orderInfo => client.post('/free', { headers: this.props.authHeaders, data: { id: orderInfo.orders_id } }))
-                    .then(result => { this.props.push('/tickets'); message.success(TICKET_PAY_SUCCESS); })
-                    .catch(error => { message.error(error.error_message); this.props.push('/tickets?type=unpaid') })
+                    .then(result => { this.props.push('/tickets'); this.setState({ paying: false }); message.success(TICKET_PAY_SUCCESS); })
+                    .catch(error => { message.error(error.error_message); this.setState({ paying: false }); this.props.push('/tickets?type=unpaid') })
             } else {
                 const cookies = new Cookies()
                 const openID = cookies.get(Constant.USER_OPENID)
@@ -137,27 +148,36 @@ export default class CompleteBuyTicketInfo extends React.Component {
                     .then(orderInfo => client.post('/charge', { headers: this.props.authHeaders, data: { id: orderInfo.orders_id, amount: ticketInfo.amount, open_id: openID, pay_type: 'wx_pub' }}))
                     .then(charge => {
                         if (charge && !isEmptyObject(charge)) {
+                            // 设置支付超时时间为25秒
+                            const paymentID = setTimeout(_ => {
+                                message.error(TICKET_PAY_FAIL);
+                                this.setState({ paying: false });
+                            }, 25000);
                             pingpp.createPayment(charge, (result, error) => {
                                 if (result == 'success') {
+                                    clearTimeout(paymentID);
                                     client.post('/check_charge', { headers: this.props.authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } })
-                                    .then(result => { this.props.push('/tickets'); message.success(TICKET_PAY_SUCCESS); })
-                                    .catch(error => { this.props.push('/tickets?type=unpaid'); message.error(error.error_message); })
+                                    .then(result => { this.props.push('/tickets'); this.setState({ paying: false }); message.success(TICKET_PAY_SUCCESS); })
+                                    .catch(error => { this.props.push('/tickets?type=unpaid'); this.setState({ paying: false }); message.error(error.error_message); })
                                 } else if (result == 'fail' ) {
-                                    message.error(TICKET_PAY_FAIL)
+                                    this.setState({ paying: false });
+                                    message.error(TICKET_PAY_FAIL);
                                 } else if (result == 'cancel') {
-                                    message.info(TICKET_PAY_CANCEL)
+                                    this.setState({ paying: false });
+                                    message.info(TICKET_PAY_CANCEL);
                                 }
                             })
                         } else {
                             return Promise.reject({ code: 10099, error_message: '返回的charge对象为空' })
                         }
                     })
-                    .catch(error => { message.error(error.error_message) })
+                    .catch(error => { this.setState({ paying: false }); message.error(error.error_message) })
             }
         }
     }
 
     _contactChecked(checkedContact) {
+        if (this.state.paying) return;
         const { insurancePrice } = this.props;
         const { price } = this.props.ticketInfo
         if (this.existedContact(this.state.checkedContacts, checkedContact)) {
@@ -183,14 +203,12 @@ export default class CompleteBuyTicketInfo extends React.Component {
 
     // 控制显示隐藏添加常用联系人的弹窗
     _addContact() {
+        if (this.state.paying) return;
         this.setState({ showAddContact: true })
     }
     _handleClickCancel(e) {
         e.preventDefault()
-        this.setState({
-            showAddContact: false,
-
-        })
+        this.setState({ showAddContact: false })
     }
 
     // 添加常用联系人
@@ -211,9 +229,9 @@ export default class CompleteBuyTicketInfo extends React.Component {
         const username = clearWhiteSpaceOf(this.state.username)
         const idCardNo = clearWhiteSpaceOf(this.state.idCardNo)
         if (username.length > 0 && illegalCardNumber(idCardNo)) {
-            this.props.addContact({ name: clearWhiteSpaceOf(this.state.username), cardno: clearWhiteSpaceOf(this.state.idCardNo) })
+            this.props.addContact({ name: username, cardno: idCardNo });
         } else {
-            message.warning('请输入正确的姓名和身份证号码...')
+            message.warning(CONTACT_WARNNING_MESSAGE)
         }
     }
 
@@ -279,8 +297,12 @@ export default class CompleteBuyTicketInfo extends React.Component {
                     {!this.props.isTicketOrderInfo && <div className={styles.insuranceAttention}><span>注意：联系人左上角的“盾牌”代表该联系人已购买救援服务，无需再次购买！</span></div>}
                 </div>
                 <div className={styles.toolbar}>
-                    <div className={styles.price}><span>价格</span><span>{this.state.totalPrice == 0 ? '免费' : `￥${this.state.totalPrice}`}</span></div>
-                    <div onClick={this.handleClickPayment} className={styles.nextStep}><span>去支付</span></div>
+                    <Spin spinning={this.state.paying}>
+                        <div className={styles.toolbarWrapper}>
+                            <div className={styles.price}><span>价格</span><span>{this.state.totalPrice == 0 ? '免费' : `￥${this.state.totalPrice}`}</span></div>
+                            <div onClick={this.handleClickPayment} className={styles.nextStep}><span>去支付</span></div>
+                        </div>
+                    </Spin>
                 </div>
                 {this.state.showAddContact &&
                     <div>

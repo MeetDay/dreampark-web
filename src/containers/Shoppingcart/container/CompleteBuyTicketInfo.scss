@@ -281,10 +281,15 @@ $toolbarHeight: 55px;
     bottom: 0px;
 
     height: $toolbarHeight;
-    text-align: center;
+    // text-align: center;
     line-height: $toolbarHeight;
     background-color: #2D343B;
 }
+
+.toolbarWrapper {
+    text-align: center;
+}
+
 .price {
     display: inline-block;
     font-size: 16px;
