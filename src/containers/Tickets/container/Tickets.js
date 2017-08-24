@@ -170,7 +170,7 @@ export default class Tickets extends React.Component {
                 <div className={styles.ticketContent}>
                     <div className={styles.ticketWrap}> { content } </div>
                     {(!tickets || (tickets && tickets.length == 0)) && <div className={styles.noTicketsMessage}>{noTicketsMessage}</div>}
-                    {hasMore && <LoadMoreButton onClick={this.handleClickLoadMore} hasMore={hasMore} isActive={isActive} /> }
+                    <LoadMoreButton onClick={this.handleClickLoadMore} hasMore={hasMore} isActive={isActive} />
                 </div>
                 <TicketTool onTicketToolBarClick={this.handleClickTicketToolBar} />
                 {this.state.selectedTicket && <TicketDetail visible={this.state.showSelectedTicket} onCancel={this.closeViewTickets} ticket={this.state.selectedTicket} />}
