@@ -13,8 +13,10 @@ const actionHandlers = {
     [`${UNUSED_TICKETS}_PENDING`]: (state, action) => ({ ...state, unusedTicketsLoading: true, unusedTicketsLoaded: false }),
     [`${UNUSED_TICKETS}_FULFILLED`]: (state, action) => {
         let unusedTickets = action.payload.order_tickets, hasMoreUnusedTickets = false, maxUnusedTicketsID = undefined;
-        if (state.hasMoreUnusedTickets && unusedTickets && Array.isArray(unusedTickets)) {
-            unusedTickets = [...state.unusedTickets, ...unusedTickets];
+        if (state.hasMoreUnusedTickets && unusedTickets && Array.isArray(unusedTickets) && unusedTickets.length > 0) {
+            if (unusedTickets[0].orderTicket_id <= state.unusedTickets[state.unusedTickets.length - 1].orderTicket_id) {
+                unusedTickets = [...state.unusedTickets, ...unusedTickets];
+            }
         }
         if (unusedTickets && Array.isArray(unusedTickets) && (unusedTickets.length % TICKET_COUNT_PER_REQUEST == 0)) {
             hasMoreUnusedTickets = true;
@@ -38,8 +40,10 @@ const actionHandlers = {
     [`${USED_TICKETS}_PENDING`]: (state, action) => ({ ...state, usedTicktsLoading: true, usedTicktsLoaded: false }),
     [`${USED_TICKETS}_FULFILLED`]: (state, action) => {
         let usedTickets = action.payload.order_tickets, hasMoreUsedTickets = false, maxUsedTicketsID = undefined;
-        if (state.hasMoreUsedTickets && usedTickets && Array.isArray(usedTickets)) {
-            usedTickets = [...state.usedTickets, ...usedTickets];
+        if (state.hasMoreUsedTickets && usedTickets && Array.isArray(usedTickets) && usedTickets.length > 0) {
+            if (usedTickets[0].orderTicket_id <= state.usedTickets[state.usedTickets.length - 1].orderTicket_id) {
+                usedTickets = [...state.usedTickets, ...usedTickets];
+            }
         }
         if (usedTickets && Array.isArray(usedTickets) && (usedTickets.length % TICKET_COUNT_PER_REQUEST == 0)) {
             hasMoreUsedTickets = true;
@@ -63,8 +67,10 @@ const actionHandlers = {
     [`${UNPAID_TICKETS}_PENDING`]: (state, action) => ({ ...state, unpaidTicketsLoading:true, unpaidTicketsLoaded: false }),
     [`${UNPAID_TICKETS}_FULFILLED`]: (state, action) => {
         let unpaidTickets = action.payload.orders, hasMoreUnpaidTickets = false, maxUnpaidTicketsID = undefined;
-        if (state.hasMoreUnpaidTickets && unpaidTickets && Array.isArray(unpaidTickets)) {
-            unpaidTickets = [...state.unpaidTickets, ...unpaidTickets];
+        if (state.hasMoreUnpaidTickets && unpaidTickets && Array.isArray(unpaidTickets) && unpaidTickets.length > 0) {
+            if (unpaidTickets[0].id <= state.unpaidTickets[state.unpaidTickets.length - 1].id) {
+                unpaidTickets = [...state.unpaidTickets, ...unpaidTickets];
+            }
         }
         if (unpaidTickets && Array.isArray(unpaidTickets) && (unpaidTickets.length % TICKET_COUNT_PER_REQUEST == 0)) {
             hasMoreUnpaidTickets = true;
@@ -193,7 +199,7 @@ export function isRecommendTicketsLoaded(globalState) {
     return globalState.tickets && globalState.tickets.recommendTicketsLoaded
 }
 
-export function getUnusedTikects() {
+export function getUnusedTikects({ headerRefreshing = false } = {}) {
     return (dispatch, getState) => {
         const { authHeaders } = getState().login;
         const { maxUnusedTicketsID } = getState().tickets;
@@ -201,13 +207,13 @@ export function getUnusedTikects() {
             type: UNUSED_TICKETS,
             payload: (client) => client.get('/unuse_ticket', {
                 headers: authHeaders,
-                params: { max_id: maxUnusedTicketsID }
+                params: { max_id: headerRefreshing ? undefined : maxUnusedTicketsID }
             })
         })
     }
 }
 
-export function getUsedTickts() {
+export function getUsedTickts({ headerRefreshing = false } = {}) {
     return (dispatch, getState) => {
         const { authHeaders } = getState().login;
         const { maxUsedTicketsID } = getState().tickets;
@@ -215,13 +221,13 @@ export function getUsedTickts() {
             type: USED_TICKETS,
             payload: (client) => client.get('/used_ticket', {
                 headers: authHeaders,
-                params: { max_id: maxUsedTicketsID }
+                params: { max_id: headerRefreshing ? undefined : maxUsedTicketsID }
             })
         })
     }
 }
 
-export function getUnpaidTickets() {
+export function getUnpaidTickets({ headerRefreshing = false } = {}) {
     return (dispatch, getState) => {
         const { authHeaders } = getState().login;
         const { maxUnpaidTicketsID } = getState().tickets;
@@ -229,7 +235,7 @@ export function getUnpaidTickets() {
             type: UNPAID_TICKETS,
             payload: (client) => client.get('/unpaid_orders', {
                 headers: authHeaders,
-                params: { max_id: maxUnpaidTicketsID }
+                params: { max_id: headerRefreshing ? undefined : maxUnpaidTicketsID }
             })
         })
     }

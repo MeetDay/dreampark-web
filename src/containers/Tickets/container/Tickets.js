@@ -120,6 +120,13 @@ export default class Tickets extends React.Component {
     _closeViewTickets(e) {
         e.preventDefault();
         this.setState({ showSelectedTicket: false, selectedTicket: null });
+        if (this.state.selectedItemType === 'unused') {
+            this.props.getUnusedTikects({ headerRefreshing: true });
+        } else if (this.state.selectedItemType === 'used') {
+            this.props.getUsedTickts({ headerRefreshing: true });
+        } else if (this.state.selectedItemType === 'unpaid') {
+            this.props.getUnpaidTickets({ headerRefreshing: true });
+        }
     }
 
     _handleClickTicketToolBar(e) {
