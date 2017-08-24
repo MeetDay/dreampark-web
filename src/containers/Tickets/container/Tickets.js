@@ -133,18 +133,21 @@ export default class Tickets extends React.Component {
             ticketType = 'unused',
             tickets = this.props.unusedTickets,
             hasMore = this.props.hasMoreUnusedTickets,
-            isActive = this.props.unusedTicketsLoading;
+            isActive = this.props.unusedTicketsLoading,
+            noTicketsMessage = '您没有任何门票...';
         if (this.state.selectedItemType === 'used') {
             ticketType = 'used';
             tickets = this.props.usedTickts;
             hasMore = this.props.hasMoreUsedTickets;
             isActive = this.props.usedTicktsLoading;
+            noTicketsMessage = '您没有任何门票...';
         } else if (this.state.selectedItemType === 'unpaid') {
             isTicketOrder = true;
             ticketType = 'unpaid';
             tickets = this.props.unpaidTickets;
             hasMore = this.props.hasMoreUnpaidTickets;
             isActive = this.props.unpaidTicketsLoading;
+            noTicketsMessage = '您没有任何订单信息...';
         }
         if (!this.props.user) console.log(this.props.user);
         return (
@@ -152,10 +155,11 @@ export default class Tickets extends React.Component {
                 <Header user={this.props.user} selectedItemType={this.state.selectedItemType} onMenuItemChange={this.onMenuItemChange} />
                 <div className={styles.ticketContent}>
                     <div className={styles.ticketWrap}>
-                        { (!isTicketOrder && tickets) && tickets.map((ticket) =>(<Ticket key={ticket.orderTicket_id} viewTicket={this.viewTicket} refundTicket={this.props.refundTicket} type={ticketType} ticket={ticket} />)) }
-                        { (isTicketOrder && tickets) && tickets.map((ticket) =>(<UnpaidOrder key={ticket.id} unpaidOrder={ticket} deleteOrder={this.props.cancelOrder} />)) }
+                        { (!isTicketOrder && tickets && tickets.length > 0) && tickets.map((ticket) =>(<Ticket key={ticket.orderTicket_id} viewTicket={this.viewTicket} refundTicket={this.props.refundTicket} type={ticketType} ticket={ticket} />)) }
+                        { (isTicketOrder && tickets && tickets.length > 0) && tickets.map((ticket) =>(<UnpaidOrder key={ticket.id} unpaidOrder={ticket} deleteOrder={this.props.cancelOrder} />)) }
                     </div>
-                    {(tickets && tickets.length > 0) && <LoadMoreButton onClick={this.handleClickLoadMore} hasMore={hasMore} isActive={isActive} /> }
+                    {(!tickets || (tickets && tickets.length == 0)) && <div className={styles.noTicketsMessage}>{noTicketsMessage}</div>}
+                    {hasMore && <LoadMoreButton onClick={this.handleClickLoadMore} hasMore={hasMore} isActive={isActive} /> }
                 </div>
                 <TicketTool onTicketToolBarClick={this.handleClickTicketToolBar} />
                 {this.state.selectedTicket && <TicketDetail visible={this.state.showSelectedTicket} onCancel={this.closeViewTickets} ticket={this.state.selectedTicket} />}

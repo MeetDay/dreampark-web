@@ -36,6 +36,7 @@ $avatarHeight: 60px;
     font-size: 0;
     vertical-align: top;
     width: 100%;
+    background-color: white;
 }
 
 .vip {
@@ -164,4 +165,13 @@ $buyHelperHeight: 44px;
     text-decoration: none;
     color: white;
     background-color: #E62A10;
+
+    &:hover {
+        color: white;
+        text-decoration: none;
+    }
+    &:visited {
+        color: white;
+        text-decoration: none;
+    }
 }
