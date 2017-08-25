@@ -17,11 +17,11 @@ const existedTicketTypes = ['unused', 'used', 'unpaid']
         const getQueryValueOf = key => decodeURIComponent(location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
         const ticketType = getQueryValueOf('type')
         if (!isUsedTicketsLoaded(getState()) && ticketType === 'used') {
-            return dispatch(getUsedTickts())
+            return dispatch(getUsedTickts({ headerRefreshing: true }))
         } else if(!isUnpaidTicketsLoaded(getState()) && ticketType === 'unpaid') {
-            return dispatch(getUnpaidTickets())
+            return dispatch(getUnpaidTickets({ headerRefreshing: true }))
         } else if (!isUnusedTicketsLoaded(getState())){
-            return dispatch(getUnusedTikects())
+            return dispatch(getUnusedTikects({ headerRefreshing: true }))
         }
     }
 }])
