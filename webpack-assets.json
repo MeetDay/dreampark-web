@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.9422f63c54e2ab7760d2.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.9422f63c54e2ab7760d2.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.9422f63c54e2ab7760d2.min.js"
+    "main": "http://localhost:3000/dist/main.52d217f0a3a742df9f2e.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.52d217f0a3a742df9f2e.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.52d217f0a3a742df9f2e.min.js"
   },
   "styles": {},
   "assets": {
@@ -89,6 +89,15 @@
       "cover": "Details__cover__3mi5A",
       "elements": "Details__elements__jAJTx",
       "_style": ".Details__cover__3mi5A {\n  width: 100%; }\n\n.Details__elements__jAJTx {\n  margin: 0 20px; }\n"
+    },
+    "./src/containers/Download/container/Download.scss": {
+      "background": "Download__background__3u7bS",
+      "fbparkLogo": "Download__fbparkLogo__389fw",
+      "fbparkDescription": "Download__fbparkDescription__2u_gy",
+      "fbparkDownload": "Download__fbparkDownload__2xsAC",
+      "downloadLink": "Download__downloadLink__lu53c",
+      "downloadWrapper": "Download__downloadWrapper__H8g6r",
+      "_style": ".Download__background__3u7bS {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  background-size: cover;\n  background-position: center; }\n\n.Download__fbparkLogo__389fw {\n  margin: 80px 0 60px 0;\n  vertical-align: top;\n  font-size: 0px;\n  text-align: center; }\n\n.Download__fbparkDescription__2u_gy {\n  margin: 60px 0;\n  text-align: center;\n  font-size: 24px;\n  line-height: 40px;\n  color: white; }\n\n.Download__fbparkDownload__2xsAC {\n  text-align: center; }\n\n.Download__downloadLink__lu53c {\n  display: inline-block;\n  width: 100%;\n  margin-top: 40px;\n  text-align: center;\n  text-decoration: none;\n  color: white; }\n\n.Download__downloadWrapper__H8g6r {\n  display: inline-block;\n  width: 200px;\n  height: 44px;\n  border-radius: 4px;\n  font-size: 0px;\n  background-color: #e32d1f; }\n  .Download__downloadWrapper__H8g6r > img {\n    width: 27px;\n    height: 30px;\n    margin-top: 7px;\n    margin-right: 15px;\n    vertical-align: top; }\n  .Download__downloadWrapper__H8g6r > span {\n    line-height: 44px;\n    font-size: 18px;\n    color: white; }\n"
     },
     "./src/containers/HotDetail/component/BuyParkingCoupon/BuyParkingCoupon.scss": {
       "description": "BuyParkingCoupon__description__u_YLZ",

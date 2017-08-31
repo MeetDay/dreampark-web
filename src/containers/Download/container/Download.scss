@@ -1,0 +1,66 @@
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    background-size: cover;
+    background-position: center;
+}
+
+.fbparkLogo {
+    margin: 80px 0 60px 0;
+    vertical-align: top;
+    font-size: 0px;
+    text-align: center;
+}
+
+.fbparkDescription {
+    margin: 60px 0;
+    text-align: center;
+    font-size: 24px;
+    line-height: 40px;
+    color: white;
+}
+
+.fbparkDownload {
+    text-align: center;
+}
+
+.downloadLink {
+    display: inline-block;
+    width: 100%;
+    margin-top: 40px;
+
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+$downloadWrapperWidth: 200px;
+$downloadWrapperHeight: 44px;
+$iconWidth: 27px;
+$iconHeight: 30px;
+
+.downloadWrapper {
+    display: inline-block;
+    width: $downloadWrapperWidth;
+    height: $downloadWrapperHeight;
+    border-radius: 4px;
+
+    font-size: 0px;
+    background-color: #e32d1f;
+
+    & > img {
+        width: $iconWidth;
+        height: $iconHeight;
+        margin-top: ($downloadWrapperHeight - $iconHeight) / 2;
+        margin-right: 15px;
+        vertical-align: top;
+    }
+
+    & > span {
+        line-height: $downloadWrapperHeight;
+        font-size: 18px;
+        color: white;
+    }
+}

@@ -9,6 +9,7 @@ import Shoppingcart, { CompleteBuyTicketInfo } from './containers/Shoppingcart';
 import Login, { WeChatLoginTransition } from './containers/Login';
 import Register from './containers/Register';
 import TermsOfService from './containers/TermsOfService';
+import Download from './containers/Download';
 import NotFound from './containers/NotFound';
 import projectConfig from '../project.config';
 import { isFullUser } from './utils/wechat';
@@ -49,6 +50,7 @@ const routes = (store) => {
 			<Route path="wechat" component={WeChatLoginTransition} />
 			<Route path="register" component={Register} onEnter={checkAlreadyLogin} />
 			<Route path="terms/:serviceType" component={TermsOfService} />
+			<Route path="app/download" component={Download} />
 			<Route path="*" component={NotFound} status={404} />
 		</Route>
 	)
