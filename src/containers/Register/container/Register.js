@@ -1,3 +1,12 @@
+/**
+ * @Author: WangChao
+ * @Date:   2017-08-22T09:03:03+08:00
+ * @Email:  crazyitcoder9527@126.com
+ * @Project: dreampark-web
+ * @Last modified by:   WangChao
+ * @Last modified time: 2017-09-02T11:05:27+08:00
+ */
+
 import React from 'react'
 import sha256 from 'js-sha256'
 import { connect } from 'react-redux'
@@ -6,12 +15,15 @@ import { push } from 'react-router-redux'
 import { message } from 'antd'
 import { StepOne, StepTwo, StepThree, StepFour } from '../component'
 import * as Constant from '../../../utils/constant'
-import { Navbar } from '../../Login/component'
 import { userSignup, updateUserInfo } from '../../Login/module/login'
 import { comfirmUserInfo, getSMSCodeAccordingTo } from '../module/register'
 import { clearWhiteSpaceOf } from '../../../utils/regex'
 import { isFullUser } from '../../../utils/wechat'
-const minPasswordLength = 8, maxPasswordLength = 14, SMSCodeLength = 4;
+
+const MIN_LENGTH_OF_PASSWORD = 8;
+const MAX_LENGTH_OF_PASSWORD = 14;
+const MAX_LENGTH_OF_SMS_CODE = 4;
+const MAX_LENGTH_OF_PHONE = 11;
 
 @connect(
     state => ({
@@ -52,10 +64,6 @@ export default class Register extends React.Component {
         };
     }
 
-    componentDidMount() {
-        console.log(this.props.weChatInfo)
-    }
-
     componentWillReceiveProps(nextProps) {
         const { user, updateUserError, weChatInfoError } = nextProps
         console.log(user)
@@ -71,10 +79,10 @@ export default class Register extends React.Component {
 
     // 注册
     _userSignup() {
-        if (this.state.password.length < minPasswordLength) {
-            message.info(`请输入${minPasswordLength}至${maxPasswordLength}位的有效密码。。。`);
-        } else if (clearWhiteSpaceOf(this.state.code).length != SMSCodeLength) {
-            message.info(`请输入${SMSCodeLength}位有效位数的验证码。。。`);
+        if (this.state.password.length < MIN_LENGTH_OF_PASSWORD) {
+            message.info(`请输入 ${ MIN_LENGTH_OF_PASSWORD } 至 ${ MAX_LENGTH_OF_PASSWORD } 位的有效密码。。。`);
+        } else if (clearWhiteSpaceOf(this.state.code).length != MAX_LENGTH_OF_SMS_CODE) {
+            message.info(`请输入 ${ MAX_LENGTH_OF_SMS_CODE } 位有效位数的验证码。。。`);
         } else {
             const { weChatInfo, accessToken } = this.props
             this.props.userSignup({
@@ -107,13 +115,16 @@ export default class Register extends React.Component {
      */
     _onPhonenumberChange(e) {
         e.preventDefault();
-        if (clearWhiteSpaceOf(e.target.value).length > 11) return
-        this.setState({ phonenumber: e.target.value });
+        const phonenumber = e.target.value;
+        const phonenumberWithNoWhiteSpace = clearWhiteSpaceOf(e.target.value);
+        if (phonenumberWithNoWhiteSpace && phonenumberWithNoWhiteSpace.length <= MAX_LENGTH_OF_PHONE) {
+            this.setState({ phonenumber: phonenumber })
+        }
     }
     _onPasswordChange(e) {
         e.preventDefault();
         const password = e.target.value;
-        if (password.length <= maxPasswordLength) {
+        if (password && password.length <= MAX_LENGTH_OF_PASSWORD) {
             this.setState({ password: password })
         }
     }
@@ -123,8 +134,11 @@ export default class Register extends React.Component {
      */
     _onSMSCodeChange(e) {
         e.preventDefault()
-        if (clearWhiteSpaceOf(e.target.value).length > 4) return
-        this.setState({ code: e.target.value })
+        const smscode = e.target.value;
+        const smscodeWithNoWhiteSpace = clearWhiteSpaceOf(smscode);
+        if (smscodeWithNoWhiteSpace.length <= MAX_LENGTH_OF_SMS_CODE) {
+            this.setState({ code: smscode })
+        }
     }
 
     /**
@@ -204,7 +218,6 @@ export default class Register extends React.Component {
             <div className={styles.register}>
                 <div className={loginStyle.loginBack} />
                 <div className={styles.container}>
-                    <div className={styles.nav}><Navbar /></div>
                     { content }
                 </div>
             </div>

@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.ac62f1abffd3e526675a.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.ac62f1abffd3e526675a.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.ac62f1abffd3e526675a.min.js"
+    "main": "http://localhost:3000/dist/main.e0151445b8e86ead83ca.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.e0151445b8e86ead83ca.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.e0151445b8e86ead83ca.min.js"
   },
   "styles": {},
   "assets": {
@@ -182,7 +182,7 @@
       "nav": "ForgotPassword__nav__2hHl4",
       "description": "ForgotPassword__description__fakcx",
       "bottom": "ForgotPassword__bottom__2UHcD",
-      "_style": ".ForgotPassword__forgotpassword__26-1n {\n  position: relative;\n  margin: 0 5%; }\n\n.ForgotPassword__nav__2hHl4 {\n  height: 44px; }\n\n.ForgotPassword__description__fakcx > span {\n  display: block;\n  margin: 24px 0;\n  color: white; }\n\n.ForgotPassword__description__fakcx > span:first-child {\n  font-size: 28px; }\n\n.ForgotPassword__description__fakcx > span:last-child {\n  font-size: 18px; }\n\n.ForgotPassword__bottom__2UHcD > div {\n  margin-bottom: 24px; }\n"
+      "_style": ".ForgotPassword__forgotpassword__26-1n {\n  position: relative;\n  margin: 0 5%; }\n\n.ForgotPassword__nav__2hHl4 {\n  height: 44px; }\n\n.ForgotPassword__description__fakcx > span {\n  display: block;\n  margin: 24px 0;\n  color: white; }\n\n.ForgotPassword__description__fakcx > span:first-child {\n  font-size: 28px; }\n\n.ForgotPassword__description__fakcx > span:last-child {\n  font-size: 20px; }\n\n.ForgotPassword__bottom__2UHcD > div {\n  margin-bottom: 24px; }\n"
     },
     "./src/containers/Login/component/Launching/Launching.scss": {
       "launching": "Launching__launching__1hhVV",
@@ -239,7 +239,7 @@
     "./src/containers/Register/container/Register.scss": {
       "container": "Register__container__3GCJW",
       "nav": "Register__nav__3PkKt",
-      "_style": ".Register__container__3GCJW {\n  position: relative; }\n\n.Register__nav__3PkKt {\n  margin: 0 20px; }\n"
+      "_style": ".Register__container__3GCJW {\n  position: relative;\n  padding-top: 64px; }\n\n.Register__nav__3PkKt {\n  margin: 0 20px; }\n"
     },
     "./src/containers/Shoppingcart/component/Card/Card.scss": {
       "card": "Card__card__2SRa_",
