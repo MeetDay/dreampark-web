@@ -1,3 +1,12 @@
+/**
+ * @Author: WangChao
+ * @Date:   2017-07-15T10:33:41+08:00
+ * @Email:  crazyitcoder9527@126.com
+ * @Project: dreampark-web
+ * @Last modified by:   WangChao
+ * @Last modified time: 2017-09-02T10:13:57+08:00
+ */
+
 const UNUSED_TICKETS = 'redux/tickets/unused'
 const USED_TICKETS = 'redux/tickets/used'
 const UNPAID_TICKETS = 'redux/tickets/unpaid'
@@ -18,7 +27,7 @@ const actionHandlers = {
                 unusedTickets = [...state.unusedTickets, ...unusedTickets];
             }
         }
-        if (unusedTickets && Array.isArray(unusedTickets) && (unusedTickets.length % TICKET_COUNT_PER_REQUEST == 0)) {
+        if (unusedTickets && Array.isArray(unusedTickets)&& unusedTickets.length > 0 && (unusedTickets.length % TICKET_COUNT_PER_REQUEST == 0)) {
             hasMoreUnusedTickets = true;
         }
         if (unusedTickets && Array.isArray(unusedTickets) && unusedTickets.length > 0) {
@@ -45,7 +54,7 @@ const actionHandlers = {
                 usedTickets = [...state.usedTickets, ...usedTickets];
             }
         }
-        if (usedTickets && Array.isArray(usedTickets) && (usedTickets.length % TICKET_COUNT_PER_REQUEST == 0)) {
+        if (usedTickets && Array.isArray(usedTickets) && usedTickets.length > 0 && (usedTickets.length % TICKET_COUNT_PER_REQUEST == 0)) {
             hasMoreUsedTickets = true;
         }
         if (usedTickets && Array.isArray(usedTickets) && usedTickets.length > 0) {
@@ -72,7 +81,7 @@ const actionHandlers = {
                 unpaidTickets = [...state.unpaidTickets, ...unpaidTickets];
             }
         }
-        if (unpaidTickets && Array.isArray(unpaidTickets) && (unpaidTickets.length % TICKET_COUNT_PER_REQUEST == 0)) {
+        if (unpaidTickets && Array.isArray(unpaidTickets) && unpaidTickets.length > 0 && (unpaidTickets.length % TICKET_COUNT_PER_REQUEST == 0)) {
             hasMoreUnpaidTickets = true;
         }
         if (unpaidTickets && Array.isArray(unpaidTickets) && unpaidTickets.length > 0) {

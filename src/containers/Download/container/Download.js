@@ -1,3 +1,12 @@
+/**
+ * @Author: WangChao
+ * @Date:   2017-08-31T13:50:55+08:00
+ * @Email:  crazyitcoder9527@126.com
+ * @Project: dreampark-web
+ * @Last modified by:   WangChao
+ * @Last modified time: 2017-09-01T18:15:48+08:00
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
