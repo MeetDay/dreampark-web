@@ -4,7 +4,7 @@
  * @Email:  crazyitcoder9527@126.com
  * @Project: dreampark-web
  * @Last modified by:   WangChao
- * @Last modified time: 2017-09-02T11:05:27+08:00
+ * @Last modified time: 2017-09-02T15:46:29+08:00
  */
 
 import React from 'react'
@@ -117,14 +117,14 @@ export default class Register extends React.Component {
         e.preventDefault();
         const phonenumber = e.target.value;
         const phonenumberWithNoWhiteSpace = clearWhiteSpaceOf(e.target.value);
-        if (phonenumberWithNoWhiteSpace && phonenumberWithNoWhiteSpace.length <= MAX_LENGTH_OF_PHONE) {
+        if (phonenumberWithNoWhiteSpace.length <= MAX_LENGTH_OF_PHONE) {
             this.setState({ phonenumber: phonenumber })
         }
     }
     _onPasswordChange(e) {
         e.preventDefault();
         const password = e.target.value;
-        if (password && password.length <= MAX_LENGTH_OF_PASSWORD) {
+        if (password.length <= MAX_LENGTH_OF_PASSWORD) {
             this.setState({ password: password })
         }
     }

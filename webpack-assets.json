@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.e0151445b8e86ead83ca.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.e0151445b8e86ead83ca.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.e0151445b8e86ead83ca.min.js"
+    "main": "http://localhost:3000/dist/main.def97896d430e1e4e528.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.def97896d430e1e4e528.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.def97896d430e1e4e528.min.js"
   },
   "styles": {},
   "assets": {
