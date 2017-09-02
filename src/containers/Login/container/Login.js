@@ -1,3 +1,12 @@
+/**
+ * @Author: WangChao
+ * @Date:   2017-07-11T08:53:12+08:00
+ * @Email:  crazyitcoder9527@126.com
+ * @Project: dreampark-web
+ * @Last modified by:   WangChao
+ * @Last modified time: 2017-09-02T10:52:41+08:00
+ */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -10,9 +19,10 @@ import Navbar from '../component/Navbar/Navbar'
 import { userLogin } from '../module/login'
 import { legalPhoneNumber, clearWhiteSpaceOf } from '../../../utils/regex'
 
+const MAX_LENGTH_OF_SMS_CODE = 4;
 const MAX_LENGTH_OF_PHONE = 11;
 const MIN_LENGTH_OF_PASSWORD = 8;
-const MAX_LENGTH_OF_SMS_CODE = 4;
+const MAX_LENGTH_OF_PASSWORD = 14;
 
 @connect(
     state => ({
@@ -49,25 +59,35 @@ export default class Login extends React.Component {
 
     _onPhonenNmberChange(e) {
         e.preventDefault()
-        if (clearWhiteSpaceOf(e.target.value).length > MAX_LENGTH_OF_PHONE) return
-        this.setState({ phonenumber: e.target.value })
+        const phonenumber = e.target.value;
+        const phonenumberWithNoWhiteSpace = clearWhiteSpaceOf(e.target.value);
+        if (phonenumberWithNoWhiteSpace && phonenumberWithNoWhiteSpace.length <= MAX_LENGTH_OF_PHONE) {
+            this.setState({ phonenumber: phonenumber })
+        }
     }
 
     _onPasswordChange(e) {
         e.preventDefault()
-        const password = e.target.value
-        this.setState({ password: password })
+        const password = e.target.value;
+        if (password && password.length <= MAX_LENGTH_OF_PASSWORD) {
+            this.setState({ password: password })
+        }
     }
 
     _onSMSCodeChange(e) {
         e.preventDefault()
-        if (clearWhiteSpaceOf(e.target.value).length > MAX_LENGTH_OF_SMS_CODE) return
-        this.setState({ code: e.target.value })
+        const smscode = e.target.value;
+        const smscodeWithNoWhiteSpace = clearWhiteSpaceOf(smscode);
+        if (smscodeWithNoWhiteSpace.length <= MAX_LENGTH_OF_SMS_CODE) {
+            this.setState({ code: smscode })
+        }
     }
 
     _userLogin(e) {
         e.preventDefault()
-        if (legalPhoneNumber(this.state.phonenumber) && this.state.password.length >= MIN_LENGTH_OF_PASSWORD) {
+        const leagalPhone = legalPhoneNumber(this.state.phonenumber);
+        const legalPassword = this.state.password.length >= MIN_LENGTH_OF_PASSWORD;
+        if (leagalPhone && legalPassword) {
             this.props.userLogin(clearWhiteSpaceOf(this.state.phonenumber), this.state.password)
         } else {
             message.error('请输入正确的用户名或密码...');
@@ -77,10 +97,10 @@ export default class Login extends React.Component {
     render() {
         const styles = require('./Login.scss');
         const { location } = this.props
-        const showForgotPassword = (location.hash === '#loging' || location.hash === '')
         let content = (
             <Loging
                 phonenumber={this.state.phonenumber}
+                password={this.state.password}
                 onPhonenNmberChange={this.onPhonenNmberChange}
                 onPasswordChange={this.onPasswordChange}
                 userLogin={this.userLogin}
@@ -109,7 +129,7 @@ export default class Login extends React.Component {
         return (
             <div>
                 <div className={styles.loginBack} />
-                {this.props.location.hash !== '#launching' && <div className={styles.nav}><Navbar showForgotPassword={showForgotPassword} /></div>}
+                {/* {showNavbar && <div className={styles.nav}><Navbar showForgotPassword={false} /></div>} */}
                 { content }
             </div>
         );

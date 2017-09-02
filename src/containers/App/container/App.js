@@ -1,3 +1,12 @@
+/**
+ * @Author: WangChao
+ * @Date:   2017-07-20T08:58:19+08:00
+ * @Email:  crazyitcoder9527@126.com
+ * @Project: dreampark-web
+ * @Last modified by:   WangChao
+ * @Last modified time: 2017-09-02T10:22:07+08:00
+ */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
@@ -34,7 +43,7 @@ export default class App extends React.Component {
 		if (nextUser && nextUser !== this.props.user) {
 			if (isFullUser(nextUser)) {
 				const cookies = new Cookies()
-				cookies.set(Constant.USER_COOKIE, nextProps.user, { path: '/', maxAge: 3600 })
+				// cookies.set(Constant.USER_COOKIE, nextProps.user, { path: '/', maxAge: 3600 })
 			}
 		}
 	}

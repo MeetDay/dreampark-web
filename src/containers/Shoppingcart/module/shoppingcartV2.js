@@ -1,3 +1,12 @@
+/**
+ * @Author: WangChao
+ * @Date:   2017-08-03T09:31:23+08:00
+ * @Email:  crazyitcoder9527@126.com
+ * @Project: dreampark-web
+ * @Last modified by:   WangChao
+ * @Last modified time: 2017-09-02T10:18:00+08:00
+ */
+
 import Cookies from 'universal-cookie'
 import superagent from 'superagent'
 import * as Constant from '../../../utils/constant'
@@ -20,7 +29,7 @@ const actionHandlers = {
         if (state.hasMoreGoods && shoppingcarts && Array.isArray(shoppingcarts)) {
             shoppingcarts = [...state.shoppingcarts, ...shoppingcarts];
         }
-        if (shoppingcarts && Array.isArray(shoppingcarts) && shoppingcarts.length == GOODS_COUNT_PER_REQUEST){
+        if (shoppingcarts && Array.isArray(shoppingcarts) && shoppingcarts.length > 0 && shoppingcarts.length % GOODS_COUNT_PER_REQUEST == 0){
             hasMoreGoods = true;
         }
         if (shoppingcarts && Array.isArray(shoppingcarts) && shoppingcarts.length > 0) {
