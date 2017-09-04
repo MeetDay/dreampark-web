@@ -1,3 +1,12 @@
+/**
+ * @Author: WangChao
+ * @Date:   2017-06-27T09:02:03+08:00
+ * @Email:  crazyitcoder9527@126.com
+ * @Project: dreampark-web
+ * @Last modified by:   WangChao
+ * @Last modified time: 2017-09-04T09:54:16+08:00
+ */
+
 var path = require('path');
 var webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
