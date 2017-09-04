@@ -1,3 +1,12 @@
+/**
+ * @Author: WangChao
+ * @Date:   2017-09-04T14:34:57+08:00
+ * @Email:  crazyitcoder9527@126.com
+ * @Project: dreampark-web
+ * @Last modified by:   WangChao
+ * @Last modified time: 2017-09-04T20:26:36+08:00
+ */
+
 import React from 'react';
 import { LoginButton } from '../../../../components';
 import { jumpToWeChatAuthorizationUrl } from '../../../../utils/wechat';
@@ -5,20 +14,22 @@ import { jumpToWeChatAuthorizationUrl } from '../../../../utils/wechat';
 export default class Launching extends React.Component {
     constructor() {
         super();
-        this.handleClickLoginButton = (e) => this._handleClickLoginButton(e);
+        this.handleClickRegisterButton = (e) => this._handleClickRegisterButton(e);
+        this.handleClickToBeVipButton = (e) => this._handleClickToBeVipButton(e);
+        this.handleClickWechatLogin = (e) => this._handleClickWechatLogin(e);
     }
 
-    _handleClickLoginButton(e) {
-        e.preventDefault();
-        location.hash = '#loging';
-    }
-
-    handleClickRegisterButton(e) {
+    _handleClickRegisterButton(e) {
         e.preventDefault();
         location.href = '/register';
     }
 
-    handleClickWeChatButton(e) {
+    _handleClickToBeVipButton(e) {
+        e.preventDefault();
+        location.href = '/register?type=vip'
+    }
+
+    _handleClickWechatLogin(e) {
         e.preventDefault();
         jumpToWeChatAuthorizationUrl(location)
     }
@@ -35,20 +46,27 @@ export default class Launching extends React.Component {
                 </div> */}
                 <div className={styles.dreampark}><img src="/assets/dreampark.png" alt="胸章"/></div>
                 <div className={styles.description}>
-                    <span>欢迎来到梦想盛会。</span>
+                    <span>欢迎来到梦想盛会</span>
                 </div>
                 <div className={styles.buttons} >
                     <LoginButton
-                        title="注册梦想会员"
+                        title="实名认证报名"
                         bgColor="transparent"
                         borderColor="white"
                         textColor="white"
-                        onClick={(e) => this.handleClickRegisterButton(e)}
+                        onClick={this.handleClickRegisterButton}
+                    />
+                    <LoginButton
+                        title="梦想VIP报名"
+                        bgColor="transparent"
+                        borderColor="white"
+                        textColor="white"
+                        onClick={this.handleClickToBeVipButton}
                     />
                     <LoginButton
                         imgShow
                         title="使用微信登陆"
-                        onClick={(e) => this.handleClickWeChatButton(e)}
+                        onClick={this.handleClickWechatLogin}
                     />
                 </div>
                 <div className={styles.declare}>

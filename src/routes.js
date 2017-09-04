@@ -1,3 +1,12 @@
+/**
+ * @Author: WangChao
+ * @Date:   2017-09-04T14:34:57+08:00
+ * @Email:  crazyitcoder9527@126.com
+ * @Project: dreampark-web
+ * @Last modified by:   WangChao
+ * @Last modified time: 2017-09-04T15:11:51+08:00
+ */
+
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import App from './containers/App';
@@ -7,7 +16,7 @@ import Details from './containers/Details';
 import HotDetail from './containers/HotDetail';
 import Shoppingcart, { CompleteBuyTicketInfo } from './containers/Shoppingcart';
 import Login, { WeChatLoginTransition } from './containers/Login';
-import Register from './containers/Register';
+import Register, { ToBeVip } from './containers/Register';
 import TermsOfService from './containers/TermsOfService';
 import Download from './containers/Download';
 import NotFound from './containers/NotFound';
@@ -40,6 +49,7 @@ const routes = (store) => {
 			<IndexRoute component={Home} />
 			<Route path="home" component={Home} />
 			<Route path="tickets" component={Tickets} onEnter={requireLogin} />
+			<Route path="pay/ticketinfo/buy/vip" component={ToBeVip} />
 			<Route path="pay/ticketinfo/:id(/:type)" component={CompleteBuyTicketInfo} onEnter={requireLogin} />
 			<Route path="buytickets" component={BuyTicket} />
 			<Route path="buytickets/search" component={SearchTicket} />

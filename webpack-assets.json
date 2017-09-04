@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.e83ec0e1c509dae4cbf4.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.e83ec0e1c509dae4cbf4.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.e83ec0e1c509dae4cbf4.min.js"
+    "main": "http://localhost:3000/dist/main.16a9c97892548ebd2233.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.16a9c97892548ebd2233.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.16a9c97892548ebd2233.min.js"
   },
   "styles": {},
   "assets": {
@@ -182,7 +182,7 @@
       "nav": "ForgotPassword__nav__2hHl4",
       "description": "ForgotPassword__description__fakcx",
       "bottom": "ForgotPassword__bottom__2UHcD",
-      "_style": ".ForgotPassword__forgotpassword__26-1n {\n  position: relative;\n  margin: 0 5%; }\n\n.ForgotPassword__nav__2hHl4 {\n  height: 44px; }\n\n.ForgotPassword__description__fakcx > span {\n  display: block;\n  margin: 24px 0;\n  color: white; }\n\n.ForgotPassword__description__fakcx > span:first-child {\n  font-size: 28px; }\n\n.ForgotPassword__description__fakcx > span:last-child {\n  font-size: 20px; }\n\n.ForgotPassword__bottom__2UHcD > div {\n  margin-bottom: 24px; }\n"
+      "_style": ".ForgotPassword__forgotpassword__26-1n {\n  position: relative;\n  margin: 0 5%; }\n\n.ForgotPassword__nav__2hHl4 {\n  height: 44px; }\n\n.ForgotPassword__description__fakcx > span {\n  display: block;\n  margin: 24px 0;\n  color: white; }\n\n.ForgotPassword__description__fakcx > span:first-child {\n  font-size: 28px; }\n\n.ForgotPassword__description__fakcx > span:last-child {\n  font-size: 18px; }\n\n.ForgotPassword__bottom__2UHcD > div {\n  margin-bottom: 24px; }\n"
     },
     "./src/containers/Login/component/Launching/Launching.scss": {
       "launching": "Launching__launching__1hhVV",
@@ -193,7 +193,7 @@
       "description": "Launching__description__ejw24",
       "buttons": "Launching__buttons__34mEM",
       "declare": "Launching__declare__2d7xH",
-      "_style": ".Launching__launching__1hhVV {\n  position: relative;\n  padding: 20px; }\n\n.Launching__launchingTop__1X5X0 {\n  width: 100%;\n  height: 0px;\n  line-height: 0px; }\n\n.Launching__loginButton__22bCc {\n  float: right;\n  min-width: 80px;\n  border: none;\n  padding: 0;\n  line-height: 0px;\n  outline: none;\n  font-size: 18px;\n  text-align: right;\n  color: white;\n  background-color: transparent; }\n\n.Launching__dreampark__1x0DQ {\n  width: 100%;\n  margin-top: 50px; }\n  .Launching__dreampark__1x0DQ > img {\n    width: 100%;\n    vertical-align: top; }\n\n.Launching__appLogo__1RAEH {\n  margin-top: 44px; }\n  .Launching__appLogo__1RAEH > img {\n    width: 70px;\n    height: 70px;\n    border-radius: 35px; }\n\n.Launching__description__ejw24 {\n  margin: 36px 0;\n  font-size: 28px;\n  color: white; }\n\n.Launching__buttons__34mEM {\n  width: 100%; }\n  .Launching__buttons__34mEM > div:last-child {\n    margin-top: 20px; }\n\n.Launching__declare__2d7xH {\n  margin-top: 44px;\n  font-size: 14px;\n  line-height: 24px;\n  letter-spacing: 1.5px;\n  color: white; }\n  .Launching__declare__2d7xH > span > a {\n    text-decoration: underline;\n    color: white; }\n"
+      "_style": ".Launching__launching__1hhVV {\n  position: relative;\n  padding: 20px; }\n\n.Launching__launchingTop__1X5X0 {\n  width: 100%;\n  height: 0px;\n  line-height: 0px; }\n\n.Launching__loginButton__22bCc {\n  float: right;\n  min-width: 80px;\n  border: none;\n  padding: 0;\n  line-height: 0px;\n  outline: none;\n  font-size: 18px;\n  text-align: right;\n  color: white;\n  background-color: transparent; }\n\n.Launching__dreampark__1x0DQ {\n  width: 100%;\n  margin-top: 50px; }\n  .Launching__dreampark__1x0DQ > img {\n    width: 100%;\n    vertical-align: top; }\n\n.Launching__appLogo__1RAEH {\n  margin-top: 44px; }\n  .Launching__appLogo__1RAEH > img {\n    width: 70px;\n    height: 70px;\n    border-radius: 35px; }\n\n.Launching__description__ejw24 {\n  margin: 36px 0;\n  font-size: 28px;\n  color: white; }\n\n.Launching__buttons__34mEM {\n  width: 100%; }\n  .Launching__buttons__34mEM > div {\n    margin: 20px 0; }\n\n.Launching__declare__2d7xH {\n  margin-top: 44px;\n  font-size: 14px;\n  line-height: 24px;\n  letter-spacing: 1.5px;\n  color: white; }\n  .Launching__declare__2d7xH > span > a {\n    text-decoration: underline;\n    color: white; }\n"
     },
     "./src/containers/Login/component/Loging/Loging.scss": {
       "loging": "Loging__loging__Y9BRq",
@@ -229,7 +229,8 @@
     "./src/containers/Register/component/StepThree/StepThree.scss": {
       "stepthree": "StepThree__stepthree__2PEG-",
       "nextstep": "StepThree__nextstep__QudN7",
-      "_style": ".StepThree__stepthree__2PEG- {\n  margin: 0 5%; }\n\n.StepThree__nextstep__QudN7 {\n  float: right;\n  width: 35%; }\n"
+      "confirm": "StepThree__confirm__Z1Gzl",
+      "_style": ".StepThree__stepthree__2PEG- {\n  margin: 0 5%; }\n\n.StepThree__nextstep__QudN7 {\n  float: right;\n  width: 35%; }\n\n.StepThree__confirm__Z1Gzl {\n  width: 100%; }\n"
     },
     "./src/containers/Register/component/StepTwo/StepTwo.scss": {
       "steptwo": "StepTwo__steptwo__eP1pe",
@@ -240,6 +241,19 @@
       "container": "Register__container__3GCJW",
       "nav": "Register__nav__3PkKt",
       "_style": ".Register__container__3GCJW {\n  position: relative;\n  padding-top: 64px; }\n\n.Register__nav__3PkKt {\n  margin: 0 20px; }\n"
+    },
+    "./src/containers/Register/container/ToBeVip.scss": {
+      "container": "ToBeVip__container__321hC",
+      "containerWrapper": "ToBeVip__containerWrapper__157cj",
+      "skip": "ToBeVip__skip__2a6Iv",
+      "title": "ToBeVip__title__3gtSJ",
+      "description": "ToBeVip__description__3ezo1",
+      "priceInfo": "ToBeVip__priceInfo__1cOLB",
+      "vipLogo": "ToBeVip__vipLogo__KX7u8",
+      "vipPrice": "ToBeVip__vipPrice__27XMz",
+      "vipRights": "ToBeVip__vipRights__3vb3p",
+      "goPay": "ToBeVip__goPay__13jA1",
+      "_style": ".ToBeVip__container__321hC {\n  position: relative; }\n\n.ToBeVip__containerWrapper__157cj {\n  margin: 0 20px; }\n\n.ToBeVip__skip__2a6Iv {\n  width: 100%;\n  height: 44px; }\n  .ToBeVip__skip__2a6Iv > span {\n    float: right;\n    text-align: center;\n    line-height: 44px;\n    font-size: 16px;\n    color: white; }\n\n.ToBeVip__title__3gtSJ {\n  margin-top: 15px; }\n  .ToBeVip__title__3gtSJ > span {\n    font-size: 28px;\n    color: #FFFFFF; }\n\n.ToBeVip__description__3ezo1 {\n  margin: 25px 0; }\n  .ToBeVip__description__3ezo1 > span {\n    font-size: 18px;\n    color: #FFFFFF; }\n\n.ToBeVip__priceInfo__1cOLB {\n  width: 100%;\n  height: 128px;\n  border-radius: 10px;\n  text-align: center;\n  background-color: #FFFFFF; }\n  .ToBeVip__priceInfo__1cOLB > div {\n    display: inline-block;\n    height: 100%;\n    font-size: 0;\n    vertical-align: top; }\n\n.ToBeVip__vipLogo__KX7u8 {\n  width: 70%; }\n  .ToBeVip__vipLogo__KX7u8 > img {\n    width: 56px;\n    height: 22px;\n    margin-right: 8px;\n    vertical-align: middle; }\n  .ToBeVip__vipLogo__KX7u8 > span {\n    font-size: 24px;\n    font-weight: bold;\n    color: #E62A10;\n    vertical-align: middle; }\n\n.ToBeVip__vipLogo__KX7u8::before {\n  display: inline-block;\n  content: ' ';\n  height: 100%;\n  vertical-align: middle; }\n\n.ToBeVip__vipPrice__27XMz {\n  width: 30%; }\n  .ToBeVip__vipPrice__27XMz > span {\n    font-size: 24px;\n    font-weight: bold;\n    color: #000000;\n    vertical-align: middle; }\n\n.ToBeVip__vipPrice__27XMz::after {\n  display: inline-block;\n  content: ' ';\n  height: 100%;\n  width: 15px;\n  vertical-align: middle; }\n\n.ToBeVip__vipRights__3vb3p {\n  margin: 24px 0; }\n  .ToBeVip__vipRights__3vb3p > span {\n    font-size: 16px;\n    color: #FFFFFF;\n    vertical-align: middle; }\n  .ToBeVip__vipRights__3vb3p > img {\n    width: 18px;\n    height: 18px;\n    margin-left: 12px;\n    font-size: 0px;\n    vertical-align: middle; }\n\n.ToBeVip__goPay__13jA1 {\n  position: fixed;\n  left: 20px;\n  right: 20px;\n  bottom: 40px; }\n"
     },
     "./src/containers/Shoppingcart/component/Card/Card.scss": {
       "card": "Card__card__2SRa_",

@@ -1,0 +1,121 @@
+// @Author: WangChao
+// @Date:   2017-09-04T15:07:50+08:00
+// @Email:  crazyitcoder9527@126.com
+// @Project: dreampark-web
+// @Last modified by:   WangChao
+// @Last modified time: 2017-09-04T16:18:59+08:00
+
+.container {
+    position: relative;
+}
+
+.containerWrapper {
+    margin: 0 20px;
+}
+
+.skip {
+    width: 100%;
+    height: 44px;
+    & > span {
+        float: right;
+        text-align: center;
+        line-height: 44px;
+        font-size: 16px;
+        color: white;
+    }
+}
+
+.title {
+    margin-top: 15px;
+    & > span {
+        font-size: 28px;
+        color: #FFFFFF;
+    }
+}
+
+.description {
+    margin: 25px 0;
+    & > span {
+        font-size: 18px;
+        color: #FFFFFF;
+    }
+}
+
+.priceInfo {
+    width: 100%;
+    height: 128px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #FFFFFF;
+
+    & > div {
+        display: inline-block;
+        height: 100%;
+        font-size: 0;
+        vertical-align: top;
+    }
+}
+
+.vipLogo {
+    width: 70%;
+
+    & > img {
+        width: 56px;
+        height: 22px;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+    & > span {
+        font-size: 24px;
+        font-weight: bold;
+        color: #E62A10;
+        vertical-align: middle;
+    }
+}
+.vipLogo::before {
+    display: inline-block;
+    content: ' ';
+    height: 100%;
+    vertical-align: middle;
+}
+
+
+.vipPrice {
+    width: 30%;
+    & > span {
+        font-size: 24px;
+        font-weight: bold;
+        color: #000000;
+        vertical-align: middle;
+    }
+}
+.vipPrice::after {
+    display: inline-block;
+    content: ' ';
+    height: 100%;
+    width: 15px;
+    vertical-align: middle;
+}
+
+.vipRights {
+    margin: 24px 0;
+    & > span {
+        font-size: 16px;
+        color: #FFFFFF;
+        vertical-align: middle;
+    }
+    & > img {
+        width: 18px;
+        height: 18px;
+        margin-left: 12px;
+        font-size: 0px;
+        vertical-align: middle;
+    }
+}
+
+.goPay {
+    position: fixed;
+    left: 20px;
+    right: 20px;
+    bottom: 40px;
+}

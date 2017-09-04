@@ -4,7 +4,7 @@
  * @Email:  crazyitcoder9527@126.com
  * @Project: dreampark-web
  * @Last modified by:   WangChao
- * @Last modified time: 2017-09-02T15:46:29+08:00
+ * @Last modified time: 2017-09-04T20:36:16+08:00
  */
 
 import React from 'react'
@@ -157,18 +157,20 @@ export default class Register extends React.Component {
     /*
      *  register step four
      */
-    _onClubChange(e) {
-        e.preventDefault()
-        this.setState({ club: e.target.value })
-    }
-    _onProfessionChange(e) {
-        e.preventDefault()
-        this.setState({ profession: e.target.value })
-    }
+    // _onClubChange(e) {
+    //     e.preventDefault()
+    //     this.setState({ club: e.target.value })
+    // }
+    // _onProfessionChange(e) {
+    //     e.preventDefault()
+    //     this.setState({ profession: e.target.value })
+    // }
 
     render() {
         const loginStyle = require('../../Login/container/Login.scss');
         const styles = require('./Register.scss');
+        const isRegistreForVip = this.props.location.query.type === 'vip';
+
         let content = (
             <StepOne
                 phonenumber={this.state.phonenumber}
@@ -196,6 +198,7 @@ export default class Register extends React.Component {
             content = (
                 <StepThree
                     idcardInfo={this.props.idcardInfo}
+                    isForVip={isRegistreForVip}
                     username={this.state.username}
                     cardno={this.state.cardno}
                     onUsernameChange={this.onUsernameChange}
@@ -203,7 +206,9 @@ export default class Register extends React.Component {
                     comfirmUserInfo={this.props.comfirmUserInfo}
                 />
             )
-        } else if (this.props.location.hash === '#stepfour') {
+        }
+
+         {/* else if (this.props.location.hash === '#stepfour') {
             content = (
                 <StepFour
                     club={this.state.club}
@@ -213,7 +218,7 @@ export default class Register extends React.Component {
                     updateUserInfo={this.updateUserInfo}
                 />
             )
-        }
+        } */}
         return (
             <div className={styles.register}>
                 <div className={loginStyle.loginBack} />
