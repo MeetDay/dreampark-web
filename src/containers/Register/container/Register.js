@@ -4,7 +4,7 @@
  * @Email:  crazyitcoder9527@126.com
  * @Project: dreampark-web
  * @Last modified by:   WangChao
- * @Last modified time: 2017-09-04T20:36:16+08:00
+ * @Last modified time: 2017-09-05T11:28:28+08:00
  */
 
 import React from 'react'
@@ -24,6 +24,7 @@ const MIN_LENGTH_OF_PASSWORD = 8;
 const MAX_LENGTH_OF_PASSWORD = 14;
 const MAX_LENGTH_OF_SMS_CODE = 4;
 const MAX_LENGTH_OF_PHONE = 11;
+const MAX_LENGTH_OF_CARDNO = 18;
 
 @connect(
     state => ({
@@ -54,42 +55,46 @@ export default class Register extends React.Component {
         this.updateUserInfo = () => this._updateUserInfo()
 
         this.state = {
+            isRegistreForVip: props.location.query.type === 'vip',
             phonenumber: '',
             password: '',
             code: '',
             username: '',
             cardno: '',
-            club: '',
-            profession: ''
         };
     }
 
     componentWillReceiveProps(nextProps) {
         const { user, updateUserError, weChatInfoError } = nextProps
-        console.log(user)
         if (isFullUser(user)) {
-            const forwardUrl = sessionStorage.getItem(Constant.URL_BEFORE_LEAVE)
-            this.props.push(forwardUrl || '/tickets')
+            if (this.state.isRegistreForVip) {
+                this.props.push('/pay/ticketinfo/buy/vip');
+            } else {
+                const forwardUrl = sessionStorage.getItem(Constant.URL_BEFORE_LEAVE);
+                this.props.push(forwardUrl || '/tickets');
+            }
         } else if (updateUserError && updateUserError !== this.props.updateUserError) {
-            message.error('注册失败, 请重新尝试...')
+            console.log(updateUserError);
+            message.error('注册失败, 请重新尝试...');
         } else if (weChatInfoError && weChatInfoError !== this.props.weChatInfoError) {
-            message.error('微信登录失败, 请重新尝试...')
+            console.log(weChatInfoError);
+            message.error('微信登录失败, 请重新尝试...');
         }
     }
 
     // 注册
     _userSignup() {
         if (this.state.password.length < MIN_LENGTH_OF_PASSWORD) {
-            message.info(`请输入 ${ MIN_LENGTH_OF_PASSWORD } 至 ${ MAX_LENGTH_OF_PASSWORD } 位的有效密码。。。`);
+            message.info(`请输入 ${ MIN_LENGTH_OF_PASSWORD } 至 ${ MAX_LENGTH_OF_PASSWORD } 位的有效密码...`);
         } else if (clearWhiteSpaceOf(this.state.code).length != MAX_LENGTH_OF_SMS_CODE) {
-            message.info(`请输入 ${ MAX_LENGTH_OF_SMS_CODE } 位有效位数的验证码。。。`);
+            message.info(`请输入 ${ MAX_LENGTH_OF_SMS_CODE } 位有效验证码...`);
         } else {
             const { weChatInfo, accessToken } = this.props
             this.props.userSignup({
-                phone: clearWhiteSpaceOf(this.state.phonenumber),
-                password: sha256(this.state.password),
                 zone: 86,
                 code: clearWhiteSpaceOf(this.state.code),
+                phone: clearWhiteSpaceOf(this.state.phonenumber),
+                password: sha256(this.state.password),
                 link_account: weChatInfo ? { union_id: weChatInfo.unionid, auth_token: accessToken } : undefined
             })
         }
@@ -103,9 +108,7 @@ export default class Register extends React.Component {
                 identity_card: clearWhiteSpaceOf(this.state.cardno),
                 birthday: this.props.idcardInfo.data.birthday,
                 gender: this.props.idcardInfo.data.sex,
-                address: this.props.idcardInfo.data.address,
-                club_name: this.state.club,
-                trade: this.state.profession
+                address: this.props.idcardInfo.data.address
             })
         }
     }
@@ -151,7 +154,11 @@ export default class Register extends React.Component {
     }
     _onCardNumberChange(e) {
         e.preventDefault()
-        this.setState({ cardno: e.target.value })
+        const cardno = e.target.value;
+        const cardnoWithNoWhiteSpace = clearWhiteSpaceOf(cardno);
+        if (cardnoWithNoWhiteSpace.length < MAX_LENGTH_OF_CARDNO) {
+            this.setState({ cardno: cardno });
+        }
     }
 
     /*
@@ -169,7 +176,6 @@ export default class Register extends React.Component {
     render() {
         const loginStyle = require('../../Login/container/Login.scss');
         const styles = require('./Register.scss');
-        const isRegistreForVip = this.props.location.query.type === 'vip';
 
         let content = (
             <StepOne
@@ -198,12 +204,14 @@ export default class Register extends React.Component {
             content = (
                 <StepThree
                     idcardInfo={this.props.idcardInfo}
-                    isForVip={isRegistreForVip}
+                    isForVip={this.state.isRegistreForVip}
                     username={this.state.username}
                     cardno={this.state.cardno}
+
                     onUsernameChange={this.onUsernameChange}
                     onCardNumberChange={this.onCardNumberChange}
                     comfirmUserInfo={this.props.comfirmUserInfo}
+                    updateUserInfo={this.updateUserInfo}
                 />
             )
         }

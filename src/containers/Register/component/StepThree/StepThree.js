@@ -4,7 +4,7 @@
  * @Email:  crazyitcoder9527@126.com
  * @Project: dreampark-web
  * @Last modified by:   WangChao
- * @Last modified time: 2017-09-04T20:47:28+08:00
+ * @Last modified time: 2017-09-05T10:52:06+08:00
  */
 
 import React from 'react'
@@ -20,9 +20,11 @@ export default class StepThree extends React.Component {
         idcardInfo: PropTypes.object,
         username: PropTypes.string,
         cardno: PropTypes.string,
+
         onUsernameChange: PropTypes.func,
         onCardNumberChange: PropTypes.func,
-        comfirmUserInfo: PropTypes.func
+        comfirmUserInfo: PropTypes.func,
+        updateUserInfo: PropTypes.func
     }
     constructor() {
         super();
@@ -34,7 +36,7 @@ export default class StepThree extends React.Component {
         if (this.props.username.length > 0 && illegalCardNumber(this.props.cardno)) {
             this.props.comfirmUserInfo(this.props.username, clearWhiteSpaceOf(this.props.cardno))
         } else {
-            message.warning(IDCARD_WARNING_MESSAGE)
+            message.warning('请输入正确的姓名和身份证号码。')
         }
     }
 
@@ -42,9 +44,9 @@ export default class StepThree extends React.Component {
         const { idcardInfo } = nextProps
         if (idcardInfo !== this.props.idcardInfo) {
             if (idcardInfo && idcardInfo.resp.code === 0) {
-                location.hash = '#stepfour'
+                this.props.updateUserInfo();
             } else {
-                message.error('请输入正确的姓名和身份证号码!')
+                message.error('姓名和身份证号码不匹配。')
             }
         }
     }
@@ -55,6 +57,7 @@ export default class StepThree extends React.Component {
         const styles = require('./StepThree.scss');
         const { isForVip } = this.props;
         const okButtonMessage = isForVip ? '确 定' : '下一步';
+
         return (
             <div className={styles.stepthree}>
                 <div className={forgotpasswordStyle.description}>

@@ -4,15 +4,23 @@
  * @Email:  crazyitcoder9527@126.com
  * @Project: dreampark-web
  * @Last modified by:   WangChao
- * @Last modified time: 2017-09-04T20:11:26+08:00
+ * @Last modified time: 2017-09-05T11:36:28+08:00
  */
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { push } from 'react-router-redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { message } from 'antd';
 import { LoginButton } from '../../../components';
 import APIClient from '../../../helpers/APIClient';
 import { isEmptyObject } from '../../Login/module/login';
+
+@connect(
+    null,
+    dispatch => bindActionCreators({ push }, dispatch)
+)
 
 export default class ToBeVip extends React.Component {
     constructor(props) {
@@ -26,6 +34,8 @@ export default class ToBeVip extends React.Component {
 
     _handleClickSkip(e) {
         e.preventDefault();
+        const forwardUrl = sessionStorage.getItem(Constant.URL_BEFORE_LEAVE);
+        this.props.push(forwardUrl || '/tickets');
     }
 
     _handleClickGoPay(e) {
@@ -54,6 +64,8 @@ export default class ToBeVip extends React.Component {
             .then(result => {
                 message.success(result.message);
                 this.setState({ paying: false });
+                const forwardUrl = sessionStorage.getItem(Constant.URL_BEFORE_LEAVE);
+                this.props.push(forwardUrl || '/tickets');
             })
             .catch(err => {
                 console.log(err.error);
