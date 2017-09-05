@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.6435144c0149c7f52b0f.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.6435144c0149c7f52b0f.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.6435144c0149c7f52b0f.min.js"
+    "main": "http://localhost:3000/dist/main.d799e5e01558a3121107.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.d799e5e01558a3121107.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.d799e5e01558a3121107.min.js"
   },
   "styles": {},
   "assets": {
@@ -98,6 +98,18 @@
       "downloadLink": "Download__downloadLink__lu53c",
       "downloadWrapper": "Download__downloadWrapper__H8g6r",
       "_style": ".Download__background__3u7bS {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  background-size: cover;\n  background-position: center; }\n\n.Download__fbparkLogo__389fw {\n  margin: 80px 0 60px 0;\n  vertical-align: top;\n  font-size: 0px;\n  text-align: center; }\n\n.Download__fbparkDescription__2u_gy {\n  margin-top: 40px;\n  margin-bottom: 20px;\n  text-align: center;\n  font-size: 24px;\n  line-height: 40px;\n  color: white; }\n\n.Download__fbparkDownload__2xsAC {\n  text-align: center; }\n\n.Download__downloadLink__lu53c {\n  display: inline-block;\n  width: 100%;\n  margin-top: 40px;\n  text-align: center;\n  text-decoration: none;\n  color: white; }\n\n.Download__downloadWrapper__H8g6r {\n  display: inline-block;\n  width: 200px;\n  height: 44px;\n  border-radius: 4px;\n  font-size: 0px;\n  background-color: #e32d1f; }\n  .Download__downloadWrapper__H8g6r > img {\n    width: 27px;\n    height: 30px;\n    margin-top: 7px;\n    margin-right: 15px;\n    vertical-align: top; }\n  .Download__downloadWrapper__H8g6r > span {\n    line-height: 44px;\n    font-size: 18px;\n    color: white; }\n"
+    },
+    "./src/containers/HotDetail/component/BuyHotelTickets/BuyHotelTickets.scss": {
+      "middle": "BuyHotelTickets__middle__yKKUA",
+      "rooms": "BuyHotelTickets__rooms__x-iLC",
+      "roomsWrapper": "BuyHotelTickets__roomsWrapper__2Tm61",
+      "roomContainer": "BuyHotelTickets__roomContainer__1GTSq",
+      "roomContainerWrapper": "BuyHotelTickets__roomContainerWrapper__1Io1_",
+      "roomNormal": "BuyHotelTickets__roomNormal__3xJaV",
+      "roomActive": "BuyHotelTickets__roomActive__1wfQ_",
+      "toolBarWrapper": "BuyHotelTickets__toolBarWrapper__dRxzh",
+      "totalPrice": "BuyHotelTickets__totalPrice__3pHt_",
+      "_style": ".BuyHotelTickets__middle__yKKUA {\n  margin: 0 20px;\n  padding: 20px 0; }\n\n.BuyHotelTickets__rooms__x-iLC {\n  width: 100%;\n  overflow: hidden; }\n\n.BuyHotelTickets__roomsWrapper__2Tm61 {\n  white-space: nowrap;\n  overflow-y: hidden;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch !important; }\n\n.BuyHotelTickets__roomsWrapper__2Tm61::-webkit-scrollbar {\n  display: none; }\n\n.BuyHotelTickets__roomContainer__1GTSq {\n  display: inline-block;\n  margin: 0 12px; }\n\n.BuyHotelTickets__roomContainerWrapper__1Io1_ {\n  padding: 10px 25px;\n  border-radius: 5px; }\n  .BuyHotelTickets__roomContainerWrapper__1Io1_ > span {\n    font-size: 20px; }\n\n.BuyHotelTickets__roomNormal__3xJaV {\n  border: 1px solid #9B9B9B;\n  color: #9B9B9B; }\n\n.BuyHotelTickets__roomActive__1wfQ_ {\n  border: 1px solid #E62A10;\n  color: #E62A10; }\n\n.BuyHotelTickets__toolBarWrapper__dRxzh {\n  position: relative;\n  text-align: center;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  color: #FFFFFF; }\n\n.BuyHotelTickets__totalPrice__3pHt_ {\n  margin: 0 8px;\n  color: #EC0539; }\n"
     },
     "./src/containers/HotDetail/component/BuyParkingCoupon/BuyParkingCoupon.scss": {
       "description": "BuyParkingCoupon__description__u_YLZ",
