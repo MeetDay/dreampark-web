@@ -1,5 +1,12 @@
-$toolHeight: 55px;
-$toolPadding: 10px;
+// @Author: WangChao
+// @Date:   2017-09-04T14:34:57+08:00
+// @Email:  crazyitcoder9527@126.com
+// @Project: dreampark-web
+// @Last modified by:   WangChao
+// @Last modified time: 2017-09-05T20:15:41+08:00
+
+$toolHeight: 50px;
+$toolPadding: 8px;
 .tool {
     position: fixed;
     left: $toolPadding;
@@ -7,6 +14,15 @@ $toolPadding: 10px;
     bottom: $toolPadding;
     height: $toolHeight;
     text-align: center;
+}
+
+.item {
+    display: inline-block;
+    width: 50%;
+}
+
+.itemWrapper {
+    margin: 0 8px;
     background-color: #E62A10;
 }
 
@@ -25,4 +41,18 @@ $imgHeight: 22px;
     font-size: 18px;
     font-family: PingFangSC-Regular;
     color: white;
+}
+
+.safaLink {
+    color: white;
+    text-decoration: none;
+    
+    &:hover {
+        color: white;
+        text-decoration: none;
+    }
+    &:visited {
+        color: white;
+        text-decoration: none;
+    }
 }

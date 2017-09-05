@@ -1,3 +1,12 @@
+/**
+ * @Author: WangChao
+ * @Date:   2017-09-04T14:34:57+08:00
+ * @Email:  crazyitcoder9527@126.com
+ * @Project: dreampark-web
+ * @Last modified by:   WangChao
+ * @Last modified time: 2017-09-05T20:35:37+08:00
+ */
+
 import React from 'react'
 import { message } from 'antd'
 import PropTypes from 'prop-types'
@@ -9,6 +18,8 @@ import { isUsedTicketsLoaded, getUsedTickts,isUnusedTicketsLoaded, getUnusedTike
 import { LoadMoreButton } from '../../../components';
 import { Header, Ticket, UnpaidOrder, TicketDetail, TicketTool } from '../component'
 import { convertToLocalDate } from '../../../utils/dateformat'
+import loadScript from '../utils/tickets';
+
 const existedTicketTypes = ['unused', 'used', 'unpaid']
 
 @asyncConnect([{
@@ -67,8 +78,13 @@ export default class Tickets extends React.Component {
         const getQueryValueOf = key => decodeURIComponent(location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
         const ticketType = getQueryValueOf('type')
         if (existedTicketTypes.includes(ticketType)) {
-            setTimeout(_ => this.setState({ selectedItemType: ticketType }))
+            setTimeout(_ => this.setState({ selectedItemType: ticketType }), 0);
         }
+
+        // 加载js
+        loadScript("/script/qrcode.min.js", function() {
+            console.log("loaded...");
+        });
     }
 
     componentWillReceiveProps(nextProps) {

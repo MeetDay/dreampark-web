@@ -46,6 +46,7 @@
     "express": "^4.15.3",
     "js-sha256": "^0.6.0",
     "prop-types": "^15.5.10",
+    "qrcode.react": "^0.7.1",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.6.1",
