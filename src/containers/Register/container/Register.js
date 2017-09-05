@@ -4,7 +4,7 @@
  * @Email:  crazyitcoder9527@126.com
  * @Project: dreampark-web
  * @Last modified by:   WangChao
- * @Last modified time: 2017-09-05T11:28:28+08:00
+ * @Last modified time: 2017-09-05T14:00:56+08:00
  */
 
 import React from 'react'
@@ -42,8 +42,8 @@ const MAX_LENGTH_OF_CARDNO = 18;
 )
 
 export default class Register extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.onPhonenNmberChange = (e) => this._onPhonenumberChange(e)
         this.onPasswordChange = (e) => this._onPasswordChange(e)
         this.onSMSCodeChange = (e) => this._onSMSCodeChange(e)
