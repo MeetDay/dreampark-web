@@ -3,7 +3,7 @@
 // @Email:  crazyitcoder9527@126.com
 // @Project: dreampark-web
 // @Last modified by:   WangChao
-// @Last modified time: 2017-09-05T15:34:38+08:00
+// @Last modified time: 2017-09-06T11:38:58+08:00
 
 .middle {
     margin: 0 20px;
@@ -31,10 +31,10 @@
 }
 
 .roomContainerWrapper {
-    padding: 10px 25px;
+    padding: 2px 25px;
     border-radius: 5px;
     & > span {
-        font-size: 20px;
+        font-size: 18px;
     }
 }
 
@@ -48,7 +48,11 @@
     color: #E62A10;
 }
 
-
+.roomPrice {
+    display: block;
+    text-align: center;
+    font-size: 12px !important;
+}
 
 .toolBarWrapper {
     position: relative;

@@ -4,7 +4,7 @@
  * @Email:  crazyitcoder9527@126.com
  * @Project: dreampark-web
  * @Last modified by:   WangChao
- * @Last modified time: 2017-09-05T18:00:09+08:00
+ * @Last modified time: 2017-09-06T11:36:11+08:00
  */
 
  import React from 'react'
@@ -22,7 +22,7 @@
          onClickCancel: PropTypes.func.isRequired
      }
      static defaultProps = {
-         title: '购买门票',
+         title: '酒店预订',
          show: false,
          rooms: [{ id:1, name: '单人间' }, { id:2, name: '大床房' }, { id:3, name: '标准间' }]
      }
@@ -59,7 +59,9 @@
      }
 
      _handleClickRoom(room) {
-
+         this.setState({
+             selectedRoom: room
+         })
      }
 
      _handleClickTicket(ticket) {
@@ -75,17 +77,24 @@
                  selectedTickets: [...nextSelectedTickets]
              }))
          } else {
-             const nextSelectedTickets =
-                this.props.tickets.filter(item => {
-                    const currentTicketDate = new Date(item.start_time * 1000);
-                    return currentTicketDate >= new Date(minDateTicket.start_time * 1000) && currentTicketDate <= new Date(ticket.start_time * 1000)
-                })
-            if (nextSelectedTickets && nextSelectedTickets.length > 0) {
-                this.setState(preState => ({
-                    totalPrice: 123,
-                    selectedTickets: [...nextSelectedTickets]
-                }));
-            }
+             if (new Date(ticket.start_time) < new Date(minDateTicket.start_time)) {
+                 this.setState({
+                     totalPrice: 1234,
+                     selectedTickets: [ticket]
+                 })
+             } else {
+                 const nextSelectedTickets =
+                    this.props.tickets.filter(item => {
+                        const currentTicketDate = new Date(item.start_time * 1000);
+                        return currentTicketDate >= new Date(minDateTicket.start_time * 1000) && currentTicketDate <= new Date(ticket.start_time * 1000)
+                    })
+                if (nextSelectedTickets && nextSelectedTickets.length > 0) {
+                    this.setState(preState => ({
+                        totalPrice: 123,
+                        selectedTickets: [...nextSelectedTickets]
+                    }));
+                }
+             }
          }
      }
 
@@ -173,6 +182,7 @@ class RoomType extends React.Component {
             <div className={hotelStyle.roomContainer} onClick={this.handleClick}>
                 <div className={classNames({ [hotelStyle.roomContainerWrapper]: true, [hotelStyle.roomNormal]: !this.props.selected, [hotelStyle.roomActive]: this.props.selected })}>
                     <span>{this.props.room.name}</span>
+                    <span className={hotelStyle.roomPrice}>200元</span>
                 </div>
             </div>
         );
