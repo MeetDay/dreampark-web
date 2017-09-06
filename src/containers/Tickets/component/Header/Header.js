@@ -4,7 +4,7 @@
  * @Email:  crazyitcoder9527@126.com
  * @Project: dreampark-web
  * @Last modified by:   WangChao
- * @Last modified time: 2017-09-05T21:02:33+08:00
+ * @Last modified time: 2017-09-06T09:51:49+08:00
  */
 
 import React from 'react';
@@ -68,7 +68,8 @@ export default class Header extends React.Component {
         e.preventDefault();
         clearTimeout(this.state.timer);
         this.setState({
-            showBarcode: false
+            showBarcode: false,
+            timer: null
         })
     }
 

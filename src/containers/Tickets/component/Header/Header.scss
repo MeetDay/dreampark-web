@@ -3,7 +3,7 @@
 // @Email:  crazyitcoder9527@126.com
 // @Project: dreampark-web
 // @Last modified by:   WangChao
-// @Last modified time: 2017-09-05T20:27:35+08:00
+// @Last modified time: 2017-09-06T09:50:35+08:00
 
 $headerHeight: 130px;
 .header {
@@ -122,6 +122,10 @@ $bottomHeight: 40px;
         font-size: 24px;
         color: #000000;
     }
+
+    @media(max-width: 320px) {
+        margin-bottom: 20px;
+    }
 }
 
 .userInfoDetails {
@@ -199,9 +203,14 @@ $buyHelperHeight: 44px;
 
     & > span {
         display: inline-block;
+        width: 100%;
         margin-top: 25px;
         font-size: 16px;
         font-weight: bold;
         color: black;
+
+        @media(max-width: 320px) {
+            margin-top: 10px;
+        }
     }
 }
