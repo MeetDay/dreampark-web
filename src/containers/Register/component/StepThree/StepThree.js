@@ -56,7 +56,7 @@ export default class StepThree extends React.Component {
         const forgotpasswordStyle = require('../../../Login/component/ForgotPassword/ForgotPassword.scss');
         const styles = require('./StepThree.scss');
         const { isForVip } = this.props;
-        const okButtonMessage = isForVip ? '确 定' : '下一步';
+        const okButtonMessage = isForVip ? '下一步': '确 定';
 
         return (
             <div className={styles.stepthree}>
@@ -67,7 +67,7 @@ export default class StepThree extends React.Component {
                 <div className={logingStyle.loginBottom}>
                     <Phone type="text" usedFor="other" title="您的真实姓名" zone={false} value={this.props.username} onChange={this.props.onUsernameChange} />
                     <Phone type="tel" usedFor="idcard" title="身份证号码" zone={false} value={this.props.cardno} onChange={this.props.onCardNumberChange} />
-                    <div className={classNames({ [styles.nextstep]: !isForVip, [styles.confirm]: isForVip })}>
+                    <div className={classNames({ [styles.nextstep]: isForVip, [styles.confirm]: !isForVip })}>
                         <LoginButton title={okButtonMessage} onClick={this.handleClickNextStep} />
                     </div>
                 </div>

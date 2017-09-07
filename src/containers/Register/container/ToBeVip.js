@@ -51,8 +51,7 @@ export default class ToBeVip extends React.Component {
 
     _handleClickSkip(e) {
         e.preventDefault();
-        const forwardUrl = sessionStorage.getItem(Constant.URL_BEFORE_LEAVE);
-        this.props.push(forwardUrl || '/tickets');
+        this.props.push('/tickets');
     }
 
     _handleClickGoPay(e) {
@@ -71,7 +70,6 @@ export default class ToBeVip extends React.Component {
         client.post('/add_order', { headers: this.props.authHeaders, data: ticketInfo })
             .then(orderInfo => client.post('/charge', { headers: this.props.authHeaders, data: { id: orderInfo.orders_id, amount: ticketInfo.amount, open_id: openID, pay_type: 'wx_pub' }}))
             .then(charge => {
-                console.log(charge);
                 if (charge && !isEmptyObject(charge)) {
                     return new Promise((resolve, reject) => {
                         pingpp.createPayment(charge, function(result, err) {
