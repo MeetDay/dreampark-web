@@ -8,10 +8,15 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { LoginButton } from '../../../../components';
 import { jumpToWeChatAuthorizationUrl } from '../../../../utils/wechat';
 
 export default class Launching extends React.Component {
+    static propTypes = {
+        pushState: PropTypes.func
+    }
+
     constructor() {
         super();
         this.handleClickRegisterButton = (e) => this._handleClickRegisterButton(e);
@@ -21,12 +26,12 @@ export default class Launching extends React.Component {
 
     _handleClickRegisterButton(e) {
         e.preventDefault();
-        location.href = '/register';
+        this.props.pushState('/register')
     }
 
     _handleClickToBeVipButton(e) {
         e.preventDefault();
-        location.href = '/register?type=vip'
+        this.props.push('/register?type=vip');
     }
 
     _handleClickWechatLogin(e) {
