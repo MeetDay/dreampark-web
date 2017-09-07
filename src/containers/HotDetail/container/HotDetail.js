@@ -4,7 +4,7 @@
  * @Email:  crazyitcoder9527@126.com
  * @Project: dreampark-web
  * @Last modified by:   WangChao
- * @Last modified time: 2017-09-05T14:34:50+08:00
+ * @Last modified time: 2017-09-07T20:25:38+08:00
  */
 
 import React from 'react';
@@ -187,20 +187,20 @@ export default class HotDetail extends React.Component {
                     <ToolBar price={price || 0} onClickBuyTicketNow={this.handleClickToolBar} />
                 }
 
-                {(tickets && tickets.length > 0) &&
+                {/* {(tickets && tickets.length > 0) &&
                     <BuyHotelTickets
                         title="酒店预订"
                         show={this.state.showBuyTicketNow}
                         tickets={tickets}
                         onClickCancel={this.handleClickCancel}
                     />
-                }
+                } */}
                 {(tickets && tickets.length > 0) &&
                     <BuyTicketNow
                         title={buyTicketTitle}
                         ticketsType={ticketsType}
                         tickets={tickets}
-                        show={false}
+                        show={this.state.showBuyTicketNow}
                         onClickCancel={this.handleClickCancel}
                         onClickBuyTicketNow={this.handleClickBuyTicketNow}
                         onClickAddToCart={this.handleClickAddToCart}

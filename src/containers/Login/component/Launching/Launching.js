@@ -4,7 +4,7 @@
  * @Email:  crazyitcoder9527@126.com
  * @Project: dreampark-web
  * @Last modified by:   WangChao
- * @Last modified time: 2017-09-04T20:26:36+08:00
+ * @Last modified time: 2017-09-07T20:55:17+08:00
  */
 
 import React from 'react';
@@ -63,11 +63,11 @@ export default class Launching extends React.Component {
                         textColor="white"
                         onClick={this.handleClickToBeVipButton}
                     />
-                    <LoginButton
+                    {/* <LoginButton
                         imgShow
                         title="使用微信登陆"
                         onClick={this.handleClickWechatLogin}
-                    />
+                    /> */}
                 </div>
                 <div className={styles.declare}>
                     <span>“注册账号”或“登录”表示即代表我同意接受梦想盛会的<a href="/terms/1">用户协议</a>及<a href="/terms/2">隐私声明</a></span>
