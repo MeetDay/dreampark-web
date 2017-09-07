@@ -41,7 +41,7 @@ loginRouter.get('/wechat', (req, res) => {
             })
             .catch((err) => { res.json(Object.assign({ code: 10002 }, data: err)) })
     } else {
-        res.json({ code: 10001, message: '缺少参数'})
+        res.json({ code: 10001, error_message: '缺少参数'})
     }
 })
 
