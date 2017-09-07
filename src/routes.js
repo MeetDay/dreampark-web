@@ -44,7 +44,7 @@ const routes = (store) => {
 		callback()
 	}
 
-	const mustbeHaveWechatInfo = (nextState, replaceState, callback) {
+	const mustbeHaveWechatInfo = (nextState, replaceState, callback) => {
 		const { user, weChatInfo } = store.getState().login;
 		if (user && isFullUser(user)) {
 			replaceState('/tickets');
