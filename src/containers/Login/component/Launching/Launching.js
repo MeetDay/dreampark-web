@@ -31,7 +31,7 @@ export default class Launching extends React.Component {
 
     _handleClickToBeVipButton(e) {
         e.preventDefault();
-        this.props.push('/register?type=vip');
+        this.props.pushState('/register?type=vip');
     }
 
     _handleClickWechatLogin(e) {
