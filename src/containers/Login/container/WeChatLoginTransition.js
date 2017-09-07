@@ -45,7 +45,7 @@ export default class WeChatLoginTransition extends React.Component {
         const getQueryValueOf = key => decodeURIComponent(this.props.location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
         const wechatCode = getQueryValueOf('code')
         const callbackUrl = getQueryValueOf('callbackUrl')
-        if (!wechatCode && callbackUrl) {
+        if (!wechatCode) {
             jumpToWeChatAuthorizationUrl(location, callbackUrl)
         }
     }
