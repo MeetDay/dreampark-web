@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.bb1447ddd5d7067259bf.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.bb1447ddd5d7067259bf.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.bb1447ddd5d7067259bf.min.js"
+    "main": "http://localhost:3000/dist/main.ed7b307cf9e100f5c158.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.ed7b307cf9e100f5c158.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.ed7b307cf9e100f5c158.min.js"
   },
   "styles": {},
   "assets": {
@@ -107,9 +107,10 @@
       "roomContainerWrapper": "BuyHotelTickets__roomContainerWrapper__1Io1_",
       "roomNormal": "BuyHotelTickets__roomNormal__3xJaV",
       "roomActive": "BuyHotelTickets__roomActive__1wfQ_",
+      "roomPrice": "BuyHotelTickets__roomPrice__2C5We",
       "toolBarWrapper": "BuyHotelTickets__toolBarWrapper__dRxzh",
       "totalPrice": "BuyHotelTickets__totalPrice__3pHt_",
-      "_style": ".BuyHotelTickets__middle__yKKUA {\n  margin: 0 20px;\n  padding: 20px 0; }\n\n.BuyHotelTickets__rooms__x-iLC {\n  width: 100%;\n  overflow: hidden; }\n\n.BuyHotelTickets__roomsWrapper__2Tm61 {\n  white-space: nowrap;\n  overflow-y: hidden;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch !important; }\n\n.BuyHotelTickets__roomsWrapper__2Tm61::-webkit-scrollbar {\n  display: none; }\n\n.BuyHotelTickets__roomContainer__1GTSq {\n  display: inline-block;\n  margin: 0 12px; }\n\n.BuyHotelTickets__roomContainerWrapper__1Io1_ {\n  padding: 10px 25px;\n  border-radius: 5px; }\n  .BuyHotelTickets__roomContainerWrapper__1Io1_ > span {\n    font-size: 20px; }\n\n.BuyHotelTickets__roomNormal__3xJaV {\n  border: 1px solid #9B9B9B;\n  color: #9B9B9B; }\n\n.BuyHotelTickets__roomActive__1wfQ_ {\n  border: 1px solid #E62A10;\n  color: #E62A10; }\n\n.BuyHotelTickets__toolBarWrapper__dRxzh {\n  position: relative;\n  text-align: center;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  color: #FFFFFF; }\n\n.BuyHotelTickets__totalPrice__3pHt_ {\n  margin: 0 8px;\n  color: #EC0539; }\n"
+      "_style": ".BuyHotelTickets__middle__yKKUA {\n  margin: 0 20px;\n  padding: 20px 0; }\n\n.BuyHotelTickets__rooms__x-iLC {\n  width: 100%;\n  overflow: hidden; }\n\n.BuyHotelTickets__roomsWrapper__2Tm61 {\n  white-space: nowrap;\n  overflow-y: hidden;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch !important; }\n\n.BuyHotelTickets__roomsWrapper__2Tm61::-webkit-scrollbar {\n  display: none; }\n\n.BuyHotelTickets__roomContainer__1GTSq {\n  display: inline-block;\n  margin: 0 12px; }\n\n.BuyHotelTickets__roomContainerWrapper__1Io1_ {\n  padding: 2px 25px;\n  border-radius: 5px; }\n  .BuyHotelTickets__roomContainerWrapper__1Io1_ > span {\n    font-size: 18px; }\n\n.BuyHotelTickets__roomNormal__3xJaV {\n  border: 1px solid #9B9B9B;\n  color: #9B9B9B; }\n\n.BuyHotelTickets__roomActive__1wfQ_ {\n  border: 1px solid #E62A10;\n  color: #E62A10; }\n\n.BuyHotelTickets__roomPrice__2C5We {\n  display: block;\n  text-align: center;\n  font-size: 12px !important; }\n\n.BuyHotelTickets__toolBarWrapper__dRxzh {\n  position: relative;\n  text-align: center;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  color: #FFFFFF; }\n\n.BuyHotelTickets__totalPrice__3pHt_ {\n  margin: 0 8px;\n  color: #EC0539; }\n"
     },
     "./src/containers/HotDetail/component/BuyParkingCoupon/BuyParkingCoupon.scss": {
       "description": "BuyParkingCoupon__description__u_YLZ",

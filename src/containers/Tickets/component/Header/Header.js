@@ -4,7 +4,7 @@
  * @Email:  crazyitcoder9527@126.com
  * @Project: dreampark-web
  * @Last modified by:   WangChao
- * @Last modified time: 2017-09-06T09:51:49+08:00
+ * @Last modified time: 2017-09-07T17:40:00+08:00
  */
 
 import React from 'react';
@@ -17,7 +17,7 @@ import { Modal } from 'antd';
 import { isEmptyObject } from '../../../Login/module/login';
 import * as Constant from '../../../../utils/constant';
 import APIClient from '../../../../helpers/APIClient';
-import { generatorRandomString } from '../../utils/tickets';
+import { generatorRandomString, PersonQRCode, TicketQRCode, encrypt } from '../../utils/tickets';
 
 export default class Header extends React.Component {
     static propTypes = {
@@ -61,7 +61,7 @@ export default class Header extends React.Component {
         this.setState({
             showBarcode: true,
             timer: timer
-        })
+        });
     }
 
     _handleClickCloseBarcode(e) {
