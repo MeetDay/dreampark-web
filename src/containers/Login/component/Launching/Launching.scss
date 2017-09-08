@@ -51,8 +51,8 @@ $logoHeight: 70px;
 
 .buttons {
     width: 100%;
-    &>div:last-child {
-        margin-top: 20px;
+    & > div {
+        margin: 20px 0;
     }
 }
 

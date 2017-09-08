@@ -62,7 +62,14 @@ const actionhandlers = {
             authHeaders: generatorAuthHeadersForUser(data.userInfo)
         }
     },
-    [`${WECHATLOGIN}_REJECTED`]: (state, action) => ({...state, weChatInfoLoading: false, weChatInfoLoaded: false, weChatInfoError: action.payload.data }),
+    [`${WECHATLOGIN}_REJECTED`]: (state, action) => {
+        console.log(action.payload);
+        return {
+            ...state, weChatInfoLoading: false,
+            weChatInfoLoaded: false,
+            weChatInfoError: action.payload
+        }
+    },
 
     [`${LOADCOOKIESYNC}`]: (state, action) => ({ ...state, user: action.cookie, authHeaders: generatorAuthHeadersForUser(action.cookie) })
 };

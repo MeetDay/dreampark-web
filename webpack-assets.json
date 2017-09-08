@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.9dcf10b80424ca6691a3.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.9dcf10b80424ca6691a3.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.9dcf10b80424ca6691a3.min.js"
+    "main": "http://localhost:3000/dist/main.65beb5de560276f458d6.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.65beb5de560276f458d6.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.65beb5de560276f458d6.min.js"
   },
   "styles": {},
   "assets": {
@@ -99,6 +99,19 @@
       "downloadWrapper": "Download__downloadWrapper__H8g6r",
       "_style": ".Download__background__3u7bS {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  background-size: cover;\n  background-position: center; }\n\n.Download__fbparkLogo__389fw {\n  margin: 80px 0 60px 0;\n  vertical-align: top;\n  font-size: 0px;\n  text-align: center; }\n\n.Download__fbparkDescription__2u_gy {\n  margin-top: 40px;\n  margin-bottom: 20px;\n  text-align: center;\n  font-size: 24px;\n  line-height: 40px;\n  color: white; }\n\n.Download__fbparkDownload__2xsAC {\n  text-align: center; }\n\n.Download__downloadLink__lu53c {\n  display: inline-block;\n  width: 100%;\n  margin-top: 40px;\n  text-align: center;\n  text-decoration: none;\n  color: white; }\n\n.Download__downloadWrapper__H8g6r {\n  display: inline-block;\n  width: 200px;\n  height: 44px;\n  border-radius: 4px;\n  font-size: 0px;\n  background-color: #e32d1f; }\n  .Download__downloadWrapper__H8g6r > img {\n    width: 27px;\n    height: 30px;\n    margin-top: 7px;\n    margin-right: 15px;\n    vertical-align: top; }\n  .Download__downloadWrapper__H8g6r > span {\n    line-height: 44px;\n    font-size: 18px;\n    color: white; }\n"
     },
+    "./src/containers/HotDetail/component/BuyHotelTickets/BuyHotelTickets.scss": {
+      "middle": "BuyHotelTickets__middle__yKKUA",
+      "rooms": "BuyHotelTickets__rooms__x-iLC",
+      "roomsWrapper": "BuyHotelTickets__roomsWrapper__2Tm61",
+      "roomContainer": "BuyHotelTickets__roomContainer__1GTSq",
+      "roomContainerWrapper": "BuyHotelTickets__roomContainerWrapper__1Io1_",
+      "roomNormal": "BuyHotelTickets__roomNormal__3xJaV",
+      "roomActive": "BuyHotelTickets__roomActive__1wfQ_",
+      "roomPrice": "BuyHotelTickets__roomPrice__2C5We",
+      "toolBarWrapper": "BuyHotelTickets__toolBarWrapper__dRxzh",
+      "totalPrice": "BuyHotelTickets__totalPrice__3pHt_",
+      "_style": ".BuyHotelTickets__middle__yKKUA {\n  margin: 0 20px;\n  padding: 20px 0; }\n\n.BuyHotelTickets__rooms__x-iLC {\n  width: 100%;\n  overflow: hidden; }\n\n.BuyHotelTickets__roomsWrapper__2Tm61 {\n  white-space: nowrap;\n  overflow-y: hidden;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch !important; }\n\n.BuyHotelTickets__roomsWrapper__2Tm61::-webkit-scrollbar {\n  display: none; }\n\n.BuyHotelTickets__roomContainer__1GTSq {\n  display: inline-block;\n  margin: 0 12px; }\n\n.BuyHotelTickets__roomContainerWrapper__1Io1_ {\n  padding: 2px 25px;\n  border-radius: 5px; }\n  .BuyHotelTickets__roomContainerWrapper__1Io1_ > span {\n    font-size: 18px; }\n\n.BuyHotelTickets__roomNormal__3xJaV {\n  border: 1px solid #9B9B9B;\n  color: #9B9B9B; }\n\n.BuyHotelTickets__roomActive__1wfQ_ {\n  border: 1px solid #E62A10;\n  color: #E62A10; }\n\n.BuyHotelTickets__roomPrice__2C5We {\n  display: block;\n  text-align: center;\n  font-size: 12px !important; }\n\n.BuyHotelTickets__toolBarWrapper__dRxzh {\n  position: relative;\n  text-align: center;\n  font-family: PingFangSC-Regular;\n  font-size: 16px;\n  color: #FFFFFF; }\n\n.BuyHotelTickets__totalPrice__3pHt_ {\n  margin: 0 8px;\n  color: #EC0539; }\n"
+    },
     "./src/containers/HotDetail/component/BuyParkingCoupon/BuyParkingCoupon.scss": {
       "description": "BuyParkingCoupon__description__u_YLZ",
       "carnumber": "BuyParkingCoupon__carnumber__1Re7L",
@@ -182,7 +195,7 @@
       "nav": "ForgotPassword__nav__2hHl4",
       "description": "ForgotPassword__description__fakcx",
       "bottom": "ForgotPassword__bottom__2UHcD",
-      "_style": ".ForgotPassword__forgotpassword__26-1n {\n  position: relative;\n  margin: 0 5%; }\n\n.ForgotPassword__nav__2hHl4 {\n  height: 44px; }\n\n.ForgotPassword__description__fakcx > span {\n  display: block;\n  margin: 24px 0;\n  color: white; }\n\n.ForgotPassword__description__fakcx > span:first-child {\n  font-size: 28px; }\n\n.ForgotPassword__description__fakcx > span:last-child {\n  font-size: 20px; }\n\n.ForgotPassword__bottom__2UHcD > div {\n  margin-bottom: 24px; }\n"
+      "_style": ".ForgotPassword__forgotpassword__26-1n {\n  position: relative;\n  margin: 0 5%; }\n\n.ForgotPassword__nav__2hHl4 {\n  height: 44px; }\n\n.ForgotPassword__description__fakcx > span {\n  display: block;\n  margin: 24px 0;\n  color: white; }\n\n.ForgotPassword__description__fakcx > span:first-child {\n  font-size: 28px; }\n\n.ForgotPassword__description__fakcx > span:last-child {\n  font-size: 18px; }\n\n.ForgotPassword__bottom__2UHcD > div {\n  margin-bottom: 24px; }\n"
     },
     "./src/containers/Login/component/Launching/Launching.scss": {
       "launching": "Launching__launching__1hhVV",
@@ -193,7 +206,7 @@
       "description": "Launching__description__ejw24",
       "buttons": "Launching__buttons__34mEM",
       "declare": "Launching__declare__2d7xH",
-      "_style": ".Launching__launching__1hhVV {\n  position: relative;\n  padding: 20px; }\n\n.Launching__launchingTop__1X5X0 {\n  width: 100%;\n  height: 0px;\n  line-height: 0px; }\n\n.Launching__loginButton__22bCc {\n  float: right;\n  min-width: 80px;\n  border: none;\n  padding: 0;\n  line-height: 0px;\n  outline: none;\n  font-size: 18px;\n  text-align: right;\n  color: white;\n  background-color: transparent; }\n\n.Launching__dreampark__1x0DQ {\n  width: 100%;\n  margin-top: 50px; }\n  .Launching__dreampark__1x0DQ > img {\n    width: 100%;\n    vertical-align: top; }\n\n.Launching__appLogo__1RAEH {\n  margin-top: 44px; }\n  .Launching__appLogo__1RAEH > img {\n    width: 70px;\n    height: 70px;\n    border-radius: 35px; }\n\n.Launching__description__ejw24 {\n  margin: 36px 0;\n  font-size: 28px;\n  color: white; }\n\n.Launching__buttons__34mEM {\n  width: 100%; }\n  .Launching__buttons__34mEM > div:last-child {\n    margin-top: 20px; }\n\n.Launching__declare__2d7xH {\n  margin-top: 44px;\n  font-size: 14px;\n  line-height: 24px;\n  letter-spacing: 1.5px;\n  color: white; }\n  .Launching__declare__2d7xH > span > a {\n    text-decoration: underline;\n    color: white; }\n"
+      "_style": ".Launching__launching__1hhVV {\n  position: relative;\n  padding: 20px; }\n\n.Launching__launchingTop__1X5X0 {\n  width: 100%;\n  height: 0px;\n  line-height: 0px; }\n\n.Launching__loginButton__22bCc {\n  float: right;\n  min-width: 80px;\n  border: none;\n  padding: 0;\n  line-height: 0px;\n  outline: none;\n  font-size: 18px;\n  text-align: right;\n  color: white;\n  background-color: transparent; }\n\n.Launching__dreampark__1x0DQ {\n  width: 100%;\n  margin-top: 50px; }\n  .Launching__dreampark__1x0DQ > img {\n    width: 100%;\n    vertical-align: top; }\n\n.Launching__appLogo__1RAEH {\n  margin-top: 44px; }\n  .Launching__appLogo__1RAEH > img {\n    width: 70px;\n    height: 70px;\n    border-radius: 35px; }\n\n.Launching__description__ejw24 {\n  margin: 36px 0;\n  font-size: 28px;\n  color: white; }\n\n.Launching__buttons__34mEM {\n  width: 100%; }\n  .Launching__buttons__34mEM > div {\n    margin: 20px 0; }\n\n.Launching__declare__2d7xH {\n  margin-top: 44px;\n  font-size: 14px;\n  line-height: 24px;\n  letter-spacing: 1.5px;\n  color: white; }\n  .Launching__declare__2d7xH > span > a {\n    text-decoration: underline;\n    color: white; }\n"
     },
     "./src/containers/Login/component/Loging/Loging.scss": {
       "loging": "Loging__loging__Y9BRq",
@@ -229,8 +242,8 @@
     "./src/containers/Register/component/StepThree/StepThree.scss": {
       "stepthree": "StepThree__stepthree__2PEG-",
       "nextstep": "StepThree__nextstep__QudN7",
-      "okButton": "StepThree__okButton__3iPyO",
-      "_style": ".StepThree__stepthree__2PEG- {\n  margin: 0 5%; }\n\n.StepThree__nextstep__QudN7 {\n  float: right;\n  width: 35%; }\n\n.StepThree__okButton__3iPyO {\n  width: 100%; }\n"
+      "confirm": "StepThree__confirm__Z1Gzl",
+      "_style": ".StepThree__stepthree__2PEG- {\n  margin: 0 5%; }\n\n.StepThree__nextstep__QudN7 {\n  float: right;\n  width: 35%; }\n\n.StepThree__confirm__Z1Gzl {\n  width: 100%; }\n"
     },
     "./src/containers/Register/component/StepTwo/StepTwo.scss": {
       "steptwo": "StepTwo__steptwo__eP1pe",
@@ -241,6 +254,19 @@
       "container": "Register__container__3GCJW",
       "nav": "Register__nav__3PkKt",
       "_style": ".Register__container__3GCJW {\n  position: relative;\n  padding-top: 44px; }\n\n.Register__nav__3PkKt {\n  margin: 0 20px; }\n"
+    },
+    "./src/containers/Register/container/ToBeVip.scss": {
+      "container": "ToBeVip__container__321hC",
+      "containerWrapper": "ToBeVip__containerWrapper__157cj",
+      "skip": "ToBeVip__skip__2a6Iv",
+      "title": "ToBeVip__title__3gtSJ",
+      "description": "ToBeVip__description__3ezo1",
+      "priceInfo": "ToBeVip__priceInfo__1cOLB",
+      "vipLogo": "ToBeVip__vipLogo__KX7u8",
+      "vipPrice": "ToBeVip__vipPrice__27XMz",
+      "vipRights": "ToBeVip__vipRights__3vb3p",
+      "goPay": "ToBeVip__goPay__13jA1",
+      "_style": ".ToBeVip__container__321hC {\n  position: relative; }\n\n.ToBeVip__containerWrapper__157cj {\n  margin: 0 20px; }\n\n.ToBeVip__skip__2a6Iv {\n  width: 100%;\n  height: 44px; }\n  .ToBeVip__skip__2a6Iv > span {\n    float: right;\n    text-align: center;\n    line-height: 44px;\n    font-size: 16px;\n    color: white; }\n\n.ToBeVip__title__3gtSJ {\n  margin-top: 15px; }\n  .ToBeVip__title__3gtSJ > span {\n    font-size: 28px;\n    color: #FFFFFF; }\n\n.ToBeVip__description__3ezo1 {\n  margin: 25px 0; }\n  .ToBeVip__description__3ezo1 > span {\n    font-size: 18px;\n    color: #FFFFFF; }\n\n.ToBeVip__priceInfo__1cOLB {\n  width: 100%;\n  height: 128px;\n  border-radius: 10px;\n  text-align: center;\n  background-color: #FFFFFF; }\n  .ToBeVip__priceInfo__1cOLB > div {\n    display: inline-block;\n    height: 100%;\n    font-size: 0;\n    vertical-align: top; }\n\n.ToBeVip__vipLogo__KX7u8 {\n  width: 70%; }\n  .ToBeVip__vipLogo__KX7u8 > img {\n    width: 56px;\n    height: 22px;\n    margin-right: 8px;\n    vertical-align: middle; }\n  .ToBeVip__vipLogo__KX7u8 > span {\n    font-size: 24px;\n    font-weight: bold;\n    color: #E62A10;\n    vertical-align: middle; }\n\n.ToBeVip__vipLogo__KX7u8::before {\n  display: inline-block;\n  content: ' ';\n  height: 100%;\n  vertical-align: middle; }\n\n.ToBeVip__vipPrice__27XMz {\n  width: 30%; }\n  .ToBeVip__vipPrice__27XMz > span {\n    font-size: 24px;\n    font-weight: bold;\n    color: #000000;\n    vertical-align: middle; }\n\n.ToBeVip__vipPrice__27XMz::after {\n  display: inline-block;\n  content: ' ';\n  height: 100%;\n  width: 15px;\n  vertical-align: middle; }\n\n.ToBeVip__vipRights__3vb3p {\n  margin: 24px 0; }\n  .ToBeVip__vipRights__3vb3p > span {\n    font-size: 16px;\n    color: #FFFFFF;\n    vertical-align: middle; }\n  .ToBeVip__vipRights__3vb3p > img {\n    width: 18px;\n    height: 18px;\n    margin-left: 12px;\n    font-size: 0px;\n    vertical-align: middle; }\n\n.ToBeVip__goPay__13jA1 {\n  position: fixed;\n  left: 20px;\n  right: 20px;\n  bottom: 40px; }\n"
     },
     "./src/containers/Shoppingcart/component/Card/Card.scss": {
       "card": "Card__card__2SRa_",
@@ -324,6 +350,7 @@
       "userqrcode": "Header__userqrcode__Wcnjx",
       "userqrcodeWrapper": "Header__userqrcodeWrapper__2KyL8",
       "userqrcodeTop": "Header__userqrcodeTop__2DHv1",
+      "realnameAuthentication": "Header__realnameAuthentication__2M8hQ",
       "userInfoDetails": "Header__userInfoDetails__2rMhE",
       "userAvatar": "Header__userAvatar__3TtuG",
       "usernameExpand": "Header__usernameExpand__1cX2T",
@@ -332,7 +359,9 @@
       "userqrcodeBottom": "Header__userqrcodeBottom__3YbQz",
       "buyTip": "Header__buyTip__2SPUZ",
       "buyHelper": "Header__buyHelper__1ioXn",
-      "_style": ".Header__header__3AhMC {\n  height: 130px;\n  white-space: nowrap;\n  background-color: white; }\n\n.Header__avatar__2vCWR {\n  height: 60px;\n  margin: 35px 0;\n  margin-left: 50px; }\n  @media screen and (max-width: 370px) {\n    .Header__avatar__2vCWR {\n      margin-left: 20px; } }\n\n.Header__info__3WAxg {\n  display: inline-block;\n  height: 60px;\n  margin: 35px 0;\n  margin-left: 13px;\n  vertical-align: top; }\n  .Header__info__3WAxg > div {\n    display: block; }\n\n.Header__username__3lolH {\n  font-size: 20px;\n  color: #143B6E; }\n\n.Header__userBarode__2hYTc {\n  font-size: 0;\n  vertical-align: top;\n  width: 100%;\n  background-color: white; }\n\n.Header__vip__23co9 {\n  width: 56px;\n  height: 22px;\n  margin-left: 13px;\n  vertical-align: text-bottom; }\n\n.Header__tip__3Bunf {\n  margin-top: 5px;\n  font-size: 14px;\n  color: #9B9B9B; }\n\n.Header__qrcode__tg8WT {\n  display: inline-block;\n  height: 60px;\n  width: 60px;\n  margin: 35px 0;\n  margin-left: 45px;\n  vertical-align: top; }\n  @media screen and (max-width: 370px) {\n    .Header__qrcode__tg8WT {\n      margin-left: 15px; } }\n  .Header__qrcode__tg8WT > img {\n    width: 100%;\n    font-size: 0;\n    vertical-align: top; }\n\n.Header__bottom__2IU04 {\n  height: 40px;\n  background-color: #2D343B; }\n  .Header__bottom__2IU04 > div {\n    display: inline-block;\n    width: 33.3%;\n    line-height: 40px;\n    font-size: 16px;\n    color: white;\n    text-align: center; }\n\n.Header__item__V4vqx {\n  display: inline-block;\n  height: 40px;\n  line-height: 40px; }\n\n.Header__itemActive__266ta {\n  border-bottom: 3px solid #E62A10; }\n\n.Header__userqrcode__Wcnjx {\n  margin: 15px 0; }\n\n.Header__userqrcodeWrapper__2KyL8 {\n  padding: 0px 20px; }\n\n.Header__userqrcodeTop__2DHv1 {\n  border-bottom: 1px dashed #9B9B9B; }\n\n.Header__userInfoDetails__2rMhE {\n  display: inline-block;\n  width: 100%;\n  text-align: center; }\n\n.Header__userAvatar__3TtuG {\n  width: 60px;\n  height: 60px;\n  font-size: 0;\n  vertical-align: top; }\n\n.Header__usernameExpand__1cX2T {\n  display: inline-block;\n  min-width: 80px;\n  text-align: center;\n  line-height: 60px; }\n\n.Header__userIDCard__3hRjO {\n  display: block;\n  padding: 20px 0;\n  text-align: center;\n  font-size: 14px;\n  color: #9B9B9B; }\n\n.Header__userqrcodeBottom__3YbQz {\n  margin: 15px 0; }\n\n.Header__buyTip__2SPUZ {\n  display: inline-block;\n  width: 100%;\n  margin: 10px 0;\n  font-size: 14px;\n  text-align: center;\n  color: #9B9B9B; }\n\n.Header__buyHelper__1ioXn {\n  display: block;\n  width: 100%;\n  height: 44px;\n  margin-top: 20px;\n  border-radius: 22px;\n  font-size: 14px;\n  line-height: 44px;\n  text-align: center;\n  text-decoration: none;\n  color: white;\n  background-color: #E62A10; }\n  .Header__buyHelper__1ioXn:hover {\n    color: white;\n    text-decoration: none; }\n  .Header__buyHelper__1ioXn:visited {\n    color: white;\n    text-decoration: none; }\n"
+      "makeQRCode": "Header__makeQRCode__IwUn3",
+      "makeQrCode": "Header__makeQRCode__IwUn3",
+      "_style": ".Header__header__3AhMC {\n  height: 130px;\n  white-space: nowrap;\n  background-color: white; }\n\n.Header__avatar__2vCWR {\n  height: 60px;\n  margin: 35px 0;\n  margin-left: 50px; }\n  @media screen and (max-width: 370px) {\n    .Header__avatar__2vCWR {\n      margin-left: 20px; } }\n\n.Header__info__3WAxg {\n  display: inline-block;\n  height: 60px;\n  margin: 35px 0;\n  margin-left: 13px;\n  vertical-align: top; }\n  .Header__info__3WAxg > div {\n    display: block; }\n\n.Header__username__3lolH {\n  font-size: 20px;\n  color: #143B6E; }\n\n.Header__userBarode__2hYTc {\n  font-size: 0;\n  vertical-align: top;\n  width: 100%;\n  background-color: white; }\n\n.Header__vip__23co9 {\n  width: 56px;\n  height: 22px;\n  margin-left: 13px;\n  vertical-align: text-bottom; }\n\n.Header__tip__3Bunf {\n  margin-top: 5px;\n  font-size: 14px;\n  color: #9B9B9B; }\n\n.Header__qrcode__tg8WT {\n  display: inline-block;\n  height: 60px;\n  width: 60px;\n  margin: 35px 0;\n  margin-left: 45px;\n  vertical-align: top; }\n  @media screen and (max-width: 370px) {\n    .Header__qrcode__tg8WT {\n      margin-left: 15px; } }\n  .Header__qrcode__tg8WT > img {\n    width: 100%;\n    font-size: 0;\n    vertical-align: top; }\n\n.Header__bottom__2IU04 {\n  height: 40px;\n  background-color: #2D343B; }\n  .Header__bottom__2IU04 > div {\n    display: inline-block;\n    width: 33.3%;\n    line-height: 40px;\n    font-size: 16px;\n    color: white;\n    text-align: center; }\n\n.Header__item__V4vqx {\n  display: inline-block;\n  height: 40px;\n  line-height: 40px; }\n\n.Header__itemActive__266ta {\n  border-bottom: 3px solid #E62A10; }\n\n.Header__userqrcode__Wcnjx {\n  margin: 15px 0; }\n\n.Header__userqrcodeWrapper__2KyL8 {\n  padding: 0px 20px; }\n\n.Header__userqrcodeTop__2DHv1 {\n  border-bottom: 1px dashed #9B9B9B; }\n\n.Header__realnameAuthentication__2M8hQ {\n  margin-bottom: 30px;\n  text-align: center; }\n  .Header__realnameAuthentication__2M8hQ > span {\n    font-size: 24px;\n    color: #000000; }\n  @media (max-width: 320px) {\n    .Header__realnameAuthentication__2M8hQ {\n      margin-bottom: 20px; } }\n\n.Header__userInfoDetails__2rMhE {\n  display: inline-block;\n  width: 100%;\n  text-align: center; }\n\n.Header__userAvatar__3TtuG {\n  width: 60px;\n  height: 60px;\n  font-size: 0;\n  vertical-align: top; }\n\n.Header__usernameExpand__1cX2T {\n  display: inline-block;\n  min-width: 80px;\n  text-align: center;\n  line-height: 60px; }\n\n.Header__userIDCard__3hRjO {\n  display: block;\n  padding: 20px 0;\n  text-align: center;\n  font-size: 14px;\n  color: #9B9B9B; }\n\n.Header__userqrcodeBottom__3YbQz {\n  margin: 15px 0; }\n\n.Header__buyTip__2SPUZ {\n  display: inline-block;\n  width: 100%;\n  margin: 10px 0;\n  font-size: 14px;\n  text-align: center;\n  color: #9B9B9B; }\n\n.Header__buyHelper__1ioXn {\n  display: block;\n  width: 100%;\n  height: 44px;\n  margin-top: 10px;\n  margin-bottom: 15px;\n  border-radius: 22px;\n  font-size: 18px;\n  line-height: 44px;\n  text-align: center;\n  text-decoration: none;\n  color: white;\n  background-color: #E62A10; }\n  .Header__buyHelper__1ioXn:hover {\n    color: white;\n    text-decoration: none; }\n  .Header__buyHelper__1ioXn:visited {\n    color: white;\n    text-decoration: none; }\n\n.Header__makeQRCode__IwUn3 {\n  width: 100%;\n  text-align: center; }\n  .Header__makeQRCode__IwUn3 > span {\n    display: inline-block;\n    width: 100%;\n    margin-top: 25px;\n    font-size: 16px;\n    font-weight: bold;\n    color: black; }\n    @media (max-width: 320px) {\n      .Header__makeQRCode__IwUn3 > span {\n        margin-top: 10px; } }\n"
     },
     "./src/containers/Tickets/component/SearchItem/SearchItem.scss": {
       "item": "SearchItem__item__1WEVn",
@@ -386,9 +415,12 @@
     },
     "./src/containers/Tickets/component/TicketTool/TicketTool.scss": {
       "tool": "TicketTool__tool__3s1E2",
+      "item": "TicketTool__item__1fP3e",
+      "itemWrapper": "TicketTool__itemWrapper__3PjV1",
       "cartImg": "TicketTool__cartImg__2b1zV",
       "ticket": "TicketTool__ticket__1Dfly",
-      "_style": ".TicketTool__tool__3s1E2 {\n  position: fixed;\n  left: 10px;\n  right: 10px;\n  bottom: 10px;\n  height: 55px;\n  text-align: center;\n  background-color: #E62A10; }\n\n.TicketTool__cartImg__2b1zV {\n  height: 22px;\n  margin-top: 16.5px; }\n\n.TicketTool__ticket__1Dfly {\n  display: inline-block;\n  margin-left: 10px;\n  height: 55px;\n  line-height: 55px;\n  vertical-align: top;\n  font-size: 18px;\n  font-family: PingFangSC-Regular;\n  color: white; }\n"
+      "safaLink": "TicketTool__safaLink__2b4n6",
+      "_style": ".TicketTool__tool__3s1E2 {\n  position: fixed;\n  left: 8px;\n  right: 8px;\n  bottom: 8px;\n  height: 50px;\n  text-align: center; }\n\n.TicketTool__item__1fP3e {\n  display: inline-block;\n  width: 100%; }\n\n.TicketTool__itemWrapper__3PjV1 {\n  margin: 0 8px;\n  background-color: #E62A10; }\n\n.TicketTool__cartImg__2b1zV {\n  height: 22px;\n  margin-top: 14px; }\n\n.TicketTool__ticket__1Dfly {\n  display: inline-block;\n  margin-left: 10px;\n  height: 50px;\n  line-height: 50px;\n  vertical-align: top;\n  font-size: 18px;\n  font-family: PingFangSC-Regular;\n  color: white; }\n\n.TicketTool__safaLink__2b4n6 {\n  color: white;\n  text-decoration: none; }\n  .TicketTool__safaLink__2b4n6:hover {\n    color: white;\n    text-decoration: none; }\n  .TicketTool__safaLink__2b4n6:visited {\n    color: white;\n    text-decoration: none; }\n"
     },
     "./src/containers/Tickets/component/UnpaidOrder/UnpaidOrder.scss": {
       "cancelOrder": "UnpaidOrder__cancelOrder__2RVJS",

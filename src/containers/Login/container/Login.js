@@ -107,7 +107,7 @@ export default class Login extends React.Component {
             />
         )
         if (this.props.location.hash === '#launching') {
-            content = (<Launching />);
+            content = (<Launching pushState={this.props.push} />);
         } else if (this.props.location.hash === '#forgotpassword') {
             content = (
                 <ForgotPassword

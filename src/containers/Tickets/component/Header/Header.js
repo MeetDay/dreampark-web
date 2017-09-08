@@ -1,12 +1,23 @@
+/**
+ * @Author: WangChao
+ * @Date:   2017-09-04T14:34:57+08:00
+ * @Email:  crazyitcoder9527@126.com
+ * @Project: dreampark-web
+ * @Last modified by:   WangChao
+ * @Last modified time: 2017-09-07T17:40:00+08:00
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import superagent from 'superagent';
 import Cookies from 'universal-cookie';
 import classNames from 'classnames';
+import QRCode from 'qrcode.react';
 import { Modal } from 'antd';
 import { isEmptyObject } from '../../../Login/module/login';
 import * as Constant from '../../../../utils/constant';
 import APIClient from '../../../../helpers/APIClient';
+import { generatorRandomString, PersonQRCode, encrypt } from '../../utils/tickets';
 
 export default class Header extends React.Component {
     static propTypes = {
@@ -24,26 +35,16 @@ export default class Header extends React.Component {
         this.handleClickShowBarcode = (e) => this._handleClickShowBarcode(e);
         this.handleClickCloseBarcode = (e) => this._handleClickCloseBarcode(e);
         this.state = {
-            freeTicketID: '',
+            randomString: generatorRandomString(20),
             selectedItemType: props.selectedItemType,
             showBarcode: false
         }
-    }
 
-    componentDidMount() {
-        const cookies = new Cookies();
-        const freeTicketID = cookies.get(Constant.FREE_TICKET_ID);
-        if (!freeTicketID) {
-            const client = new APIClient();
-            client.get('/ticket/free', { subpath: '/actions/user' })
-                .then(freeTicket => {
-                    cookies.set(Constant.FREE_TICKET_ID, freeTicket.id, { path: '/', maxAge: 3600 })
-                    this.setState({ freeTicketID: freeTicket.id })
-                })
-                .catch(error => console.log(error))
-        } else {
-            this.setState({ freeTicketID: freeTicketID })
-        }
+        const userType = props.user.level === 'vip' ? '02' : '01';
+        const personQRCode = new PersonQRCode(props.user.id, userType, props.user.identity_card);
+        const formatQRCode = personQRCode.getPersonQRCode();
+        const encryptedQRCode = encrypt(formatQRCode, 'godblessyou');
+        this.qrcode = formatQRCode + encryptedQRCode.cipherHexText.substr(-6, 6)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -60,15 +61,21 @@ export default class Header extends React.Component {
 
     _handleClickShowBarcode(e) {
         e.preventDefault();
+        const timer = setInterval(() => {
+            this.setState({ randomString: generatorRandomString(20) })
+        }, 1000);
         this.setState({
-            showBarcode: true
-        })
+            showBarcode: true,
+            timer: timer
+        });
     }
 
     _handleClickCloseBarcode(e) {
         e.preventDefault();
+        clearTimeout(this.state.timer);
         this.setState({
-            showBarcode: false
+            showBarcode: false,
+            timer: null
         })
     }
 
@@ -90,27 +97,25 @@ export default class Header extends React.Component {
                     </div>
                     <div onClick={this.handleClickShowBarcode} className={styles.qrcode}><img src="assets/qrcode_big.png" alt="qrcode" /></div>
                     <div>
-                        {(!isEmptyObject(user)) &&
-                            <Modal style={{ top: 30 }} visible={this.state.showBarcode} onCancel={this.handleClickCloseBarcode} footer={null}>
+                        {(!isEmptyObject(user) && this.state.showBarcode) &&
+                            <Modal style={{ top: 5 }} visible={this.state.showBarcode} onCancel={this.handleClickCloseBarcode} footer={null}>
                                 <div className={styles.userqrcode}>
                                     <div className={styles.userqrcodeWrapper}>
                                         <div className={styles.userqrcodeTop}>
+                                            <div className={styles.realnameAuthentication}><span>实名认证码</span></div>
                                             <div className={styles.userInfoDetails}>
                                                 <img className={styles.userAvatar} src="/assets/avatar_profile_big.png" alt="avatar" />
                                                 <span className={classNames(styles.username, styles.usernameExpand)}>{username}</span>
                                                 {isVip && <img className={styles.vip} src="/assets/vip_big.png" alt="vip" />}
                                             </div>
                                             <div className={styles.userIDCard}><span>{`身份证号码: ${user.identity_card}`}</span></div>
+                                            {!isVip && <div><a className={styles.buyHelper} href="pay/ticketinfo/buy/vip">成为梦想VIP会员</a></div>}
                                         </div>
                                         <div className={styles.userqrcodeBottom}>
-                                            {user.barcode && <img className={styles.userBarode} src={user.barcode} alt="barcode" />}
-                                            {!user.barcode &&
-                                                <div>
-                                                    <span className={styles.buyTip}>为了确保您在梦想盛会中的活动安全，<br />请您购买救援服务。</span>
-                                                    <span className={styles.buyTip}>购买救援服务后即可激活个人二维码。</span>
-                                                    <a className={styles.buyHelper} href={`/hotdetail/${this.state.freeTicketID}`}>立刻购买</a>
-                                                </div>
-                                            }
+                                            <div className={styles.makeQRCode}>
+                                                <QRCode value={this.qrcode.toUpperCase()} size={220} />
+                                                <span>{this.state.randomString}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

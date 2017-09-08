@@ -1,0 +1,62 @@
+.middle {
+    margin: 0 20px;
+    padding: 20px 0;
+}
+
+.rooms {
+    width: 100%;
+    overflow: hidden;
+}
+
+.roomsWrapper {
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch !important;
+}
+.roomsWrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.roomContainer {
+    display: inline-block;
+    margin: 0 12px;
+}
+
+.roomContainerWrapper {
+    padding: 2px 25px;
+    border-radius: 5px;
+    & > span {
+        font-size: 18px;
+    }
+}
+
+.roomNormal {
+    border: 1px solid #9B9B9B;
+    color: #9B9B9B;
+}
+
+.roomActive {
+    border: 1px solid #E62A10;
+    color: #E62A10;
+}
+
+.roomPrice {
+    display: block;
+    text-align: center;
+    font-size: 12px !important;
+}
+
+.toolBarWrapper {
+    position: relative;
+    text-align: center;
+
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+
+.totalPrice {
+    margin: 0 8px;
+    color: #EC0539;
+}

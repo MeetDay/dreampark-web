@@ -1,3 +1,12 @@
+/**
+ * @Author: WangChao
+ * @Date:   2017-09-04T14:34:57+08:00
+ * @Email:  crazyitcoder9527@126.com
+ * @Project: dreampark-web
+ * @Last modified by:   WangChao
+ * @Last modified time: 2017-09-07T20:25:38+08:00
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
@@ -9,7 +18,7 @@ import { push } from 'react-router-redux';
 import { asyncConnect } from 'redux-async-connect';
 import { connect } from 'react-redux';
 import { TitleElement, PageNotExist } from '../../../components';
-import { Navbar, ToolBar, Recommend, BuyTicketNow, BuyParkingCoupon } from '../component';
+import { Navbar, ToolBar, Recommend, BuyTicketNow, BuyParkingCoupon, BuyHotelTickets } from '../component';
 import { isHotDetailLoaded, getHotDetailBy } from '../module/hotdetail';
 import { addTicketToShoppingcart } from '../../Shoppingcart/module/shoppingcartV2';
 import { convertElementsToComponet } from '../../../utils/elements';
@@ -177,7 +186,26 @@ export default class HotDetail extends React.Component {
                 {((classify_type == 'tickets' && tickets && tickets.length > 0) || (classify_type == 'hotel' || classify_type == 'parking')) &&
                     <ToolBar price={price || 0} onClickBuyTicketNow={this.handleClickToolBar} />
                 }
-                {(tickets && tickets.length > 0) && <BuyTicketNow title={buyTicketTitle} ticketsType={ticketsType} tickets={tickets} show={this.state.showBuyTicketNow} onClickCancel={this.handleClickCancel} onClickBuyTicketNow={this.handleClickBuyTicketNow} onClickAddToCart={this.handleClickAddToCart} /> }
+
+                {/* {(tickets && tickets.length > 0) &&
+                    <BuyHotelTickets
+                        title="酒店预订"
+                        show={this.state.showBuyTicketNow}
+                        tickets={tickets}
+                        onClickCancel={this.handleClickCancel}
+                    />
+                } */}
+                {(tickets && tickets.length > 0) &&
+                    <BuyTicketNow
+                        title={buyTicketTitle}
+                        ticketsType={ticketsType}
+                        tickets={tickets}
+                        show={this.state.showBuyTicketNow}
+                        onClickCancel={this.handleClickCancel}
+                        onClickBuyTicketNow={this.handleClickBuyTicketNow}
+                        onClickAddToCart={this.handleClickAddToCart}
+                    />
+                }
                 <BuyParkingCoupon show={this.state.showBuyParkingNow} onClickCancel={this.handleClickCancel} />
                 {(no_tickets === 'yes') && <div className={styles.noTickets}><span>门票已售完</span></div>}
             </div>

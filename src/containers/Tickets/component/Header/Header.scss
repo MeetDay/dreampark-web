@@ -108,6 +108,19 @@ $bottomHeight: 40px;
     border-bottom: 1px dashed #9B9B9B;
 }
 
+.realnameAuthentication {
+    margin-bottom: 20px;
+    text-align: center;
+    & > span {
+        font-size: 24px;
+        color: #000000;
+    }
+
+    @media(max-width: 320px) {
+        margin-bottom: 20px;
+    }
+}
+
 .userInfoDetails {
     display: inline-block;
     width: 100%;
@@ -156,10 +169,11 @@ $buyHelperHeight: 44px;
     display: block;
     width: 100%;
     height: $buyHelperHeight;
-    margin-top: 20px;
+    // margin-top: 10px;
+    margin-bottom: 15px;
     border-radius: $buyHelperHeight / 2;
 
-    font-size: 14px;
+    font-size: 18px;
     line-height: $buyHelperHeight;
     text-align: center;
     text-decoration: none;
@@ -173,5 +187,23 @@ $buyHelperHeight: 44px;
     &:visited {
         color: white;
         text-decoration: none;
+    }
+}
+
+.makeQRCode {
+    width: 100%;
+    text-align: center;
+
+    & > span {
+        display: inline-block;
+        width: 100%;
+        margin-top: 25px;
+        font-size: 16px;
+        font-weight: bold;
+        color: black;
+
+        @media(max-width: 320px) {
+            margin-top: 10px;
+        }
     }
 }

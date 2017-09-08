@@ -1,5 +1,5 @@
-$toolHeight: 55px;
-$toolPadding: 10px;
+$toolHeight: 50px;
+$toolPadding: 8px;
 .tool {
     position: fixed;
     left: $toolPadding;
@@ -7,6 +7,15 @@ $toolPadding: 10px;
     bottom: $toolPadding;
     height: $toolHeight;
     text-align: center;
+}
+
+.item {
+    display: inline-block;
+    width: 100%;
+}
+
+.itemWrapper {
+    margin: 0 8px;
     background-color: #E62A10;
 }
 
@@ -25,4 +34,18 @@ $imgHeight: 22px;
     font-size: 18px;
     font-family: PingFangSC-Regular;
     color: white;
+}
+
+.safaLink {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+        color: white;
+        text-decoration: none;
+    }
+    &:visited {
+        color: white;
+        text-decoration: none;
+    }
 }
