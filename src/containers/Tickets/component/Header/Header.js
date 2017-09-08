@@ -17,7 +17,7 @@ import { Modal } from 'antd';
 import { isEmptyObject } from '../../../Login/module/login';
 import * as Constant from '../../../../utils/constant';
 import APIClient from '../../../../helpers/APIClient';
-import { generatorRandomString, PersonQRCode, TicketQRCode, encrypt } from '../../utils/tickets';
+import { generatorRandomString, PersonQRCode, encrypt } from '../../utils/tickets';
 
 export default class Header extends React.Component {
     static propTypes = {
@@ -39,6 +39,12 @@ export default class Header extends React.Component {
             selectedItemType: props.selectedItemType,
             showBarcode: false
         }
+
+        const userType = props.user.level === 'vip' ? '02' : '01';
+        const personQRCode = new PersonQRCode(props.user.id, userType, props.user.identity_card);
+        const formatQRCode = personQRCode.getPersonQRCode();
+        const encryptedQRCode = encrypt(formatQRCode, 'godblessyou');
+        this.qrcode = encryptedQRCode.ciphertext + cipherHexText.substr(-6, 6)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -92,7 +98,7 @@ export default class Header extends React.Component {
                     <div onClick={this.handleClickShowBarcode} className={styles.qrcode}><img src="assets/qrcode_big.png" alt="qrcode" /></div>
                     <div>
                         {(!isEmptyObject(user) && this.state.showBarcode) &&
-                            <Modal style={{ top: 30 }} visible={this.state.showBarcode} onCancel={this.handleClickCloseBarcode} footer={null}>
+                            <Modal style={{ top: 20 }} visible={this.state.showBarcode} onCancel={this.handleClickCloseBarcode} footer={null}>
                                 <div className={styles.userqrcode}>
                                     <div className={styles.userqrcodeWrapper}>
                                         <div className={styles.userqrcodeTop}>
@@ -107,7 +113,7 @@ export default class Header extends React.Component {
                                         </div>
                                         <div className={styles.userqrcodeBottom}>
                                             <div className={styles.makeQRCode}>
-                                                <QRCode value="123" size={220} />
+                                                <QRCode value={this.qrcode.toUpperCase()} size={220} />
                                                 <span>{this.state.randomString}</span>
                                             </div>
                                         </div>
