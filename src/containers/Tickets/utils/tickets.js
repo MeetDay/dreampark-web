@@ -76,7 +76,7 @@ export function PersonQRCode(userid, userType, cardno) {
 
     this.getPersonQRCode = function() {
         const formatUserid = convertTo32HexNumber(this.userid, 6);
-        const formatUserType = convertTo32HexNumber(this.userType, 2);
+        const formatUserType = convertTo32HexNumber(this.userType, 2, 10);
         const formatCardno = convertCardno(this.cardno);
         return `${formatUserid}${formatCardno}${formatUserType}`;
     }
@@ -91,7 +91,7 @@ export function TicketQRCode(poiID, ticketType, ticketTime, cardno, checkRule) {
 
     this.getTicketQRCode = function() {
         const formatPoiID = convertTo32HexNumber(this.poiID, 2);
-        const formatTicketType = convertTo32HexNumber(this.ticketType, 2);
+        const formatTicketType = convertTo32HexNumber(this.ticketType, 2, 10);
         const formatCardno = convertCardno(this.cardno);
         const formatCheckRule = convertTo32HexNumber(this.checkRule, 2);
         const formatTicketTime =
