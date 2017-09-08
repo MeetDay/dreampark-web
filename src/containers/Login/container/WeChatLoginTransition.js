@@ -72,7 +72,7 @@ export default class WeChatLoginTransition extends React.Component {
         }
         console.log('if process arrive here, say code not right');
         console.log(weChatInfoError);
-        this.props.push('/login#launching');
+        location.href = '/login#launching';
     }
 
     render() {

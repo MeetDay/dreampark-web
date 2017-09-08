@@ -8,7 +8,6 @@
  */
 
 import React from 'react';
-import Cookies from 'universal-cookie';
 import { IndexRoute, Route } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
@@ -23,7 +22,6 @@ import Download from './containers/Download';
 import NotFound from './containers/NotFound';
 import projectConfig from '../project.config';
 import { isFullUser } from './utils/wechat';
-import * as Constant from './utils/constant';
 
 function isEmptyObject(obj) {
 	return obj === undefined || obj === null || Object.keys(obj).length === 0
