@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.be465f3e0dce7970a395.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.be465f3e0dce7970a395.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.be465f3e0dce7970a395.min.js"
+    "main": "http://localhost:3000/dist/main.65beb5de560276f458d6.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.65beb5de560276f458d6.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.65beb5de560276f458d6.min.js"
   },
   "styles": {},
   "assets": {
@@ -253,7 +253,7 @@
     "./src/containers/Register/container/Register.scss": {
       "container": "Register__container__3GCJW",
       "nav": "Register__nav__3PkKt",
-      "_style": ".Register__container__3GCJW {\n  position: relative;\n  padding-top: 64px; }\n\n.Register__nav__3PkKt {\n  margin: 0 20px; }\n"
+      "_style": ".Register__container__3GCJW {\n  position: relative;\n  padding-top: 44px; }\n\n.Register__nav__3PkKt {\n  margin: 0 20px; }\n"
     },
     "./src/containers/Register/container/ToBeVip.scss": {
       "container": "ToBeVip__container__321hC",
@@ -420,7 +420,7 @@
       "cartImg": "TicketTool__cartImg__2b1zV",
       "ticket": "TicketTool__ticket__1Dfly",
       "safaLink": "TicketTool__safaLink__2b4n6",
-      "_style": ".TicketTool__tool__3s1E2 {\n  position: fixed;\n  left: 8px;\n  right: 8px;\n  bottom: 8px;\n  height: 50px;\n  text-align: center; }\n\n.TicketTool__item__1fP3e {\n  display: inline-block;\n  width: 50%; }\n\n.TicketTool__itemWrapper__3PjV1 {\n  margin: 0 8px;\n  background-color: #E62A10; }\n\n.TicketTool__cartImg__2b1zV {\n  height: 22px;\n  margin-top: 14px; }\n\n.TicketTool__ticket__1Dfly {\n  display: inline-block;\n  margin-left: 10px;\n  height: 50px;\n  line-height: 50px;\n  vertical-align: top;\n  font-size: 18px;\n  font-family: PingFangSC-Regular;\n  color: white; }\n\n.TicketTool__safaLink__2b4n6 {\n  color: white;\n  text-decoration: none; }\n  .TicketTool__safaLink__2b4n6:hover {\n    color: white;\n    text-decoration: none; }\n  .TicketTool__safaLink__2b4n6:visited {\n    color: white;\n    text-decoration: none; }\n"
+      "_style": ".TicketTool__tool__3s1E2 {\n  position: fixed;\n  left: 8px;\n  right: 8px;\n  bottom: 8px;\n  height: 50px;\n  text-align: center; }\n\n.TicketTool__item__1fP3e {\n  display: inline-block;\n  width: 100%; }\n\n.TicketTool__itemWrapper__3PjV1 {\n  margin: 0 8px;\n  background-color: #E62A10; }\n\n.TicketTool__cartImg__2b1zV {\n  height: 22px;\n  margin-top: 14px; }\n\n.TicketTool__ticket__1Dfly {\n  display: inline-block;\n  margin-left: 10px;\n  height: 50px;\n  line-height: 50px;\n  vertical-align: top;\n  font-size: 18px;\n  font-family: PingFangSC-Regular;\n  color: white; }\n\n.TicketTool__safaLink__2b4n6 {\n  color: white;\n  text-decoration: none; }\n  .TicketTool__safaLink__2b4n6:hover {\n    color: white;\n    text-decoration: none; }\n  .TicketTool__safaLink__2b4n6:visited {\n    color: white;\n    text-decoration: none; }\n"
     },
     "./src/containers/Tickets/component/UnpaidOrder/UnpaidOrder.scss": {
       "cancelOrder": "UnpaidOrder__cancelOrder__2RVJS",

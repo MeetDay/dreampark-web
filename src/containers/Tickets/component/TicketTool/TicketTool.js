@@ -19,14 +19,14 @@ export default class TicketTool extends React.Component {
         return (
             <div className={styles.tool}>
                 <div className={styles.toolWrapper}>
-                    <div className={styles.item}>
+                    {/* <div className={styles.item}>
                         <div className={styles.itemWrapper}>
                             <a className={styles.safeLink} href="javascript:void(0)">
                                 <img className={styles.cartImg} src="/assets/ticket_white.png" alt="safe"/>
                                 <span className={styles.ticket}>购买保险</span>
                             </a>
                         </div>
-                    </div>
+                    </div> */}
                     <div  className={styles.item} onClick={this.props.onTicketToolBarClick}>
                         <div className={styles.itemWrapper}>
                             <img className={styles.cartImg} src="/assets/ticket_white.png" alt="cart"/>
