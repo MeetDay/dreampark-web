@@ -4,7 +4,7 @@
  * @Email:  crazyitcoder9527@126.com
  * @Project: dreampark-web
  * @Last modified by:   WangChao
- * @Last modified time: 2017-09-02T15:46:29+08:00
+ * @Last modified time: 2017-09-05T10:17:02+08:00
  */
 
 import React from 'react'
@@ -24,6 +24,7 @@ const MIN_LENGTH_OF_PASSWORD = 8;
 const MAX_LENGTH_OF_PASSWORD = 14;
 const MAX_LENGTH_OF_SMS_CODE = 4;
 const MAX_LENGTH_OF_PHONE = 11;
+const MAX_LENGTH_OF_CARDNO = 18;
 
 @connect(
     state => ({
@@ -48,8 +49,6 @@ export default class Register extends React.Component {
         this.onSMSCodeChange = (e) => this._onSMSCodeChange(e)
         this.onUsernameChange = (e) => this._onUsernameChange(e)
         this.onCardNumberChange = (e) => this._onCardNumberChange(e)
-        this.onClubChange = (e) => this._onClubChange(e)
-        this.onProfessionChange = (e) => this._onProfessionChange(e)
         this.userSignup = () => this._userSignup()
         this.updateUserInfo = () => this._updateUserInfo()
 
@@ -58,9 +57,7 @@ export default class Register extends React.Component {
             password: '',
             code: '',
             username: '',
-            cardno: '',
-            club: '',
-            profession: ''
+            cardno: ''
         };
     }
 
@@ -103,9 +100,7 @@ export default class Register extends React.Component {
                 identity_card: clearWhiteSpaceOf(this.state.cardno),
                 birthday: this.props.idcardInfo.data.birthday,
                 gender: this.props.idcardInfo.data.sex,
-                address: this.props.idcardInfo.data.address,
-                club_name: this.state.club,
-                trade: this.state.profession
+                address: this.props.idcardInfo.data.address
             })
         }
     }
@@ -151,19 +146,11 @@ export default class Register extends React.Component {
     }
     _onCardNumberChange(e) {
         e.preventDefault()
-        this.setState({ cardno: e.target.value })
-    }
-
-    /*
-     *  register step four
-     */
-    _onClubChange(e) {
-        e.preventDefault()
-        this.setState({ club: e.target.value })
-    }
-    _onProfessionChange(e) {
-        e.preventDefault()
-        this.setState({ profession: e.target.value })
+        const cardno = e.target.value;
+        const cardnoWithNoWhiteSpace = clearWhiteSpaceOf(cardno);
+        if (cardnoWithNoWhiteSpace.length <= MAX_LENGTH_OF_CARDNO) {
+            this.setState({ cardno: cardno })
+        }
     }
 
     render() {
@@ -200,20 +187,13 @@ export default class Register extends React.Component {
                     cardno={this.state.cardno}
                     onUsernameChange={this.onUsernameChange}
                     onCardNumberChange={this.onCardNumberChange}
+
                     comfirmUserInfo={this.props.comfirmUserInfo}
-                />
-            )
-        } else if (this.props.location.hash === '#stepfour') {
-            content = (
-                <StepFour
-                    club={this.state.club}
-                    profession={this.state.profession}
-                    onClubChange={this.onClubChange}
-                    onProfessionChange={this.onProfessionChange}
                     updateUserInfo={this.updateUserInfo}
                 />
             )
         }
+
         return (
             <div className={styles.register}>
                 <div className={loginStyle.loginBack} />

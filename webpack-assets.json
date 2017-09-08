@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.e83ec0e1c509dae4cbf4.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.e83ec0e1c509dae4cbf4.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.e83ec0e1c509dae4cbf4.min.js"
+    "main": "http://localhost:3000/dist/main.9dcf10b80424ca6691a3.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.9dcf10b80424ca6691a3.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.9dcf10b80424ca6691a3.min.js"
   },
   "styles": {},
   "assets": {
@@ -229,7 +229,8 @@
     "./src/containers/Register/component/StepThree/StepThree.scss": {
       "stepthree": "StepThree__stepthree__2PEG-",
       "nextstep": "StepThree__nextstep__QudN7",
-      "_style": ".StepThree__stepthree__2PEG- {\n  margin: 0 5%; }\n\n.StepThree__nextstep__QudN7 {\n  float: right;\n  width: 35%; }\n"
+      "okButton": "StepThree__okButton__3iPyO",
+      "_style": ".StepThree__stepthree__2PEG- {\n  margin: 0 5%; }\n\n.StepThree__nextstep__QudN7 {\n  float: right;\n  width: 35%; }\n\n.StepThree__okButton__3iPyO {\n  width: 100%; }\n"
     },
     "./src/containers/Register/component/StepTwo/StepTwo.scss": {
       "steptwo": "StepTwo__steptwo__eP1pe",
@@ -239,7 +240,7 @@
     "./src/containers/Register/container/Register.scss": {
       "container": "Register__container__3GCJW",
       "nav": "Register__nav__3PkKt",
-      "_style": ".Register__container__3GCJW {\n  position: relative;\n  padding-top: 64px; }\n\n.Register__nav__3PkKt {\n  margin: 0 20px; }\n"
+      "_style": ".Register__container__3GCJW {\n  position: relative;\n  padding-top: 44px; }\n\n.Register__nav__3PkKt {\n  margin: 0 20px; }\n"
     },
     "./src/containers/Shoppingcart/component/Card/Card.scss": {
       "card": "Card__card__2SRa_",
