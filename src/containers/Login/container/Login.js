@@ -18,6 +18,7 @@ import { StepTwo as SMSCode } from '../../Register/component'
 import Navbar from '../component/Navbar/Navbar'
 import { userLogin } from '../module/login'
 import { legalPhoneNumber, clearWhiteSpaceOf } from '../../../utils/regex'
+import { isFullUser } from '../../../utils/wechat';
 
 const MAX_LENGTH_OF_SMS_CODE = 4;
 const MAX_LENGTH_OF_PHONE = 11;
@@ -52,8 +53,11 @@ export default class Login extends React.Component {
             message.error(userLoginError.error_message);
         }
 
-        if (user !== this.props.user) {
+        if (user && user !== this.props.user && isFullUser(user)) {
             this.props.push('/tickets')
+        }
+        if (user && user !== this.props.user && !isFullUser(user)) {
+            this.props.push('/register#stepthree');
         }
     }
 

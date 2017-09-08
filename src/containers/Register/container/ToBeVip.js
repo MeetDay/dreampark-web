@@ -71,23 +71,27 @@ export default class ToBeVip extends React.Component {
             .then(orderInfo => client.post('/charge', { headers: this.props.authHeaders, data: { id: orderInfo.orders_id, amount: ticketInfo.amount, open_id: openID, pay_type: 'wx_pub' }}))
             .then(charge => {
                 if (charge && !isEmptyObject(charge)) {
-                    return new Promise((resolve, reject) => {
-                        pingpp.createPayment(charge, function(result, err) {
-                            if (result == 'success') {
-                                resolve({ code: 10000, success_message: '支付成功' });
-                            } else {
-                                reject({ code: 10001, error: err, error_message: '支付失败' });
-                            }
-                        });
-                    })
+                    pingpp.createPayment(charge, (result, err) => {
+                        if (result == 'success') {
+                            client.post('/check_charge', { headers: this.props.authHeaders, data: { charge_id: charge.id, order_no: charge.orderNo } })
+                                .then(result => {
+                                    message.success('支付成功');
+                                    this.setState({ paying: false });
+                                    this.props.push('/tickets');
+                                })
+                                .catch(error => {
+                                    message.error('支付失败');
+                                    this.setState({ paying: false });
+                                    this.props.push('/tickets?type=unpaid');
+                                })
+                        } else {
+                            message.error('支付失败, 请重新尝试');
+                            this.setState({ paying: false });
+                        }
+                    });
                 } else {
                     return Promise.reject({ code: 10002, error_message: '支付失败, charge对象为空' });
                 }
-            })
-            .then(result => {
-                message.success(result.success_message);
-                this.setState({ paying: false });
-                this.props.push('/tickets');
             })
             .catch(err => {
                 console.log(err.error);
