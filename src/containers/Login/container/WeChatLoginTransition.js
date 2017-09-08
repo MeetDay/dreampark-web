@@ -41,38 +41,31 @@ import { isFullUser } from '../../../utils/wechat'
 
 export default class WeChatLoginTransition extends React.Component {
 
-    componentDidMount() {
+    componentWillMount() {
         const getQueryValueOf = key => decodeURIComponent(this.props.location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
-        const wechatCode = getQueryValueOf('code')
         const callbackUrl = getQueryValueOf('callbackUrl')
-        if (!wechatCode) {
+        if (callbackUrl) {
             jumpToWeChatAuthorizationUrl(location, callbackUrl)
         }
     }
 
     componentWillReceiveProps(nextProps) {
         const { user, weChatInfo, weChatInfoError } = nextProps;
-
-        // 1. 微信登录成功，但登录fbpark失败, 一律跳到启动页
         if (weChatInfo && weChatInfoError && !isEmptyObject(weChatInfoError)) {
+            // 1. 微信登录成功，但登录fbpark失败, 一律跳到启动页
             this.props.push('/login#launching');
-            return
-        }
-        // 2. 微信登录成功, 登录fbpark成功，但用户信息不全, 需要补全信息
-        if (weChatInfo && user && !isFullUser(user)) {
+        } else if (weChatInfo && user && !isFullUser(user)) {
+             // 2. 微信登录成功, 登录fbpark成功，但用户信息不全, 需要补全信息
             this.props.push('/register#stepthree');
-            return
-        }
-
-        // 3. 微信登录成功, 登录fbpark成功
-        if (user && isFullUser(user)) {
+        } else if (user && isFullUser(user)) {
+             // 3. 微信登录成功, 登录fbpark成功
             const forwardUrl = sessionStorage.getItem(Constant.URL_BEFORE_LEAVE);
             this.props.push(forwardUrl || '/tickets');
-            return
+        } else {
+            console.log('if process arrive here, say code not right');
+            console.log(weChatInfoError);
+            location.href = '/login#launching';
         }
-        console.log('if process arrive here, say code not right');
-        console.log(weChatInfoError);
-        location.href = '/login#launching';
     }
 
     render() {
