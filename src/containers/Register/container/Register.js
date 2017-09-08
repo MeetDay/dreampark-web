@@ -156,7 +156,7 @@ export default class Register extends React.Component {
         e.preventDefault()
         const cardno = e.target.value;
         const cardnoWithNoWhiteSpace = clearWhiteSpaceOf(cardno);
-        if (cardnoWithNoWhiteSpace.length < MAX_LENGTH_OF_CARDNO) {
+        if (cardnoWithNoWhiteSpace.length <= MAX_LENGTH_OF_CARDNO) {
             this.setState({ cardno: cardno });
         }
     }
