@@ -39,9 +39,9 @@ loginRouter.get('/wechat', (req, res) => {
                 res.set('Set-Cookie', `${Constant.USER_OPENID}=${userInfo.weChatUserInfo.openid}; Max-Age=${3600*24*30}; Path=/`)
                 res.json({ code: 10000, message: 'success', data: userInfo})
             })
-            .catch((err) => { res.json(Object.assign({ code: 10002 }, data: err)) })
+            .catch((err) => { res.status(400).json(Object.assign({ code: 10002 }, err)) })
     } else {
-        res.json({ code: 10001, error_message: '缺少参数'})
+        res.status(400).json({ code: 10001, error_message: '缺少参数'})
     }
 })
 
@@ -54,7 +54,7 @@ function getWechatToken(code) {
             .end((err, res) => {
                 const body = JSON.parse(res.text)
                 if (err || Object.prototype.hasOwnProperty.call(body, 'errcode')) {
-                    reject({ message: '根据code获取微信token失败', data: body })
+                    reject({ error_message: '根据code获取微信token失败', data: body })
                 } else {
                     resolve(body)
                 }
@@ -69,7 +69,7 @@ function getWechatUserInfo(tokenInfo) {
             .end((err, res) => {
                 const body = JSON.parse(res.text)
                 if (err || Object.prototype.hasOwnProperty.call(body, 'errcode')) {
-                    reject({ message: '根据token获取微信信息失败', data: body})
+                    reject({ error_message: '根据token获取微信信息失败', data: body})
                 } else {
                     resolve({  weChatUserInfo: body, accessToken: tokenInfo.access_token })
                 }

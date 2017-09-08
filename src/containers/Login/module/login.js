@@ -63,11 +63,11 @@ const actionhandlers = {
         }
     },
     [`${WECHATLOGIN}_REJECTED`]: (state, action) => {
-        const { data } = action.payload;
+        console.log(action.payload);
         return {
             ...state, weChatInfoLoading: false,
             weChatInfoLoaded: false,
-            weChatInfoError: data 
+            weChatInfoError: action.payload
         }
     },
 
