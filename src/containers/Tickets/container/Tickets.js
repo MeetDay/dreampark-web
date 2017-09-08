@@ -16,8 +16,8 @@ import { asyncConnect } from 'redux-async-connect'
 import { bindActionCreators } from 'redux'
 import { isUsedTicketsLoaded, getUsedTickts,isUnusedTicketsLoaded, getUnusedTikects, isUnpaidTicketsLoaded, getUnpaidTickets, cancelOrder, refundTicket } from '../module/tickets'
 import { LoadMoreButton } from '../../../components';
-import { Header, Ticket, UnpaidOrder, TicketDetail, TicketTool } from '../component'
-import { convertToLocalDate } from '../../../utils/dateformat'
+import { Header, Ticket, UnpaidOrder, TicketDetail, TicketTool } from '../component';
+import { convertToLocalDate } from '../../../utils/dateformat';
 
 const existedTicketTypes = ['unused', 'used', 'unpaid']
 

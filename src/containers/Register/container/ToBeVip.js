@@ -115,7 +115,7 @@ export default class ToBeVip extends React.Component {
                             <div className={styles.vipLogo}><img src="/assets/vip_big.png" alt="vip" /><span>会员</span></div>
                             <div className={styles.vipPrice}><span>{`${this.props.vipInfo.price}元`}</span></div>
                         </div>
-                        <div className={styles.vipRights}><span>点击查看VIP权益</span><img src="/assets/forward_icon.png" alt="forward_icon" /></div>
+                        <div className={styles.vipRights}><a href="/terms/7">点击查看VIP权益</a><img src="/assets/forward_icon.png" alt="forward_icon" /></div>
                         <div className={styles.goPay}>
                             <LoginButton title={`前往付费 ￥${this.props.vipInfo.price}`} onClick={this.handleClickGoPay} />
                         </div>
