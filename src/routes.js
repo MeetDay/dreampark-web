@@ -9,6 +9,7 @@
 
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
+import Cookies from 'universal-cookie';
 import App from './containers/App';
 import Home from './containers/Home';
 import { Tickets, BuyTicket, SearchTicket } from './containers/Tickets';
@@ -22,6 +23,7 @@ import Download from './containers/Download';
 import NotFound from './containers/NotFound';
 import projectConfig from '../project.config';
 import { isFullUser } from './utils/wechat';
+import * as Constant from './utils/constant';
 
 function isEmptyObject(obj) {
 	return obj === undefined || obj === null || Object.keys(obj).length === 0
@@ -45,13 +47,13 @@ const routes = (store) => {
 	}
 
 	const mustbeHaveWechatInfo = (nextState, replaceState, callback) => {
-		const { user, weChatInfo } = store.getState().login;
+		const { user, weChatInfo, openID } = store.getState().login;
 		if (user && isFullUser(user)) {
 			replaceState('/tickets');
 		} else {
-			const callbackUrl = nextState.location.pathname;
-			const forwardUrl = `/wechat?callbackUrl=${callbackUrl}`;
-			if (isEmptyObject(weChatInfo)) {
+			if (!openID && isEmptyObject(weChatInfo)) {
+				const callbackUrl = nextState.location.pathname;
+				const forwardUrl = `/wechat?callbackUrl=${callbackUrl}`;
 				replaceState(forwardUrl);
 			}
 		}

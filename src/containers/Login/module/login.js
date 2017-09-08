@@ -8,6 +8,7 @@ const UPDATE_USER = 'redux/login/UPDATE_USER'
 const WECHATLOGIN = 'redux/login/WECHATLOGIN'
 const LOADCOOKIESYNC = 'redux/login/LOADCOOKIESYNC'
 const LOADCOOKIE = 'redux/login/LOADCOOKIE'
+const LOAD_OPENID = 'redux/login/LOAD_OPENID'
 
 export function isEmptyObject(obj) {
     return obj === undefined || obj === null || Object.keys(obj).length === 0
@@ -71,7 +72,8 @@ const actionhandlers = {
         }
     },
 
-    [`${LOADCOOKIESYNC}`]: (state, action) => ({ ...state, user: action.cookie, authHeaders: generatorAuthHeadersForUser(action.cookie) })
+    [`${LOADCOOKIESYNC}`]: (state, action) => ({ ...state, user: action.cookie, authHeaders: generatorAuthHeadersForUser(action.cookie) }),
+    [`${LOAD_OPENID}`]: (state, action) => ({ ...state, openID: action.openID })
 };
 
 const initialState = {
@@ -159,6 +161,13 @@ export function loadCookieSync(cookie) {
     return {
         type: LOADCOOKIESYNC,
         cookie
+    }
+}
+
+export function loadOpenIDOfWechat(openID) {
+    return {
+        type: LOAD_OPENID,
+        openID
     }
 }
 

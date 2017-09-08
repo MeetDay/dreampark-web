@@ -12,7 +12,7 @@ import Html from '../../helpers/Html';
 import APIClient from '../../helpers/APIClient';
 import createStore from '../../store';
 import routes from '../../routes';
-import { loadCookieSync, isEmptyObject } from '../../containers/Login/module/login';
+import { loadCookieSync, loadOpenIDOfWechat, isEmptyObject } from '../../containers/Login/module/login';
 
 const serverRouterMiddleware = () => (req, res, next) => {
 	if (__DEV__) {
@@ -24,6 +24,7 @@ const serverRouterMiddleware = () => (req, res, next) => {
 	const store = createStore(memoryHistory, client);
 	if (!isEmptyObject(req.universalCookies.cookies)) {
 		store.dispatch(loadCookieSync(req.universalCookies.get(Constant.USER_COOKIE)));
+		store.dispatch(loadOpenIDOfWechat(req.universalCookies.get(Constant.USER_OPENID)));
 	}
 	const history = syncHistoryWithStore(memoryHistory, store);
 	match({ history, routes: routes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {

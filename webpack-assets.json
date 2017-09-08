@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.2407f109e1abca78e7d0.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.2407f109e1abca78e7d0.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.2407f109e1abca78e7d0.min.js"
+    "main": "http://localhost:3000/dist/main.ee75d6893e0e1380fcd1.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.ee75d6893e0e1380fcd1.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.ee75d6893e0e1380fcd1.min.js"
   },
   "styles": {},
   "assets": {
@@ -98,6 +98,12 @@
       "downloadLink": "Download__downloadLink__lu53c",
       "downloadWrapper": "Download__downloadWrapper__H8g6r",
       "_style": ".Download__background__3u7bS {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  background-size: cover;\n  background-position: center; }\n\n.Download__fbparkLogo__389fw {\n  margin: 80px 0 60px 0;\n  vertical-align: top;\n  font-size: 0px;\n  text-align: center; }\n\n.Download__fbparkDescription__2u_gy {\n  margin-top: 40px;\n  margin-bottom: 20px;\n  text-align: center;\n  font-size: 24px;\n  line-height: 40px;\n  color: white; }\n\n.Download__fbparkDownload__2xsAC {\n  text-align: center; }\n\n.Download__downloadLink__lu53c {\n  display: inline-block;\n  width: 100%;\n  margin-top: 40px;\n  text-align: center;\n  text-decoration: none;\n  color: white; }\n\n.Download__downloadWrapper__H8g6r {\n  display: inline-block;\n  width: 200px;\n  height: 44px;\n  border-radius: 4px;\n  font-size: 0px;\n  background-color: #e32d1f; }\n  .Download__downloadWrapper__H8g6r > img {\n    width: 27px;\n    height: 30px;\n    margin-top: 7px;\n    margin-right: 15px;\n    vertical-align: top; }\n  .Download__downloadWrapper__H8g6r > span {\n    line-height: 44px;\n    font-size: 18px;\n    color: white; }\n"
+    },
+    "./src/containers/Home/container/Home.scss": {
+      "backgroundImage": "Home__backgroundImage__3Z6LG",
+      "gradient": "Home__gradient__2EpHC",
+      "title": "Home__title__semuj",
+      "_style": ".Home__backgroundImage__3Z6LG {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-size: cover;\n  background-position: center;\n  background-image: url(\"/assets/home_bg.jpg\"); }\n\n.Home__gradient__2EpHC {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  background-color: #000000;\n  opacity: .05; }\n\n.Home__title__semuj {\n  padding-top: 15%;\n  text-align: center;\n  font-size: 50px;\n  color: white; }\n"
     },
     "./src/containers/HotDetail/component/BuyHotelTickets/BuyHotelTickets.scss": {
       "middle": "BuyHotelTickets__middle__yKKUA",
@@ -447,12 +453,6 @@
       "ticketWrap": "Tickets__ticketWrap__1-ptD",
       "noTicketsMessage": "Tickets__noTicketsMessage__1fD42",
       "_style": ".Tickets__ticketContent__3Hk8V {\n  border-bottom: 75px solid transparent; }\n\n.Tickets__ticketWrap__1-ptD {\n  padding: 0 20px; }\n\n.Tickets__noTicketsMessage__1fD42 {\n  margin-top: 60px;\n  font-size: 16px;\n  text-align: center;\n  color: #9B9B9B; }\n"
-    },
-    "./src/containers/Home/container/Home.scss": {
-      "backgroundImage": "Home__backgroundImage__3Z6LG",
-      "gradient": "Home__gradient__2EpHC",
-      "title": "Home__title__semuj",
-      "_style": ".Home__backgroundImage__3Z6LG {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-size: cover;\n  background-position: center;\n  background-image: url(\"/assets/home_bg.jpg\"); }\n\n.Home__gradient__2EpHC {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  background-color: #000000;\n  opacity: .05; }\n\n.Home__title__semuj {\n  padding-top: 15%;\n  text-align: center;\n  font-size: 50px;\n  color: white; }\n"
     }
   },
   "webpack": {
