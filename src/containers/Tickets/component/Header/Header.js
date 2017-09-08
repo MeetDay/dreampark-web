@@ -44,7 +44,7 @@ export default class Header extends React.Component {
         const personQRCode = new PersonQRCode(props.user.id, userType, props.user.identity_card);
         const formatQRCode = personQRCode.getPersonQRCode();
         const encryptedQRCode = encrypt(formatQRCode, 'godblessyou');
-        this.qrcode = encryptedQRCode.ciphertext + cipherHexText.substr(-6, 6)
+        this.qrcode = encryptedQRCode.ciphertext + encryptedQRCode.cipherHexText.substr(-6, 6)
     }
 
     componentWillReceiveProps(nextProps) {
