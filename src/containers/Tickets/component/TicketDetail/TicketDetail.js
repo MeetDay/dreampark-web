@@ -19,7 +19,7 @@ export default class TicketDetail extends React.Component {
             randomString: generatorRandomString(20)
         }
         if (props.ticket) {
-            const checkRule = props.ticket.checking_rule === 'once' ? '01' : "02";
+            const checkRule = props.ticket.checking_rule === 'more' ? '02' : "01";
             const ticketQRCode = new TicketQRCode(props.ticket.poi_id, props.ticket.ticket_id, '0.0.0.0', props.ticket.identity_card, checkRule);
             const formatQRCode = ticketQRCode.getTicketQRCode();
             const encryptedQRCode = encrypt(formatQRCode, 'godblessyou');
@@ -61,11 +61,13 @@ export default class TicketDetail extends React.Component {
                                 <span className={classNames(styles.item, styles.itemTime)}>{endTime.time}</span>
                             </div>
                         </div>
-                        <div className={styles.location}>
-                            <span>{`场馆：${place}`}</span>
-                            {/* <span>{`${num}张标准票`}</span> */}
-                            <span></span>
-                        </div>
+                        {(place && place.length > 0) &&
+                            <div className={styles.location}>
+                                <span>{`场馆：${place}`}</span>
+                                {/* <span>{`${num}张标准票`}</span> */}
+                                <span></span>
+                            </div>
+                        }
                     </div>
                     <div>
                         {/* <div><img className={styles.barcode} src={barcode} alt="qrcode"/></div> */}
