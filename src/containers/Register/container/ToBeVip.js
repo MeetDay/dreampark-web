@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-async-connect';
 import { bindActionCreators } from 'redux';
 import { message } from 'antd';
-import { LoginButton } from '../../../components';
+import { LoginButton, PageNotExist } from '../../../components';
 import APIClient from '../../../helpers/APIClient';
 import { isEmptyObject } from '../../Login/module/login';
 import { isVipInfoLoaded, getVipInfo } from '../module/register';
@@ -103,7 +103,8 @@ export default class ToBeVip extends React.Component {
     render() {
         const { vipInfo, vipInfoError } = this.props;
         if (vipInfoError && !isEmptyObject(vipInfoError)) {
-            return console.log(JSON.parse(JSON.stringify(vipInfoError)));
+            console.log(JSON.parse(JSON.stringify(vipInfoError)));
+            return <PageNotExist />;
         }
         const styles = require('./ToBeVip.scss');
         const loginStyle = require('../../Login/container/Login.scss');

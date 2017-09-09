@@ -37,9 +37,7 @@ const actionhandlers = {
 
     [`${UPDATE_USER}_PENDING`]: (state, action) => ({ ...state, updateUserLoading: true, updateUserLoaded: false }),
     [`${UPDATE_USER}_FULFILLED`]: (state, action) => {
-        console.log(action)
         const updateUser = Object.assign({}, state.user, action.payload)
-        console.log(updateUser)
         return {
             ...state,
             updateUserLoading: false,
