@@ -39,8 +39,8 @@ export default class Ticket extends React.Component {
     render() {
         const styles = require('./Ticket.scss')
         const { ticket_name, start_time, end_time, num: ticketNum, status, total } = this.props.ticket;
-        const ticketUnused = false;
-        const canRefundTickt = ticketUnused && total != 0;
+        const ticketUnused = status == 0 || status == 5;
+        const canRefundTickt = false;
         const qrcodeImg = (this.props.type == 'unused' && ticketUnused) ? 'assets/qrcode_small.png' : 'assets/qrcode_small_gray.png';
         const startTime = convertToLocalDate(start_time);
         const endTime = convertToLocalDate(end_time);

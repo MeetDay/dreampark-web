@@ -40,11 +40,13 @@ export default class Header extends React.Component {
             showBarcode: false
         }
 
-        const userType = props.user.level === 'vip' ? '02' : '01';
-        const personQRCode = new PersonQRCode(props.user.id, userType, props.user.identity_card);
-        const formatQRCode = personQRCode.getPersonQRCode();
-        const encryptedQRCode = encrypt(formatQRCode, 'godblessyou');
-        this.qrcode = formatQRCode + encryptedQRCode.cipherHexText.substr(-6, 6)
+        if (props.user) {
+            const userType = props.user.level === 'vip' ? '02' : '01';
+            const personQRCode = new PersonQRCode(props.user.id, userType, props.user.identity_card);
+            const formatQRCode = personQRCode.getPersonQRCode();
+            const encryptedQRCode = encrypt(formatQRCode, 'godblessyou');
+            this.qrcode = formatQRCode + encryptedQRCode.cipherHexText.substr(-6, 6)
+        }
     }
 
     componentWillReceiveProps(nextProps) {

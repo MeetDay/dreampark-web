@@ -39,6 +39,7 @@ import { isEmptyObject } from '../../Login/module/login'
     state => ({
         user: state.login.user,
         hotDetail: state.hotdetail.hotDetail,
+        hotDetailError: state.hotdetail.hotDetailError,
 
         addTicketToShoppingcartLoaded: state.shoppingcart.addTicketToShoppingcartLoaded,
         addTicketToShoppingcartError: state.shoppingcart.addTicketToShoppingcartError
@@ -117,7 +118,10 @@ export default class HotDetail extends React.Component {
     }
 
     render() {
-        if (!this.props.hotDetail || isEmptyObject(this.props.hotDetail)) return (<PageNotExist />);
+        if (!this.props.hotDetail || isEmptyObject(this.props.hotDetail)) {
+            console.log(JSON.stringify(this.props.hotDetailError));
+            return (<PageNotExist />)
+        }
         const styles = require('./HotDetail.scss');
         const contentWrapStyle = {
             maxHeight: this.state.contentWrapMaxHeight,

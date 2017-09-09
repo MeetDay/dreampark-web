@@ -357,11 +357,11 @@ class ContactCard extends React.Component {
     render() {
         const styles = require('./CompleteBuyTicketInfo.scss');
         const { contact, checked } = this.props;
-        let content = null
+        let content = null, insurant = false;
         if (this.props.type === 'contact') {
             content = (
                 <div onClick={this.onContactChecked} className={classNames({ [styles.contact]: true, [styles.checkedContact]: checked })}>
-                    {this.props.contact.insurant == 'yes' && <img className={styles.contactHasSurance} src="/assets/safe_small.png" alt="safe" />}
+                    {insurant && <img className={styles.contactHasSurance} src="/assets/safe_small.png" alt="safe" />}
                     <span className={styles.contactName}>{contact.name}</span>
                     { checked && <span className={styles.contactSelected}><img src="/assets/contacts_selected.png" alt="selected"/></span> }
                 </div>
