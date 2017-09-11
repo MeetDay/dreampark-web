@@ -62,6 +62,7 @@ export default class HotDetail extends React.Component {
             contentWrapOverflow: 'hidden',
             viewMoreWrapDisplay: 'block',
             showBuyTicketNow: false,
+            showBuyHotelTicketNow: false,
             showBuyParkingNow: false,
             paying: false
         };
@@ -105,6 +106,7 @@ export default class HotDetail extends React.Component {
         e.preventDefault();
         this.setState({
             showBuyTicketNow: false,
+            showBuyHotelTicketNow: false,
             showBuyParkingNow: false
         });
     }
@@ -116,9 +118,12 @@ export default class HotDetail extends React.Component {
             const { tickets } = this.props.hotDetail;
             location.href = `/pay/ticketinfo/${tickets[0].id}`
         } else if (classifyType === 'parking') {
-            this.setState({ showBuyParkingNow: true })
-        } else if (classifyType === 'hotel' || classifyType === 'tickets') {
+            // this.setState({ showBuyParkingNow: true })
             this.setState({ showBuyTicketNow: true })
+        } else if (classifyType === 'tickets') {
+            this.setState({ showBuyTicketNow: true })
+        } else if (classifyType === 'hotel') {
+            this.setState({ showBuyHotelTicketNow: true })
         }
     }
 
@@ -135,6 +140,7 @@ export default class HotDetail extends React.Component {
         const viewMoreWrapStyle = { display: this.state.viewMoreWrapDisplay };
         // 转换数据
         const { title, slides, content, tickets, recommandation, price } = this.props.hotDetail;
+        const { room_type: rooms, start_date: startDate, end_date: endDate } = this.props.hotDetail;
         const { attention, place, location, time_info, classify_type, classify_name, direct_sales, no_tickets } = this.props.hotDetail;
         const ticketsType = classify_name ? (classify_name == '出入口' ? 'doorTicket' : 'ticket') : 'ticket';
         const autoplay = slides && Array.isArray(slides) && slides.length > 1;
@@ -197,14 +203,17 @@ export default class HotDetail extends React.Component {
                 }
                 {(no_tickets === 'yes') && <div className={styles.noTickets}><span>门票已售完</span></div>}
 
-                {/* {(tickets && tickets.length > 0) &&
+                {(tickets && tickets.length > 0 && rooms && rooms.length > 0) &&
                     <BuyHotelTickets
                         title="酒店预订"
-                        show={this.state.showBuyTicketNow}
+                        show={this.state.showBuyHotelTicketNow}
+                        startDate={startDate}
+                        endDate={endDate}
                         tickets={tickets}
+                        rooms={rooms}
                         onClickCancel={this.handleClickCancel}
                     />
-                } */}
+                }
                 {(tickets && tickets.length > 0) &&
                     <BuyTicketNow
                         title={buyTicketTitle}
