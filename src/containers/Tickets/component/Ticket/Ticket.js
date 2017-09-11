@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { Popconfirm } from 'antd'
 import { convertToLocalDate } from '../../../../utils/dateformat';
 
@@ -38,9 +39,10 @@ export default class Ticket extends React.Component {
 
     render() {
         const styles = require('./Ticket.scss')
-        const { ticket_name, start_time, end_time, num: ticketNum, status, total } = this.props.ticket;
+        const { ticket_name, start_time, end_time, num: ticketNum, status, direct_sales: directSales } = this.props.ticket;
         const ticketUnused = status == 0 || status == 5;
         const canRefundTickt = false;
+        const isDirectSales = directSales === 'yes' ? true : false;
         const qrcodeImg = (this.props.type == 'unused' && ticketUnused) ? 'assets/qrcode_small.png' : 'assets/qrcode_small_gray.png';
         const startTime = convertToLocalDate(start_time);
         const endTime = convertToLocalDate(end_time);
@@ -49,9 +51,9 @@ export default class Ticket extends React.Component {
                 <div className={styles.ticketBorder}><img src="/assets/ticket_border_big.png" alt="ticket_border_big" /></div>
                 <div className={styles.ticketWrap}>
                     <div className={styles.info}>
-                        <span className={styles.title}>{ticket_name}</span>
-                        <span className={styles.date}>{startTime.date}</span>
-                        <span className={styles.time}>{`${startTime.time} - ${endTime.time}`}</span>
+                        <span className={classNames({[styles.title]: true, [styles.titleOnly]: isDirectSales})}>{ticket_name}</span>
+                        <span className={classNames({[styles.date]: true, [styles.itemVisibility]: isDirectSales})}>{startTime.date}</span>
+                        <span className={classNames({[styles.time]: true, [styles.itemVisibility]: isDirectSales})}>{`${startTime.time} - ${endTime.time}`}</span>
                         <div className={styles.rest}>
                             {/* <span className={styles.ticketCount}>{`${ticketNum}张票`}</span> */}
                             {(this.props.type == 'unused' && canRefundTickt) &&
