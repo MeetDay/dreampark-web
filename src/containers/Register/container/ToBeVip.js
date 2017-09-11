@@ -84,8 +84,12 @@ export default class ToBeVip extends React.Component {
                                     this.setState({ paying: false });
                                     this.props.push('/tickets?type=unpaid');
                                 })
-                        } else {
+                        } else if (result == 'fail') {
                             message.error('支付失败, 请重新尝试');
+                            this.setState({ paying: false });
+                            this.props.push('/tickets');
+                        } else if (result == 'cancel') {
+                            message.error('支付取消, 请重新支付');
                             this.setState({ paying: false });
                         }
                     });

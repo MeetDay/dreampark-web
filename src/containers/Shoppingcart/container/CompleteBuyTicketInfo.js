@@ -26,8 +26,9 @@ const CONTACT_WARNNING_MESSAGE = '请输入正确的姓名和身份证号码';
 
 @asyncConnect([{
     deferred: true,
-    promise: ({ params, store:{ dispatch, getState }, helpers }) => {
-        if (params.type === 'ticketorder' && !isTicketOrderInfoLoaded(getState())) {
+    promise: ({ params, store:{ dispatch, getState }, location, helpers }) => {
+        const query = location.query;
+        if (query.ticketType == 'ticketorder' && !isTicketOrderInfoLoaded(getState())) {
             return dispatch(getTicketOrderInfoBy(params.id))
         } else if (!isTicketInfoLoaded(getState())) {
             return dispatch(getTicketInfoBy(params.id))

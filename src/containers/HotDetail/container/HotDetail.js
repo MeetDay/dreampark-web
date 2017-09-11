@@ -109,7 +109,7 @@ export default class HotDetail extends React.Component {
 
     _handleClickToolBar(e) {
         e.preventDefault();
-        const { classify_type: classifyType } = this.props.hotDetail
+        const { classify_type: classifyType } = this.props.hotDetail;
         if (classifyType === 'parking') {
             this.setState({ showBuyParkingNow: true })
         } else if (classifyType === 'hotel' || classifyType === 'tickets') {

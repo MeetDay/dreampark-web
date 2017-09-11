@@ -116,7 +116,8 @@ export default class Header extends React.Component {
                                         <div className={styles.userqrcodeBottom}>
                                             <div className={styles.makeQRCode}>
                                                 <QRCode value={this.qrcode.toUpperCase()} size={220} />
-                                                <span>{this.state.randomString}</span>
+                                                <span className={styles.qrcodeDescription}>该二维码分享无效</span>
+                                                <span className={styles.randomString}>{this.state.randomString}</span>
                                             </div>
                                         </div>
                                     </div>

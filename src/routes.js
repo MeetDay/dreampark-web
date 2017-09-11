@@ -66,7 +66,7 @@ const routes = (store) => {
 			<Route path="home" component={Home} />
 			<Route path="tickets" component={Tickets} onEnter={requireLogin} />
 			<Route path="pay/ticketinfo/buy/vip" component={ToBeVip} onEnter={requireLogin} />
-			<Route path="pay/ticketinfo/:id(/:type)" component={CompleteBuyTicketInfo} onEnter={requireLogin} />
+			<Route path="pay/ticketinfo/:id" component={CompleteBuyTicketInfo} onEnter={requireLogin} />
 			<Route path="buytickets" component={BuyTicket} />
 			<Route path="buytickets/search" component={SearchTicket} />
 			<Route path="detail/:id" component={Details} />

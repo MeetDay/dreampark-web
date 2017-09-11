@@ -47,7 +47,7 @@ export default class UnpaidOrder extends React.Component {
                     </div>
                     <div className={styles.qrcode}>
                         {(type == 0) &&
-                            <a href={`/pay/ticketinfo/${this.props.unpaidOrder.orders_no}/ticketorder`}>
+                            <a href={`/pay/ticketinfo/${this.props.unpaidOrder.orders_no}?ticketType=ticketorder`}>
                                 <div className={classNames(styles.qrcodeWrap, unpaidStyles.gopayment)}><span>去支付</span></div>
                             </a>
                         }

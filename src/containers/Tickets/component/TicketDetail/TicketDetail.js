@@ -73,7 +73,8 @@ export default class TicketDetail extends React.Component {
                         {/* <div><img className={styles.barcode} src={barcode} alt="qrcode"/></div> */}
                         <div className={classNames(headerStyles.makeQRCode, styles.customQRCode)}>
                             <QRCode value={this.qrcode.toUpperCase()} size={180} />
-                            <span>{this.state.randomString}</span>
+                            <span className={headerStyles.qrcodeDescription}>该二维码分享无效</span>
+                            <span className={headerStyles.randomString}>{this.state.randomString}</span>
                         </div>
                     </div>
                 </div>
