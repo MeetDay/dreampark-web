@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.45cf6c26f9dc7afa5f47.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.45cf6c26f9dc7afa5f47.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.45cf6c26f9dc7afa5f47.min.js"
+    "main": "http://localhost:3000/dist/main.a6b0f8b1e5a10e72e34f.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.a6b0f8b1e5a10e72e34f.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.a6b0f8b1e5a10e72e34f.min.js"
   },
   "styles": {},
   "assets": {
@@ -259,7 +259,7 @@
     "./src/containers/Register/container/Register.scss": {
       "container": "Register__container__3GCJW",
       "nav": "Register__nav__3PkKt",
-      "_style": ".Register__container__3GCJW {\n  position: relative;\n  padding-top: 44px; }\n\n.Register__nav__3PkKt {\n  margin: 0 20px; }\n"
+      "_style": ".Register__container__3GCJW {\n  position: relative;\n  padding-top: 0px; }\n\n.Register__nav__3PkKt {\n  margin: 0 20px; }\n"
     },
     "./src/containers/Register/container/ToBeVip.scss": {
       "container": "ToBeVip__container__321hC",

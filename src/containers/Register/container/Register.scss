@@ -2,9 +2,10 @@
 
 }
 
+$registerContainerPaddingTop: 10px;
 .container {
     position: relative;
-    padding-top: 44px;
+    padding-top: $registerContainerPaddingTop;
 }
 
 .nav {

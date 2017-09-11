@@ -50,7 +50,7 @@ export default class Launching extends React.Component {
         return (
             <div className={styles.launching}>
                 <div className={styles.launchingTop}>
-                    <button className={styles.loginButton} onClick={this.handleClickLoginButton}>登&nbsp;录</button>
+                    {/* <button className={styles.loginButton} onClick={this.handleClickLoginButton}>登&nbsp;录</button> */}
                 </div>
                 {/* <div className={styles.appLogo}>
                     <img src="/assets/logo.png" alt="appLogo" />
