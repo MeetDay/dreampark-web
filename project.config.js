@@ -1,8 +1,8 @@
 module.exports = {
 	// baseUrl: 'http://192.168.12.99:8080',
 	// devBaseUrl: 'http://192.168.12.99:8080',
-	baseUrl: 'http://www.fbpageant.com',
-	devBaseUrl: 'http://www.fbpageant.com',
+	baseUrl: 'http://dev.fbpageant.com',
+	devBaseUrl: 'http://dev.fbpageant.com',
 
 	wechatAppID: 'wxacb87d3fa8d3ab52',
 	wechatAppSecret: 'b61e6bac5715ca1cc986c602f1f864ed',

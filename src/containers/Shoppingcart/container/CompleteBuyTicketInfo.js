@@ -48,7 +48,8 @@ const CONTACT_WARNNING_MESSAGE = '请输入正确的姓名和身份证号码';
 
         isTicketOrderInfo: state.shoppingcart.isTicketOrderInfo,
         hasInsurance: state.shoppingcart.ticketInfo ? state.shoppingcart.ticketInfo.is_insurance === 1 : false,
-        insurancePrice: state.shoppingcart.ticketInfo ? state.shoppingcart.ticketInfo.insurance_price || 0 : 0,
+        // insurancePrice: state.shoppingcart.ticketInfo ? state.shoppingcart.ticketInfo.insurance_price || 0 : 0,
+        insurancePrice: 0,
 
         generatorTicketOrderLoading: state.shoppingcart.generatorTicketOrderLoading,
         generatorTicketOrder: state.shoppingcart.generatorTicketOrder,
@@ -79,8 +80,9 @@ export default class CompleteBuyTicketInfo extends React.Component {
             username: '',
             idCardNo: '',
             checkedContacts: props.ticketInfo ? (props.isTicketOrderInfo ? [...props.contactList] : ((props.contactList && props.contactList.length > 0) ? [props.contactList[0]] : [])) : [],
-            checkedContactsNoInsurance: props.checkedContactsNoInsurance,
-            totalPrice: props.ticketInfo ? (props.isTicketOrderInfo ? Number(props.ticketInfo.amount).toFixed(2) : Number(props.ticketInfo.price + props.insurancePrice*props.checkedContactsNoInsurance.length).toFixed(2)) : 0,
+            // checkedContactsNoInsurance: props.checkedContactsNoInsurance,
+            totalPrice: props.ticketInfo ? (props.isTicketOrderInfo ? Number(props.ticketInfo.amount).toFixed(2) : Number(props.ticketInfo.price).toFixed(2)) : 0,
+            // totalPrice: props.ticketInfo ? (props.isTicketOrderInfo ? Number(props.ticketInfo.amount).toFixed(2) : Number(props.ticketInfo.price + props.insurancePrice*props.checkedContactsNoInsurance.length).toFixed(2)) : 0,
         }
     }
 
@@ -88,7 +90,11 @@ export default class CompleteBuyTicketInfo extends React.Component {
         // 添加联系人
         const { contact, contactError } = nextProps
         if (contact && contact !== this.props.contact) {
-            this.setState({ showAddContact: false, username: '', idCardNo: '' })
+            this.setState({
+                showAddContact: false,
+                username: '',
+                idCardNo: ''
+            });
         } else if (contactError && contactError !== this.props.contactError) {
             message.error(contactError.error_message);
         }
@@ -108,7 +114,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                         const paymentID = setTimeout(_ => {
                             message.error(TICKET_PAY_FAIL);
                             this.setState({ paying: false });
-                        }, 15000);
+                        }, 30000);
                         pingpp.createPayment(charge, (result, error) => {
                             if (result == 'success') {
                                 clearTimeout(paymentID);
@@ -184,20 +190,22 @@ export default class CompleteBuyTicketInfo extends React.Component {
         if (this.existedContact(this.state.checkedContacts, checkedContact)) {
             if (this.state.checkedContacts.length > 1) {
                 const results = this.state.checkedContacts.filter(contact => contact.identity_card !== checkedContact.identity_card);
-                const noInsuranceContacts = results.filter(contact => contact.insurant != 'yes');
+                // const noInsuranceContacts = results.filter(contact => contact.insurant != 'yes');
                 this.setState({
                     checkedContacts: [...results],
-                    checkedContactsNoInsurance: [...noInsuranceContacts],
-                    totalPrice: Number(price*results.length + insurancePrice*noInsuranceContacts.length).toFixed(2),
+                    totalPrice: Number(price*results.length).toFixed(2),
+                    // checkedContactsNoInsurance: [...noInsuranceContacts],
+                    // totalPrice: Number(price*results.length + insurancePrice*noInsuranceContacts.length).toFixed(2),
                 })
             }
         } else {
             const checkedContacts = [...this.state.checkedContacts, checkedContact];
-            const noInsuranceContacts = checkedContacts.filter(contact => contact.insurant != 'yes');
+            // const noInsuranceContacts = checkedContacts.filter(contact => contact.insurant != 'yes');
             this.setState({
                 checkedContacts: checkedContacts,
-                checkedContactsNoInsurance: [...noInsuranceContacts],
-                totalPrice: Number(price*checkedContacts.length + insurancePrice*noInsuranceContacts.length).toFixed(2)
+                totalPrice: Number(price*checkedContacts.length).toFixed(2)
+                // checkedContactsNoInsurance: [...noInsuranceContacts],
+                // totalPrice: Number(price*checkedContacts.length + insurancePrice*noInsuranceContacts.length).toFixed(2)
             })
         }
     }
@@ -209,13 +217,18 @@ export default class CompleteBuyTicketInfo extends React.Component {
     }
     _handleClickCancel(e) {
         e.preventDefault()
-        this.setState({ showAddContact: false })
+        this.setState({
+            showAddContact: false,
+            username: '',
+            idCardNo: ''
+        })
     }
 
     // 添加常用联系人
     _onUsernameChange(e) {
         e.preventDefault()
-        this.setState({ username: e.target.value })
+        const usernameText = e.target.value;
+        this.setState({ username: clearWhiteSpaceOf(usernameText) })
     }
     _onCardNumberChange(e) {
         e.preventDefault()
@@ -284,7 +297,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                             this.state.checkedContacts.map(checkedContact => (<SingleInfo key={checkedContact.identity_card} contact={checkedContact} />))
                         }
                     </div>
-                    {this.props.hasInsurance &&
+                    {false &&
                         <div className={styles.insuranceService}>
                             <div className={styles.insuranceServiceWrap}>
                                 <span className={styles.imageWrap}><img className={styles.imgsafe} src="/assets/safe.png" alt="safe"/></span>
@@ -295,7 +308,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                             </div>
                         </div>
                     }
-                    {!this.props.isTicketOrderInfo && <div className={styles.insuranceAttention}><span>注意：联系人左上角的“盾牌”代表该联系人已购买救援服务，无需再次购买！</span></div>}
+                    {false && <div className={styles.insuranceAttention}><span>注意：联系人左上角的“盾牌”代表该联系人已购买救援服务，无需再次购买！</span></div>}
                 </div>
                 <div className={styles.toolbar}>
                     <Spin spinning={this.state.paying}>
@@ -307,7 +320,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                 </div>
                 {this.state.showAddContact &&
                     <div>
-                        <Modal style={{ top: 30 }} visible={this.state.showAddContact} title={<div className={styles.addContactTitle}>新增联系人</div>} footer={null} onCancel={this.handleClickCancel}>
+                        <Modal style={{ top: 10 }} visible={this.state.showAddContact} title={<div className={styles.addContactTitle}>新增联系人</div>} footer={null} onCancel={this.handleClickCancel}>
                             <div className={styles.addContactContent}>
                                 <div className={styles.addContactAttention}>
                                     <span>注意</span>

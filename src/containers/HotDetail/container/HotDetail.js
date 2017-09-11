@@ -23,8 +23,8 @@ import { isHotDetailLoaded, getHotDetailBy } from '../module/hotdetail';
 import { addTicketToShoppingcart } from '../../Shoppingcart/module/shoppingcartV2';
 import { convertElementsToComponet } from '../../../utils/elements';
 import { appendQiNiuQueryParamsForImageUrl } from '../../../helpers/QiNiuHelpers';
-import { jumpToWeChatAuthorizationUrl } from '../../../utils/wechat'
-import { isEmptyObject } from '../../Login/module/login'
+import { jumpToWeChatAuthorizationUrl } from '../../../utils/wechat';
+import { isEmptyObject } from '../../Login/module/login';
 
 @asyncConnect([{
     deferred: true,
@@ -38,6 +38,7 @@ import { isEmptyObject } from '../../Login/module/login'
 @connect(
     state => ({
         user: state.login.user,
+        authHeaders: state.login.authHeaders,
         hotDetail: state.hotdetail.hotDetail,
         hotDetailError: state.hotdetail.hotDetailError,
 
@@ -61,7 +62,8 @@ export default class HotDetail extends React.Component {
             contentWrapOverflow: 'hidden',
             viewMoreWrapDisplay: 'block',
             showBuyTicketNow: false,
-            showBuyParkingNow: false
+            showBuyParkingNow: false,
+            paying: false
         };
     }
 
@@ -109,8 +111,11 @@ export default class HotDetail extends React.Component {
 
     _handleClickToolBar(e) {
         e.preventDefault();
-        const { classify_type: classifyType } = this.props.hotDetail;
-        if (classifyType === 'parking') {
+        const { classify_type: classifyType, direct_sales: directSales } = this.props.hotDetail;
+        if (directSales === 'yes') {
+            const { tickets } = this.props.hotDetail;
+            location.href = `/pay/ticketinfo/${tickets[0].id}`
+        } else if (classifyType === 'parking') {
             this.setState({ showBuyParkingNow: true })
         } else if (classifyType === 'hotel' || classifyType === 'tickets') {
             this.setState({ showBuyTicketNow: true })
@@ -130,7 +135,7 @@ export default class HotDetail extends React.Component {
         const viewMoreWrapStyle = { display: this.state.viewMoreWrapDisplay };
         // 转换数据
         const { title, slides, content, tickets, recommandation, price } = this.props.hotDetail;
-        const { attention, place, location, time_info, classify_type, classify_name, no_tickets } = this.props.hotDetail;
+        const { attention, place, location, time_info, classify_type, classify_name, direct_sales, no_tickets } = this.props.hotDetail;
         const ticketsType = classify_name ? (classify_name == '出入口' ? 'doorTicket' : 'ticket') : 'ticket';
         const autoplay = slides && Array.isArray(slides) && slides.length > 1;
         const isNormal = (classify_type === 'normal' || classify_type === undefined);
@@ -187,9 +192,10 @@ export default class HotDetail extends React.Component {
                         </div>
                     }
                 </div>
-                {((classify_type == 'tickets' && tickets && tickets.length > 0) || (classify_type == 'hotel' || classify_type == 'parking')) &&
+                {((classify_type != 'normal' || direct_sales == 'yes') && (tickets && tickets.length > 0) ) &&
                     <ToolBar price={price || 0} onClickBuyTicketNow={this.handleClickToolBar} />
                 }
+                {(no_tickets === 'yes') && <div className={styles.noTickets}><span>门票已售完</span></div>}
 
                 {/* {(tickets && tickets.length > 0) &&
                     <BuyHotelTickets
@@ -210,8 +216,7 @@ export default class HotDetail extends React.Component {
                         onClickAddToCart={this.handleClickAddToCart}
                     />
                 }
-                <BuyParkingCoupon show={this.state.showBuyParkingNow} onClickCancel={this.handleClickCancel} />
-                {(no_tickets === 'yes') && <div className={styles.noTickets}><span>门票已售完</span></div>}
+                {/* <BuyParkingCoupon show={this.state.showBuyParkingNow} onClickCancel={this.handleClickCancel} /> */}
             </div>
         );
     }
