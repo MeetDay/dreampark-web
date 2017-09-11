@@ -75,7 +75,7 @@ const routes = (store) => {
 			<Route path="shoppingcart" component={Shoppingcart} onEnter={requireLogin} />
 			<Route path="login" component={Login} onEnter={checkAlreadyLogin} />
 			<Route path="wechat" component={WeChatLoginTransition} />
-			<Route path="register" component={Register} onEnter={checkAlreadyLogin} />
+			<Route path="register" component={Register} onEnter={mustbeHaveWechatInfo} />
 			<Route path="terms/:serviceType" component={TermsOfService} />
 			<Route path="app/download" component={Download} />
 			<Route path="*" component={NotFound} status={404} />
