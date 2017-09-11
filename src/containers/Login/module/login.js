@@ -64,7 +64,8 @@ const actionhandlers = {
     [`${WECHATLOGIN}_REJECTED`]: (state, action) => {
         console.log(action.payload);
         return {
-            ...state, weChatInfoLoading: false,
+            ...state,
+            weChatInfoLoading: false,
             weChatInfoLoaded: false,
             weChatInfoError: action.payload
         }
