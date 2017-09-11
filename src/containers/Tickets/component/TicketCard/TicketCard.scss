@@ -9,17 +9,19 @@ $cardHeight: 130px;
     white-space: nowrap;
 }
 
-.ticketLink {
-    display: inline-block;
-    vertical-align: top;
-}
-
 $coverImageHeight: 90px;
 .cover {
     display: inline-block;
     width: $coverImageHeight;
     height: $coverImageHeight;
     font-size: 0;
+    vertical-align: top;
+}
+
+.ticketLink {
+    display: inline-block;
+    width: 70%;
+    height: $coverImageHeight;
     vertical-align: top;
 }
 
