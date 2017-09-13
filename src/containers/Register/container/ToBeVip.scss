@@ -35,33 +35,40 @@
 }
 
 .priceInfo {
+    position: relative;
     width: 100%;
-    height: 128px;
+    margin-top: 30%;
     border-radius: 10px;
-    text-align: center;
-    background-color: #FFFFFF;
 
-    & > div {
-        display: inline-block;
-        height: 100%;
-        font-size: 0;
-        vertical-align: top;
+    @media(max-width: 320px) {
+        margin-top: 20%;
     }
 }
 
-.vipLogo {
-    width: 70%;
+.priceInfoWrapper {
+    position: relative;
+    padding: 15px;
+}
 
+.cardImage {
+    position: absolute;
+    width: 100%;
+}
+
+.vipLogo {
+    padding-top: 10px;
+    margin-left: 15px;
     & > img {
         width: 56px;
         height: 22px;
         margin-right: 8px;
+        font-size: 0;
         vertical-align: middle;
     }
     & > span {
         font-size: 24px;
         font-weight: bold;
-        color: #E62A10;
+        color: #E01B19;
         vertical-align: middle;
     }
 }
@@ -74,36 +81,56 @@
 
 
 .vipPrice {
-    width: 30%;
-    & > span {
-        font-size: 24px;
-        font-weight: bold;
-        color: #000000;
-        vertical-align: middle;
-    }
+    margin-top: 10px;
+    text-align: center;
 }
-.vipPrice::after {
+
+.price {
+    font-size: 40px;
+    font-weight: bold;
+    font-style: italic;
+    color: #000000;
+    vertical-align: baseline;
+}
+
+.priceSymbol {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    vertical-align: baseline;
+}
+
+.priceCNSymbol {
     display: inline-block;
-    content: ' ';
-    height: 100%;
-    width: 15px;
-    vertical-align: middle;
+    padding-left: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    vertical-align: baseline;
 }
 
 .vipRights {
-    margin: 24px 0;
+    margin: 20px 0;
+    text-align: center;
     & > a {
-        font-size: 16px;
-        color: #FFFFFF;
+        font-size: 14px;
+        color: black;
         vertical-align: middle;
     }
     & > img {
-        width: 18px;
-        height: 18px;
-        margin-left: 12px;
+        height: 12px;
+        margin-left: 5px;
         font-size: 0px;
         vertical-align: middle;
     }
+}
+
+.vipRights::before {
+    display: inline-block;
+    content: ' ';
+    height: 100%;
+    // height: 21px;
+    vertical-align: middle;
 }
 
 .goPay {

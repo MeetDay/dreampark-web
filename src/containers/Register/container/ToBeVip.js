@@ -118,15 +118,20 @@ export default class ToBeVip extends React.Component {
                 <div className={styles.container}>
                     <div className={styles.containerWrapper}>
                         <div className={styles.skip} onClick={this.handleClickSkip}><span>跳过</span></div>
-                        <div className={styles.title}><span>成为VIP</span></div>
+                        <div className={styles.title}><span>成为梦想VIP会员</span></div>
                         <div className={styles.description}><span>报名成为梦想VIP会员，开启您的极致梦想体验之旅！</span></div>
                         <div className={styles.priceInfo}>
-                            <div className={styles.vipLogo}><img src="/assets/vip_big.png" alt="vip" /><span>会员</span></div>
-                            <div className={styles.vipPrice}><span>{`${this.props.vipInfo.price}元`}</span></div>
+                            <img className={styles.cardImage} src="/assets/card.png" alt="card" />
+                            <div className={styles.priceInfoWrapper}>
+                                <div className={styles.vipLogo}><img src="/assets/vip_big.png" alt="vip" /><span>会员</span></div>
+                                <div className={styles.vipPrice}>
+                                    <span className={styles.priceSymbol}>￥</span><span className={styles.price}>{this.props.vipInfo.price}</span><span className={styles.priceCNSymbol}>元</span>
+                                </div>
+                                <div className={styles.vipRights}><a href="/terms/7">点击查看VIP权益</a><img src="/assets/slides_detail_arrow.png" alt="forward_icon" /></div>
+                            </div>
                         </div>
-                        <div className={styles.vipRights}><a href="/terms/7">点击查看VIP权益</a><img src="/assets/forward_icon.png" alt="forward_icon" /></div>
                         <div className={styles.goPay}>
-                            <LoginButton title={`前往付费 ￥${this.props.vipInfo.price}`} onClick={this.handleClickGoPay} />
+                            <LoginButton title={`前往付费 ￥${this.props.vipInfo.price}`} bgColor="#FFCD00" onClick={this.handleClickGoPay} />
                         </div>
                     </div>
                 </div>
