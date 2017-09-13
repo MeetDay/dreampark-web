@@ -153,7 +153,7 @@ const initialState = {
 
     usedTicktsLoading: false,
     usedTicktsLoaded: false,
-    usedTicktsError: null,
+    usedTicketsError: null,
     usedTickts: [],
     hasMoreUsedTickets: false,
     maxUsedTicketsID: undefined,
@@ -193,7 +193,7 @@ export default function tickets(state=initialState, action) {
 }
 
 export function isUnusedTicketsLoaded(globalState) {
-    return globalState.tickets && globalState.tickets.unusedTikectsLoaded
+    return globalState.tickets && globalState.tickets.unusedTicketsLoaded
 }
 
 export function isUsedTicketsLoaded(globalState) {
@@ -285,7 +285,7 @@ export function getRecommendTickets() {
             payload: (client) => client.get('/pois/ticket', {
                 headers: authHeaders,
                 params: { count: TICKET_COUNT_PER_REQUEST, max_id: recommendTicketMaxID },
-                subpath: '/api/v1'
+                subpath: '/fbpark/v1'
             })
         })
     }
@@ -297,7 +297,7 @@ export function searchTickets(title) {
         type: SEARCH_TICKETS,
         payload: (client) => client.get('/pois/ticket', {
             params: { title: title },
-            subpath: '/api/v1'
+            subpath: '/fbpark/v1'
         })
     }
 }

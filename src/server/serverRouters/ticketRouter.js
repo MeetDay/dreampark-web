@@ -9,7 +9,7 @@ ticketRouter.get('/free', (req, res) => {
     if (freeTickets.length > 0) {
         res.json({ id: freeTickets[0].id });
     } else {
-        const url = projectConfig.baseUrl + '/api/v1/users/homepage';
+        const url = projectConfig.baseUrl + '/fbpark/v1/users/homepage';
         superagent.get(url)
             .end((error, { body, text } = { }) => {
                 const result = isEmptyObject(body) ? JSON.parse(text) : body;

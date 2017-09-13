@@ -18,6 +18,7 @@ const ADD_CONTACT = 'redux/shoppingcart/add_contact'
 const TICKET_INFO = 'redux/shoppingcart/ticketinfo'
 const TICKET_ORDER_INFO = 'redux/shoppingcart/ticket_order_info'
 const TICEKT_ORDER = 'redux/shoppingcart/ticket_order'
+const UPDATE_TICKET_INFO_HOTEL = 'redux/shoppingcart/update_ticket_info_hotel'
 const PAYMENT = 'redux/shoppingcart/payment'
 const GOODS_COUNT_PER_REQUEST = 20
 
@@ -99,6 +100,22 @@ const actionHandlers = {
     [`${TICEKT_ORDER}_FULFILLED`]: (state, action) => ({ ...state, generatorTicketOrderLoading: false, generatorTicketOrderLoaded: true, generatorTicketOrder: action.payload }),
     [`${TICEKT_ORDER}_REJECTED`]: (state, action) => ({ ...state, generatorTicketOrderLoading: false, generatorTicketOrderLoaded: false, generatorTicketOrderError: action.payload }),
 
+    [`${UPDATE_TICKET_INFO_HOTEL}`]: (state, action) => {
+        const { ticketInfo } = state;
+        const { hotelTicketInfo } = action.payload;
+        return {
+            ...state,
+            isHotelTicketInfo: true,
+            ticketInfo: {
+                id: ticketInfo.id,
+                ticket_name: ticketInfo.ticket_name,
+                type_name: hotelTicketInfo.typeName,
+                price: hotelTicketInfo.price,
+                start_time: hotelTicketInfo.startDate / 1000,
+                end_time: hotelTicketInfo.endDate / 1000
+            }
+        }
+    },
     // 支付订单
     [`${PAYMENT}_PENDING`]: (state, action) => ({ ...state, paymentLoading: true, paymentLoaded: false }),
     [`${PAYMENT}_FULFILLED`]: (state, action) => ({ ...state, paymentLoading: false, paymentLoaded: true, paymentObject: action.payload }),
@@ -253,7 +270,7 @@ export function getTicketInfoBy(ticketID) {
             type: TICKET_INFO,
             payload: (client) => client.get(`/tickets/ticket_order_info/${ticketID}`, {
                 headers: authHeaders,
-                subpath: '/api/v1'
+                subpath: '/fbpark/v1'
             })
         })
     }
@@ -280,6 +297,14 @@ export function addContact(contact) {
                     return Promise.reject(result);
                 })
         })
+    }
+}
+
+// 根据选择的酒店信息，更新ticketInfo
+export function updateTicketInfo(hotelTicketInfo) {
+    return {
+        type: UPDATE_TICKET_INFO_HOTEL,
+        payload: { hotelTicketInfo: hotelTicketInfo }
     }
 }
 

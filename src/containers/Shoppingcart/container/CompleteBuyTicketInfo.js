@@ -13,12 +13,13 @@ import * as Constant from '../../../utils/constant';
 import APIClient from '../../../helpers/APIClient';
 import { isEmptyObject } from '../../Login/module/login';
 import { PageNotExist } from '../../../components'
-import { isTicketInfoLoaded, getTicketInfoBy, addContact, isTicketOrderInfoLoaded, getTicketOrderInfoBy, payment, submitTicketOrder } from '../module/shoppingcartV2';
+import { isTicketInfoLoaded, getTicketInfoBy, updateTicketInfo, addContact, isTicketOrderInfoLoaded, getTicketOrderInfoBy, payment, submitTicketOrder } from '../module/shoppingcartV2';
 import { Phone } from '../../../components';
 import { clearWhiteSpaceOf, illegalCardNumber } from '../../../utils/regex';
 import { convertToLocalDate } from '../../../utils/dateformat'
 
 const IDCARD_TEXT_MAX_LENGTH = 18;
+const USERNAME_TEXT_MAX_LENGTH = 20;
 const TICKET_PAY_FAIL = '支付失败, 请重新支付';
 const TICKET_PAY_CANCEL = '支付已取消, 请重新支付';
 const TICKET_PAY_SUCCESS = '出票成功';
@@ -43,6 +44,7 @@ const CONTACT_WARNNING_MESSAGE = '请输入正确的姓名和身份证号码';
         contactError: state.shoppingcart.contactError,
         contact: state.shoppingcart.contact,
         ticketInfo: state.shoppingcart.ticketInfo,
+        isHotelTicketInfo: state.shoppingcart.isHotelTicketInfo,
         contactList: state.shoppingcart.contactList,
         checkedContactsNoInsurance: state.shoppingcart.checkedContactsNoInsurance,
 
@@ -59,7 +61,7 @@ const CONTACT_WARNNING_MESSAGE = '请输入正确的姓名和身份证号码';
         paymentObject: state.shoppingcart.paymentObject,
         paymentError: state.shoppingcart.paymentError
     }),
-    dispatch => bindActionCreators({ push, addContact, payment, submitTicketOrder }, dispatch)
+    dispatch => bindActionCreators({ push, addContact, updateTicketInfo, payment, submitTicketOrder }, dispatch)
 )
 
 export default class CompleteBuyTicketInfo extends React.Component {
@@ -74,15 +76,44 @@ export default class CompleteBuyTicketInfo extends React.Component {
 
         this.contactChecked = (checkedContact) => this._contactChecked(checkedContact)
         this.addContact = () => this._addContact()
+
+        const { hotelTicketInfo, goodsInfo } = props.location.query;
+        if (hotelTicketInfo) {
+            const parsedHotelTicketInfo = JSON.parse(hotelTicketInfo);
+            if (parsedHotelTicketInfo && !isEmptyObject(parsedHotelTicketInfo)) {
+                this.parsedHotelTicketInfo = parsedHotelTicketInfo;
+                this.isHotelTicketInfo = true;
+            }
+        }
+        if (goodsInfo) {
+            const parsedGoodsInfo = JSON.parse(goodsInfo);
+            if (parsedGoodsInfo && !isEmptyObject(parsedGoodsInfo)) {
+                this.goodsFromShoppingcart = true;
+                this.goodsID = parsedGoodsInfo.goodsID;
+            }
+        }
+
+        let totalPrice = props.ticketInfo ? (props.isTicketOrderInfo ? Number(props.ticketInfo.amount).toFixed(2) : Number(props.ticketInfo.price).toFixed(2)) : 0;
+        if (this.isHotelTicketInfo) {
+            totalPrice = Number(this.parsedHotelTicketInfo.price).toFixed(2);
+        }
+        const checkedContacts = props.ticketInfo ? (props.isTicketOrderInfo ? [...props.contactList] : ((props.contactList && props.contactList.length > 0) ? [props.contactList[0]] : [])) : [];
         this.state = {
             paying: false,
             showAddContact: false,
             username: '',
             idCardNo: '',
-            checkedContacts: props.ticketInfo ? (props.isTicketOrderInfo ? [...props.contactList] : ((props.contactList && props.contactList.length > 0) ? [props.contactList[0]] : [])) : [],
+            checkedContacts: checkedContacts,
+            totalPrice: totalPrice,
             // checkedContactsNoInsurance: props.checkedContactsNoInsurance,
-            totalPrice: props.ticketInfo ? (props.isTicketOrderInfo ? Number(props.ticketInfo.amount).toFixed(2) : Number(props.ticketInfo.price).toFixed(2)) : 0,
+            // totalPrice: props.ticketInfo ? (props.isTicketOrderInfo ? Number(props.ticketInfo.amount).toFixed(2) : Number(props.ticketInfo.price).toFixed(2)) : 0,
             // totalPrice: props.ticketInfo ? (props.isTicketOrderInfo ? Number(props.ticketInfo.amount).toFixed(2) : Number(props.ticketInfo.price + props.insurancePrice*props.checkedContactsNoInsurance.length).toFixed(2)) : 0,
+        }
+    }
+
+    componentWillMount() {
+        if (this.isHotelTicketInfo) {
+            this.props.updateTicketInfo(this.parsedHotelTicketInfo);
         }
     }
 
@@ -90,11 +121,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
         // 添加联系人
         const { contact, contactError } = nextProps
         if (contact && contact !== this.props.contact) {
-            this.setState({
-                showAddContact: false,
-                username: '',
-                idCardNo: ''
-            });
+            this.setState({ showAddContact: false, username: '', idCardNo: '' });
         } else if (contactError && contactError !== this.props.contactError) {
             message.error(contactError.error_message);
         }
@@ -110,11 +137,11 @@ export default class CompleteBuyTicketInfo extends React.Component {
             client.post('/charge', { headers: this.props.authHeaders, data: { id: this.props.ticketInfo.orders_id, amount: this.props.ticketInfo.amount, open_id: openID, pay_type: 'wx_pub' } })
                 .then(charge => {
                     if (charge && !isEmptyObject(charge)) {
-                        // 设置支付超时时间为25秒
+                        // 设置支付超时时间为60秒
                         const paymentID = setTimeout(_ => {
                             message.error(TICKET_PAY_FAIL);
                             this.setState({ paying: false });
-                        }, 30000);
+                        }, 60000);
                         pingpp.createPayment(charge, (result, error) => {
                             if (result == 'success') {
                                 clearTimeout(paymentID);
@@ -130,12 +157,12 @@ export default class CompleteBuyTicketInfo extends React.Component {
                             }
                         })
                     } else {
-                        return Promise.reject({ code: 10099, error_message: '返回的charge对象为空' })
+                        return Promise.reject({ code: 10099, error_message: '支付失败, charge对象为空' })
                     }
                 })
                 .catch(error => { this.setState({ paying: false }); message.error(error.error_message) })
         } else {
-            const ticketInfo = {
+            let ticketInfo = {
                 amount: this.state.totalPrice,
                 ticket: {
                     id: this.props.ticketInfo.id,
@@ -144,6 +171,9 @@ export default class CompleteBuyTicketInfo extends React.Component {
             };
             const client = new APIClient();
             if (this.state.totalPrice == 0) {
+                if (this.goodsFromShoppingcart) {
+                    ticketInfo = Object.assign({ cart_id: this.goodsID }, ticketInfo);
+                }
                 client.post('/add_order', { headers: this.props.authHeaders, data: ticketInfo })
                     .then(orderInfo => client.post('/free', { headers: this.props.authHeaders, data: { id: orderInfo.orders_id } }))
                     .then(result => { this.props.push('/tickets'); this.setState({ paying: false }); message.success(TICKET_PAY_SUCCESS); })
@@ -151,15 +181,21 @@ export default class CompleteBuyTicketInfo extends React.Component {
             } else {
                 const cookies = new Cookies()
                 const openID = cookies.get(Constant.USER_OPENID)
+                if (this.isHotelTicketInfo) {
+                    ticketInfo = Object.assign({ start_date: this.props.ticketInfo.start_time, end_date: this.props.ticketInfo.end_time }, ticketInfo);
+                } else if (this.goodsFromShoppingcart) {
+                    ticketInfo = Object.assign({ cart_id: this.goodsID }, ticketInfo);
+                }
+
                 client.post('/add_order', { headers: this.props.authHeaders, data: ticketInfo })
                     .then(orderInfo => client.post('/charge', { headers: this.props.authHeaders, data: { id: orderInfo.orders_id, amount: ticketInfo.amount, open_id: openID, pay_type: 'wx_pub' }}))
                     .then(charge => {
                         if (charge && !isEmptyObject(charge)) {
-                            // 设置支付超时时间为25秒
+                            // 设置支付超时时间为60秒
                             const paymentID = setTimeout(_ => {
                                 message.error(TICKET_PAY_FAIL);
                                 this.setState({ paying: false });
-                            }, 15000);
+                            }, 60000);
                             pingpp.createPayment(charge, (result, error) => {
                                 if (result == 'success') {
                                     clearTimeout(paymentID);
@@ -175,7 +211,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                                 }
                             })
                         } else {
-                            return Promise.reject({ code: 10099, error_message: '返回的charge对象为空' })
+                            return Promise.reject({ code: 10099, error_message: '支付失败, charge对象为空' })
                         }
                     })
                     .catch(error => { this.setState({ paying: false }); message.error(error.error_message) })
@@ -217,18 +253,17 @@ export default class CompleteBuyTicketInfo extends React.Component {
     }
     _handleClickCancel(e) {
         e.preventDefault()
-        this.setState({
-            showAddContact: false,
-            username: '',
-            idCardNo: ''
-        })
+        this.setState({ showAddContact: false, username: '', idCardNo: '' })
     }
 
     // 添加常用联系人
     _onUsernameChange(e) {
         e.preventDefault()
         const usernameText = e.target.value;
-        this.setState({ username: clearWhiteSpaceOf(usernameText) })
+        const usernameTextWithNoWhiteSpace = clearWhiteSpaceOf(usernameText);
+        if (usernameTextWithNoWhiteSpace.length <= USERNAME_TEXT_MAX_LENGTH) {
+            this.setState((preState) => ({ username: usernameTextWithNoWhiteSpace }))
+        }
     }
     _onCardNumberChange(e) {
         e.preventDefault()
@@ -274,11 +309,20 @@ export default class CompleteBuyTicketInfo extends React.Component {
                         <span className={styles.ticketImageWrap}><img src="/assets/ticket_border_big.png" alt="ticket"/></span>
                         <div className={styles.ticketDetails}>
                             <div className={styles.ticketDescription}>
-                                <div className={styles.ticketDescriptionWrap}>
-                                    <span className={styles.ticketTitle}>{ticketInfo.ticket_name}</span>
-                                    <span className={styles.ticketTimeInfo}>{`${ticketStartTimeObject.date} ${ticketStartTimeObject.week}`}</span>
-                                    <span className={styles.ticketDuration}>{`${ticketStartTimeObject.time} - ${ticketEndTimeObject.time}`}</span>
-                                </div>
+                                {!this.isHotelTicketInfo &&
+                                    <div className={styles.ticketDescriptionWrap}>
+                                        <span className={styles.ticketTitle}>{ticketInfo.ticket_name}</span>
+                                        <span className={styles.ticketTimeInfo}>{`${ticketStartTimeObject.date} ${ticketStartTimeObject.week}`}</span>
+                                        <span className={styles.ticketDuration}>{`${ticketStartTimeObject.time} - ${ticketEndTimeObject.time}`}</span>
+                                    </div>
+                                }
+                                {this.isHotelTicketInfo &&
+                                    <div className={styles.ticketDescriptionWrap}>
+                                        <span className={styles.ticketTitle}>{ticketInfo.ticket_name}</span>
+                                        <span className={styles.ticketTimeInfo}>{`${ticketStartTimeObject.dotDate}-${ticketEndTimeObject.dotDate}`}</span>
+                                        <span className={styles.ticketDuration}>{ticketInfo.type_name}</span>
+                                    </div>
+                                }
                             </div>
                             <span className={styles.ticketPrice}>{ticketInfo.price == 0 ? '免费' : `￥${ticketInfo.price}`}</span>
                         </div>
@@ -297,7 +341,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                             this.state.checkedContacts.map(checkedContact => (<SingleInfo key={checkedContact.identity_card} contact={checkedContact} />))
                         }
                     </div>
-                    {false &&
+                    {/* {false &&
                         <div className={styles.insuranceService}>
                             <div className={styles.insuranceServiceWrap}>
                                 <span className={styles.imageWrap}><img className={styles.imgsafe} src="/assets/safe.png" alt="safe"/></span>
@@ -307,8 +351,9 @@ export default class CompleteBuyTicketInfo extends React.Component {
                                 </span>
                             </div>
                         </div>
-                    }
-                    {false && <div className={styles.insuranceAttention}><span>注意：联系人左上角的“盾牌”代表该联系人已购买救援服务，无需再次购买！</span></div>}
+                    } */}
+                    {/* {false && <div className={styles.insuranceAttention}><span>注意：联系人左上角的“盾牌”代表该联系人已购买救援服务，无需再次购买！</span></div>} */}
+                    {this.isHotelTicketInfo &&  <div className={styles.insuranceAttention}><span>注意：单一联系人代表预订一间房间，请勿多选。</span></div>}
                 </div>
                 <div className={styles.toolbar}>
                     <Spin spinning={this.state.paying}>

@@ -48,7 +48,7 @@ export default class Html extends React.Component {
 					{
 						Object.keys(assets.javascript)
 							.reverse()
-							.map((js) => (<script type="text/javascript" key={js} src={assets.javascript[js]} charSet="utf-8" deffer />))
+							.map((js) => (<script type="text/javascript" key={js} src={assets.javascript[js]} charSet="utf-8" />))
 					}
 					<script type="text/javascript" src="/pingpp/pingpp.js" />
 	            </body>

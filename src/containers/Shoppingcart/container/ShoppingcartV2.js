@@ -47,7 +47,7 @@ export default class ShoppingcartV2 extends React.Component {
     }
 
     _goPayment(goods) {
-        this.props.push(`/pay/ticketinfo/${goods.ticket.ticket_id}`);
+        this.props.push(`/pay/ticketinfo/${goods.ticket.ticket_id}?goodsInfo=${JSON.stringify({goodsID: goods.id })}`);
     }
 
     _handleClickLoadMoreGoods(e) {

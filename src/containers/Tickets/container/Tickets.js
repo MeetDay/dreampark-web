@@ -26,6 +26,7 @@ const existedTicketTypes = ['unused', 'used', 'unpaid']
     promise: ({ params, store: { dispatch, getState }, location, helpers }) => {
         const getQueryValueOf = key => decodeURIComponent(location.search.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[.+*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
         const ticketType = getQueryValueOf('type')
+        console.log(ticketType)
         if (!isUsedTicketsLoaded(getState()) && ticketType === 'used') {
             return dispatch(getUsedTickts({ headerRefreshing: true }))
         } else if(!isUnpaidTicketsLoaded(getState()) && ticketType === 'unpaid') {

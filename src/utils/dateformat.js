@@ -2,6 +2,7 @@ export function convertToLocalDate(timestamp) {
     const targetDate = new Date(timestamp * 1000)
     return {
         date: getLocalDateString(targetDate),
+        dotDate: getLocalDotDateString(targetDate),
         month: getLocalMonthString(targetDate),
         day: getLocalDayString(targetDate),
         week: getLocalWeekString(targetDate),
@@ -11,6 +12,10 @@ export function convertToLocalDate(timestamp) {
 
 function getLocalDateString(date) {
     return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`
+}
+
+function getLocalDotDateString(date) {
+    return `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`
 }
 
 function getLocalMonthString(date) {
