@@ -86,7 +86,7 @@ function getUserInfo(weChatInfo) {
     }
     return new Promise((resolve, reject) => {
         let baseUrl = __DEV__ ? projectConfig.devBaseUrl : projectConfig.baseUrl
-        const linkAccountUrl = baseUrl + '/fbpark/v1/users/login/linked_account'
+        const linkAccountUrl = baseUrl + '/api/v1/users/login/linked_account'
         superagent.post(linkAccountUrl)
             .send(data)
             .end((err, { body, text } = {}) => {

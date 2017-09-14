@@ -48,15 +48,13 @@ const routes = (store) => {
 
 	const mustbeHaveWechatInfo = (nextState, replaceState, callback) => {
 		const { user, weChatInfo, openID } = store.getState().login;
+		const isEmptyOfWeChatInfo = isEmptyObject(weChatInfo);
 		if (user && isFullUser(user)) {
 			replaceState('/tickets');
-		} else {
-			console.log(weChatInfo);
-			if (!openID && isEmptyObject(weChatInfo)) {
-				const callbackUrl = nextState.location.pathname;
-				const forwardUrl = `/wechat?callbackUrl=${callbackUrl}`;
-				replaceState(forwardUrl);
-			}
+		} else if (isEmptyOfWeChatInfo) {
+			const callbackUrl = nextState.location.pathname;
+			const forwardUrl = `/wechat?callbackUrl=${callbackUrl}`;
+			replaceState(forwardUrl);
 		}
 		callback();
 	}
@@ -73,7 +71,7 @@ const routes = (store) => {
 			<Route path="detail/:id" component={Details} />
 			<Route path="hotdetail/:id" component={HotDetail} />
 			<Route path="shoppingcart" component={Shoppingcart} onEnter={requireLogin} />
-			<Route path="login" component={Login} onEnter={checkAlreadyLogin} />
+			<Route path="login" component={Login} onEnter={mustbeHaveWechatInfo} />
 			<Route path="wechat" component={WeChatLoginTransition} />
 			<Route path="register" component={Register} onEnter={mustbeHaveWechatInfo} />
 			<Route path="terms/:serviceType" component={TermsOfService} />

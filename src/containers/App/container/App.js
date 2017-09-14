@@ -43,7 +43,7 @@ export default class App extends React.Component {
 		if (nextUser && nextUser !== this.props.user) {
 			if (isFullUser(nextUser)) {
 				const cookies = new Cookies()
-				cookies.set(Constant.USER_COOKIE, nextProps.user, { path: '/', maxAge: 3600 })
+				cookies.set(Constant.USER_COOKIE, nextProps.user, { path: '/', maxAge: 3600*24*30 })
 			}
 		}
 	}

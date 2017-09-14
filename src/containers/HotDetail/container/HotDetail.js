@@ -114,7 +114,7 @@ export default class HotDetail extends React.Component {
     _handleClickToolBar(e) {
         e.preventDefault();
         const { classify_type: classifyType, direct_sales: directSales } = this.props.hotDetail;
-        if (directSales === 'yes123') {
+        if (directSales === 'yes') {
             const { tickets } = this.props.hotDetail;
             location.href = `/pay/ticketinfo/${tickets[0].id}`;
         } else if (classifyType === 'parking') {

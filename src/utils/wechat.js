@@ -9,8 +9,10 @@ export function jumpToWeChatAuthorizationUrl(location, urlBeforeLeave) {
 }
 
 export function getWeChatAuthorizationUrl(urlBeforeLeave) {
-    if (typeof urlBeforeLeave === 'string' && !(urlBeforeLeave.includes('register') || urlBeforeLeave.includes('login') || urlBeforeLeave.includes('wechat'))) {
-        sessionStorage.setItem(Constant.URL_BEFORE_LEAVE, urlBeforeLeave);
+    if (typeof urlBeforeLeave === 'string') {
+        if (urlBeforeLeave.indexOf('register') < 0 && urlBeforeLeave.indexOf('login') < 0 && urlBeforeLeave.indexOf('wechat') < 0) {
+            sessionStorage.setItem(Constant.URL_BEFORE_LEAVE, urlBeforeLeave);
+        }
     }
     const redirectUri = 'http%3A%2F%2Fwww.fbpageant.com%2Fwechat';
     const url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${projectConfig.wechatAppID}`

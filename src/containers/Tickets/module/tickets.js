@@ -285,7 +285,7 @@ export function getRecommendTickets() {
             payload: (client) => client.get('/pois/ticket', {
                 headers: authHeaders,
                 params: { count: TICKET_COUNT_PER_REQUEST, max_id: recommendTicketMaxID },
-                subpath: '/fbpark/v1'
+                subpath: '/api/v1'
             })
         })
     }
@@ -297,7 +297,7 @@ export function searchTickets(title) {
         type: SEARCH_TICKETS,
         payload: (client) => client.get('/pois/ticket', {
             params: { title: title },
-            subpath: '/fbpark/v1'
+            subpath: '/api/v1'
         })
     }
 }
