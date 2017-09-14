@@ -19,6 +19,12 @@
     }
 }
 
+.info {
+    & > span {
+        margin: 0 !important;
+    }
+}
+
 .others {
     width: 80px;
     height: 45px;

@@ -32,7 +32,7 @@ export default class UnpaidOrder extends React.Component {
             <div className={styles.ticket}>
                 <div className={styles.ticketBorder}><img src="/assets/ticket_border_big.png" alt="ticket_border_big" /></div>
                 <div className={styles.ticketWrap}>
-                    <div className={styles.info}>
+                    <div className={classNames(styles.info, unpaidStyles.info)}>
                         <span className={styles.title}>{ticketName}</span>
                         <span className={styles.date}>{`${startTimeDate.date} ${startTimeDate.week}`}</span>
                         <span className={styles.time}>{`${startTimeDate.time}-${endTimeDate.time}`}</span>

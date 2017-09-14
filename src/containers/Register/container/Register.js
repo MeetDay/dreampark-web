@@ -75,10 +75,10 @@ export default class Register extends React.Component {
             }
         } else if (updateUserError && updateUserError !== this.props.updateUserError) {
             console.log(updateUserError);
-            message.error('注册失败, 请重新尝试...');
+            message.error(updateUserError.error_message || '注册失败，请重新...');
         } else if (weChatInfoError && weChatInfoError !== this.props.weChatInfoError) {
             console.log(weChatInfoError);
-            message.error('微信登录失败, 请重新尝试...');
+            message.error(weChatInfoError.error_message || '微信登录失败，请重试...');
         }
     }
 

@@ -72,7 +72,7 @@ export default class WeChatLoginTransition extends React.Component {
         const styles = require('./WeChatLoginTransition.scss')
         return (
             <div className={styles.wechat}>
-                <span className={styles.description}>正在登录...</span>
+                <span className={styles.description}>正在登录, 请稍后...</span>
             </div>
         );
     }
