@@ -126,6 +126,7 @@ export default class Header extends React.Component {
                         }
                     </div>
                 </div>
+                {!isVip && <div className={styles.toBeVipOnHeader}><a className={styles.buyHelper} href="pay/ticketinfo/buy/vip">成为梦想VIP会员</a></div>}
                 <div className={styles.bottom}>
                     <div id="unused" onClick={this.handleClick}><span className={classNames({ [styles.item]: true, [styles.itemActive]: this.state.selectedItemType === 'unused'  })}>未使用</span></div>
                     <div id="used" onClick={this.handleClick}><span className={classNames({ [styles.item]: true, [styles.itemActive]: this.state.selectedItemType === 'used' })}>已使用</span></div>

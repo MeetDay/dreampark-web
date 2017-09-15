@@ -183,6 +183,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
                 const openID = cookies.get(Constant.USER_OPENID)
                 if (this.isHotelTicketInfo) {
                     ticketInfo = Object.assign({
+                        total: Number(this.props.ticketInfo.price).toFixed(2),
                         room_type_id: this.props.ticketInfo.type_id,
                         room_type: this.props.ticketInfo.type_name,
                         start_date: this.props.ticketInfo.start_time,

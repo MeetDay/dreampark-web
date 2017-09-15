@@ -14,7 +14,7 @@ import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-async-connect';
 import { bindActionCreators } from 'redux';
-import { message } from 'antd';
+import { message, Modal } from 'antd';
 import { LoginButton, PageNotExist } from '../../../components';
 import APIClient from '../../../helpers/APIClient';
 import { isEmptyObject } from '../../Login/module/login';
@@ -56,6 +56,12 @@ export default class ToBeVip extends React.Component {
 
     _handleClickGoPay(e) {
         if (this.state.paying) return;
+        if (this.props.vipInfo.number <= 0) {
+            Modal.warning({
+                title: '梦想VIP会员已售罄',
+                onOk: function() { location.href = '/tickets' }
+            });
+        }
         e.preventDefault();
         this.setState({ paying: true });
         const cookies = new Cookies()
@@ -80,7 +86,7 @@ export default class ToBeVip extends React.Component {
                                     this.props.push('/tickets');
                                 })
                                 .catch(error => {
-                                    message.error('支付失败');
+                                    message.error(error.error_message || '支付失败');
                                     this.setState({ paying: false });
                                     this.props.push('/tickets?type=unpaid');
                                 })
@@ -99,7 +105,7 @@ export default class ToBeVip extends React.Component {
             })
             .catch(err => {
                 console.log(err.error);
-                message.error(err.error_message);
+                message.error(err.error_message || '生成订单失败...');
                 this.setState({ paying: false });
             })
     }
