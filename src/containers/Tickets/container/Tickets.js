@@ -85,6 +85,13 @@ export default class Tickets extends React.Component {
         if (existedTicketTypes.includes(ticketType)) {
             setTimeout(_ => this.setState({ selectedItemType: ticketType }), 0);
         }
+
+        const { unusedTicketsError, usedTicktsError, unpaidTicketsError } = this.props;
+        if ((unusedTicketsError && (unusedTicketsError.code == 10021)) || (usedTicktsError && (usedTicktsError.code = 10021)) || (unpaidTicketsError && (unpaidTicketsError.code == 10021))) {
+            const cookies = new Cookies();
+            cookies.remove(Constant.USER_COOKIE, { path: '/' });
+            this.props.push('/login#launching');
+        }
     }
 
     componentWillReceiveProps(nextProps) {
