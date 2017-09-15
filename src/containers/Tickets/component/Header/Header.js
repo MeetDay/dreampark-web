@@ -49,12 +49,6 @@ export default class Header extends React.Component {
         }
     }
 
-    componentDidMount() {
-        if (!this.props.user || isEmptyObject(this.props.user)) {
-            location.reload();
-        }
-    }
-
     componentWillReceiveProps(nextProps) {
         const { selectedItemType } = nextProps
         this.setState({ selectedItemType: selectedItemType })
