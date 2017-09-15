@@ -24,7 +24,7 @@ const serverRouterMiddleware = () => (req, res, next) => {
 	const store = createStore(memoryHistory, client);
 	if (!isEmptyObject(req.universalCookies.cookies)) {
 		const userCookie = req.universalCookies.get(Constant.USER_COOKIE);
-		console.log(`用户:${userCookie.username}-${userCookie.userid} 时间:${new Date().toDateString()} 访问:${req.originalUrl}`);
+		console.log(`用户:${userCookie} 时间:${new Date().toDateString()} 访问:${req.originalUrl}`);
 		store.dispatch(loadCookieSync(userCookie));
 		store.dispatch(loadOpenIDOfWechat(req.universalCookies.get(Constant.USER_OPENID)));
 	}
