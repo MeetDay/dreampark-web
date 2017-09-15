@@ -182,7 +182,10 @@ export default class CompleteBuyTicketInfo extends React.Component {
                 const cookies = new Cookies()
                 const openID = cookies.get(Constant.USER_OPENID)
                 if (this.isHotelTicketInfo) {
-                    ticketInfo = Object.assign({ start_date: this.props.ticketInfo.start_time, end_date: this.props.ticketInfo.end_time }, ticketInfo);
+                    ticketInfo = Object.assign({ 
+                        start_date: this.props.ticketInfo.start_time,
+                        end_date: this.props.ticketInfo.end_time
+                    }, ticketInfo);
                 } else if (this.goodsFromShoppingcart) {
                     ticketInfo = Object.assign({ cart_id: this.goodsID }, ticketInfo);
                 }

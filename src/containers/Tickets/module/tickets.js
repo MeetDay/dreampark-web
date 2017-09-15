@@ -153,7 +153,7 @@ const initialState = {
 
     usedTicktsLoading: false,
     usedTicktsLoaded: false,
-    usedTicketsError: null,
+    usedTicktsError: null,
     usedTickts: [],
     hasMoreUsedTickets: false,
     maxUsedTicketsID: undefined,

@@ -8,8 +8,9 @@
  */
 
 import React from 'react'
-import { message } from 'antd'
 import PropTypes from 'prop-types'
+import Cookies from 'universal-cookie'
+import { message } from 'antd'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { asyncConnect } from 'redux-async-connect'
@@ -18,6 +19,7 @@ import { isUsedTicketsLoaded, getUsedTickts,isUnusedTicketsLoaded, getUnusedTike
 import { LoadMoreButton } from '../../../components';
 import { Header, Ticket, UnpaidOrder, TicketDetail, TicketTool } from '../component';
 import { convertToLocalDate } from '../../../utils/dateformat';
+import * as Constant from '../../../utils/constant';
 
 const existedTicketTypes = ['unused', 'used', 'unpaid']
 
@@ -43,14 +45,17 @@ const existedTicketTypes = ['unused', 'used', 'unpaid']
 
         unusedTickets: state.tickets.unusedTickets,
         unusedTicketsLoading: state.tickets.unusedTicketsLoading,
+        unusedTicketsError: state.tickets.unusedTicketsError,
         hasMoreUnusedTickets: state.tickets.hasMoreUnusedTickets,
 
         usedTickts: state.tickets.usedTickts,
         usedTicktsLoading: state.tickets.usedTicktsLoading,
+        usedTicktsError: state.tickets.usedTicktsError,
         hasMoreUsedTickets: state.tickets.hasMoreUsedTickets,
 
         unpaidTickets: state.tickets.unpaidTickets,
         unpaidTicketsLoading: state.tickets.unpaidTicketsLoading,
+        unpaidTicketsError: state.tickets.unpaidTicketsError,
         hasMoreUnpaidTickets: state.tickets.hasMoreUnpaidTickets,
 
         cancelOrderLoaded: state.tickets.cancelOrderLoaded
@@ -86,6 +91,18 @@ export default class Tickets extends React.Component {
         const { cancelOrderLoaded } = nextProps
         if (cancelOrderLoaded && cancelOrderLoaded !== this.props.cancelOrderLoaded) {
             message.success('删除订单成功...')
+        }
+
+        const { unusedTicketsError: nextUnusedTicketsError, usedTicktsError: nextUsedTicktsError, unpaidTicketsError: nextUnpaidTicketsError } = nextProps;
+        const { unusedTicketsError, usedTicktsError, unpaidTicketsError } = this.props;
+        if ((nextUnusedTicketsError && nextUnusedTicketsError != unusedTicketsError) ||
+            (nextUsedTicktsError && nextUsedTicktsError != usedTicktsError) ||
+            (nextUnpaidTicketsError && nextUnpaidTicketsError != unpaidTicketsError)) {
+            if (nextUnusedTicketsError.code == 10021 || nextUsedTicktsError.code = 10021 || nextUnpaidTicketsError.code == 10021) {
+                const cookies = new Cookies();
+                cookies.remove(Constant.USER_COOKIE, { path: '/' });
+                location.href = '/login#launching';
+            }
         }
     }
 
