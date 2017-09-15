@@ -1,8 +1,8 @@
 {
   "javascript": {
-    "main": "http://localhost:3000/dist/main.20edeab5b71102dcccca.min.js",
-    "vendor": "http://localhost:3000/dist/vendor.20edeab5b71102dcccca.min.js",
-    "manifest": "http://localhost:3000/dist/manifest.20edeab5b71102dcccca.min.js"
+    "main": "http://localhost:3000/dist/main.71c377b73f179df86ea2.min.js",
+    "vendor": "http://localhost:3000/dist/vendor.71c377b73f179df86ea2.min.js",
+    "manifest": "http://localhost:3000/dist/manifest.71c377b73f179df86ea2.min.js"
   },
   "styles": {},
   "assets": {
@@ -463,6 +463,12 @@
       "searchImg": "SearchTicket__searchImg__3FyFs",
       "noSearchDescription": "SearchTicket__noSearchDescription__35rxw",
       "_style": ".SearchTicket__searchTicket__2OKE1 {\n  background-color: #FFFFFF; }\n\n.SearchTicket__contentWrap__GHM6C {\n  margin-top: 44px; }\n\n.SearchTicket__noSearchResult__3Q_8d {\n  margin-top: 144px; }\n\n.SearchTicket__searchImg__3FyFs {\n  width: 100%;\n  height: 93px;\n  text-align: center; }\n  .SearchTicket__searchImg__3FyFs > img {\n    height: 100%;\n    vertical-align: top; }\n\n.SearchTicket__noSearchDescription__35rxw {\n  margin-top: 35px;\n  text-align: center; }\n  .SearchTicket__noSearchDescription__35rxw > span:first-child {\n    display: inline-block;\n    width: 100%;\n    font-family: PingFangSC-Semibold;\n    font-size: 16px;\n    color: #393939; }\n  .SearchTicket__noSearchDescription__35rxw > span:last-child {\n    display: inline-block;\n    margin-top: 20px;\n    font-family: PingFangSC-Regular;\n    font-size: 14px;\n    color: #D6D6D6; }\n"
+    },
+    "./src/containers/Tickets/container/Tickets.scss": {
+      "ticketContent": "Tickets__ticketContent__3Hk8V",
+      "ticketWrap": "Tickets__ticketWrap__1-ptD",
+      "noTicketsMessage": "Tickets__noTicketsMessage__1fD42",
+      "_style": ".Tickets__ticketContent__3Hk8V {\n  border-bottom: 75px solid transparent; }\n\n.Tickets__ticketWrap__1-ptD {\n  padding: 0 20px; }\n\n.Tickets__noTicketsMessage__1fD42 {\n  margin-top: 60px;\n  font-size: 16px;\n  text-align: center;\n  color: #9B9B9B; }\n"
     }
   },
   "webpack": {
