@@ -49,7 +49,7 @@ export default class Header extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         if (!this.props.user || isEmptyObject(this.props.user)) {
             location.reload();
         }
