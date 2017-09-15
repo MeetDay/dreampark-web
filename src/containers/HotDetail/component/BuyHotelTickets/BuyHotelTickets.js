@@ -83,6 +83,7 @@
              const sortedTickets = this.state.selectedTickets.sort((ticket, anthorTicket) => ticket.timestamp > anthorTicket.timestamp);
              const minDateTicket = sortedTickets[0], maxDateTicket = sortedTickets[sortedTickets.length - 1];
              const queryParams = {
+                 typeID: this.state.selectedRoom.type_id,
                  typeName: this.state.selectedRoom.type_name,
                  startDate: minDateTicket.timestamp,
                  endDate: maxDateTicket.timestamp,

@@ -109,6 +109,7 @@ const actionHandlers = {
             ticketInfo: {
                 id: ticketInfo.id,
                 ticket_name: ticketInfo.ticket_name,
+                type_id: hotelTicketInfo.typeID,
                 type_name: hotelTicketInfo.typeName,
                 price: hotelTicketInfo.price,
                 start_time: hotelTicketInfo.startDate / 1000,

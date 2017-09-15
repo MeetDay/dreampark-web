@@ -101,7 +101,6 @@ export default class Tickets extends React.Component {
             if ((nextUnusedTicketsError.code == 10021) || (nextUsedTicktsError.code = 10021) || (nextUnpaidTicketsError.code == 10021)) {
                 const cookies = new Cookies();
                 cookies.remove(Constant.USER_COOKIE, { path: '/' });
-                location.href = '/login#launching';
             }
         }
     }
