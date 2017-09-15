@@ -72,7 +72,7 @@ const routes = (store) => {
 			<Route path="detail/:id" component={Details} />
 			<Route path="hotdetail/:id" component={HotDetail} />
 			<Route path="shoppingcart" component={Shoppingcart} onEnter={requireLogin} />
-			<Route path="login" component={Login} />
+			<Route path="login" component={Login} onEnter={mustbeHaveWechatInfo} />
 			<Route path="wechat" component={WeChatLoginTransition} />
 			<Route path="register" component={Register} onEnter={mustbeHaveWechatInfo} />
 			<Route path="terms/:serviceType" component={TermsOfService} />
