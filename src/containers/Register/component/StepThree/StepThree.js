@@ -66,7 +66,7 @@ export default class StepThree extends React.Component {
                 </div>
                 <div className={logingStyle.loginBottom}>
                     <Phone type="text" usedFor="other" title="您的真实姓名" zone={false} value={this.props.username} onChange={this.props.onUsernameChange} />
-                    <Phone type="tel" usedFor="idcard" title="身份证号码" zone={false} value={this.props.cardno} onChange={this.props.onCardNumberChange} />
+                    <Phone type="text" usedFor="idcard" title="身份证号码" zone={false} value={this.props.cardno} onChange={this.props.onCardNumberChange} />
                     <div className={classNames({ [styles.nextstep]: isForVip, [styles.confirm]: !isForVip })}>
                         <LoginButton title={okButtonMessage} onClick={this.handleClickNextStep} />
                     </div>
