@@ -40,8 +40,7 @@ loginRouter.get('/wechat', (req, res) => {
                 if (userCookie && !isEmptyObject(userCookie)) {
                     res.set('Set-Cookie', `${Constant.USER_COOKIE}=${userCookie}; Max-Age=${3600*24*30}; Path=/`);
                 }
-                // res.set('Set-Cookie', `${Constant.USER_OPENID}=${userInfo.weChatUserInfo.openid}; Max-Age=${3600*24*30}; Path=/`)
-                res.set('Set-Cookie', `${Constant.USER_OPENID}=oUr10wDQslvet8jtmGa_JAoAVvmI; Max-Age=${3600*24*30}; Path=/`)
+                res.set('Set-Cookie', `${Constant.USER_OPENID}=${userInfo.weChatUserInfo.openid}; Max-Age=${3600*24*30}; Path=/`)
                 res.json({ code: 10000, message: 'success', data: userInfo})
             })
             .catch((err) => { res.status(400).json(Object.assign({ code: 10002 }, err)) })
