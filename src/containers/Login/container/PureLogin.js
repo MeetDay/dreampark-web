@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { Loging } from '../component';
 import { userLogin } from '../module/login';
+import { isFullUser } from '../../../utils/wechat';
 import { legalPhoneNumber, clearWhiteSpaceOf } from '../../../utils/regex';
 
 const MAX_LENGTH_OF_SMS_CODE = 4;
