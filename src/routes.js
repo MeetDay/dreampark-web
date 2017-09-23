@@ -73,7 +73,7 @@ const routes = (store) => {
 		<Route path="/" component={App}>
 			<IndexRoute component={Home} />
 			<Route path="home" component={Home} />
-			<Route path="tickets" component={Tickets} onEnter={mustHaveFullUserAndOpenID} />
+			<Route path="tickets" component={Tickets} onEnter={requireLogin} />
 			<Route path="tickets/test" component={TicketTest} onEnter={mustHaveFullUserAndOpenID} />
 			<Route path="pay/ticketinfo/buy/vip" component={ToBeVip} onEnter={requireLogin} />
 			<Route path="pay/ticketinfo/:id" component={CompleteBuyTicketInfo} onEnter={requireLogin} />
