@@ -153,7 +153,7 @@ export function forgotpassword(data) {
     return {
         type: FORGOT_PASSWORD,
         payload: client => client.post('/forgot_password', {
-            data: Object.assign({ zone: "86" }, data)
+            data: Object.assign({ zone: "86", timestamp: Math.floor(Date.now() / 1000) }, data)
         })
     }
 }
