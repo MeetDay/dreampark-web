@@ -29,6 +29,12 @@
     }
 }
 
+.roomType {
+    margin-top: 10px;
+    font-size: 18px;
+    color: black;
+}
+
 .item {
     display: block;
     font-family: PingFangSC-Regular;
@@ -42,6 +48,11 @@
 .itemTime {
     font-size: 28px;
     color: #E62A10;
+}
+
+.itemHotel {
+    margin-top: 10px;
+    font-size: 20px !important;
 }
 
 .location {

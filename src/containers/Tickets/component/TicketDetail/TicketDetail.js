@@ -16,11 +16,19 @@ export default class TicketDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isHotelTicket: props.ticket.ticket_type === "hotel",
             randomString: generatorRandomString(20)
         }
         if (props.ticket) {
             const checkRule = props.ticket.checking_rule === 'more' ? '02' : "01";
-            const ticketQRCode = new TicketQRCode(props.ticket.poi_id, props.ticket.ticket_id, '0.0.0.0', props.ticket.identity_card, checkRule);
+            let ticketDateString = '0.0.0.0';
+            if (props.ticket.ticket_type === 'hotel') {
+                const { start_day: startDay, end_day: endDay } = props.ticket;
+                const startDayArray = startDay.split('-'), endDayArray = endDay.split('-');
+                startDayArray.shift(); endDayArray.shift();
+                ticketDateString = [...startDayArray, ...endDayArray].join(".");
+            }
+            const ticketQRCode = new TicketQRCode(props.ticket.poi_id, props.ticket.ticket_id, ticketDateString, props.ticket.identity_card, checkRule);
             const formatQRCode = ticketQRCode.getTicketQRCode();
             const encryptedQRCode = encrypt(formatQRCode, 'godblessyou');
             this.qrcode = formatQRCode + encryptedQRCode.cipherHexText.substr(-6, 6)
@@ -42,25 +50,29 @@ export default class TicketDetail extends React.Component {
     render() {
         const styles = require('./TicketDetail.scss');
         const headerStyles = require('../Header/Header.scss');
-        const { ticket_name, start_time, end_time, num, place, barcode } = this.props.ticket;
-        const startTime = convertToLocalDate(start_time);
-        const endTime = convertToLocalDate(end_time);
+        const { ticket_name, start_time, end_time, num, place, barcode, room_type: roomType } = this.props.ticket;
+        const { start_day: startDay, end_day: endDay } = this.props.ticket;
+        const formatStartTime = this.state.isHotelTicket ? startDay : convertToLocalDate(start_time).time;
+        const formatEndTime = this.state.isHotelTicket ? endDay : convertToLocalDate(end_time).time;
         return (
             <Modal style={{ top: 20 }} visible={this.props.visible} onCancel={this.props.onCancel} footer={null}>
                 <div className={styles.ticketDetail}>
                     <div className={styles.info}>
                         <div className={styles.title}><span>{ticket_name}</span></div>
-                        <div className={styles.date}><span>{startTime.date}</span></div>
+                        {!this.state.isHotelTicket && <div className={styles.date}><span>{startTime.date}</span></div>}
                         <div className={styles.time}>
                             <div>
                                 <sapn className={classNames(styles.item ,styles.itemTitle)}>开始时间</sapn>
-                                <sapn className={classNames(styles.item, styles.itemTime)}>{startTime.time}</sapn>
+                                <sapn className={classNames({[styles.item]: true, [styles.itemTime]: true, [styles.itemHotel]: this.state.isHotelTicket})}>{formatStartTime}</sapn>
                             </div>
                             <div>
                                 <span className={classNames(styles.item, styles.itemTitle)}>结束时间</span>
-                                <span className={classNames(styles.item, styles.itemTime)}>{endTime.time}</span>
+                                <span className={classNames({[styles.item]: true, [styles.itemTime]: true, [styles.itemHotel]: this.state.isHotelTicket})}>{formatEndTime}</span>
                             </div>
                         </div>
+                        {this.state.isHotelTicket &&
+                            <div className={styles.roomType}><span>{roomType}</span></div>
+                        }
                         {(place && place.length > 0) &&
                             <div className={styles.location}>
                                 <span>{`场馆：${place}`}</span>
