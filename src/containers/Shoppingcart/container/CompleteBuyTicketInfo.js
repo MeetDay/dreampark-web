@@ -77,6 +77,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
         this.contactChecked = (checkedContact) => this._contactChecked(checkedContact)
         this.addContact = () => this._addContact()
 
+        // query 参数
         const { hotelTicketInfo, goodsInfo } = props.location.query;
         if (hotelTicketInfo) {
             const parsedHotelTicketInfo = JSON.parse(hotelTicketInfo);
@@ -97,6 +98,12 @@ export default class CompleteBuyTicketInfo extends React.Component {
         if (this.isHotelTicketInfo) {
             totalPrice = Number(this.parsedHotelTicketInfo.price).toFixed(2);
         }
+
+        // 酒店订单
+        if (props.isTicketOrderInfo) {
+            this.isHotelTicketInfo = props.isTicketOrderInfo;
+        }
+
         const checkedContacts = props.ticketInfo ? (props.isTicketOrderInfo ? [...props.contactList] : ((props.contactList && props.contactList.length > 0) ? [props.contactList[0]] : [])) : [];
         this.state = {
             paying: false,
@@ -112,7 +119,7 @@ export default class CompleteBuyTicketInfo extends React.Component {
     }
 
     componentWillMount() {
-        if (this.isHotelTicketInfo) {
+        if (this.isHotelTicketInfo && this.parsedHotelTicketInfo) {
             this.props.updateTicketInfo(this.parsedHotelTicketInfo);
         }
     }

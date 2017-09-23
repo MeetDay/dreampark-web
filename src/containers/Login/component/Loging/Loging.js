@@ -28,7 +28,7 @@ export default class Loging extends React.Component {
             <div className={styles.loging}>
                 <div className={styles.loginDescription}><span>登&nbsp;录</span></div>
                 <div className={styles.loginBottom}>
-                    <Phone onChange={this.props.onPhonenNmberChange} value={this.props.phonenumber} imgShow={legalPhoneNumber(this.props.phonenumber)} />
+                    <Phone usedFor="other" zone={false} type="text" title="电话号码或身份证号码" onChange={this.props.onPhonenNmberChange} value={this.props.phonenumber} />
                     <Password onChange={this.props.onPasswordChange} value={this.props.password} />
                     <LoginButton title="登录" onClick={this.props.userLogin} />
                 </div>

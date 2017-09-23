@@ -65,9 +65,10 @@ export default class Login extends React.Component {
         e.preventDefault()
         const phonenumber = e.target.value;
         const phonenumberWithNoWhiteSpace = clearWhiteSpaceOf(e.target.value);
-        if (phonenumberWithNoWhiteSpace.length <= MAX_LENGTH_OF_PHONE) {
-            this.setState({ phonenumber: phonenumber })
-        }
+        this.setState({ phonenumber: phonenumberWithNoWhiteSpace })
+        // if (phonenumberWithNoWhiteSpace.length <= MAX_LENGTH_OF_PHONE) {
+        //     this.setState({ phonenumber: phonenumberWithNoWhiteSpace })
+        // }
     }
 
     _onPasswordChange(e) {
@@ -89,9 +90,8 @@ export default class Login extends React.Component {
 
     _userLogin(e) {
         e.preventDefault()
-        const leagalPhone = legalPhoneNumber(this.state.phonenumber);
         const legalPassword = this.state.password.length >= MIN_LENGTH_OF_PASSWORD;
-        if (leagalPhone && legalPassword) {
+        if (legalPassword) {
             this.props.userLogin(clearWhiteSpaceOf(this.state.phonenumber), this.state.password)
         } else {
             message.error('请输入正确的用户名或密码...');

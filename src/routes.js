@@ -12,11 +12,11 @@ import { IndexRoute, Route } from 'react-router';
 import Cookies from 'universal-cookie';
 import App from './containers/App';
 import Home from './containers/Home';
-import { Tickets, BuyTicket, SearchTicket } from './containers/Tickets';
+import { Tickets, TicketTest, BuyTicket, SearchTicket } from './containers/Tickets';
 import Details from './containers/Details';
 import HotDetail from './containers/HotDetail';
 import Shoppingcart, { CompleteBuyTicketInfo } from './containers/Shoppingcart';
-import Login, { WeChatLoginTransition } from './containers/Login';
+import Login, { PureLogin, ForgotPassword, ChangePassword, WeChatLoginTransition } from './containers/Login';
 import Register, { ToBeVip } from './containers/Register';
 import TermsOfService from './containers/TermsOfService';
 import Download from './containers/Download';
@@ -37,6 +37,15 @@ const routes = (store) => {
 			replaceState(forwardUrl)
 		}
 		callback()
+	}
+
+	const mustHaveFullUserAndOpenID = (nextState, replaceState, callback) => {
+		const { user, openID } = store.getState().login;
+		if (!openID || !isFullUser(user)) {
+			const forwardUrl = `/wechat?callbackUrl=${nextState.location.pathname}`;
+			replaceState(forwardUrl);
+		}
+		callback();
 	}
 
 	const checkAlreadyLogin = (nextState, replaceState, callback) => {
@@ -64,7 +73,8 @@ const routes = (store) => {
 		<Route path="/" component={App}>
 			<IndexRoute component={Home} />
 			<Route path="home" component={Home} />
-			<Route path="tickets" component={Tickets} onEnter={requireLogin} />
+			<Route path="tickets" component={Tickets} onEnter={mustHaveFullUserAndOpenID} />
+			<Route path="tickets/test" component={TicketTest} onEnter={mustHaveFullUserAndOpenID} />
 			<Route path="pay/ticketinfo/buy/vip" component={ToBeVip} onEnter={requireLogin} />
 			<Route path="pay/ticketinfo/:id" component={CompleteBuyTicketInfo} onEnter={requireLogin} />
 			<Route path="buytickets" component={BuyTicket} />
@@ -72,7 +82,10 @@ const routes = (store) => {
 			<Route path="detail/:id" component={Details} />
 			<Route path="hotdetail/:id" component={HotDetail} />
 			<Route path="shoppingcart" component={Shoppingcart} onEnter={requireLogin} />
-			<Route path="login" component={Login} onEnter={mustbeHaveWechatInfo} />
+			<Route path="user/login" component={PureLogin} />
+			<Route path="user/forgotpassword/changepassword" component={ChangePassword} />
+			<Route path="user/forgotpassword" component={ForgotPassword} />
+			<Route path="login" component={Login} />
 			<Route path="wechat" component={WeChatLoginTransition} />
 			<Route path="register" component={Register} onEnter={mustbeHaveWechatInfo} />
 			<Route path="terms/:serviceType" component={TermsOfService} />

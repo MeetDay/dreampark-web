@@ -123,26 +123,42 @@ const actionHandlers = {
     [`${PAYMENT}_REJECTED`]: (state, action) => ({ ...state, paymentLoading: false, paymentLoaded: false, paymentError: action.payload }),
 
     // 订单详情
-    [`${TICKET_ORDER_INFO}_PENDING`]: (state, action) => ({ ...state, ticektOrderInfoLoading: true, ticketOrderInfoLoaded: false, isTicketOrderInfo:true }),
+    [`${TICKET_ORDER_INFO}_PENDING`]: (state, action) => ({ ...state, ticektOrderInfoLoading: true, ticketOrderInfoLoaded: false, isTicketOrderInfo:false }),
     [`${TICKET_ORDER_INFO}_FULFILLED`]: (state, action) => {
         let checkedContactsNoInsurance = [];
-        const ticketOrderInfo = action.payload;
+        let ticketOrderInfo = action.payload, isHotelTicketInfo = false;
         const contactList = ticketOrderInfo.contacters;
         delete ticketOrderInfo.contacters;
         if (contactList && contactList.length > 0) {
             checkedContactsNoInsurance = contactList.filter(contact => contact.insurant == 'no');
         }
+
+        if (ticketOrderInfo && Object.prototype.hasOwnProperty.call(ticketOrderInfo, 'ticket_type') && ticketOrderInfo.ticket_type === 'hotel') {
+            ticketOrderInfo = {
+                orders_id: ticketOrderInfo.orders_id,
+                amount: ticketOrderInfo.amount,
+                price: ticketOrderInfo.hotel_price,
+                ticket_id: ticketOrderInfo.ticket_id,
+                ticket_name: ticketOrderInfo.ticket_name,
+                type_name: ticketOrderInfo.room_type,
+                start_time: new Date(ticketOrderInfo.start_day).getTime() / 1000,
+                end_time: new Date(ticketOrderInfo.end_day).getTime() / 1000
+            };
+            isHotelTicketInfo = true;
+        }
+
         return {
             ...state,
             ticektOrderInfoLoading: false,
             ticketOrderInfoLoaded: true,
             isTicketOrderInfo:true,
+            isHotelTicketInfo: isHotelTicketInfo,
             ticketInfo: ticketOrderInfo,
             contactList: contactList,
             checkedContactsNoInsurance: checkedContactsNoInsurance
         }
     },
-    [`${TICKET_ORDER_INFO}_REJECTED`]: (state, action) => ({ ...state, ticektOrderInfoLoading: false, ticketOrderInfoLoaded: false, isTicketOrderInfo:true, ticketOrderInfoError: action.payload })
+    [`${TICKET_ORDER_INFO}_REJECTED`]: (state, action) => ({ ...state, ticektOrderInfoLoading: false, ticketOrderInfoLoaded: false, isTicketOrderInfo:false, ticketOrderInfoError: action.payload })
 }
 
 const initialState = {

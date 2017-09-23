@@ -5,6 +5,7 @@ import * as Constant from '../../../utils/constant'
 const LOGIN = 'redux/login/LOGIN'
 const SIGNUP = 'redux/login/SIGNUP'
 const UPDATE_USER = 'redux/login/UPDATE_USER'
+const FORGOT_PASSWORD = 'redux/login/forgot_password'
 const WECHATLOGIN = 'redux/login/WECHATLOGIN'
 const LOADCOOKIESYNC = 'redux/login/LOADCOOKIESYNC'
 const LOADCOOKIE = 'redux/login/LOADCOOKIE'
@@ -47,6 +48,10 @@ const actionhandlers = {
     },
     [`${UPDATE_USER}_REJECTED`]: (state, action) => ({ ...state, updateUserLoading: false, updateUserLoaded: false, updateUserError: action.payload }),
 
+    [`${FORGOT_PASSWORD}_PENDING`]: (state, action) => ({ ...state, forgotpasswordLoading: true, forgotpasswordLoaded: false }),
+    [`${FORGOT_PASSWORD}_FULFILLED`]: (state, action) => ({ ...state, forgotpasswordLoading: false, forgotpasswordLoaded: true, user: action.payload }),
+    [`${FORGOT_PASSWORD}_REJECTED`]: (state, action) => ({ ...state, forgotpasswordLoading: false, forgotpasswordLoaded: false, forgotpasswordError: action.payload }),
+
     [`${WECHATLOGIN}_PENDING`]: (state, action) => ({ ...state, weChatInfoLoading: true, weChatInfoLoaded: false }),
     [`${WECHATLOGIN}_FULFILLED`]: (state, action) => {
         const { data } = action.payload
@@ -87,6 +92,10 @@ const initialState = {
     updateUserLoading: false,
     updateUserLoaded: false,
     updateUserError: null,
+
+    forgotpasswordLoading: false,
+    forgotpasswordLoaded: false,
+    forgotpasswordError: null,
 
     user: null,
     authHeaders: null,
@@ -132,9 +141,19 @@ export function userSignup(data) {
 export function updateUserInfo(data) {
     return (dispatch, getState) => {
         const { user, authHeaders } = getState().login
-        dispatch({
+        return dispatch({
             type: UPDATE_USER,
             payload: (client) => client.put(`/${user.userid}`, { data, headers: authHeaders })
+        })
+    }
+}
+
+// user forgotpassword
+export function forgotpassword(data) {
+    return {
+        type: FORGOT_PASSWORD,
+        payload: client => client.post('/forgot_password', {
+            data: Object.assign({ zone: "86" }, data)
         })
     }
 }
