@@ -85,9 +85,9 @@ const routes = (store) => {
 			<Route path="user/login" component={PureLogin} />
 			<Route path="user/forgotpassword/changepassword" component={ChangePassword} />
 			<Route path="user/forgotpassword" component={ForgotPassword} />
-			<Route path="login" component={Login} />
+			<Route path="login" component={Login} onEnter={checkAlreadyLogin} />
 			<Route path="wechat" component={WeChatLoginTransition} />
-			<Route path="register" component={Register} />
+			<Route path="register" component={Register} onEnter={checkAlreadyLogin} />
 			<Route path="terms/:serviceType" component={TermsOfService} />
 			<Route path="app/download" component={Download} />
 			<Route path="*" component={NotFound} status={404} />
