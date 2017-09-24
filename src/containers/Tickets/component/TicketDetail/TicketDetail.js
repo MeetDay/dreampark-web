@@ -52,8 +52,9 @@ export default class TicketDetail extends React.Component {
         const headerStyles = require('../Header/Header.scss');
         const { ticket_name, start_time, end_time, num, place, barcode, room_type: roomType } = this.props.ticket;
         const { start_day: startDay, end_day: endDay } = this.props.ticket;
-        const formatStartTime = this.state.isHotelTicket ? startDay : convertToLocalDate(start_time).time;
-        const formatEndTime = this.state.isHotelTicket ? endDay : convertToLocalDate(end_time).time;
+        const startTime = convertToLocalDate(start_time), endTime = convertToLocalDate(end_time);
+        const formatStartTime = this.state.isHotelTicket ? startDay : startTime.time;
+        const formatEndTime = this.state.isHotelTicket ? endDay : endTime.time;
         return (
             <Modal style={{ top: 20 }} visible={this.props.visible} onCancel={this.props.onCancel} footer={null}>
                 <div className={styles.ticketDetail}>
