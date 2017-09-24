@@ -87,7 +87,7 @@ const routes = (store) => {
 			<Route path="user/forgotpassword" component={ForgotPassword} />
 			<Route path="login" component={Login} />
 			<Route path="wechat" component={WeChatLoginTransition} />
-			<Route path="register" component={Register} onEnter={mustbeHaveWechatInfo} />
+			<Route path="register" component={Register} />
 			<Route path="terms/:serviceType" component={TermsOfService} />
 			<Route path="app/download" component={Download} />
 			<Route path="*" component={NotFound} status={404} />
