@@ -49,8 +49,8 @@ const routes = (store) => {
 	}
 
 	const checkAlreadyLogin = (nextState, replaceState, callback) => {
-		const { user } = store.getState().login
-		if (isFullUser(user)) {
+		const { user, openID } = store.getState().login
+		if (isFullUser(user) && openID) {
 			replaceState('/tickets')
 		}
 		callback()
@@ -59,7 +59,7 @@ const routes = (store) => {
 	const mustbeHaveWechatInfo = (nextState, replaceState, callback) => {
 		const { user, weChatInfo, openID } = store.getState().login;
 		const isEmptyOfWeChatInfo = isEmptyObject(weChatInfo);
-		if (user && isFullUser(user)) {
+		if (user && isFullUser(user) && openID) {
 			replaceState('/tickets');
 		} else if (isEmptyOfWeChatInfo) {
 			const callbackUrl = nextState.location.pathname;
@@ -82,12 +82,12 @@ const routes = (store) => {
 			<Route path="detail/:id" component={Details} />
 			<Route path="hotdetail/:id" component={HotDetail} />
 			<Route path="shoppingcart" component={Shoppingcart} onEnter={requireLogin} />
-			<Route path="user/login" component={PureLogin} />
-			<Route path="user/forgotpassword/changepassword" component={ChangePassword} />
-			<Route path="user/forgotpassword" component={ForgotPassword} />
-			<Route path="login" component={Login} onEnter={checkAlreadyLogin} />
-			<Route path="wechat" component={WeChatLoginTransition} />
-			<Route path="register" component={Register} onEnter={checkAlreadyLogin} />
+			<Route path="user/login" component={PureLogin} onEnter={checkAlreadyLogin} />
+			<Route path="user/forgotpassword/changepassword" component={ChangePassword} onEnter={checkAlreadyLogin} />
+			<Route path="user/forgotpassword" component={ForgotPassword} onEnter={checkAlreadyLogin} />
+			<Route path="login" component={Login} onEnter={mustbeHaveWechatInfo} />
+			<Route path="wechat" component={WeChatLoginTransition} onEnter={checkAlreadyLogin} />
+			<Route path="register" component={Register} onEnter={mustbeHaveWechatInfo} />
 			<Route path="terms/:serviceType" component={TermsOfService} />
 			<Route path="app/download" component={Download} />
 			<Route path="*" component={NotFound} status={404} />

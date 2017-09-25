@@ -76,7 +76,12 @@ const actionhandlers = {
         }
     },
 
-    [`${LOADCOOKIESYNC}`]: (state, action) => ({ ...state, user: action.cookie, authHeaders: generatorAuthHeadersForUser(action.cookie) }),
+    [`${LOADCOOKIESYNC}`]: (state, action) => ({
+        ...state,
+        openID: action.cookies.openID,
+        user: action.cookies.userCookie,
+        authHeaders: generatorAuthHeadersForUser(action.cookies.userCookie)
+    }),
     [`${LOAD_OPENID}`]: (state, action) => ({ ...state, openID: action.openID })
 };
 
@@ -153,7 +158,7 @@ export function forgotpassword(data) {
     return {
         type: FORGOT_PASSWORD,
         payload: client => client.post('/forgot_password', {
-            data: Object.assign({ zone: "86", timestamp: Math.floor(Date.now() / 1000) }, data)
+            data: Object.assign({ zone: "86", timestamp: Math.floor(Date.now() / 1000) }, data, { password: sha256(data.password) })
         })
     }
 }
@@ -175,10 +180,10 @@ export function isWechatInfoLoaded(globalState) {
 /**
  *  cookie
  */
-export function loadCookieSync(cookie) {
+export function loadCookieSync(cookies) {
     return {
         type: LOADCOOKIESYNC,
-        cookie
+        cookies
     }
 }
 
@@ -191,7 +196,9 @@ export function loadOpenIDOfWechat(openID) {
 
 export function loadCookie() {
     const cookies = new Cookies()
-    return loadCookieSync(cookies.get(Constant.USER_COOKIE))
+    const userCookie = cookies.get(Constant.USER_COOKIE),
+        openID = cookies.get(Constant.USER_OPENID);
+    return loadCookieSync({ userCookie: userCookie, openID: openID })
 }
 
 export function isCookieLoaded(globalState) {

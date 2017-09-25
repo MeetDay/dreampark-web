@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { message } from 'antd';
+import Cookies from 'universal-cookie';
+import * as Constant from '../../../utils/constant';
 import { LoginButton, Phone, Password } from '../../../components/index';
 import { getSMSCodeAccordingTo } from '../../Register/module/register';
 import { forgotpassword } from '../module/login';
+import { isFullUser } from '../../../utils/wechat';
 import { legalSMSCode, formatPhoneNumber, clearWhiteSpaceOf } from '../../../utils/regex';
 import countDown from '../../../utils/countDown';
 
@@ -40,7 +43,13 @@ export default class ChangePassword extends React.Component {
     componentWillReceiveProps(nextProps) {
         const { user: nextUser, forgotpasswordError } = nextProps;
         if (nextUser && nextUser != this.props.user) {
-            this.props.push('/tickets');
+            const cookies = new Cookies();
+            const openID = cookies.get(Constant.USER_OPENID);
+            if (openID && isFullUser(nextUser)) {
+                this.props.push('/tickets');
+            } else {
+                this.props.push('/wechat?callbackUrl=/tickets');
+            }
         } else if (forgotpasswordError && forgotpasswordError != this.props.forgotpasswordError) {
             console.log(JSON.stringify(forgotpasswordError));
             message.error(forgotpasswordError.error_message || '更换密码失败...');

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { message } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Cookies from 'universal-cookie'
 import { push } from 'react-router-redux';
+import * as Constant from '../../../utils/constant'
 import { Loging } from '../component';
 import { userLogin } from '../module/login';
 import { isFullUser } from '../../../utils/wechat';
@@ -41,11 +43,15 @@ export default class PureLogin extends React.Component {
         const { user: nextUser, userLoginError: nextUserLoginError } = nextProps;
         if (nextUserLoginError && nextUserLoginError !== this.props.userLoginError) {
             message.error(nextUserLoginError.error_message);
-        }
-        if (nextUser && nextUser !== this.props.user && isFullUser(nextUser)) {
-            this.props.push('/tickets')
-        }
-        if (nextUser && nextUser !== this.props.user && !isFullUser(nextUser)) {
+        } else if (nextUser && nextUser !== this.props.user && isFullUser(nextUser)) {
+            const cookies = new Cookies();
+            const openID = cookies.get(Constant.USER_OPENID);
+            if (openID) {
+                this.props.push('/tickets');
+            } else {
+                this.props.push('/wechat?callbackUrl=/tickets');
+            }
+        } else if (nextUser && nextUser !== this.props.user && !isFullUser(nextUser)) {
             this.props.push('/register#stepthree');
         }
     }

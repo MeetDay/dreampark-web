@@ -11,7 +11,7 @@ import superagent from 'superagent'
 import * as Constant from '../../utils/constant'
 import Express from 'express'
 var loginRouter = Express.Router()
-import { isEmptyObject } from '../../containers/Login/module/login'
+import { isEmptyObject, generatorAuthHeadersForUser } from '../../containers/Login/module/login'
 import APIClient from '../../helpers/APIClient'
 import projectConfig from '../../../project.config'
 
@@ -31,19 +31,32 @@ loginRouter.get('/idcard', (req, res) => {
 
 loginRouter.get('/wechat', (req, res) => {
     const { code } = req.query;
+    const userCookie = req.universalCookies.get(Constant.USER_COOKIE);
     if (code) {
-        getWechatToken(code)
-            .then((tokenInfo) => getWechatUserInfo(tokenInfo))
-            .then((weChatUserInfo) => getUserInfo(weChatUserInfo))
-            .then((userInfo) => {
-                const { userInfo: userCookie } = userInfo;
-                if (userCookie && !isEmptyObject(userCookie)) {
-                    res.set('Set-Cookie', `${Constant.USER_COOKIE}=${userCookie}; Max-Age=${3600*24*30}; Path=/`);
-                }
-                res.set('Set-Cookie', `${Constant.USER_OPENID}=${userInfo.weChatUserInfo.openid}; Max-Age=${3600*24*30}; Path=/`)
-                res.json({ code: 10000, message: 'success', data: userInfo})
-            })
-            .catch((err) => { res.status(400).json(Object.assign({ code: 10002 }, err)) })
+        if (!isEmptyObject(userCookie)) {
+            getWechatToken(code)
+                .then((tokenInfo) => getWechatUserInfo(tokenInfo, userCookie))
+                .then((weChatUserInfo) => bindWechatInfo(weChatUserInfo, userCookie))
+                .then(result => {
+                    res.set('Set-Cookie', `${Constant.USER_COOKIE}=${result.userInfo}; Max-Age=${3600*24*30}; Path=/`);
+                    res.set('Set-Cookie', `${Constant.USER_OPENID}=${result.weChatUserInfo.openid}; Max-Age=${3600*24*30}; Path=/`);
+                    res.redirect(301, '/tickets');
+                })
+                .catch((err) => { res.status(400).json(Object.assign({ code: 10002 }, err)) })
+        } else {
+            getWechatToken(code)
+                .then((tokenInfo) => getWechatUserInfo(tokenInfo))
+                .then((weChatUserInfo) => getUserInfo(weChatUserInfo))
+                .then((userInfo) => {
+                    const { userInfo: userCookie } = userInfo;
+                    if (userCookie && !isEmptyObject(userCookie)) {
+                        res.set('Set-Cookie', `${Constant.USER_COOKIE}=${userCookie}; Max-Age=${3600*24*30}; Path=/`);
+                    }
+                    res.set('Set-Cookie', `${Constant.USER_OPENID}=${userInfo.weChatUserInfo.openid}; Max-Age=${3600*24*30}; Path=/`)
+                    res.json({ code: 10000, message: 'success', data: userInfo})
+                })
+                .catch((err) => { res.status(400).json(Object.assign({ code: 10002 }, err)) })
+        }
     } else {
         res.status(400).json({ code: 10001, error_message: '缺少参数'})
     }
@@ -96,8 +109,35 @@ function getUserInfo(weChatInfo) {
             .end((err, { body, text } = {}) => {
                 const resBody = isEmptyObject(body) ? JSON.parse(text) : body
                 console.log(resBody)
-                if (err || Object.prototype.hasOwnProperty.call(resBody, 'code')) resolve({ weChatUserInfo: weChatUserInfo, accessToken, userError: resBody })
-                resolve({ weChatUserInfo: weChatUserInfo, accessToken, userInfo: resBody })
+                if (err || Object.prototype.hasOwnProperty.call(resBody, 'code')) {
+                    resolve({ weChatUserInfo: weChatUserInfo, accessToken, userError: resBody })
+                } else {
+                    resolve({ weChatUserInfo: weChatUserInfo, accessToken, userInfo: resBody })
+                }
             })
     })
+}
+
+function bindWechatInfo(weChatInfo, userCookie) {
+    const { weChatUserInfo, accessToken } = weChatInfo
+    const data = {
+        auth_token: accessToken,
+        union_id: weChatUserInfo.unionid
+    };
+    console.log(userCookie);
+    return new Promise((resolve, reject) => {
+        let baseUrl = __DEV__ ? projectConfig.devBaseUrl : projectConfig.baseUrl
+        const bindWechatInfoUrl = baseUrl + '/api/v1/users/bind_wechat';
+        superagent.post(bindWechatInfoUrl)
+            .set(generatorAuthHeadersForUser(userCookie))
+            .send(data)
+            .end((err, { body, text } = {}) => {
+                const resBody = isEmptyObject(body) ? JSON.parse(text) : body;
+                if (err || Object.prototype.hasOwnProperty.call(resBody, 'code')) {
+                    resolve({ weChatUserInfo: weChatUserInfo, accessToken, userError: resBody, linkedWechat: false })
+                } else {
+                    resolve({ weChatUserInfo: weChatUserInfo, accessToken, userInfo: userCookie, linkedWechat: true })
+                }
+            })
+    });
 }
