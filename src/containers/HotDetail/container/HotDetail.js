@@ -88,8 +88,8 @@ export default class HotDetail extends React.Component {
 
     _handleClickBuyTicketNow(selectedTicket) {
         if (this.props.user) {
-            // this.props.push(`/pay/ticketinfo/${selectedTicket.id}`)
-            location.href = `/pay/ticketinfo/${selectedTicket.id}`;
+            this.props.push(`/pay/ticketinfo/${selectedTicket.id}`)
+            // location.href = `/pay/ticketinfo/${selectedTicket.id}`;
         } else {
             jumpToWeChatAuthorizationUrl(location)
         }

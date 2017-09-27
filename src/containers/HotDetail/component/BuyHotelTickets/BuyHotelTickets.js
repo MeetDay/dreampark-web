@@ -89,8 +89,8 @@
                  endDate: maxDateTicket.timestamp,
                  price: this.state.totalPrice
              };
-            //  this.props.pushState(`/pay/ticketinfo/${this.props.tickets[0].id}?hotelTicketInfo=${JSON.stringify(queryParams)}`);
-             location.href = `/pay/ticketinfo/${this.props.tickets[0].id}?hotelTicketInfo=${JSON.stringify(queryParams)}`;
+             this.props.pushState(`/pay/ticketinfo/${this.props.tickets[0].id}?hotelTicketInfo=${JSON.stringify(queryParams)}`);
+            //  location.href = `/pay/ticketinfo/${this.props.tickets[0].id}?hotelTicketInfo=${JSON.stringify(queryParams)}`;
          } else {
              if (this.state.selectedTickets.length < this.state.startDays) {
                  message.info(`该房型${this.state.startDays}天起订!`);
