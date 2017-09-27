@@ -44,7 +44,7 @@ const serverRouterMiddleware = () => (req, res, next) => {
 		    			<ReduxAsyncConnect {...renderProps} />
 		    		</Provider>
 		    	);
-				res.set('Set-Cookie', `${Constant.USER_OPENID}=oUr10wDQslvet8jtmGa_JAoAVvmI; Max-Age=${3600*24*30}; Path=/`)
+				// res.set('Set-Cookie', `${Constant.USER_OPENID}=oUr10wDQslvet8jtmGa_JAoAVvmI; Max-Age=${3600*24*30}; Path=/`)
 				res.status(200).send('<!doctype html>\n' + renderToString(<Html component={component} store={store} assets={webpackIsomorphicTools.assets()} />));
 			});
 	    } else {
