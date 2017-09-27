@@ -100,8 +100,8 @@ export default class CompleteBuyTicketInfo extends React.Component {
         }
 
         // 酒店订单
-        if (props.isTicketOrderInfo) {
-            this.isHotelTicketInfo = props.isTicketOrderInfo;
+        if (props.isHotelTicketInfo) {
+            this.isHotelTicketInfo = props.isHotelTicketInfo;
         }
 
         const checkedContacts = props.ticketInfo ? (props.isTicketOrderInfo ? [...props.contactList] : ((props.contactList && props.contactList.length > 0) ? [props.contactList[0]] : [])) : [];
